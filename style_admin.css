@@ -1,0 +1,17 @@
+#bjl_word_count_main_stats { width: 680px; margin: 10px auto; overflow: hidden; text-align: center; }
+#bjl_word_count_main_stats li { float: left; width: 150px; font-size: 32px; line-height: 60px; margin: 0px 8px; background-color: #FFFFFF; border: 1px solid #CDCDCD; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; -moz-border-bottom-left-radius: 10px; -moz-border-bottom-right-radius: 10px; }
+#bjl_word_count_main_stats div.top { color: #FFFFFF; font-size: 12px; line-height: 26px; text-transform: uppercase; background-position: top center; background-repeat: repeat-x; }
+#bjl_word_count_main_stats div.bottom { font-size: 10px; line-height: 40px; margin-top: -20px; color: #565656; }
+#bjl_word_count_main_stats div.published { background-image: url(images/background_published.jpg); background-color: #1A5B78; }
+#bjl_word_count_main_stats div.draft { background-image: url(images/background_draft.jpg); background-color: #9D1F1F; }
+
+#bjl_word_count_main_totals { width: 680px; overflow: hidden; margin: 0px auto; text-align: center; }
+#bjl_word_count_main_totals li { float: left; width: 318px; font-size: 16px; line-height: 36px; margin: 0px 8px; background-color: #FFFFFF; border: 1px solid #CDCDCD; border-radius: 10px; -moz-border-radius: 10px; }
+#bjl_word_count_main_totals li b.published { color: #1A5B78; }
+#bjl_word_count_main_totals li b.draft { color: #9D1F1F; }
+#bjl_word_count_main_totals li span { color: #787878; }
+
+#bjl_word_count_main_averages { width: 680px; margin: 10px auto; overflow: hidden; text-align: center; }
+#bjl_word_count_main_averages li { float: left; width: 150px; font-size: 16px; line-height: 50px; margin: 0px 8px; background-color: #FFFFFF; border: 1px solid #CDCDCD; border-top-left-radius: 10px; border-top-right-radius: 10px; -moz-border-top-left-radius: 10px; -moz-border-top-right-radius: 10px; }
+#bjl_word_count_main_averages div.bottom { color: #FFFFFF; font-size: 12px; line-height: 26px; text-transform: uppercase; background-image: url(images/background_average.jpg); background-color: #888888; background-position: bottom center; background-repeat: repeat-x; }
+#bjl_word_count_main_averages li span { color: #787878; }
