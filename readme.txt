@@ -5,11 +5,11 @@ Requires at least: 2.8.0
 Tested up to: 3.0.1
 Stable tag: 1.0
 
-WP Word Count is a plugin for WordPress that gives you word count statistics for your blog’s posts and pages. In addition to overall stats, WP Word Count also gives figures and details for the largest posts and pages of your blog as well as breakdowns for each of your blog’s authors.
+WP Word Count is a plugin for WordPress that gives you word count statistics for your blog's posts and pages. In addition to overall stats, WP Word Count also gives figures and details for the largest posts and pages of your blog as well as breakdowns for each of your blog's authors.
 
 == Description ==
 
-WP Word Count is a plugin for WordPress that gives you word count statistics for your blog’s posts and pages. In addition to overall stats, WP Word Count also gives figures and details for the largest posts and pages of your blog as well as breakdowns for each of your blog’s authors.
+WP Word Count is a plugin for WordPress that gives you word count statistics for your blog's posts and pages. In addition to overall stats, WP Word Count also gives figures and details for the largest posts and pages of your blog as well as breakdowns for each of your blog's authors.
 
 == Installation ==
 
