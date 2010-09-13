@@ -15,6 +15,7 @@ WP Word Count is a plugin for WordPress that gives you word count statistics for
 
 1. Upload `wpwordcount` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
+3. WP Word Count can be accessed under the "Dashboard" Menu of the WordPress Admin.
 
 == Screenshots ==
 
