@@ -4,7 +4,7 @@
 	Plugin URI: http://www.brianjlink.com/wpwordcount
 	Description: Word Count Statistics for your Posts and Pages.
 	Author: Brian J. Link 
-	Version: 1.0 
+	Version: 1.1 
 	Author URI: http://www.brianjlink.com
 	*/
 	
@@ -43,14 +43,25 @@
 		$arr_bjl_author_pages_draft = array();
 		$arr_bjl_author_pages_draft_word_count = array();
 		
+		$arr_bjl_month_word_count = array();
+		$arr_bjl_month_posts_publish = array();
+		$arr_bjl_month_posts_publish_word_count = array();
+		$arr_bjl_month_posts_draft = array();
+		$arr_bjl_month_posts_draft_word_count = array();
+		$arr_bjl_month_pages_publish = array();
+		$arr_bjl_month_pages_publish_word_count = array();
+		$arr_bjl_month_pages_draft = array();
+		$arr_bjl_month_pages_draft_word_count = array();
+		
 		// CAPTURE ALL POSTS & PAGES, PUBLISH AND UNPUBLISHED, WHILE AVOIDING AUTO-SAVES & AUTO-DRAFTS AND MENU ITEMS
-		$bjl_word_count_items = $wpdb->get_results("SELECT ID, post_content, post_status, post_date, post_title, post_author, post_type FROM $table_prefix"."posts WHERE post_status <> 'inherit' AND post_status <> 'auto-draft' AND (post_type = 'page' OR post_type = 'post') ORDER BY ID;");
+		$bjl_word_count_items = $wpdb->get_results("SELECT ID, post_content, post_status, MID(post_date, 1, 7) AS post_date, post_title, post_author, post_type FROM $table_prefix"."posts WHERE post_status <> 'inherit' AND post_status <> 'auto-draft' AND (post_type = 'page' OR post_type = 'post') ORDER BY post_date DESC;");
 		
 		foreach ($bjl_word_count_items as $items => $item)
 		{
 			// CALCULATE AND STORE MAIN STATS
 			$words = bjl_word_counter($item->post_content);
 			$arr_bjl_author_word_count[$item->post_author] = $arr_bjl_author_word_count[$item->post_author] + $words;
+			$arr_bjl_month_word_count[$item->post_date] = $arr_bjl_month_word_count[$item->post_date] + $words;
 			
 			if ($item->post_type == "post")
 			{
@@ -61,6 +72,9 @@
 					
 					$arr_bjl_author_posts_publish[$item->post_author] = $arr_bjl_author_posts_publish[$item->post_author] + 1;
 					$arr_bjl_author_posts_publish_word_count[$item->post_author] = $arr_bjl_author_posts_publish_word_count[$item->post_author] + $words;
+					
+					$arr_bjl_month_posts_publish[$item->post_date] = $arr_bjl_month_posts_publish[$item->post_date] + 1;
+					$arr_bjl_month_posts_publish_word_count[$item->post_date] = $arr_bjl_month_posts_publish_word_count[$item->post_date] + $words;
 				}
 				elseif ($item->post_status == "draft")
 				{
@@ -69,6 +83,9 @@
 					
 					$arr_bjl_author_posts_draft[$item->post_author] = $arr_bjl_author_posts_draft[$item->post_author] + 1;
 					$arr_bjl_author_posts_draft_word_count[$item->post_author] = $arr_bjl_author_posts_draft_word_count[$item->post_author] + $words;
+					
+					$arr_bjl_month_posts_draft[$item->post_date] = $arr_bjl_month_posts_draft[$item->post_date] + 1;
+					$arr_bjl_month_posts_draft_word_count[$item->post_date] = $arr_bjl_month_posts_draft_word_count[$item->post_date] + $words;
 				}
 			}
 			elseif ($item->post_type == "page")
@@ -80,6 +97,9 @@
 					
 					$arr_bjl_author_pages_publish[$item->post_author] = $arr_bjl_author_pages_publish[$item->post_author] + 1;
 					$arr_bjl_author_pages_publish_word_count[$item->post_author] = $arr_bjl_author_pages_publish_word_count[$item->post_author] + $words;
+					
+					$arr_bjl_month_pages_publish[$item->post_date] = $arr_bjl_month_pages_publish[$item->post_date] + 1;
+					$arr_bjl_month_pages_publish_word_count[$item->post_date] = $arr_bjl_month_pages_publish_word_count[$item->post_date] + $words;
 				}
 				elseif ($item->post_status == "draft")
 				{
@@ -88,6 +108,9 @@
 					
 					$arr_bjl_author_pages_draft[$item->post_author] = $arr_bjl_author_pages_draft[$item->post_author] + 1;
 					$arr_bjl_author_pages_draft_word_count[$item->post_author] = $arr_bjl_author_pages_draft_word_count[$item->post_author] + $words;
+					
+					$arr_bjl_month_pages_draft[$item->post_date] = $arr_bjl_month_pages_draft[$item->post_date] + 1;
+					$arr_bjl_month_pages_draft_word_count[$item->post_date] = $arr_bjl_month_pages_draft_word_count[$item->post_date] + $words;
 				}
 			}
 			
@@ -99,7 +122,7 @@
 			$arr_bjl_content_post_author[$item->ID] = $item->post_author;
 		}
 		
-		// WRITE TO MAIN STATS TO OPTIONS TABLE
+		// WRITE MAIN STATS TO OPTIONS TABLE
 		$arr_bjl_word_count_main = array
 		(
 			'words_posts_publish' => $words_posts_publish,
@@ -139,6 +162,21 @@
 			'bjl_author_pages_draft_word_count' => $arr_bjl_author_pages_draft_word_count
 		);
 		update_option('bjl_word_count_author', $arr_bjl_word_count_author);
+		
+		// WRITE MONTH STATS TO OPTIONS TABLE
+		$arr_bjl_word_count_month = array
+		(
+			'bjl_month_word_count' => $arr_bjl_month_word_count,
+			'bjl_month_posts_publish' => $arr_bjl_month_posts_publish,
+			'bjl_month_posts_publish_word_count' => $arr_bjl_month_posts_publish_word_count,
+			'bjl_month_posts_draft' => $arr_bjl_month_posts_draft,
+			'bjl_month_posts_draft_word_count' => $arr_bjl_month_posts_draft_word_count,
+			'bjl_month_pages_publish' => $arr_bjl_month_pages_publish,
+			'bjl_month_pages_publish_word_count' => $arr_bjl_month_pages_publish_word_count,
+			'bjl_month_pages_draft' => $arr_bjl_month_pages_draft,
+			'bjl_month_pages_draft_word_count' => $arr_bjl_month_pages_draft_word_count
+		);
+		update_option('bjl_word_count_month', $arr_bjl_word_count_month);
 	}
 	
 	function bjl_word_counter($content)
@@ -149,7 +187,7 @@
 	
 	function bjl_word_count_admin()
 	{
-		if (!get_option('bjl_word_count_main'))
+		if (!get_option('bjl_word_count_main') || !get_option('bjl_word_count_month'))
 		{
 			bjl_word_count_calculate();
 		}
@@ -165,6 +203,10 @@
 		// LOAD AUTHOR STATS
 		$arr_bjl_word_count_author = get_option('bjl_word_count_author');
 		@extract($arr_bjl_word_count_author);
+		
+		// LOAD MONTH STATS
+		$arr_bjl_word_count_month = get_option('bjl_word_count_month');
+		@extract($arr_bjl_word_count_month);
 		
 		// OUTPUT DATA
 		echo '<div class="wrap">';
@@ -225,8 +267,8 @@
 		echo '<table class="widefat post fixed" cellspacing="0">';
 		echo '<thead>';
 		echo '<tr>';
-		echo '<th scope="col" id="wordcount" class="manage-column column-author" style="width:75px; text-align:center;">'.__("Words").'</th>';
 		echo '<th scope="col" id="author" class="manage-column column-author">'.__("Author").'</th>';
+		echo '<th scope="col" id="wordcount" class="manage-column column-author" style="width:75px; text-align:center;">'.__("Words").'</th>';
 		echo '<th scope="col" id="published_posts" class="manage-column column-author">'.__("Published Posts").'</th>';
 		echo '<th scope="col" id="published_ages" class="manage-column column-author">'.__("Published Pages").'</th>';
 		echo '<th scope="col" id="published_total" class="manage-column column-author">'.__("Published Total").'</th>';
@@ -243,8 +285,8 @@
 			$user = get_userdata($key);
 			
 			echo '<tr'.($bjl_author_counter % 2 == 1 ? "" : " class='alternate'").'>';
-			echo '<td class="author column-author" style="width:75px; text-align:center;">'.number_format($value).'</td>';
 			echo '<td class="author column-author"><strong>'.$user->user_login.'</strong></td>';
+			echo '<td class="author column-author" style="width:75px; text-align:center;">'.number_format($value).'</td>';
 			echo '<td class="author column-author">'.number_format($bjl_author_posts_publish_word_count[$key]).' '.__("Words").'<br />'.@number_format($bjl_author_posts_publish_word_count[$key] / $bjl_author_posts_publish[$key]).' '.__("Word Avg.").'</td>';
 			echo '<td class="author column-author">'.number_format($bjl_author_pages_publish_word_count[$key]).' '.__("Words").'<br />'.@number_format($bjl_author_pages_publish_word_count[$key] / $bjl_author_pages_publish[$key]).' '.__("Word Avg.").'</td>';
 			echo '<td class="author column-author">'.number_format($bjl_author_posts_publish_word_count[$key] + $bjl_author_pages_publish_word_count[$key]).' '.__("Words").'<br />'.@number_format(($bjl_author_posts_publish_word_count[$key] + $bjl_author_pages_publish_word_count[$key]) / ($bjl_author_posts_publish[$key] + $bjl_author_pages_publish[$key])).' '.__("Word Avg.").'</td>';
@@ -258,7 +300,42 @@
 		echo '</tbody>';
 		echo '</table>';
 		
-		echo '</div>';	// END DIV.WRAP
+		echo '<h2>'.__("Monthly Statistics").'</h2>';
+		echo '<table class="widefat post fixed" cellspacing="0">';
+		echo '<thead>';
+		echo '<tr>';
+		echo '<th scope="col" id="author" class="manage-column column-author">'.__("Month").'</th>';
+		echo '<th scope="col" id="wordcount" class="manage-column column-author" style="width:75px; text-align:center;">'.__("Words").'</th>';
+		echo '<th scope="col" id="published_posts" class="manage-column column-author">'.__("Published Posts").'</th>';
+		echo '<th scope="col" id="published_ages" class="manage-column column-author">'.__("Published Pages").'</th>';
+		echo '<th scope="col" id="published_total" class="manage-column column-author">'.__("Published Total").'</th>';
+		echo '<th scope="col" id="draft_posts" class="manage-column column-author">'.__("Draft Posts").'</th>';
+		echo '<th scope="col" id="draft_pages" class="manage-column column-author">'.__("Draft Pages").'</th>';
+		echo '<th scope="col" id="draft_total" class="manage-column column-author">'.__("Draft Total").'</th>';
+		echo '</tr>';
+		echo '</thead>';
+		
+		echo '<tbody>';
+		$bjl_month_counter = 0;
+		foreach($bjl_month_word_count as $key => $value)
+		{			
+			echo '<tr'.($bjl_month_counter % 2 == 1 ? "" : " class='alternate'").'>';
+			echo '<td class="author column-author"><strong>'.$key.'</strong></td>';
+			echo '<td class="author column-author" style="width:75px; text-align:center;">'.number_format($value).'</td>';
+			echo '<td class="author column-author">'.number_format($bjl_month_posts_publish_word_count[$key]).' '.__("Words").'<br />'.@number_format($bjl_month_posts_publish_word_count[$key] / $bjl_month_posts_publish[$key]).' '.__("Word Avg.").'</td>';
+			echo '<td class="author column-author">'.number_format($bjl_month_pages_publish_word_count[$key]).' '.__("Words").'<br />'.@number_format($bjl_month_pages_publish_word_count[$key] / $bjl_month_pages_publish[$key]).' '.__("Word Avg.").'</td>';
+			echo '<td class="author column-author">'.number_format($bjl_month_posts_publish_word_count[$key] + $bjl_month_pages_publish_word_count[$key]).' '.__("Words").'<br />'.@number_format(($bjl_month_posts_publish_word_count[$key] + $bjl_month_pages_publish_word_count[$key]) / ($bjl_month_posts_publish[$key] + $bjl_month_pages_publish[$key])).' '.__("Word Avg.").'</td>';
+			echo '<td class="author column-author">'.number_format($bjl_month_posts_draft_word_count[$key]).' '.__("Words").'<br />'.@number_format($bjl_month_posts_draft_word_count[$key] / $bjl_month_posts_draft[$key]).' '.__("Word Avg.").'</td>';
+			echo '<td class="author column-author">'.number_format($bjl_month_pages_draft_word_count[$key]).' '.__("Words").'<br />'.@number_format($bjl_month_pages_draft_word_count[$key] / $bjl_month_pages_draft[$key]).' '.__("Word Avg.").'</td>';
+			echo '<td class="author column-author">'.number_format($bjl_month_posts_draft_word_count[$key] + $bjl_month_pages_draft_word_count[$key]).' '.__("Words").'<br />'.@number_format(($bjl_month_posts_draft_word_count[$key] + $bjl_month_pages_draft_word_count[$key]) / ($bjl_month_posts_draft[$key] + $bjl_month_pages_draft[$key])).' '.__("Word Avg.").'</td>';
+			echo '</tr>';
+			
+			$bjl_month_counter++;
+		}
+		echo '</tbody>';
+		echo '</table>';
+		
+		echo '<br /><br /></div>';	// END DIV.WRAP
 	}
 	
 	function bjl_word_count_add_menu()
