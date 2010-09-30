@@ -4,12 +4,13 @@
 	Plugin URI: http://www.brianjlink.com/wpwordcount
 	Description: Word Count Statistics for your Posts and Pages.
 	Author: Brian J. Link 
-	Version: 1.1 
+	Version: 1.2 
 	Author URI: http://www.brianjlink.com
 	*/
 	
 	add_action('publish_post', 'bjl_word_count_calculate');
 	add_action('edit_post', 'bjl_word_count_calculate');
+	add_action("widgets_init", 'bjl_word_count_add_widget');
 	add_action('admin_menu', 'bjl_word_count_add_menu');
 	add_action('admin_head', 'bjl_word_count_style_admin');
 	
@@ -336,6 +337,92 @@
 		echo '</table>';
 		
 		echo '<br /><br /></div>';	// END DIV.WRAP
+	}
+	
+	// WIDGET
+	class wpwordcount extends WP_Widget
+	{
+		function wpwordcount()
+		{
+			$widget_ops = array('classname' => 'wpwordcount', 'description' => 'Word Count Statistics for your Posts and Pages.');
+			$control_ops = array('id_base' => 'wpwordcount');
+
+			$this->WP_Widget('wpwordcount', 'WP Word Count', $widget_ops, $control_ops);
+		}
+		
+		function widget($args, $instance)
+		{
+			extract($args);
+			
+			$title = apply_filters('widget_title', $instance['title']);
+			$show_total = isset( $instance['show_total'] ) ? $instance['show_total'] : false;
+			$show_posts = isset( $instance['show_posts'] ) ? $instance['show_posts'] : false;
+			$show_pages = isset( $instance['show_pages'] ) ? $instance['show_pages'] : false;
+			$show_link = isset( $instance['show_link'] ) ? $instance['show_link'] : false;
+			
+			// LOAD MAIN STATS
+			$arr_bjl_word_count_main = get_option('bjl_word_count_main');
+			@extract($arr_bjl_word_count_main);
+			
+			echo $before_widget;
+			echo $before_title.$title.$after_title;
+			
+			if ($show_total || $show_posts || $show_pages) echo '<p>';
+			if ($show_total) echo '<b>'.__("Total").':</b> '.number_format($words_posts_publish + $words_pages_publish).' '.__("Words").'<br />';
+			if ($show_posts) echo '<b>'.__("Posts").':</b> '.number_format($words_posts_publish).' '.__("Words").' ('.@number_format($words_posts_publish / $count_posts_publish).' '.__("Avg.").')<br />';
+			if ($show_pages) echo '<b>'.__("Pages").':</b> '.number_format($words_pages_publish).' '.__("Words").' ('.@number_format($words_pages_publish / $count_pages_publish).' '.__("Avg.").')<br />';
+			if ($show_total || $show_posts || $show_pages) echo '</p>';
+			
+			if ($show_link) echo '<p class="center">Powered by <a href="http://www.brianjlink.com/wpwordcount/">WP Word Count</p>';
+			
+			echo $after_widget;
+		}
+		
+		function update($new_instance, $old_instance)
+		{
+			$instance = $old_instance;
+	
+			$instance['title'] = strip_tags($new_instance['title']);
+			$instance['show_total'] = $new_instance['show_total'];
+			$instance['show_posts'] = $new_instance['show_posts'];
+			$instance['show_pages'] = $new_instance['show_pages'];
+			$instance['show_link'] = $new_instance['show_link'];
+	
+			return $instance;
+		}
+		
+		function form($instance)
+		{
+			$defaults = array('title' => 'Word Count Statistics', 'show_total' => true, 'show_posts' => true, 'show_pages' => true, 'show_link' => true);
+			$instance = wp_parse_args((array) $instance, $defaults);
+			?>
+			
+			<p>
+				<label for="<?php echo $this->get_field_id('title'); ?>">Title:</label>
+				<input class="widefat" type="text" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $instance['title']; ?>" />
+			</p>
+			
+			<p>
+				<input type="checkbox" class="checkbox" <?php checked($instance['show_total'], "on"); ?> id="<?php echo $this->get_field_id('show_total'); ?>" name="<?php echo $this->get_field_name('show_total'); ?>" />
+				<label for="<?php echo $this->get_field_id('show_total'); ?>">Display Total Word Count</label><br />
+				
+				<input type="checkbox" class="checkbox" <?php checked($instance['show_posts'], "on"); ?> id="<?php echo $this->get_field_id('show_posts'); ?>" name="<?php echo $this->get_field_name('show_posts'); ?>" />
+				<label for="<?php echo $this->get_field_id('show_posts'); ?>">Display Post Word Counts</label><br />
+				
+				<input type="checkbox" class="checkbox" <?php checked($instance['show_pages'], "on"); ?> id="<?php echo $this->get_field_id('show_pages'); ?>" name="<?php echo $this->get_field_name('show_pages'); ?>" />
+				<label for="<?php echo $this->get_field_id('show_pages'); ?>">Display Page Word Counts</label><br />
+				
+				<input type="checkbox" class="checkbox" <?php checked($instance['show_link'], "on"); ?> id="<?php echo $this->get_field_id('show_link'); ?>" name="<?php echo $this->get_field_name('show_link'); ?>" />
+				<label for="<?php echo $this->get_field_id('show_link'); ?>">Display WP Word Count Link</label><br />
+			</p>
+			
+			<?php
+		}
+	}
+	
+	function bjl_word_count_add_widget()
+	{
+		register_widget('wpwordcount');
 	}
 	
 	function bjl_word_count_add_menu()
