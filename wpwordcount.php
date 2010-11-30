@@ -4,7 +4,7 @@
 	Plugin URI: http://www.brianjlink.com/wpwordcount
 	Description: Word Count Statistics for your Posts and Pages.
 	Author: Brian J. Link 
-	Version: 1.2 
+	Version: 1.3 
 	Author URI: http://www.brianjlink.com
 	*/
 	
@@ -13,6 +13,7 @@
 	add_action("widgets_init", 'bjl_word_count_add_widget');
 	add_action('admin_menu', 'bjl_word_count_add_menu');
 	add_action('admin_head', 'bjl_word_count_style_admin');
+	add_shortcode('wpwordcount', 'bjl_word_count_shortcode');
 	
 	function bjl_word_count_calculate()
 	{
@@ -336,6 +337,26 @@
 		echo '</tbody>';
 		echo '</table>';
 		
+		// SHAMELESS PLUGS
+		echo '<div id="bjl_shameless_plugs">';
+		echo '<h3><a href="http://www.brianjlink.com/wordpress-plugins/">More Plugins from Brian J. Link</a></h3>';
+		
+		echo '<ul>';
+		echo '<li class="buffer">';
+		echo '<a href="http://www.brianjlink.com/export-comment-authors/"><img src="'.get_option('siteurl').'/wp-content/plugins/'.basename(dirname(__FILE__)).'/images/exportcommentauthors.jpg'.'" alt="Export Comment Authors" title="Export Comment Authors" /></a>';
+		echo '<div><a href="http://www.brianjlink.com/export-comment-authors/">Export Comment Authors</a></div>';
+		echo 'Export Comment Authors is a WordPress plugin that lets you extract the details of your Comment Authors into a CSV file.';
+		echo '</li>';
+		
+		echo '<li>';
+		echo '<a href="http://www.brianjlink.com/flicknpress/"><img src="'.get_option('siteurl').'/wp-content/plugins/'.basename(dirname(__FILE__)).'/images/flicknpress.jpg'.'" alt="flicknpress" title="flicknpress" /></a>';
+		echo '<div><a href="http://www.brianjlink.com/flicknpress/">flicknpress</a></div>';
+		echo 'flicknpress is a WordPress plugin that lets you attach a cropped photo from Flickr right inside your blog post.';
+		echo '</li>';
+		echo '</ul>';
+		
+		echo '</div>';
+		
 		echo '<br /><br /></div>';	// END DIV.WRAP
 	}
 	
@@ -439,5 +460,21 @@
 		$url = get_option('siteurl').'/wp-content/plugins/'.basename(dirname(__FILE__)).'/style_admin.css';
 		
 		echo "<link rel='stylesheet' type='text/css' href='$url' />\n";
+	}
+	
+	function bjl_word_count_shortcode($atts)
+	{
+		global $post;
+		
+		extract(shortcode_atts(array(
+			'before' => '',
+			'after' => 'Words',
+		), $atts));
+		
+		// LOAD CACHED ITEMS
+		$arr_bjl_word_count_cache = get_option('bjl_word_count_cache');
+		@extract($arr_bjl_word_count_cache);
+		
+		return esc_attr($before).' '.number_format($bjl_content_word_count[$post->ID]).' '.esc_attr($after);
 	}
 ?>
