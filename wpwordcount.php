@@ -1,10 +1,10 @@
 <?php  
 	/* 
-	Plugin Name: WP Word Count
+	Plugin Name: WP Word&nbsp;Count
 	Plugin URI: http://www.brianjlink.com/wpwordcount
 	Description: Word Count Statistics for your Posts and Pages.
-	Author: Brian J. Link 
-	Version: 1.3 
+	Author: Brian J. Link
+	Version: 1.4
 	Author URI: http://www.brianjlink.com
 	*/
 	
