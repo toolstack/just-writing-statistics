@@ -4,7 +4,7 @@
 	Plugin URI: http://www.brianjlink.com/wpwordcount
 	Description: Word Count Statistics for your Posts and Pages.
 	Author: Brian J. Link
-	Version: 1.4
+	Version: 1.5
 	Author URI: http://www.brianjlink.com
 	*/
 	
@@ -233,7 +233,23 @@
 		echo '<li>'.@number_format($words_pages_draft / $count_pages_draft).' <span>'.__("Words").'</span><div class="bottom">'.__("Average Per Page").'</div></li>';
 		echo '</ul>';
 		
-		echo '<h2>'.__("Largest Posts &amp; Pages").'</h2>';
+		if ($_GET["largest"] == "all")
+		{
+			echo '<h2>'.__("All Posts &amp; Pages").'</h2>';
+		}
+		else
+		{
+			echo '<h2>'.__("Largest Posts &amp; Pages").'</h2>';
+		}
+		
+		$bjl_wp_posts_total = count($bjl_content_word_count);
+		if ($bjl_wp_posts_total > 10) { $bjl_wp_posts_top = 10; } else { $bjl_wp_posts_top = $bjl_wp_posts_total; }
+		
+		echo '<ul class="subsubsub bjl_word_count_subsubsub">';
+		echo '<li><a href="?page=wpwordcount.php"'.($_GET["largest"] != "all" ? ' class="current"' : '').'>Top <span class="count">('.$bjl_wp_posts_top.')</span></a> |</li>';
+		echo '<li><a href="?page=wpwordcount.php&largest=all"'.($_GET["largest"] == "all" ? ' class="current"' : '').'>All <span class="count">('.count($bjl_content_word_count).')</span></a></li>';
+		echo '</ul>';
+		
 		echo '<table class="widefat post fixed" cellspacing="0">';
 		echo '<thead>';
 		echo '<tr>';
@@ -241,7 +257,7 @@
 		echo '<th scope="col" id="title" class="manage-column column-title">'.__("Title").'</th>';
 		echo '<th scope="col" id="type" class="manage-column column-author">'.__("Type").'</th>';
 		echo '<th scope="col" id="status" class="manage-column column-author">'.__("Status").'</th>';
-		// echo '<th scope="col" id="author" class="manage-column column-author">'.__("Author").'</th>';
+		echo '<th scope="col" id="author" class="manage-column column-author">'.__("Author").'</th>';
 		echo '</tr>';
 		echo '</thead>';
 		
@@ -251,16 +267,18 @@
 		$bjl_largest_limit = 10;
 		foreach($bjl_content_word_count as $key => $value)
 		{
+			$user = get_userdata($bjl_content_post_author[$key]);
+			
 			echo '<tr'.($bjl_largest_counter % 2 == 1 ? "" : " class='alternate'").'>';
 			echo '<td class="author column-author" style="width:75px; text-align:center;">'.number_format($value).'</td>';
 			echo '<td class="post-title column-title"><a href="post.php?post='.$key.'&action=edit"><strong>'.$bjl_content_post_title[$key].'</strong></a></td>';
 			echo '<td class="author column-author">'.ucwords($bjl_content_post_type[$key]).'</td>';
 			echo '<td class="author column-author">'.ucwords($bjl_content_post_status[$key]).'</td>';
-			// echo '<td class="author column-author">'.$bjl_content_post_author[$key].'</td>';
+			echo '<td class="author column-author">'.$user->user_login.'</td>';
 			echo '</tr>';
 			
 			$bjl_largest_counter++;
-			if ($bjl_largest_counter == $bjl_largest_limit) break;
+			if ($_GET["largest"] != "all" && $bjl_largest_counter == $bjl_largest_limit) break;
 		}
 		echo '</tbody>';
 		echo '</table>';
