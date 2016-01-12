@@ -4,7 +4,7 @@
 	Plugin URI: http://linksoftwarellc.com/wpwordcount
 	Description: Word Count Statistics for your Posts and Pages.
 	Author: Link Software LLC
-	Version: 1.6
+	Version: 1.6.1
 	Author URI: http://linksoftwarellc.com
 	*/
 	
