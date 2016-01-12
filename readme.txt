@@ -1,9 +1,9 @@
 === WP Word Count ===
-Contributors: bjplink
+Contributors: linksoftware
 Tags: word count, post, words, widget, shortcode
 Requires at least: 2.8
-Tested up to: 3.3.1
-Stable tag: 1.5
+Tested up to: 4.4.1
+Stable tag: 1.6
 
 WP Word Count is a plugin for WordPress that gives you word count statistics for your blog's posts and pages.
 
@@ -31,6 +31,9 @@ Example: [wpwordcount before="This post has" after=" total words."]
 1. The main WP Word Count dashboard.
 
 == Changelog ==
+
+= 1.6 =
+* Compatibility updates.
 
 = 1.5 =
 * Added ability to see word count statistics for All Posts and Pages.

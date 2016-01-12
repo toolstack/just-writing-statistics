@@ -16,12 +16,8 @@
 #bjl_word_count_main_averages div.bottom { color: #FFFFFF; font-size: 12px; line-height: 26px; text-transform: uppercase; background-image: url(images/background_average.jpg); background-color: #888888; background-position: bottom center; background-repeat: repeat-x; }
 #bjl_word_count_main_averages li span { color: #787878; }
 
-#bjl_shameless_plugs { margin: 25px auto; width: 744px; }
-#bjl_shameless_plugs h3 { color: #FFFFFF; font-size: 12px; line-height: 26px; padding-left: 10px; text-transform: uppercase; background-image: url(images/background_shameless.jpg); background-color: #1A5B78; background-position: top center; background-repeat: repeat-x; }
-#bjl_shameless_plugs h3 a { text-decoration: none; color: #FFFFFF; }
-#bjl_shameless_plugs img { width: 350px; padding: 5px; border: 1px solid #DCDCDC; background-color: #FFFFFF; clear: both; }
-#bjl_shameless_plugs li { width: 362px; float: left; margin: 0px 0px 25px 0px; text-align: center; }
-#bjl_shameless_plugs li.buffer { margin-right: 20px; }
-#bjl_shameless_plugs div { width: 362px; margin: 7px 0px; font-size: 1.35em; font-weight: bold; clear: both; }
+#bjl_word_count_linksoftware { padding: 40px 0px 0px 0px; text-align: center; text-transform: uppercase; font-size: 14px; color: #232323; }
+#bjl_word_count_linksoftware img { width: 17px;	padding-top: 10px; -ms-interpolation-mode: bicubic; vertical-align: middle; margin: -14px 2px 0px 2px; }
+#bjl_word_count_linksoftware a { color: #232323; text-decoration: none; }
 
 .bjl_word_count_subsubsub { margin-top: 0px; }

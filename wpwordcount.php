@@ -1,11 +1,11 @@
 <?php  
 	/* 
 	Plugin Name: WP Word&nbsp;Count
-	Plugin URI: http://www.brianjlink.com/wpwordcount
+	Plugin URI: http://linksoftwarellc.com/wpwordcount
 	Description: Word Count Statistics for your Posts and Pages.
-	Author: Brian J. Link
-	Version: 1.5
-	Author URI: http://www.brianjlink.com
+	Author: Link Software LLC
+	Version: 1.6
+	Author URI: http://linksoftwarellc.com
 	*/
 	
 	add_action('publish_post', 'bjl_word_count_calculate');
@@ -355,24 +355,8 @@
 		echo '</tbody>';
 		echo '</table>';
 		
-		// SHAMELESS PLUGS
-		echo '<div id="bjl_shameless_plugs">';
-		echo '<h3><a href="http://www.brianjlink.com/wordpress-plugins/">More Plugins from Brian J. Link</a></h3>';
-		
-		echo '<ul>';
-		echo '<li class="buffer">';
-		echo '<a href="http://www.brianjlink.com/export-comment-authors/"><img src="'.get_option('siteurl').'/wp-content/plugins/'.basename(dirname(__FILE__)).'/images/exportcommentauthors.jpg'.'" alt="Export Comment Authors" title="Export Comment Authors" /></a>';
-		echo '<div><a href="http://www.brianjlink.com/export-comment-authors/">Export Comment Authors</a></div>';
-		echo 'Export Comment Authors is a WordPress plugin that lets you extract the details of your Comment Authors into a CSV file.';
-		echo '</li>';
-		
-		echo '<li>';
-		echo '<a href="http://www.brianjlink.com/flicknpress/"><img src="'.get_option('siteurl').'/wp-content/plugins/'.basename(dirname(__FILE__)).'/images/flicknpress.jpg'.'" alt="flicknpress" title="flicknpress" /></a>';
-		echo '<div><a href="http://www.brianjlink.com/flicknpress/">flicknpress</a></div>';
-		echo 'flicknpress is a WordPress plugin that lets you attach a cropped photo from Flickr right inside your blog post.';
-		echo '</li>';
-		echo '</ul>';
-		
+		echo '<div id="bjl_word_count_linksoftware">';
+		echo '<a href="http://linksoftwarellc.com">WordPress Plugin by <img src="'.plugins_url('images/linksoftware.png', __FILE__).'" alt="Link Software" /></a> <a href="http://linksoftwarellc.com">Link Software</a>';
 		echo '</div>';
 		
 		echo '<br /><br /></div>';	// END DIV.WRAP
@@ -412,7 +396,7 @@
 			if ($show_pages) echo '<b>'.__("Pages").':</b> '.number_format($words_pages_publish).' '.__("Words").' ('.@number_format($words_pages_publish / $count_pages_publish).' '.__("Avg.").')<br />';
 			if ($show_total || $show_posts || $show_pages) echo '</p>';
 			
-			if ($show_link) echo '<p class="center">Powered by <a href="http://www.brianjlink.com/wpwordcount/">WP Word Count</p>';
+			if ($show_link) echo '<p class="center">Powered by <a href="https://wordpress.org/plugins/wp-word-count">WP Word Count</p>';
 			
 			echo $after_widget;
 		}
