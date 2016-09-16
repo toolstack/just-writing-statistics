@@ -1,0 +1,162 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: WP Word Count\n"
+"POT-Creation-Date: 2016-09-15 16:38-0400\n"
+"PO-Revision-Date: 2016-09-15 16:38-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.9\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wpwordcount.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/partials/wp-word-count-admin-ac.php:16
+#: admin/partials/wp-word-count-admin-as.php:17
+#: admin/partials/wp-word-count-admin-as.php:41
+#: admin/partials/wp-word-count-admin-as.php:46
+#: admin/partials/wp-word-count-admin-ms.php:17
+#: admin/partials/wp-word-count-admin-ms.php:41
+#: admin/partials/wp-word-count-admin-ms.php:46
+#: admin/partials/wp-word-count-admin-stats.php:22
+#: admin/partials/wp-word-count-admin-stats.php:75
+#: admin/partials/wp-word-count-admin-tc.php:16
+msgid "Words"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-ac.php:17
+#: admin/partials/wp-word-count-admin-tc.php:17
+msgid "Title"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-ac.php:18
+#: admin/partials/wp-word-count-admin-stats.php:20
+#: admin/partials/wp-word-count-admin-stats.php:73
+#: admin/partials/wp-word-count-admin-tc.php:18
+msgid "Type"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-ac.php:19
+#: admin/partials/wp-word-count-admin-tc.php:19
+msgid "Status"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-ac.php:20
+#: admin/partials/wp-word-count-admin-as.php:16
+#: admin/partials/wp-word-count-admin-tc.php:20
+msgid "Author"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-as.php:25
+#: admin/partials/wp-word-count-admin-ms.php:25
+#: admin/partials/wp-word-count-admin-stats.php:15
+msgid "Published"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-as.php:26
+#: admin/partials/wp-word-count-admin-ms.php:26
+#: admin/partials/wp-word-count-admin-stats.php:68
+msgid "Draft"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-as.php:42
+#: admin/partials/wp-word-count-admin-as.php:47
+#: admin/partials/wp-word-count-admin-ms.php:42
+#: admin/partials/wp-word-count-admin-ms.php:47
+msgid "Avg."
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-ms.php:16
+msgid "Month"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:21
+#: admin/partials/wp-word-count-admin-stats.php:74
+msgid "Total"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:23
+#: admin/partials/wp-word-count-admin-stats.php:76
+msgid "Average"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:63
+msgid "Published Words"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:116
+msgid "Unpublished Words"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:121
+msgid "WP Word Count Pro"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:123
+msgid "Upgrade to <strong>WP Word Count Pro</strong> for"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:127
+msgid "Detailed Post Statistics"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:128
+msgid "Monthly Writing Breakdowns"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:129
+msgid "Motivational Achievements"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin-stats.php:132
+msgid "Learn More"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin.php:22
+msgid "Top Content"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin.php:23
+msgid "All Content"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin.php:24
+msgid "Monthly Statistics"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin.php:25
+msgid "Author Statistics"
+msgstr ""
+
+#: admin/partials/wp-word-count-admin.php:46
+msgid "A WordPress Plugin by"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Word Count"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://linksoftwarellc.com/wp-word-count"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Word Count Statistics for your Posts, Pages and Custom Post Types."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Link Software LLC"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://linksoftwarellc.com"
+msgstr ""
