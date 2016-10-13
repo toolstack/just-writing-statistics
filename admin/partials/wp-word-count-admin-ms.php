@@ -37,14 +37,18 @@
 			<td><?php echo number_format($month['total']); ?></td>
 			<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
 			<td>
-				<?php echo @number_format(0 + $month[$index]['posts']['publish']); ?> Total<br />
-				<?php echo @number_format(0 + $month[$index]['word_counts']['publish']); ?> <?php _e('Words', $this->plugin_name); ?><br />
-				<?php echo @number_format(round(0 + ($month[$index]['word_counts']['publish'] / $month[$index]['posts']['publish']))); ?> <?php _e('Avg.', $this->plugin_name); ?>
+				<?php if (isset($month[$index]['posts']['publish'])) { echo number_format(0 + $month[$index]['posts']['publish']); } else { echo '0'; } ?> Total<br />
+				<?php if (isset($month[$index]['word_counts']['publish'])) { echo number_format(0 + $month[$index]['word_counts']['publish']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
+				<?php if (isset($month[$index]['posts']['publish']) && $month[$index]['posts']['publish'] != 0) : ?>
+				<?php echo number_format(round(0 + ($month[$index]['word_counts']['publish'] / $month[$index]['posts']['publish']))); ?> <?php _e('Avg.', $this->plugin_name); ?>
+				<?php endif; ?>
 			</td>
 			<td>
-				<?php echo @number_format(0 + $month[$index]['posts']['draft']); ?> Total<br />
-				<?php echo @number_format(0 + $month[$index]['word_counts']['draft']); ?> <?php _e('Words', $this->plugin_name); ?><br />
-				<?php echo @number_format(round(0 + ($month[$index]['word_counts']['draft'] / $month[$index]['posts']['draft']))); ?> <?php _e('Avg.', $this->plugin_name); ?>
+				<?php if (isset($month[$index]['posts']['draft'])) { echo number_format(0 + $month[$index]['posts']['draft']); } else { echo '0'; } ?> Total<br />
+				<?php if (isset($month[$index]['word_counts']['draft'])) { echo number_format(0 + $month[$index]['word_counts']['draft']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
+				<?php if (isset($month[$index]['posts']['draft']) && $month[$index]['posts']['draft'] != 0) : ?>
+				<?php echo number_format(round(0 + ($month[$index]['word_counts']['draft'] / $month[$index]['posts']['draft']))); ?> <?php _e('Avg.', $this->plugin_name); ?>
+				<?php endif; ?>
 			</td>
 			<?php endforeach; ?>
 		</tr>

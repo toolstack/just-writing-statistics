@@ -30,10 +30,32 @@
 				<?php foreach ($arr_wpwc_post_types_default as $default) : ?>
 				
 				<?php echo '<tr'.($wpwc_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-					<td><?php echo $arr_wpwc_post_types[$default]['singular_name']; ?></td>
+					<td>
+						<?php
+							
+							if (isset($arr_wpwc_post_types[$default]['singular_name'])) {
+							
+								echo $arr_wpwc_post_types[$default]['singular_name'];
+							
+							}
+							else {
+								
+								echo ucwords($default);
+							}
+								
+						?>
+					</td>
 					<td><?php echo @number_format(0 + $arr_wpwc_post_types[$default]['posts']['publish']); ?></td>
 					<td><?php echo @number_format(0 + $arr_wpwc_post_types[$default]['word_counts']['publish']); ?></td>
-					<td><?php echo @number_format(round(0 + ($arr_wpwc_post_types[$default]['word_counts']['publish'] / $arr_wpwc_post_types[$default]['posts']['publish']))); ?></td>
+					<td>
+					<?php
+						if (0 + @$arr_wpwc_post_types[$default]['word_counts']['publish'] != 0) {
+							
+							echo @number_format(round(0 + ($arr_wpwc_post_types[$default]['word_counts']['publish'] / $arr_wpwc_post_types[$default]['posts']['publish'])));
+							
+						}
+					?>
+					</td>
 				</tr>
 				
 				<?php $wpwc_counter_post_types++; ?>
@@ -47,7 +69,15 @@
 					<td><?php echo $post_type['singular_name']; ?></td>
 					<td><?php echo @number_format(0 + $post_type['posts']['publish']); ?></td>
 					<td><?php echo @number_format(0 + $post_type['word_counts']['publish']); ?></td>
-					<td><?php echo @number_format(round(0 + ($post_type['word_counts']['publish'] / $post_type['posts']['publish']))); ?></td>
+					<td>
+					<?php
+						if (0 + @$post_type['word_counts']['publish'] != 0) {
+							
+							echo @number_format(round(0 + ($post_type['word_counts']['publish'] / $post_type['posts']['publish'])));
+							
+						}
+					?>
+					</td>
 				</tr>
 				
 				<?php $wpwc_counter_post_types++; ?>
@@ -83,10 +113,32 @@
 				<?php foreach ($arr_wpwc_post_types_default as $default) : ?>
 				
 				<?php echo '<tr'.($wpwc_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-					<td><?php echo $arr_wpwc_post_types[$default]['singular_name']; ?></td>
+					<td>
+						<?php
+							
+							if (isset($arr_wpwc_post_types[$default]['singular_name'])) {
+							
+								echo $arr_wpwc_post_types[$default]['singular_name'];
+							
+							}
+							else {
+								
+								echo ucwords($default);
+							}
+								
+						?>
+					</td>
 					<td><?php echo @number_format(0 + $arr_wpwc_post_types[$default]['posts']['draft']); ?></td>
 					<td><?php echo @number_format(0 + $arr_wpwc_post_types[$default]['word_counts']['draft']); ?></td>
-					<td><?php echo @number_format(round(0 + ($arr_wpwc_post_types[$default]['word_counts']['draft'] / $arr_wpwc_post_types[$default]['posts']['draft']))); ?></td>
+					<td>
+					<?php
+						if (0 + @$arr_wpwc_post_types[$default]['word_counts']['draft'] != 0) {
+							
+							echo @number_format(round(0 + ($arr_wpwc_post_types[$default]['word_counts']['draft'] / $arr_wpwc_post_types[$default]['posts']['draft'])));
+							
+						}
+					?>
+					</td>
 				</tr>
 				
 				<?php $wpwc_counter_post_types++; ?>
@@ -100,7 +152,15 @@
 					<td><?php echo $post_type['singular_name']; ?></td>
 					<td><?php echo @number_format(0 + $post_type['posts']['draft']); ?></td>
 					<td><?php echo @number_format(0 + $post_type['word_counts']['draft']); ?></td>
-					<td><?php echo @number_format(round(0 + ($post_type['word_counts']['draft'] / $post_type['posts']['draft']))); ?></td>
+					<td>
+					<?php
+						if (0 + @$post_type['word_counts']['draft'] != 0) {
+							
+							echo @number_format(round(0 + ($post_type['word_counts']['draft'] / $post_type['posts']['draft'])));
+							
+						}
+					?>
+					</td>
 				</tr>
 				
 				<?php $wpwc_counter_post_types++; ?>

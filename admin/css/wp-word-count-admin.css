@@ -1,6 +1,7 @@
 #wp-word-count .wpwc-main-stats { float: left; display: block; clear: both; width: 100%; margin: 25px 0px 0px 0px; }
 #wp-word-count .wpwc-main-stats div { float: left; width: 30%; padding-right: 3.33%; }
-#wp-word-count .wpwc-main-stats div h3 { width: 97%; margin: 0; padding: 8px 0 8px 3%; background-color: #82878c; color: #ffffff; font-weight: normal; }
+#wp-word-count .wpwc-main-stats div:nth-of-type(3) { width: 33%; padding-right: 0; }
+#wp-word-count .wpwc-main-stats div h3 { margin: 0; padding: 8px 10px; background-color: #0056a6; color: #ffffff; font-weight: normal; }
 #wp-word-count .wpwc-main-stats div td { width: 25%; }
 #wp-word-count .wpwc-main-stats div h2 { margin: 20px 0 0 0; padding: 0; font-size: 2.0em; text-align: center; line-height: 0.9em; }
 #wp-word-count .wpwc-main-stats div h2 span { font-size: 0.55em; font-weight: normal; }
@@ -23,9 +24,9 @@ table.widefat .wpwc-type { width: 10% !important; }
 table.widefat .wpwc-status { width: 10% !important; }
 table.widefat .wpwc-author { width: 15% !important; }
 
-#wpwc-link-software { float: left; display: block; clear: both; width: 100%; margin: 25px 0px; padding: 0; text-align: center; text-transform: uppercase; font-size: 14px; color: #464b50; }
-#wpwc-link-software img { width: 17px;	padding-top: 10px; -ms-interpolation-mode: bicubic; vertical-align: middle; margin: -14px 2px 0px 2px; }
-#wpwc-link-software a { color: #464b50; text-decoration: none; }
+#wpwc-footer { float: left; display: block; clear: both; width: 100%; margin: 25px 0px; padding: 0; text-align: center; text-transform: uppercase; font-size: 14px; color: #464b50; }
+#wpwc-footer img { width: 17px;	padding-top: 10px; -ms-interpolation-mode: bicubic; vertical-align: middle; margin: -14px 2px 0px 2px; }
+#wpwc-footer a { color: #464b50; text-decoration: none; }
 
 @media only screen and (min-width:768px) and (max-width:991px) {
 	#wp-word-count .wpwc-main-stats div { width: 100% !important; margin-bottom: 35px; padding: 0; }

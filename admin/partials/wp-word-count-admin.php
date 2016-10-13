@@ -20,7 +20,7 @@
 	<div id="wpwc-tabs">
 		<ul>
 			<li><a href="#wpwc-top-content" class="nav-tab nav-tab-active"><?php _e('Top Content', $this->plugin_name); ?></a></li>
-			<li><a href="#wpwc-all-content" class="nav-tab"><?php _e('All Content', $this->plugin_name); ?> (<?php echo (0 + count($arr_wpwc_posts)); ?>)</a></li>
+			<li><a href="#wpwc-all-content" class="nav-tab"><?php _e('All Content', $this->plugin_name); ?> (<?php echo number_format(0 + count($arr_wpwc_posts)); ?>)</a></li>
 			<li><a href="#wpwc-monthly-statistics" class="nav-tab"><?php _e('Monthly Statistics', $this->plugin_name); ?></a></li>
 			<li><a href="#wpwc-author-statistics" class="nav-tab"><?php _e('Author Statistics', $this->plugin_name); ?></a></li>
 		</ul>
@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	
-	<div id="wpwc-link-software">
+	<div id="wpwc-footer">
 		<a href="http://linksoftwarellc.com"><?php _e('A WordPress Plugin by', $this->plugin_name); ?> <img src="<?php echo plugins_url('/images/linksoftware.png', dirname(__FILE__)); ?>" alt="Link Software LLC" /></a> <a href="http://linksoftwarellc.com">Link Software LLC</a>
 	</div>
 </div>

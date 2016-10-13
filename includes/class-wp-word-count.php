@@ -156,6 +156,7 @@ class Wp_Word_Count {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'menu' );
+		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'upgrade_link', 10, 2 );
 		
 		$this->loader->add_action( 'save_post', $plugin_admin, 'post_word_count', 10, 2 );
 	}

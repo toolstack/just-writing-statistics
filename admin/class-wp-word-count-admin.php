@@ -107,6 +107,26 @@ class Wp_Word_Count_Admin {
 		add_menu_page( 'WP Word Count', 'WP Word Count', 'delete_posts', $this->plugin_name, array( $this, 'admin_display' ), 'dashicons-chart-area', 99 );
 		
 	}
+	
+	/**
+	 * Add upgrade action link to the plugins page.
+	 *
+	 * @since    2.0.1
+	 */
+	 
+	public function upgrade_link($links, $file ) {
+
+		if (strpos($file, 'wpwordcount.php') !== false) {
+			
+			$new_links = array(
+				'donate' => '<a href="http://linksoftwarellc.com/wp-word-count" target="_blank"><strong>'.__('Upgrade to WP Word Count Pro', $this->plugin_name).'</strong></a>'
+			);
+			
+			$links = array_merge( $links, $new_links );
+		}
+	
+	return $links;
+	}
 	 
 	/**
 	 * Render the admin display.
@@ -153,13 +173,13 @@ class Wp_Word_Count_Admin {
 				
 			}
 			
-			@$arr_wpwc_post_types[$wpwc_post->post_type]['posts'][$wpwc_post->post_status] += 1;
-			@$arr_wpwc_post_types[$wpwc_post->post_type]['word_counts'][$wpwc_post->post_status] += $wpwc_post->post_word_count;
+			$arr_wpwc_post_types[$wpwc_post->post_type]['posts'][$wpwc_post->post_status] += 1;
+			$arr_wpwc_post_types[$wpwc_post->post_type]['word_counts'][$wpwc_post->post_status] += $wpwc_post->post_word_count;
 			
 			asort($arr_wpwc_post_types);
 			
 			// Load months array
-			if (!isset($arr_wpwc_months[$wpwc_post->post_date])) {
+			if (!isset($arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type])) {
 				
 				$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['posts']['publish'] = 0;
 				$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['posts']['draft'] = 0;
@@ -171,14 +191,14 @@ class Wp_Word_Count_Admin {
 				
 			}
 			
-			@$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['posts'][$wpwc_post->post_status] += 1;
-			@$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['word_counts'][$wpwc_post->post_status] += $wpwc_post->post_word_count;
+			$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['posts'][$wpwc_post->post_status] += 1;
+			$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['word_counts'][$wpwc_post->post_status] += $wpwc_post->post_word_count;
 			$arr_wpwc_months[$wpwc_post->post_date]['total'] += $wpwc_post->post_word_count;
 			
 			krsort($arr_wpwc_months);
 			
 			// Load authors array
-			if (!isset($arr_wpwc_authors[$wpwc_post->post_author])) {
+			if (!isset($arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type])) {
 				
 				$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['posts']['publish'] = 0;
 				$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['posts']['draft'] = 0;
@@ -192,8 +212,8 @@ class Wp_Word_Count_Admin {
 				
 			}
 			
-			@$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['posts'][$wpwc_post->post_status] += 1;
-			@$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['word_counts'][$wpwc_post->post_status] += $wpwc_post->post_word_count;
+			$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['posts'][$wpwc_post->post_status] += 1;
+			$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['word_counts'][$wpwc_post->post_status] += $wpwc_post->post_word_count;
 			$arr_wpwc_authors[$wpwc_post->post_author]['total'] += $wpwc_post->post_word_count;
 			
 			krsort($arr_wpwc_months);

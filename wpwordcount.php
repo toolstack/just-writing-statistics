@@ -16,7 +16,7 @@
  * Plugin Name:       WP Word Count
  * Plugin URI:        http://linksoftwarellc.com/wp-word-count
  * Description:       Word Count Statistics for your Posts, Pages and Custom Post Types.
- * Version:           2.0.0
+ * Version:           2.0.1
  * Author:            Link Software LLC
  * Author URI:        http://linksoftwarellc.com
  * License:           GPL-2.0+
@@ -30,14 +30,20 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define('WPWC_VERSION', '2.0.0');
+define('WPWC_VERSION', '2.0.1');
 
 function activate_wp_word_count() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-word-count-activator.php';
 	Wp_Word_Count_Activator::activate();
 }
 
+function deactivate_wp_word_count() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-word-count-deactivator.php';
+	Wp_Word_Count_Deactivator::deactivate();
+}
+
 register_activation_hook( __FILE__, 'activate_wp_word_count' );
+register_deactivation_hook( __FILE__, 'deactivate_wp_word_count' );
 
 require plugin_dir_path( __FILE__ ) . 'includes/class-wp-word-count.php';
 require plugin_dir_path( __FILE__ ) . 'includes/functions-wp-word-count.php';
