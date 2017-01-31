@@ -12,12 +12,15 @@ WP Word Count is a WordPress plugin for word count statistics on blog posts, pag
 WP Word Count is a WordPress plugin for word count statistics on blog posts, pages and custom post types.
 
 **Total & Individual Word Counts for All Content**
+
 Quickly see how many posts and pages you've created and how many total words they add up to. Track all of your content sorted from largest word count down to the smallest.
 
 **Statistics by Month & Author**
+
 View your writing output for each month broken down by post, page and custom post type. Each writer on your site has their total word count statistics calculated across all of your forms of content.
 
 **Simple Download and Setup**
+
 Start tracking your blog's word counts today with WP Word Count. You can learn more at [wpwordcount.com](http://wpwordcount.com)
 
 == Installation ==
