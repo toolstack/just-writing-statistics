@@ -62,7 +62,7 @@ class Wp_Word_Count_Admin {
 	 
 	public function plugin_check() {
 	
-		$wpwc_installed_version = get_site_option('wpwc_version');
+		$wpwc_installed_version = get_option('wpwc_version');
 		
 		if ($wpwc_installed_version != WPWC_VERSION) {
 			
@@ -179,6 +179,12 @@ class Wp_Word_Count_Admin {
 			asort($arr_wpwc_post_types);
 			
 			// Load months array
+			if (!isset($arr_wpwc_months[$wpwc_post->post_date])) {
+				
+				$arr_wpwc_months[$wpwc_post->post_date]['total'] = 0;
+				
+			}
+			
 			if (!isset($arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type])) {
 				
 				$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['posts']['publish'] = 0;
@@ -186,8 +192,6 @@ class Wp_Word_Count_Admin {
 				
 				$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['word_counts']['publish'] = 0;
 				$arr_wpwc_months[$wpwc_post->post_date][$wpwc_post->post_type]['word_counts']['draft'] = 0;
-				
-				$arr_wpwc_months[$wpwc_post->post_date]['total'] = 0;
 				
 			}
 			
@@ -198,6 +202,11 @@ class Wp_Word_Count_Admin {
 			krsort($arr_wpwc_months);
 			
 			// Load authors array
+			if (!isset($arr_wpwc_authors[$wpwc_post->post_author]['total'])) {
+			
+				$arr_wpwc_authors[$wpwc_post->post_author]['total'] = 0;	
+			}
+			
 			if (!isset($arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type])) {
 				
 				$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['posts']['publish'] = 0;
@@ -205,8 +214,6 @@ class Wp_Word_Count_Admin {
 				
 				$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['word_counts']['publish'] = 0;
 				$arr_wpwc_authors[$wpwc_post->post_author][$wpwc_post->post_type]['word_counts']['draft'] = 0;
-				
-				$arr_wpwc_authors[$wpwc_post->post_author]['total'] = 0;
 				
 				$arr_wpwc_authors[$wpwc_post->post_author]['display_name'] = get_the_author_meta('display_name', $wpwc_post->post_author);
 				
