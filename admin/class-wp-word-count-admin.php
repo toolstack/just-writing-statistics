@@ -104,7 +104,9 @@ class Wp_Word_Count_Admin {
 	 
 	public function menu() {
 	
-		add_menu_page( 'WP Word Count', 'WP Word Count', 'delete_posts', $this->plugin_name, array( $this, 'admin_display' ), 'dashicons-chart-area', 99 );
+		$icon_svg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RkZBMDRCQTQxN0Q2MTFFNzkxNjdFRDUzNUM3OEQ5MTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RkZBMDRCQTUxN0Q2MTFFNzkxNjdFRDUzNUM3OEQ5MTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRkEwNEJBMjE3RDYxMUU3OTE2N0VENTM1Qzc4RDkxNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRkEwNEJBMzE3RDYxMUU3OTE2N0VENTM1Qzc4RDkxNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqUWiFsAAAHiSURBVHjahFO7qhpRFF2OI77xBYrESkREESJaqk3Ab7C59w/iB6TPH+QTImkFsbCxsEipha0g+OCihfhEjTrmrM0ISdDcBWtmOHvvtdaZmWOp1WpfAbwqWvA33hQ/mes/FT/8UzcUv+vq8gWPwYGPilfF9JOez5q67PAcN9PpGbaa6fAMxjsCBgWwXq9xPp+xXC5xOp2w2+1wPB5htVqly2Kx4Ha7SX0+n0v9XtP5kMvlMJ1Okclk5O73+3G5XDAej+FwOOSZfcViEZFIBIPBALPZDHa7HRqdSqUSkskkqtUq0uk0CoUCotEo9vu9OLPH7XajXC4jlUqhUqlIYgrr2+1W1CjAeD6fT4p0d7lcEl/TNEmwWCxENBaLybrUvF4vdF2XeBRjgng8DsMwJG4oFEIwGAT78vk8stkser0eAoEAwuEwNO7jcDiIw2QyQSKRkMHNZgOn0yniTEARj8eDer2Ofr8vwqzpVB6NRmi32xgOh2g0GrJnDjMFYbPZsFqt0Gw25Z3QnfuXr8BGurVaLXHpdruShg73Jqbk3judjgxTkEIicL1eZYH7IShC3Iflb1FJ7qLye5rDhGbyGd6rW1n0/q/hwSn9Ex6exm+KLw8a54oDxV+KfcXog4P247cAAwA4I8oZtVZOgwAAAABJRU5ErkJggg==';
+		
+		add_menu_page( 'WP Word Count', 'Word Count', 'delete_posts', $this->plugin_name, array( $this, 'admin_display' ), $icon_svg, 99 );
 		
 	}
 	
@@ -119,7 +121,7 @@ class Wp_Word_Count_Admin {
 		if (strpos($file, 'wpwordcount.php') !== false) {
 			
 			$new_links = array(
-				'donate' => '<a href="http://linksoftwarellc.com/wp-word-count" target="_blank"><strong>'.__('Upgrade to WP Word Count Pro', $this->plugin_name).'</strong></a>'
+				'donate' => '<a href="https://linksoftwarellc.com/wp-word-count#pro" target="_blank"><strong>'.__('Upgrade to WP Word Count Pro', $this->plugin_name).'</strong></a>'
 			);
 			
 			$links = array_merge( $links, $new_links );

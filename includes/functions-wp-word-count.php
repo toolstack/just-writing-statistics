@@ -103,7 +103,20 @@ function wpwc_save_post_data($post) {
  */
 function wpwc_word_count($content) {
 	
-	return str_word_count(strip_tags($content));
+	$content = strip_tags( nl2br( $content ) );
+	
+	if ( preg_match( "/[\x{4e00}-\x{9fa5}]+/u", $content ) ) {
+		
+		$content = preg_replace( '/[\x80-\xff]{1,3}/', ' ', $content, -1, $n );
+		$n += str_word_count($content);
+		
+		return $n;
+	
+	} else {
+		
+		return count( preg_split( '/\s+/', $content ) );
+		
+	}
 	
 }
 

@@ -13,7 +13,7 @@
  */
 ?>
 <div id="wp-word-count" class="wrap">
-    <h2><?php echo esc_html(get_admin_page_title()); ?></h2>
+	<?php include_once('wp-word-count-menu.php'); ?>
     
 	<?php include_once('wp-word-count-admin-stats.php'); ?>
 

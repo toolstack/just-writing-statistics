@@ -1,9 +1,9 @@
 # WP Word Count
 Contributors: linksoftware  
 Tags: word count, word stats, word statistics, author stats, author statistics, words, stats, statistics
-Requires at least: 2.8  
-Tested up to: 4.7.2  
-Stable tag: 2.0.2
+Requires at least: 4.0  
+Tested up to: 4.7.5  
+Stable tag: 2.1.0
 
 WP Word Count is a WordPress plugin for word count statistics on blog posts, pages and custom post types.
 
@@ -40,12 +40,19 @@ Example: [wpwordcount before="This post has" after=" total words."]
 
 ## Screenshots
 
-1. Main Word Count Statistics
-2. Content Statistics
-3. Monthly Statistics
-4. Author Statistics
+1. WP Word Count
+2. Published and Unpublished Word Count Totals
+3. Content Statistics
+4. Monthly Statistics
+5. Author Statistics
 
 ## Changelog
+
+### 2.1.0
+* Improved word counts.
+* Support for non-Latin languages.
+* Interface changes.
+* General bug fixes.
 
 ### 2.0.2
 * Fixed critical performance bugs for WordPress Network installations.

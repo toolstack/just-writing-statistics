@@ -176,19 +176,8 @@
 			<span><?php _e('Unpublished Words', $this->plugin_name); ?></span>
 		</h2>
     </div>
-    
-    <div class="wpwc-pro">
-	    <h3><?php _e('WP Word Count Pro', $this->plugin_name); ?></h3>
-	    <p>
-		<?php _e('Upgrade to <strong>WP Word Count Pro</strong> for', $this->plugin_name); ?>
-	    </p>
-	    
-	    <ul>
-		    <li><?php _e('Detailed Post Statistics', $this->plugin_name); ?></li>
-		    <li><?php _e('Monthly Writing Breakdowns', $this->plugin_name); ?></li>
-		    <li><?php _e('Motivational Achievements', $this->plugin_name); ?></li>
-	    </ul>
-	    
-	    <a href="http://linksoftwarellc.com/wp-word-count"><?php _e('Learn More', $this->plugin_name); ?></a>
-    </div>
+
+    <div>
+	    <a href="https://linksoftwarellc.com/wp-word-count#pro"><img class="wpwc-logo" src="<?php echo plugins_url( '/images/wpwordcountpro.png', dirname( __FILE__ ) ); ?>" alt="<?php _e( 'WP Word Count Pro', $this->plugin_name ); ?>" /></a>
+	</div>
 </div>
