@@ -9,8 +9,7 @@ Count the words on your WordPress site instantly.
 
 == Description ==
 
-If you own a WordPress site and like to write then WP Word Count is for you. WP Word Count tells you exactly how many words you've written on your site and comes with extra statistics giving you 
-details by month and author.
+If you own a WordPress site and like to write then WP Word Count is for you. WP Word Count tells you exactly how many words you've written on your site and comes with extra statistics giving you details by month and author.
 
 ## FEATURES
 
