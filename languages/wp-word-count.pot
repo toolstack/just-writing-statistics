@@ -3,15 +3,16 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WP Word Count\n"
-"POT-Creation-Date: 2016-10-13 11:51-0400\n"
-"PO-Revision-Date: 2016-10-13 11:50-0400\n"
+"POT-Creation-Date: 2018-02-19 10:55-0500\n"
+"PO-Revision-Date: 2018-02-19 10:54-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 2.0\n"
 "X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wpwordcount.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -20,133 +21,233 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/class-wp-word-count-admin.php:122
+#: admin/class-wpwc-admin.php:97 admin/partials/wpwc-calculate.php:18
+#: admin/partials/wpwc-statistics-menu.php:19
+msgid "Calculate"
+msgstr ""
+
+#: admin/class-wpwc-admin.php:98 admin/partials/wpwc-statistics-menu.php:20
+#: admin/partials/wpwc-upgrade.php:19
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: admin/class-wpwc-admin.php:114
 msgid "Upgrade to WP Word Count Pro"
 msgstr ""
 
-#: admin/partials/wp-word-count-admin-ac.php:16
-#: admin/partials/wp-word-count-admin-as.php:17
-#: admin/partials/wp-word-count-admin-as.php:41
-#: admin/partials/wp-word-count-admin-as.php:48
-#: admin/partials/wp-word-count-admin-ms.php:17
-#: admin/partials/wp-word-count-admin-ms.php:41
-#: admin/partials/wp-word-count-admin-ms.php:48
-#: admin/partials/wp-word-count-admin-stats.php:22
-#: admin/partials/wp-word-count-admin-stats.php:105
-#: admin/partials/wp-word-count-admin-tc.php:16
-msgid "Words"
+#: admin/class-wpwc-admin.php:132
+msgid "Settings"
 msgstr ""
 
-#: admin/partials/wp-word-count-admin-ac.php:17
-#: admin/partials/wp-word-count-admin-tc.php:17
-msgid "Title"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-ac.php:18
-#: admin/partials/wp-word-count-admin-stats.php:20
-#: admin/partials/wp-word-count-admin-stats.php:103
-#: admin/partials/wp-word-count-admin-tc.php:18
-msgid "Type"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-ac.php:19
-#: admin/partials/wp-word-count-admin-tc.php:19
-msgid "Status"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-ac.php:20
-#: admin/partials/wp-word-count-admin-as.php:16
-#: admin/partials/wp-word-count-admin-tc.php:20
-msgid "Author"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-as.php:25
-#: admin/partials/wp-word-count-admin-ms.php:25
-#: admin/partials/wp-word-count-admin-stats.php:15
-msgid "Published"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-as.php:26
-#: admin/partials/wp-word-count-admin-ms.php:26
-#: admin/partials/wp-word-count-admin-stats.php:98
-msgid "Draft"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-as.php:43
-#: admin/partials/wp-word-count-admin-as.php:50
-#: admin/partials/wp-word-count-admin-ms.php:43
-#: admin/partials/wp-word-count-admin-ms.php:50
-msgid "Avg."
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-ms.php:16
-msgid "Month"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:21
-#: admin/partials/wp-word-count-admin-stats.php:104
-msgid "Total"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:23
-#: admin/partials/wp-word-count-admin-stats.php:106
-msgid "Average"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:93
-msgid "Published Words"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:176
-msgid "Unpublished Words"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:181
-msgid "WP Word Count Pro"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:183
-msgid "Upgrade to <strong>WP Word Count Pro</strong> for"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:187
-msgid "Detailed Post Statistics"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:188
-msgid "Monthly Writing Breakdowns"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:189
-msgid "Motivational Achievements"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin-stats.php:192
-msgid "Learn More"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin.php:22
-msgid "Top Content"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin.php:23
-msgid "All Content"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin.php:24
-msgid "Monthly Statistics"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin.php:25
-msgid "Author Statistics"
-msgstr ""
-
-#: admin/partials/wp-word-count-admin.php:46
-msgid "A WordPress Plugin by"
+#: admin/class-wpwc-admin.php:199
+#, php-format
+msgid ""
+"Word counts calculated successfully. Visit the <a href=\"%s\">statistics "
+"page</a> to view."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
+#: admin/partials/wpwc-calculate.php:18 admin/partials/wpwc-statistics.php:17
+#: admin/partials/wpwc-upgrade.php:19
 msgid "WP Word Count"
+msgstr ""
+
+#: admin/partials/wpwc-calculate.php:22
+msgid "Calculate Word Counts"
+msgstr ""
+
+#: admin/partials/wpwc-calculate.php:24
+msgid ""
+"You can calculate the word counts of all your content by pressing the button "
+"below.<br>After your first calculation, word counts will be stored "
+"automatically every time you save a post."
+msgstr ""
+
+#: admin/partials/wpwc-calculate.php:29
+msgid "Calculate Now"
+msgstr ""
+
+#: admin/partials/wpwc-footer.php:14
+msgid "A WordPress Plugin by"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-menu.php:15
+#: admin/partials/wpwc-statistics.php:35
+msgid "Top Content"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-menu.php:16
+#: admin/partials/wpwc-statistics.php:37
+msgid "All Content"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-menu.php:17
+#: admin/partials/wpwc-statistics.php:79
+msgid "Monthly Statistics"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-menu.php:18
+#: admin/partials/wpwc-statistics.php:133
+msgid "Author Statistics"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:15
+#: admin/partials/wpwc-statistics.php:93 admin/partials/wpwc-statistics.php:147
+msgid "Published"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:20
+#: admin/partials/wpwc-statistics-totals.php:68
+#: admin/partials/wpwc-statistics-totals.php:116
+#: admin/partials/wpwc-statistics.php:45
+msgid "Type"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:21
+#: admin/partials/wpwc-statistics-totals.php:69
+#: admin/partials/wpwc-statistics-totals.php:117
+#: admin/partials/wpwc-statistics.php:108
+#: admin/partials/wpwc-statistics.php:115
+#: admin/partials/wpwc-statistics.php:162
+#: admin/partials/wpwc-statistics.php:169
+msgid "Total"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:22
+#: admin/partials/wpwc-statistics-totals.php:70
+#: admin/partials/wpwc-statistics-totals.php:118
+#: admin/partials/wpwc-statistics.php:43 admin/partials/wpwc-statistics.php:85
+#: admin/partials/wpwc-statistics.php:109
+#: admin/partials/wpwc-statistics.php:116
+#: admin/partials/wpwc-statistics.php:139
+#: admin/partials/wpwc-statistics.php:163
+#: admin/partials/wpwc-statistics.php:170
+msgid "Words"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:23
+#: admin/partials/wpwc-statistics-totals.php:71
+#: admin/partials/wpwc-statistics-totals.php:119
+#: admin/partials/wpwc-statistics.php:111
+#: admin/partials/wpwc-statistics.php:118
+#: admin/partials/wpwc-statistics.php:165
+#: admin/partials/wpwc-statistics.php:172
+msgid "Average"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:58
+msgid "Published Words"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:63
+#: admin/partials/wpwc-statistics.php:94 admin/partials/wpwc-statistics.php:148
+msgid "Unpublished"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:106
+msgid "Unpublished Words"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:111
+msgid "Totals"
+msgstr ""
+
+#: admin/partials/wpwc-statistics-totals.php:154
+msgid "Total Words"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:44
+msgid "Title"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:46
+msgid "Status"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:47 admin/partials/wpwc-statistics.php:138
+msgid "Author"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:61
+msgid "Edit"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:62
+msgid "Trash"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:63
+msgid "View"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:84
+msgid "Month"
+msgstr ""
+
+#: admin/partials/wpwc-statistics.php:190
+#, php-format
+msgid ""
+"You need to <a href=\"%s\">calculate</a> your word counts before you can "
+"start using the plugin."
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:25 admin/partials/wpwc-upgrade.php:42
+msgid "WP Word Count Pro"
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:27
+msgid "Upgrade to get the following extra features:"
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:30
+msgid ""
+"You'll get complete control over which post types you see in your statistics "
+"through a custom \"Settings\" option."
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:31
+msgid ""
+"WP Word Count Pro comes with detailed breakdowns of your monthly writing "
+"output by day, author, post type and more."
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:32
+msgid ""
+"Each author that contributes to your site has their own personal stats page "
+"with information beyond just word count totals."
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:33
+msgid ""
+"All of your posts have expanded statistical details with revision history, "
+"post rankings and more."
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:34
+msgid ""
+"The achievement system in WP Word Count Pro gives you extra motivation to "
+"write more and increase your site's content."
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:35
+msgid ""
+"Charts and graphs are on nearly every screen of WP Word Count Pro to offer "
+"better data visualization."
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:38
+msgid "View Features and Pricing"
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:45 admin/partials/wpwc-upgrade.php:46
+#: admin/partials/wpwc-upgrade.php:47
+msgid "WP Word Count Pro Screenshot"
+msgstr ""
+
+#: admin/partials/wpwc-upgrade.php:56
+msgid ""
+"Click subscribe below to get writing tips, updates on new releases and "
+"discounts for WP Word Count Pro. Unsubscribe at any time."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -154,7 +255,7 @@ msgid "http://linksoftwarellc.com/wp-word-count"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Word Count Statistics for your Posts, Pages and Custom Post Types."
+msgid "Count the words on your WordPress site instantly."
 msgstr ""
 
 #. Author of the plugin/theme

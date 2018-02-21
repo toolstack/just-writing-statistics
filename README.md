@@ -1,31 +1,40 @@
 # WP Word Count
 Contributors: linksoftware  
 Tags: word count, word stats, word statistics, author stats, author statistics, words, stats, statistics
-Requires at least: 4.0  
-Tested up to: 4.8.1 
-Stable tag: 2.1.0
+Requires at least: 4.0
+Tested up to: 4.9.4
+Stable tag: 3.0.0
 
-WP Word Count is a WordPress plugin for word count statistics on blog posts, pages and custom post types.
+Count the words on your WordPress site instantly.
 
 ## Description
 
-WP Word Count is a WordPress plugin for word count statistics on blog posts, pages and custom post types.
+If you own a WordPress site and like to write then WP Word Count is for you. WP Word Count tells you exactly how many words you've written on your site and comes with extra statistics giving you 
+details by month and author.
 
-###Total & Individual Word Counts for All Content###
+### FEATURES
 
-Quickly see how many posts and pages you've created and how many total words they add up to. Track all of your content sorted from largest word count down to the smallest.
+- Quickly see how many posts and pages you've created and how many total words they add up to.
+- Support for custom post types so you can monitor word counts from content created by your themes and plugins.
+- View your writing output for each month broken down by post type.
+- See all of your site author's word counts with breakdowns by post type.
 
-###Statistics by Month & Author###
+### WP WORD COUNT PRO
 
-View your writing output for each month broken down by post, page and custom post type. Each writer on your site has their total word count statistics calculated across all of your forms of content.
+Upgrade to [WP Word Count Pro](https://linksoftwarellc.com/wp-word-count/#pro) and get additional features to help you understand and analyze the amount of content you are producing for your site:
 
-###Simple Download and Setup###
+- You'll get complete control over which post types you see in your statistics through a custom "Settings" option.
+- WP Word Count Pro comes with detailed breakdowns of your monthly writing output by day, author, post type and more.
+- Each author that contributes to your site has their own personal stats page with information beyond just word count totals.
+- All of your posts have expanded statistical details with revision history, post rankings and more.
+- The achievement system in WP Word Count Pro gives you extra motivation to write more and increase your site's content.
+- Charts and graphs are on nearly every screen of WP Word Count Pro to offer better data visualization.
 
-Start tracking your blog's word counts today with WP Word Count. You can learn more at [wpwordcount.com](http://wpwordcount.com)
+You can learn more about WP Word Count Pro at [wpwordcount.com](http://wpwordcount.com)
 
 ## Installation
 
-1. Upload `wpwordcount` to the `/wp-content/plugins/` directory
+1. Upload `wp-word-count` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. WP Word Count can be accessed via the menu of the WordPress Admin.
 
@@ -41,12 +50,18 @@ Example: [wpwordcount before="This post has" after=" total words."]
 ## Screenshots
 
 1. WP Word Count
-2. Published and Unpublished Word Count Totals
-3. Content Statistics
-4. Monthly Statistics
-5. Author Statistics
+2. Monthly Statistics
+3. Author Statistics
 
 ## Changelog
+
+### 3.0.0
+* You can calculate your word counts any time you wish via the "Calculate" tab. This should help alleviate problems with plugin activation/updating on servers with limited resources.
+* Automatically excluding common WordPress post types: Custom CSS, Navigation Menu Items.
+* Support for Scheduled Posts.
+* Support for Thrive Content Builder.
+* Interface changes.
+* General bug fixes.
 
 ### 2.1.0
 * Improved word counts.
@@ -94,6 +109,9 @@ Example: [wpwordcount before="This post has" after=" total words."]
 * Initial version.
 
 ## Upgrade Notice
+
+### 3.0.0
+New interface and adjustments to word count calculation to improve plugin performance.
 
 ### 2.0.0
 Support for custom post types is finally here and the statistics have been redesigned.

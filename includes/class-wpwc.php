@@ -1,19 +1,6 @@
 <?php
 
 /**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       http://linksoftwarellc.com/wp-word-count
- * @since      2.0.0
- *
- * @package    Wp_Word_Count
- * @subpackage Wp_Word_Count/includes
- */
-
-/**
  * The core plugin class.
  *
  * This is used to define internationalization, admin-specific hooks, and
@@ -22,10 +9,11 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      2.0.0
+ * @since      3.0.0
  * @package    Wp_Word_Count
  * @subpackage Wp_Word_Count/includes
  * @author     Link Software LLC <support@linksoftwarellc.com>
+ * @link       http://linksoftwarellc.com/wp-word-count
  */
 class Wp_Word_Count {
 
@@ -33,7 +21,7 @@ class Wp_Word_Count {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 * @access   protected
 	 * @var      Wp_Word_Count_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
@@ -42,7 +30,7 @@ class Wp_Word_Count {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
@@ -51,7 +39,7 @@ class Wp_Word_Count {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -64,7 +52,7 @@ class Wp_Word_Count {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 */
 	public function __construct() {
 		
@@ -91,7 +79,7 @@ class Wp_Word_Count {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -100,24 +88,24 @@ class Wp_Word_Count {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-word-count-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpwc-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-word-count-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpwc-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-word-count-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wpwc-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-word-count-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wpwc-public.php';
 
 		$this->loader = new Wp_Word_Count_Loader();
 
@@ -129,7 +117,7 @@ class Wp_Word_Count {
 	 * Uses the Wp_Word_Count_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -144,28 +132,34 @@ class Wp_Word_Count {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
+		
 		$plugin_admin = new Wp_Word_Count_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'plugin_check' );
+		
+		$this->loader->add_action( 'wp_ajax_wpwc_calculate', $plugin_admin, 'calculate_statistics' );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		
+		$plugin_basename = plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'menu' );
+		$this->loader->add_filter( 'plugin_action_links_' . $plugin_basename, $plugin_admin, 'action_links', 10, 2 );
 		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'upgrade_link', 10, 2 );
 		
 		$this->loader->add_action( 'save_post', $plugin_admin, 'post_word_count', 10, 2 );
+		
 	}
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 */
 	private function define_public_hooks() {
@@ -179,41 +173,49 @@ class Wp_Word_Count {
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    3.0.0
 	 */
 	public function run() {
+		
 		$this->loader->run();
+		
 	}
 
 	/**
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     2.0.0
+	 * @since     3.0.0
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
+		
 		return $this->plugin_name;
+		
 	}
 
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     2.0.0
+	 * @since     3.0.0
 	 * @return    Wp_Word_Count_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
+		
 		return $this->loader;
+		
 	}
 
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     2.0.0
+	 * @since     3.0.0
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {
+		
 		return $this->version;
+		
 	}
 
 }

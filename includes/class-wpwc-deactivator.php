@@ -1,33 +1,24 @@
 <?php
 
 /**
- * Fired during plugin deactivation
- *
- * @link       http://linksoftwarellc.com/wp-word-count
- * @since      2.0.1
- *
- * @package    Wp_Word_Count
- * @subpackage Wp_Word_Count/includes
- */
-
-/**
  * Fired during plugin deactivation.
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      2.0.1
+ * @since      3.0.0
  * @package    Wp_Word_Count
  * @subpackage Wp_Word_Count/includes
  * @author     Link Software LLC <support@linksoftwarellc.com>
+ * @link       http://linksoftwarellc.com/wp-word-count
  */
 class Wp_Word_Count_Deactivator {
 
 	/**
-	 * Remove tables and options.
+	 * Remove tables, options and transients.
 	 *
 	 * Remove all data from the WordPress database that WP Word Count has generated.
 	 *
-	 * @since    2.0.1
+	 * @since    3.0.0
 	 */
 	public static function deactivate() {
 		
@@ -41,7 +32,6 @@ class Wp_Word_Count_Deactivator {
 		
 		// Delete options the plugin has made
 		delete_option('wpwc_version');
-		delete_option('wpwc_post_types');
 
 	}
 
