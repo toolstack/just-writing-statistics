@@ -1,5 +1,5 @@
 # WP Word Count
-Contributors: linksoftware  
+Contributors: linksoftware, bjplink
 Tags: word count, word stats, word statistics, author stats, author statistics, words, stats, statistics
 Requires at least: 4.0
 Tested up to: 4.9.4
