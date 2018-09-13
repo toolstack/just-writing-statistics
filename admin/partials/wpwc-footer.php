@@ -3,7 +3,7 @@
 /**
  * This file is used to markup the footer of the plugin admin.
  *
- * @link       http://linksoftwarellc.com/wp-word-count
+ * @link       https://wpwordcount.com
  * @since      1.0.0
  *
  * @package    Wp_Word_Count

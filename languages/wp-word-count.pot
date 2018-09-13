@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WP Word Count\n"
-"POT-Creation-Date: 2018-02-19 10:55-0500\n"
+"POT-Creation-Date: 2018-09-04 09:37-0400\n"
 "PO-Revision-Date: 2018-02-19 10:54-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wpwordcount.php\n"
@@ -87,12 +87,12 @@ msgid "Monthly Statistics"
 msgstr ""
 
 #: admin/partials/wpwc-statistics-menu.php:18
-#: admin/partials/wpwc-statistics.php:133
+#: admin/partials/wpwc-statistics.php:135
 msgid "Author Statistics"
 msgstr ""
 
 #: admin/partials/wpwc-statistics-totals.php:15
-#: admin/partials/wpwc-statistics.php:93 admin/partials/wpwc-statistics.php:147
+#: admin/partials/wpwc-statistics.php:94 admin/partials/wpwc-statistics.php:150
 msgid "Published"
 msgstr ""
 
@@ -106,32 +106,32 @@ msgstr ""
 #: admin/partials/wpwc-statistics-totals.php:21
 #: admin/partials/wpwc-statistics-totals.php:69
 #: admin/partials/wpwc-statistics-totals.php:117
-#: admin/partials/wpwc-statistics.php:108
-#: admin/partials/wpwc-statistics.php:115
-#: admin/partials/wpwc-statistics.php:162
-#: admin/partials/wpwc-statistics.php:169
+#: admin/partials/wpwc-statistics.php:109
+#: admin/partials/wpwc-statistics.php:116
+#: admin/partials/wpwc-statistics.php:165
+#: admin/partials/wpwc-statistics.php:172
 msgid "Total"
 msgstr ""
 
 #: admin/partials/wpwc-statistics-totals.php:22
 #: admin/partials/wpwc-statistics-totals.php:70
 #: admin/partials/wpwc-statistics-totals.php:118
-#: admin/partials/wpwc-statistics.php:43 admin/partials/wpwc-statistics.php:85
-#: admin/partials/wpwc-statistics.php:109
-#: admin/partials/wpwc-statistics.php:116
-#: admin/partials/wpwc-statistics.php:139
-#: admin/partials/wpwc-statistics.php:163
-#: admin/partials/wpwc-statistics.php:170
+#: admin/partials/wpwc-statistics.php:43 admin/partials/wpwc-statistics.php:86
+#: admin/partials/wpwc-statistics.php:110
+#: admin/partials/wpwc-statistics.php:117
+#: admin/partials/wpwc-statistics.php:142
+#: admin/partials/wpwc-statistics.php:166
+#: admin/partials/wpwc-statistics.php:173
 msgid "Words"
 msgstr ""
 
 #: admin/partials/wpwc-statistics-totals.php:23
 #: admin/partials/wpwc-statistics-totals.php:71
 #: admin/partials/wpwc-statistics-totals.php:119
-#: admin/partials/wpwc-statistics.php:111
-#: admin/partials/wpwc-statistics.php:118
-#: admin/partials/wpwc-statistics.php:165
-#: admin/partials/wpwc-statistics.php:172
+#: admin/partials/wpwc-statistics.php:112
+#: admin/partials/wpwc-statistics.php:119
+#: admin/partials/wpwc-statistics.php:168
+#: admin/partials/wpwc-statistics.php:175
 msgid "Average"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgid "Published Words"
 msgstr ""
 
 #: admin/partials/wpwc-statistics-totals.php:63
-#: admin/partials/wpwc-statistics.php:94 admin/partials/wpwc-statistics.php:148
+#: admin/partials/wpwc-statistics.php:95 admin/partials/wpwc-statistics.php:151
 msgid "Unpublished"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: admin/partials/wpwc-statistics.php:47 admin/partials/wpwc-statistics.php:138
+#: admin/partials/wpwc-statistics.php:47 admin/partials/wpwc-statistics.php:141
 msgid "Author"
 msgstr ""
 
@@ -180,11 +180,11 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: admin/partials/wpwc-statistics.php:84
+#: admin/partials/wpwc-statistics.php:85
 msgid "Month"
 msgstr ""
 
-#: admin/partials/wpwc-statistics.php:190
+#: admin/partials/wpwc-statistics.php:194
 #, php-format
 msgid ""
 "You need to <a href=\"%s\">calculate</a> your word counts before you can "
@@ -208,7 +208,7 @@ msgstr ""
 #: admin/partials/wpwc-upgrade.php:31
 msgid ""
 "WP Word Count Pro comes with detailed breakdowns of your monthly writing "
-"output by day, author, post type and more."
+"output by day, author, post type, category, tag and more."
 msgstr ""
 
 #: admin/partials/wpwc-upgrade.php:32
@@ -251,7 +251,7 @@ msgid ""
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://linksoftwarellc.com/wp-word-count"
+msgid "https://wpwordcount.com"
 msgstr ""
 
 #. Description of the plugin/theme

@@ -5,7 +5,7 @@
  *
  * This file is used to markup the settings view of the plugin.
  *
- * @link       http://linksoftwarellc.com/wp-word-count
+ * @link       https://wpwordcount.com
  * @since      3.0.0
  *
  * @package    Wp_Word_Count

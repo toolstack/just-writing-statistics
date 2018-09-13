@@ -3,7 +3,7 @@
 /**
  * This file is used to markup the menu of the plugin admin.
  *
- * @link       http://linksoftwarellc.com/wp-word-count
+ * @link       https://wpwordcount.com
  * @since      2.0.0
  *
  * @package    Wp_Word_Count

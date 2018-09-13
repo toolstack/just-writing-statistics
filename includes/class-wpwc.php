@@ -13,7 +13,7 @@
  * @package    Wp_Word_Count
  * @subpackage Wp_Word_Count/includes
  * @author     Link Software LLC <support@linksoftwarellc.com>
- * @link       http://linksoftwarellc.com/wp-word-count
+ * @link       https://wpwordcount.com
  */
 class Wp_Word_Count {
 

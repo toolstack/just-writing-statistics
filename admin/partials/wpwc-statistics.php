@@ -5,7 +5,7 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       http://linksoftwarellc.com/wp-word-count
+ * @link       https://wpwordcount.com
  * @since      3.0.0
  *
  * @package    Wp_Word_Count_Pro
@@ -78,53 +78,55 @@
 	<div class="full">
 		<h3><?php _e('Monthly Statistics', $this->plugin_name); ?></h3>
 		
-		<table class="widefat">
-			<thead>
-				<tr>
-					<th rowspan="2"><?php _e('Month', $this->plugin_name); ?></th>
-					<th rowspan="2"><?php _e('Words', $this->plugin_name); ?></th>
-					<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
-					<th colspan="2" class="wpwc-post-type"><?php echo $post_type['plural_name']; ?></th>
-					<?php endforeach; ?>
-				</tr>
+		<div class="wpwc-table">
+			<table class="widefat wpwc-post-type-stats">
+				<thead>
+					<tr>
+						<th rowspan="2"><?php _e('Month', $this->plugin_name); ?></th>
+						<th rowspan="2"><?php _e('Words', $this->plugin_name); ?></th>
+						<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
+						<th colspan="2" class="wpwc-post-type"><?php echo $post_type['plural_name']; ?></th>
+						<?php endforeach; ?>
+					</tr>
+					
+					<tr>
+						<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
+						<th><?php _e('Published', $this->plugin_name); ?></th>
+						<th><?php _e('Unpublished', $this->plugin_name); ?></th>
+						<?php endforeach; ?>
+					</tr>
+				</thead>
 				
-				<tr>
-					<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
-					<th><?php _e('Published', $this->plugin_name); ?></th>
-					<th><?php _e('Unpublished', $this->plugin_name); ?></th>
+				<tbody>
+					<?php $wpwc_counter_monthly_statistics = 0; ?>
+					<?php foreach ($arr_wpwc_months as $month_name => $month) : ?>
+					
+					<?php echo '<tr'.($wpwc_counter_monthly_statistics % 2 == 1 ? "" : " class='alternate'").'>'; ?>
+						<td><nobr><?php echo $month_name; ?></td>
+						<td><?php echo number_format($month['total']); ?></td>
+						<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
+						<td>
+							<?php if (isset($month[$index]['published']['posts'])) { echo number_format(0 + $month[$index]['published']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
+							<?php if (isset($month[$index]['published']['word_count'])) { echo number_format(0 + $month[$index]['published']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
+							<?php if (isset($month[$index]['published']['posts']) && $month[$index]['published']['posts'] != 0) : ?>
+							<?php echo number_format(round(0 + ($month[$index]['published']['word_count'] / $month[$index]['published']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+							<?php endif; ?>
+						</td>
+						<td>
+							<?php if (isset($month[$index]['unpublished']['posts'])) { echo number_format(0 + $month[$index]['unpublished']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
+							<?php if (isset($month[$index]['unpublished']['word_count'])) { echo number_format(0 + $month[$index]['unpublished']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
+							<?php if (isset($month[$index]['unpublished']['posts']) && $month[$index]['unpublished']['posts'] != 0) : ?>
+							<?php echo number_format(round(0 + ($month[$index]['unpublished']['word_count'] / $month[$index]['unpublished']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+							<?php endif; ?>
+						</td>
+						<?php endforeach; ?>
+					</tr>
+					
+					<?php $wpwc_counter_monthly_statistics++; ?>
 					<?php endforeach; ?>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<?php $wpwc_counter_monthly_statistics = 0; ?>
-				<?php foreach ($arr_wpwc_months as $month_name => $month) : ?>
-				
-				<?php echo '<tr'.($wpwc_counter_monthly_statistics % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-					<td><nobr><?php echo $month_name; ?></td>
-					<td><?php echo number_format($month['total']); ?></td>
-					<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
-					<td>
-						<?php if (isset($month[$index]['published']['posts'])) { echo number_format(0 + $month[$index]['published']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
-						<?php if (isset($month[$index]['published']['word_count'])) { echo number_format(0 + $month[$index]['published']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
-						<?php if (isset($month[$index]['published']['posts']) && $month[$index]['published']['posts'] != 0) : ?>
-						<?php echo number_format(round(0 + ($month[$index]['published']['word_count'] / $month[$index]['published']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
-						<?php endif; ?>
-					</td>
-					<td>
-						<?php if (isset($month[$index]['unpublished']['posts'])) { echo number_format(0 + $month[$index]['unpublished']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
-						<?php if (isset($month[$index]['unpublished']['word_count'])) { echo number_format(0 + $month[$index]['unpublished']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
-						<?php if (isset($month[$index]['unpublished']['posts']) && $month[$index]['unpublished']['posts'] != 0) : ?>
-						<?php echo number_format(round(0 + ($month[$index]['unpublished']['word_count'] / $month[$index]['unpublished']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
-						<?php endif; ?>
-					</td>
-					<?php endforeach; ?>
-				</tr>
-				
-				<?php $wpwc_counter_monthly_statistics++; ?>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	
 	<?php elseif ( $wpwc_tab == 'author-statistics') : ?>
@@ -132,53 +134,55 @@
 	<div class="full">
 		<h3><?php _e('Author Statistics', $this->plugin_name); ?></h3>
 		
-		<table class="widefat">
-			<thead>
-				<tr>
-					<th rowspan="2"><?php _e('Author', $this->plugin_name); ?></th>
-					<th rowspan="2"><?php _e('Words', $this->plugin_name); ?></th>
-					<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
-					<th colspan="2" class="wpwc-post-type"><?php echo $post_type['plural_name']; ?></th>
-					<?php endforeach; ?>
-				</tr>
+		<div class="wpwc-table">
+			<table class="widefat wpwc-post-type-stats">
+				<thead>
+					<tr>
+						<th rowspan="2"><?php _e('Author', $this->plugin_name); ?></th>
+						<th rowspan="2"><?php _e('Words', $this->plugin_name); ?></th>
+						<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
+						<th colspan="2" class="wpwc-post-type"><?php echo $post_type['plural_name']; ?></th>
+						<?php endforeach; ?>
+					</tr>
+					
+					<tr>
+						<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
+						<th><?php _e('Published', $this->plugin_name); ?></th>
+						<th><?php _e('Unpublished', $this->plugin_name); ?></th>
+						<?php endforeach; ?>
+					</tr>
+				</thead>
 				
-				<tr>
-					<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
-					<th><?php _e('Published', $this->plugin_name); ?></th>
-					<th><?php _e('Unpublished', $this->plugin_name); ?></th>
+				<tbody>
+					<?php $wpwc_counter_author_statistics = 0; ?>
+					<?php foreach ($arr_wpwc_authors as $index => $author) : ?>
+					
+					<?php echo '<tr'.($wpwc_counter_author_statistics % 2 == 1 ? "" : " class='alternate'").'>'; ?>
+						<td><nobr><?php echo $author['display_name']; ?></td>
+						<td><?php echo number_format($author['total']); ?></td>
+						<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
+						<td>
+							<?php if (isset($author[$index]['published']['posts'])) { echo number_format(0 + $author[$index]['published']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
+							<?php if (isset($author[$index]['published']['word_count'])) { echo number_format(0 + $author[$index]['published']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
+							<?php if (isset($author[$index]['published']['posts']) && $author[$index]['published']['posts'] != 0) : ?>
+							<?php echo number_format(round(0 + ($author[$index]['published']['word_count'] / $author[$index]['published']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+							<?php endif; ?>
+						</td>
+						<td>
+							<?php if (isset($author[$index]['unpublished']['posts'])) { echo number_format(0 + $author[$index]['unpublished']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
+							<?php if (isset($author[$index]['unpublished']['word_count'])) { echo number_format(0 + $author[$index]['unpublished']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
+							<?php if (isset($author[$index]['unpublished']['posts']) && $author[$index]['unpublished']['posts'] != 0) : ?>
+							<?php echo number_format(round(0 + ($author[$index]['unpublished']['word_count'] / $author[$index]['unpublished']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+							<?php endif; ?>
+						</td>
+						<?php endforeach; ?>
+					</tr>
+					
+					<?php $wpwc_counter_author_statistics++; ?>
 					<?php endforeach; ?>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<?php $wpwc_counter_author_statistics = 0; ?>
-				<?php foreach ($arr_wpwc_authors as $index => $author) : ?>
-				
-				<?php echo '<tr'.($wpwc_counter_author_statistics % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-					<td><nobr><?php echo $author['display_name']; ?></td>
-					<td><?php echo number_format($author['total']); ?></td>
-					<?php foreach ($arr_wpwc_post_types as $index => $post_type) : ?>
-					<td>
-						<?php if (isset($author[$index]['published']['posts'])) { echo number_format(0 + $author[$index]['published']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
-						<?php if (isset($author[$index]['published']['word_count'])) { echo number_format(0 + $author[$index]['published']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
-						<?php if (isset($author[$index]['published']['posts']) && $author[$index]['published']['posts'] != 0) : ?>
-						<?php echo number_format(round(0 + ($author[$index]['published']['word_count'] / $author[$index]['published']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
-						<?php endif; ?>
-					</td>
-					<td>
-						<?php if (isset($author[$index]['unpublished']['posts'])) { echo number_format(0 + $author[$index]['unpublished']['posts']); } else { echo '0'; } ?> <?php _e('Total', $this->plugin_name); ?><br />
-						<?php if (isset($author[$index]['unpublished']['word_count'])) { echo number_format(0 + $author[$index]['unpublished']['word_count']); } else { echo '0'; } ?> <?php _e('Words', $this->plugin_name); ?><br />
-						<?php if (isset($author[$index]['unpublished']['posts']) && $author[$index]['unpublished']['posts'] != 0) : ?>
-						<?php echo number_format(round(0 + ($author[$index]['unpublished']['word_count'] / $author[$index]['unpublished']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
-						<?php endif; ?>
-					</td>
-					<?php endforeach; ?>
-				</tr>
-				
-				<?php $wpwc_counter_author_statistics++; ?>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	
 	<?php endif; ?>

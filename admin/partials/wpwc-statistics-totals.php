@@ -3,7 +3,7 @@
 /**
  * Display main word stats at the top of the plugin's admin area.
  *
- * @link       http://linksoftwarellc.com/wp-word-count
+ * @link       https://wpwordcount.com
  * @since      2.0.0
  *
  * @package    Wp_Word_Count

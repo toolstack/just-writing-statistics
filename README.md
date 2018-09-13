@@ -1,9 +1,9 @@
 # WP Word Count
-Contributors: linksoftware, bjplink
+Contributors: linksoftware  
 Tags: word count, word stats, word statistics, author stats, author statistics, words, stats, statistics
 Requires at least: 4.0
-Tested up to: 4.9.4
-Stable tag: 3.0.0
+Tested up to: 4.9.8
+Stable tag: 3.0.1
 
 Count the words on your WordPress site instantly.
 
@@ -21,7 +21,7 @@ details by month and author.
 
 ### WP WORD COUNT PRO
 
-Upgrade to [WP Word Count Pro](https://linksoftwarellc.com/wp-word-count/#pro) and get additional features to help you understand and analyze the amount of content you are producing for your site:
+Upgrade to [WP Word Count Pro](https://wpwordcount.com) and get additional features to help you understand and analyze the amount of content you are producing for your site:
 
 - You'll get complete control over which post types you see in your statistics through a custom "Settings" option.
 - WP Word Count Pro comes with detailed breakdowns of your monthly writing output by day, author, post type and more.
@@ -30,7 +30,7 @@ Upgrade to [WP Word Count Pro](https://linksoftwarellc.com/wp-word-count/#pro) a
 - The achievement system in WP Word Count Pro gives you extra motivation to write more and increase your site's content.
 - Charts and graphs are on nearly every screen of WP Word Count Pro to offer better data visualization.
 
-You can learn more about WP Word Count Pro at [wpwordcount.com](http://wpwordcount.com)
+You can learn more about WP Word Count Pro at [wpwordcount.com](https://wpwordcount.com)
 
 ## Installation
 
@@ -54,6 +54,9 @@ Example: [wpwordcount before="This post has" after=" total words."]
 3. Author Statistics
 
 ## Changelog
+
+### 3.0.1
+* Interface changes and bug fixes.
 
 ### 3.0.0
 * You can calculate your word counts any time you wish via the "Calculate" tab. This should help alleviate problems with plugin activation/updating on servers with limited resources.

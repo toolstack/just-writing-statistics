@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: WP Word Count\n"
-"POT-Creation-Date: 2018-02-19 11:00-0500\n"
-"PO-Revision-Date: 2018-02-19 11:06-0500\n"
+"POT-Creation-Date: 2018-09-04 09:38-0400\n"
+"PO-Revision-Date: 2018-09-04 09:39-0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wpwordcount.php\n"
@@ -16,8 +18,6 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Last-Translator: \n"
-"Language: es\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -92,12 +92,12 @@ msgid "Monthly Statistics"
 msgstr "Estadísticas Mensuales"
 
 #: admin/partials/wpwc-statistics-menu.php:18
-#: admin/partials/wpwc-statistics.php:133
+#: admin/partials/wpwc-statistics.php:135
 msgid "Author Statistics"
 msgstr "Estadísticas de Autor"
 
 #: admin/partials/wpwc-statistics-totals.php:15
-#: admin/partials/wpwc-statistics.php:93 admin/partials/wpwc-statistics.php:147
+#: admin/partials/wpwc-statistics.php:94 admin/partials/wpwc-statistics.php:150
 msgid "Published"
 msgstr "Publicado"
 
@@ -111,32 +111,32 @@ msgstr "Tipo"
 #: admin/partials/wpwc-statistics-totals.php:21
 #: admin/partials/wpwc-statistics-totals.php:69
 #: admin/partials/wpwc-statistics-totals.php:117
-#: admin/partials/wpwc-statistics.php:108
-#: admin/partials/wpwc-statistics.php:115
-#: admin/partials/wpwc-statistics.php:162
-#: admin/partials/wpwc-statistics.php:169
+#: admin/partials/wpwc-statistics.php:109
+#: admin/partials/wpwc-statistics.php:116
+#: admin/partials/wpwc-statistics.php:165
+#: admin/partials/wpwc-statistics.php:172
 msgid "Total"
 msgstr "Total"
 
 #: admin/partials/wpwc-statistics-totals.php:22
 #: admin/partials/wpwc-statistics-totals.php:70
 #: admin/partials/wpwc-statistics-totals.php:118
-#: admin/partials/wpwc-statistics.php:43 admin/partials/wpwc-statistics.php:85
-#: admin/partials/wpwc-statistics.php:109
-#: admin/partials/wpwc-statistics.php:116
-#: admin/partials/wpwc-statistics.php:139
-#: admin/partials/wpwc-statistics.php:163
-#: admin/partials/wpwc-statistics.php:170
+#: admin/partials/wpwc-statistics.php:43 admin/partials/wpwc-statistics.php:86
+#: admin/partials/wpwc-statistics.php:110
+#: admin/partials/wpwc-statistics.php:117
+#: admin/partials/wpwc-statistics.php:142
+#: admin/partials/wpwc-statistics.php:166
+#: admin/partials/wpwc-statistics.php:173
 msgid "Words"
 msgstr "Palabras"
 
 #: admin/partials/wpwc-statistics-totals.php:23
 #: admin/partials/wpwc-statistics-totals.php:71
 #: admin/partials/wpwc-statistics-totals.php:119
-#: admin/partials/wpwc-statistics.php:111
-#: admin/partials/wpwc-statistics.php:118
-#: admin/partials/wpwc-statistics.php:165
-#: admin/partials/wpwc-statistics.php:172
+#: admin/partials/wpwc-statistics.php:112
+#: admin/partials/wpwc-statistics.php:119
+#: admin/partials/wpwc-statistics.php:168
+#: admin/partials/wpwc-statistics.php:175
 msgid "Average"
 msgstr "Promedio"
 
@@ -145,7 +145,7 @@ msgid "Published Words"
 msgstr "Palabras Publicadas"
 
 #: admin/partials/wpwc-statistics-totals.php:63
-#: admin/partials/wpwc-statistics.php:94 admin/partials/wpwc-statistics.php:148
+#: admin/partials/wpwc-statistics.php:95 admin/partials/wpwc-statistics.php:151
 msgid "Unpublished"
 msgstr "Sin Publicar"
 
@@ -169,7 +169,7 @@ msgstr "Carga"
 msgid "Status"
 msgstr "Estado"
 
-#: admin/partials/wpwc-statistics.php:47 admin/partials/wpwc-statistics.php:138
+#: admin/partials/wpwc-statistics.php:47 admin/partials/wpwc-statistics.php:141
 msgid "Author"
 msgstr "Autor"
 
@@ -185,11 +185,11 @@ msgstr "Basura"
 msgid "View"
 msgstr "Vista"
 
-#: admin/partials/wpwc-statistics.php:84
+#: admin/partials/wpwc-statistics.php:85
 msgid "Month"
 msgstr "Mes"
 
-#: admin/partials/wpwc-statistics.php:190
+#: admin/partials/wpwc-statistics.php:194
 #, php-format
 msgid ""
 "You need to <a href=\"%s\">calculate</a> your word counts before you can "
@@ -217,10 +217,10 @@ msgstr ""
 #: admin/partials/wpwc-upgrade.php:31
 msgid ""
 "WP Word Count Pro comes with detailed breakdowns of your monthly writing "
-"output by day, author, post type and more."
+"output by day, author, post type, category, tag and more."
 msgstr ""
 "Contar palabras de WP Pro viene con desglose detallado de su mensual escrito "
-"salida por día, autor, tipo y más."
+"salida por día, autor, tipo, categoría, etiqueta y más."
 
 #: admin/partials/wpwc-upgrade.php:32
 msgid ""
@@ -274,7 +274,7 @@ msgstr ""
 "de baja en cualquier momento."
 
 #. Plugin URI of the plugin/theme
-msgid "http://linksoftwarellc.com/wp-word-count"
+msgid "https://wpwordcount.com"
 msgstr ""
 
 #. Description of the plugin/theme

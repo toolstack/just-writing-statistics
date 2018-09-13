@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @link              http://linksoftwarellc.com/wp-word-count
+ * @link              https://wpwordcount.com
  * @since             3.0.0
  * @package           Wp_Word_Count
  *
  * @wordpress-plugin
  * Plugin Name:       WP Word Count
- * Plugin URI:        http://linksoftwarellc.com/wp-word-count
+ * Plugin URI:        https://wpwordcount.com
  * Description:       Count the words on your WordPress site instantly.
- * Version:           3.0.0
+ * Version:           3.0.1
  * Author:            Link Software LLC
  * Author URI:        http://linksoftwarellc.com
  * License:           GPL-2.0+
@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define('WPWC_VERSION', '3.0.0');
+define('WPWC_VERSION', '3.0.1');
 
 function activate_wp_word_count() {
 	

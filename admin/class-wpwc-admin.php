@@ -9,7 +9,7 @@
  * @package    Wp_Word_Count
  * @subpackage Wp_Word_Count/admin
  * @author     Link Software LLC <support@linksoftwarellc.com>
- * @link       http://linksoftwarellc.com/wp-word-count
+ * @link       https://wpwordcount.com
  */
 class Wp_Word_Count_Admin {
 
@@ -69,7 +69,7 @@ class Wp_Word_Count_Admin {
 	 */
 	public function enqueue_styles() {
 		
-		wp_enqueue_style( $this->plugin_name.'-css', plugin_dir_url( __FILE__ ) . 'css/wpwc-admin.css', array(), '0.11.0', 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wpwc-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -523,6 +523,29 @@ class Wp_Word_Count_Admin {
 				
 			}
 			
+		}
+		
+		// Sort Post Types in a more readable way
+		if ( isset( $arr_wpwc_post_types ) ) {
+			
+			$arr_wpwc_post_types_standard = array();
+			$arr_wpwc_post_types_custom = array();
+			
+			if ( isset( $arr_wpwc_post_types['post'] ) ) { $arr_wpwc_post_types_standard['post'] = $arr_wpwc_post_types['post']; }
+			if ( isset( $arr_wpwc_post_types['page'] ) ) { $arr_wpwc_post_types_standard['page'] = $arr_wpwc_post_types['page']; }
+			
+			foreach ( $arr_wpwc_post_types as $post_type_slug => $post_type ) {
+				
+				if ( $post_type_slug != 'post' && $post_type_slug != 'page' ) { 
+					
+					$arr_wpwc_post_types_custom[$post_type_slug] = $post_type; 
+					
+				}
+				
+			}
+			
+			usort($arr_wpwc_post_types_custom, function ($a, $b) { return strcmp($a['plural_name'], $b['plural_name']); });
+			$arr_wpwc_post_types = array_merge( $arr_wpwc_post_types_standard, $arr_wpwc_post_types_custom );
 		}
 
 	    include_once('partials/wpwc-statistics.php');
