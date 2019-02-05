@@ -2,7 +2,7 @@
 Contributors: linksoftware
 Tags: word count, word stats, word statistics, author stats, author statistics, words, stats, statistics
 Requires at least: 4.0
-Tested up to: 4.9.8
+Tested up to: 5.0.3
 Stable tag: 3.0.1
 
 Count the words on your WordPress site instantly.
