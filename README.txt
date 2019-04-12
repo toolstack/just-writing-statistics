@@ -2,15 +2,14 @@
 Contributors: linksoftware
 Tags: word count, word stats, word statistics, author stats, author statistics, words, stats, statistics
 Requires at least: 4.0
-Tested up to: 5.0.3
-Stable tag: 3.0.1
+Tested up to: 5.1.1
+Stable tag: 3.0.2
 
 Count the words on your WordPress site instantly.
 
 == Description ==
 
-If you own a WordPress site and like to write then WP Word Count is for you. WP Word Count tells you exactly how many words you've written on your site and comes with extra statistics giving you 
-details by month and author.
+If you own a WordPress site and like to write then WP Word Count is for you. WP Word Count tells you exactly how many words you've written on your site and comes with extra statistics giving you details by month and author.
 
 ## FEATURES
 
@@ -23,8 +22,8 @@ details by month and author.
 
 Upgrade to [WP Word Count Pro](https://wpwordcount.com) and get additional features to help you understand and analyze the amount of content you are producing for your site:
 
-- You'll get complete control over which post types you see in your statistics through a custom "Settings" option.
-- WP Word Count Pro comes with detailed breakdowns of your monthly writing output by day, author, post type and more.
+- You'll get complete control over which post types and statuses you see in your statistics through custom "Settings" options.
+- WP Word Count Pro comes with detailed breakdowns of your monthly writing output by day, author, post type, category, tag and more.
 - Each author that contributes to your site has their own personal stats page with information beyond just word count totals.
 - All of your posts have expanded statistical details with revision history, post rankings and more.
 - The achievement system in WP Word Count Pro gives you extra motivation to write more and increase your site's content.
@@ -54,6 +53,9 @@ Example: [wpwordcount before="This post has" after=" total words."]
 3. Author Statistics
 
 == Changelog ==
+
+= 3.0.2 =
+* Interface changes.
 
 = 3.0.1 =
 * Interface changes and bug fixes.
