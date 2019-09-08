@@ -1,9 +1,9 @@
 === WP Word Count ===
 Contributors: linksoftware
-Tags: word count, word stats, word statistics, author stats, author statistics, words, stats, statistics
+Tags: word count, word statistics, author statistics, words, writing, nanowrimo
 Requires at least: 4.0
-Tested up to: 5.2.2
-Stable tag: 3.0.2
+Tested up to: 5.2.3
+Stable tag: 3.1.0
 
 Count the words on your WordPress site instantly.
 
@@ -53,6 +53,10 @@ Example: [wpwordcount before="This post has" after=" total words."]
 3. Author Statistics
 
 == Changelog ==
+
+= 3.1.0 =
+* New calculation options for sites with extremely large amounts of content.
+* Menu changes.
 
 = 3.0.2 =
 * Interface changes.

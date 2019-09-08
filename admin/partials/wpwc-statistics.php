@@ -29,12 +29,6 @@
 	?>
 	
 	<?php if ( !isset( $wpwc_tab ) || $wpwc_tab == 'top-content' || $wpwc_tab == 'all-content' ) : ?>
-    <div class="postbox-container">
-        <div class="postbox">
-            <p><?php printf( __( '<a href="%s">Upgrade to WP Word Count Pro for extra features and statistics</a>. Use the discount code <b>UPGRADE</b> at checkout to save 20%%.', $this->plugin_name ), esc_url( add_query_arg( array( 'page' => $this->plugin_name.'-upgrade', 'tab' => 'upgrade' ), admin_url('admin.php') ) ) ); ?></p>
-        </div>
-    </div>
-
 	<div class="full">
 		<?php if ( !isset( $wpwc_tab ) || $wpwc_tab == 'top-content' ) : ?>
 		<h3><?php _e('Top Content', $this->plugin_name); ?></h3>

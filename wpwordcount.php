@@ -9,7 +9,7 @@
  * Plugin Name:       WP Word Count
  * Plugin URI:        https://wpwordcount.com
  * Description:       Count the words on your WordPress site instantly.
- * Version:           3.0.2
+ * Version:           3.1.0
  * Author:            Link Software LLC
  * Author URI:        http://linksoftwarellc.com
  * License:           GPL-2.0+
@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define('WPWC_VERSION', '3.0.2');
+define('WPWC_VERSION', '3.1.0');
 
 function activate_wp_word_count() {
 	

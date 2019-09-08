@@ -69,7 +69,19 @@ class Wp_Word_Count_Admin {
 	 */
 	public function enqueue_styles() {
 		
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wpwc-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wpwc-admin.css', array(), $this->version, 'all' );        $wp_scripts = wp_scripts();
+        wp_enqueue_style(
+
+            'jquery-ui-theme-smoothness',
+            sprintf
+            (
+
+                '//ajax.googleapis.com/ajax/libs/jqueryui/%s/themes/smoothness/jquery-ui.css', // working for https as well now
+                $wp_scripts->registered['jquery-ui-core']->ver
+
+            )
+
+        );
 
 	}
 
@@ -80,7 +92,7 @@ class Wp_Word_Count_Admin {
 	 */
 	public function enqueue_scripts() {
 		
-		wp_enqueue_script( $this->plugin_name.'-js', plugin_dir_url( __FILE__ ) . 'js/wpwc-admin.js', array( 'jquery', 'jquery-ui-tabs' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-js', plugin_dir_url( __FILE__ ) . 'js/wpwc-admin.js', array( 'jquery', 'jquery-ui-tabs', 'jquery-ui-datepicker' ), $this->version, false );
 
 	}
 	
@@ -94,8 +106,9 @@ class Wp_Word_Count_Admin {
 		$icon_svg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RkZBMDRCQTQxN0Q2MTFFNzkxNjdFRDUzNUM3OEQ5MTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RkZBMDRCQTUxN0Q2MTFFNzkxNjdFRDUzNUM3OEQ5MTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGRkEwNEJBMjE3RDYxMUU3OTE2N0VENTM1Qzc4RDkxNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGRkEwNEJBMzE3RDYxMUU3OTE2N0VENTM1Qzc4RDkxNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqUWiFsAAAHiSURBVHjahFO7qhpRFF2OI77xBYrESkREESJaqk3Ab7C59w/iB6TPH+QTImkFsbCxsEipha0g+OCihfhEjTrmrM0ISdDcBWtmOHvvtdaZmWOp1WpfAbwqWvA33hQ/mes/FT/8UzcUv+vq8gWPwYGPilfF9JOez5q67PAcN9PpGbaa6fAMxjsCBgWwXq9xPp+xXC5xOp2w2+1wPB5htVqly2Kx4Ha7SX0+n0v9XtP5kMvlMJ1Okclk5O73+3G5XDAej+FwOOSZfcViEZFIBIPBALPZDHa7HRqdSqUSkskkqtUq0uk0CoUCotEo9vu9OLPH7XajXC4jlUqhUqlIYgrr2+1W1CjAeD6fT4p0d7lcEl/TNEmwWCxENBaLybrUvF4vdF2XeBRjgng8DsMwJG4oFEIwGAT78vk8stkser0eAoEAwuEwNO7jcDiIw2QyQSKRkMHNZgOn0yniTEARj8eDer2Ofr8vwqzpVB6NRmi32xgOh2g0GrJnDjMFYbPZsFqt0Gw25Z3QnfuXr8BGurVaLXHpdruShg73Jqbk3judjgxTkEIicL1eZYH7IShC3Iflb1FJ7qLye5rDhGbyGd6rW1n0/q/hwSn9Ex6exm+KLw8a54oDxV+KfcXog4P247cAAwA4I8oZtVZOgwAAAABJRU5ErkJggg==';
 		
 		add_menu_page( 'WP Word Count', 'Word Count', 'delete_posts', $this->plugin_name, array( $this, 'display_statistics' ), $icon_svg, 99 );
-		add_submenu_page( 'wpwc', 'WP Word Count - '.__('Calculate', $this->plugin_name), 'WP Word Count - '.__('Calculate', $this->plugin_name), 'delete_posts', $this->plugin_name . '-calculate', array($this, 'display_calculate') );
-		add_submenu_page( 'wpwc', 'WP Word Count - '.__('Upgrade to Pro', $this->plugin_name), 'WP Word Count - '.__('Upgrade to Pro', $this->plugin_name), 'delete_posts', $this->plugin_name . '-upgrade', array($this, 'display_upgrade') );
+		add_submenu_page( $this->plugin_name, 'WP Word Count', __('Statistics', $this->plugin_name), 'delete_posts', $this->plugin_name, array($this, 'display_statistics') );
+        add_submenu_page( $this->plugin_name, 'WP Word Count - '.__('Calculate', $this->plugin_name), __('Calculate', $this->plugin_name), 'delete_posts', $this->plugin_name . '-calculate', array($this, 'display_calculate') );
+		add_submenu_page( $this->plugin_name, 'WP Word Count - '.__('Upgrade to Pro', $this->plugin_name), __('Upgrade to Pro', $this->plugin_name), 'delete_posts', $this->plugin_name . '-upgrade', array($this, 'display_upgrade') );
 
 	}
 	
@@ -152,29 +165,70 @@ class Wp_Word_Count_Admin {
 	 * @since    3.0.0
 	 */
 	function calculate_statistics() {
+		
+        global $wpdb;
+			
+        $table_name_posts = $wpdb->prefix.'posts';
+        $sql_wpwc_process = '';
+
+        parse_str($_POST['form'], $parameters);
+        if ($parameters['wpwc_calculation_type'] == 'all') {
+
+            unset($parameters['wpwc_date_range_start'], $parameters['wpwc_date_range_end'], $parameters['wpwc_date_range_start_formatted'], $parameters['wpwc_date_range_end_formatted'], $parameters['wpwc_delete_data']);
+
+        }
+
+        $sql_post_total = "SELECT COUNT(ID) AS post_total FROM $table_name_posts WHERE 1 ";
+    
+        $post_types = get_post_types('', 'names');
+        unset($post_types['attachment'], $post_types['nav_menu_item'], $post_types['custom_css'], $post_types['revision'], $post_types['customize_changeset']);
+
+        // Post Types
+        if (isset($post_types) && count($post_types) > 0) {
+
+            $sql_post_total.= "AND (";
+
+            foreach ($post_types as $post_type) {
+
+                $sql_post_total.= "$table_name_posts.post_type = '".$post_type."' OR ";
+
+            }
+            $sql_post_total = substr($sql_post_total, 0, -4);
+
+            $sql_post_total.= ") ";
+
+        }
+
+        // Date Range
+        if (isset($parameters['wpwc_date_range_start_formatted']) && strlen($parameters['wpwc_date_range_start_formatted']) == 10) {
+
+            $sql_post_total.= "AND $table_name_posts.post_date >= '".$parameters['wpwc_date_range_start_formatted']." 00:00:00' ";
+
+        }
+
+        if (isset($parameters['wpwc_date_range_end_formatted']) && strlen($parameters['wpwc_date_range_end_formatted']) == 10) {
+
+            $sql_post_total.= "AND $table_name_posts.post_date <= '".$parameters['wpwc_date_range_end_formatted']." 23:59:59' ";
+
+        }
+
+        $wpwc_post_total = $wpdb->get_results($sql_post_total);
 	
 		$step = absint($_POST['step']);
 		
-		$ret = $this->process_step($step);
+		$ret = $this->process_step($step, $_POST);
 	
 		$percentage = 0;
 		
-		$post_types = get_post_types('', 'names');
-		$posts_count = 0;
-		
-		foreach ($post_types as $post_type) {
-			
-			$type_counts = wp_count_posts($post_type);
-			
-			$posts_count += $type_counts->publish;
-			$posts_count += $type_counts->draft;
-		}
+        $post_types = get_post_types('', 'names');
+        $post_statuses = get_post_stati('', 'names');
+		$posts_count = 0 + $wpwc_post_total[0]->post_total;
 	
 		if ($ret) {
 	
 			$step += 1;
-			$percentage = (($step - 1) * 20 / $posts_count * 100);
-			if ($percentage > 100) { $percentage = 100; }
+			$percentage = (($step - 1) * 50 / $posts_count * 100);
+            if ($percentage > 100) { $percentage = 100; }
 			
 			echo json_encode(array('step' => $step, 'percentage' => $percentage));
 			
@@ -189,13 +243,7 @@ class Wp_Word_Count_Admin {
 				
 			));
 			
-			$link_message = add_query_arg(
-	            array(
-	                'page' => $this->plugin_name
-	            ),
-	            admin_url('admin.php')
-	        );
-	        
+			$link_message = add_query_arg(array('page' => $this->plugin_name), admin_url('admin.php'));
 			$message = sprintf(wp_kses(__('Word counts calculated successfully. Visit the <a href="%s">statistics page</a> to view.', $this->plugin_name), array('a' => array('href' => array()))), esc_url($link_message));
 		
 			echo json_encode(array('step' => 'done', 'message' => $message));
@@ -213,42 +261,77 @@ class Wp_Word_Count_Admin {
 	 * @since    3.0.0
 	 * @return 	bool
 	 */
-	public function process_step($step) {
+	public function process_step($step, $data) {
 		
 		global $wpdb;
+			
+        $table_name_wpwc_posts = $wpdb->prefix.'wpwc_posts';
+        $sql_wpwc_process = '';
+
+        parse_str($data['form'], $parameters);
+        if ($parameters['wpwc_calculation_type'] == 'all') {
+
+            unset($parameters['wpwc_date_range_start'], $parameters['wpwc_date_range_end'], $parameters['wpwc_date_range_start_formatted'], $parameters['wpwc_date_range_end_formatted'], $parameters['wpwc_delete_data']);
+
+        }
+
+        // Date Range
+        if (isset($parameters['wpwc_date_range_start_formatted']) && strlen($parameters['wpwc_date_range_start_formatted']) == 10) {
+
+            $sql_wpwc_process.= "AND $table_name_wpwc_posts.post_date >= '".$parameters['wpwc_date_range_start_formatted']." 00:00:00' ";
+
+        }
+
+        if (isset($parameters['wpwc_date_range_end_formatted']) && strlen($parameters['wpwc_date_range_end_formatted']) == 10) {
+
+            $sql_wpwc_process.= "AND $table_name_wpwc_posts.post_date <= '".$parameters['wpwc_date_range_end_formatted']." 23:59:59' ";
+
+        }
 		
 		if ($step == 1) {
 			
-			$table_name = $wpdb->prefix.'wpwc_posts';
-			$wpdb->query("DELETE FROM $table_name");
+			$wpdb->query("DELETE FROM $table_name_wpwc_posts WHERE 1 ".(!isset($parameters['wpwc_delete_data']) ? $sql_wpwc_process : ''));
 			wpwc_create_posts_table();
 			
 		}
 		
-		$post_types = get_post_types('', 'names');
+        $post_types = get_post_types('', 'names');
+        unset($post_types['attachment'], $post_types['nav_menu_item'], $post_types['custom_css'], $post_types['revision'], $post_types['customize_changeset']);
 	
 		$args = array(
 			
 			'post_type' => $post_types,
-			'post_status' => array('publish', 'draft', 'future'),
 			'orderby'   => 'post_date',
 			'order'     => 'ASC',
-			'posts_per_page' => 20
+			'posts_per_page' => 50
 			
-		);
+        );
+        
+        // Date Range
+        if (isset($parameters['wpwc_date_range_start_formatted']) && strlen($parameters['wpwc_date_range_start_formatted']) == 10) {
+
+            $args['date_query']['after'] = array('year' => substr($parameters['wpwc_date_range_start_formatted'], 0, 4), 'month' => substr($parameters['wpwc_date_range_start_formatted'], 5, 2), 'day' => substr($parameters['wpwc_date_range_start_formatted'], -2));
+
+        }
+
+        if (isset($parameters['wpwc_date_range_end_formatted']) && strlen($parameters['wpwc_date_range_end_formatted']) == 10) {
+
+            $args['date_query']['before'] = array('year' => substr($parameters['wpwc_date_range_end_formatted'], 0, 4), 'month' => substr($parameters['wpwc_date_range_end_formatted'], 5, 2), 'day' => substr($parameters['wpwc_date_range_end_formatted'], -2));
+
+        }
 		
 		if ($step > 1) {
 			
-			$args['offset'] = 20 * ($step - 1);
-		}
+			$args['offset'] = 50 * ($step - 1);
+        }
 		
-		$wpwc_posts = new WP_Query($args);
+        $wpwc_posts = new WP_Query($args);
 		
 		if ($wpwc_posts->have_posts()) {
 			
 			foreach ($wpwc_posts->posts as $post) {
 	
-				if ($post->post_author != 0 && $post->post_type != 'attachment' && $post->post_type != 'nav_menu_item' && $post->post_type != 'custom_css' && $post->post_type != 'revision' && $post->post_type != 'customize_changeset') {
+				if ($post->post_author != 0) {
 				
 					wpwc_save_post_data($post);
 			
