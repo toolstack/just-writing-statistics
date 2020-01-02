@@ -17,7 +17,7 @@
 <div id="wp-word-count" class="wrap">
     <h1><?php _e('WP Word Count', $this->plugin_name); ?> - <?php _e('Calculate', $this->plugin_name); ?></h1>
     
-    <?php include_once('wpwc-statistics-menu.php'); ?>
+    <?php include_once 'wpwc-statistics-menu.php'; ?>
 
     <h2><?php _e('Calculate Word Counts', $this->plugin_name); ?></h2>
     <p style="width:65%"><?php _e('You can calculate the word counts on your site at any time. Sites with thousands of posts or years of content should do multiple calculations by a date range to avoid server complications.', $this->plugin_name); ?></p>
@@ -59,7 +59,7 @@
             </tr>
         </table>
         
-        <?php submit_button(__('Calculate Word Counts', $this->plugin_name), 'primary', true, array( 'id' => 'recount-stats-submit' )); ?>
+        <?php submit_button(__('Calculate Word Counts', $this->plugin_name), 'primary', true, ['id' => 'recount-stats-submit']); ?>
     </form>
     
     <span class="spinner"></span>

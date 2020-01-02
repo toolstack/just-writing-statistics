@@ -9,7 +9,7 @@
  * Plugin Name:       WP Word Count
  * Plugin URI:        https://wpwordcount.com
  * Description:       Count the words on your WordPress site instantly.
- * Version:           3.1.0
+ * Version:           3.2.0
  * Author:            Link Software LLC
  * Author URI:        http://linksoftwarellc.com
  * License:           GPL-2.0+
@@ -19,43 +19,39 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	
-	die;
+if (!defined('WPINC')) {
+    die;
 }
 
-define('WPWC_VERSION', '3.1.0');
+define('WPWC_VERSION', '3.2.0');
 
-function activate_wp_word_count() {
-	
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpwc-activator.php';
-	Wp_Word_Count_Activator::activate();
-
+function activate_wp_word_count()
+{
+    require_once plugin_dir_path(__FILE__) . 'includes/class-wpwc-activator.php';
+    Wp_Word_Count_Activator::activate();
 }
 
-function deactivate_wp_word_count() {
-	
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpwc-deactivator.php';
-	Wp_Word_Count_Deactivator::deactivate();
-	
+function deactivate_wp_word_count()
+{
+    require_once plugin_dir_path(__FILE__) . 'includes/class-wpwc-deactivator.php';
+    Wp_Word_Count_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_wp_word_count' );
-register_deactivation_hook( __FILE__, 'deactivate_wp_word_count' );
+register_activation_hook(__FILE__, 'activate_wp_word_count');
+register_deactivation_hook(__FILE__, 'deactivate_wp_word_count');
 
-require plugin_dir_path( __FILE__ ) . 'includes/class-wpwc.php';
-require plugin_dir_path( __FILE__ ) . 'includes/class-wpwc-functions.php';
+require plugin_dir_path(__FILE__) . 'includes/class-wpwc.php';
+require plugin_dir_path(__FILE__) . 'includes/class-wpwc-functions.php';
 
 /**
  * Begins execution of WP Word Count.
  *
  * @since    3.0.0
  */
-function run_wp_word_count() {
-		
-	$plugin = new Wp_Word_Count();
-	$plugin->run();
-
+function run_wp_word_count()
+{
+    $plugin = new Wp_Word_Count();
+    $plugin->run();
 }
 
 run_wp_word_count();

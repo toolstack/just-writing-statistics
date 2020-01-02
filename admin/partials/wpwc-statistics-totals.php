@@ -53,9 +53,14 @@
 			</tbody>
 		</table>
 		
-		<h2>
-			<?php echo number_format($wpwc_total); ?><br />
+		<h2 style="float:left; width:40%;">
+            <?php echo number_format($wpwc_total); ?><br />
 			<span><?php _e('Total Words', $this->plugin_name); ?></span>
+		</h2>
+		
+		<h2 style="float:left; width:60%;">
+            <?php echo wpwc_reading_time($wpwc_total, $reading_time_wpm); ?><br />
+			<span><?php _e('Reading Time', $this->plugin_name); ?></span>
 		</h2>
     </div>
 

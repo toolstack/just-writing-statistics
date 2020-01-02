@@ -11,16 +11,14 @@
  * @link       https://wpwordcount.com
  * @author     Link Software LLC <support@linksoftwarellc.com>
  */
-class Wp_Word_Count_Activator {
-	
-	/**
-	 * @since    3.0.0
-	 */
-	public static function activate() {
-		
-		wpwc_set_plugin_version(WPWC_VERSION);
-		wpwc_create_posts_table();
-		
-	}
-	
+class Wp_Word_Count_Activator
+{
+    /**
+     * @since    3.0.0
+     */
+    public static function activate()
+    {
+        wpwc_set_plugin_version(WPWC_VERSION);
+        wpwc_create_posts_table();
+    }
 }

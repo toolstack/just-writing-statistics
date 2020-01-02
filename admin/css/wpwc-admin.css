@@ -2,7 +2,7 @@
 
 #dashboard_right_now a.wpwc-glance:before, #dashboard_right_now span.wpwc-glance:before { content: "\f205"; }
 
-#wp-word-count .nav-tab-wrapper a:nth-of-type(6) { color: #0056a6; font-weight: bold; }
+#wp-word-count .nav-tab-wrapper a:nth-of-type(7) { color: #0056a6; font-weight: bold; }
 
 #wp-word-count p.submit { padding: 0; }
 #wp-word-count #wpwc_calculation_by_dates { display: none; }
@@ -26,13 +26,14 @@
 #wp-word-count .wpwc-totals { float: none; overflow: hidden; display: inline-table; clear: both; width: 100%; margin: 0; }
 #wp-word-count .wpwc-totals div table { width: 100% !important; margin: 0 !important; padding: 0 !important; }
 #wp-word-count .wpwc-totals div td { width: 25%; }
-#wp-word-count .wpwc-totals div h2 { margin: 15px 0 0 0; padding: 0; font-size: 2.0em; text-align: center; line-height: 0.9em; }
-#wp-word-count .wpwc-totals div h2 span { font-size: 0.55em; font-weight: normal; }
+#wp-word-count .wpwc-totals div h2 { margin: 15px 0 0 0; padding: 0; font-size: 1.5em; text-align: center; line-height: 1.2em; }
+#wp-word-count .wpwc-totals div h2 span { font-size: 0.65em; font-weight: normal; }
 
 #wp-word-count .wpwc-table { overflow-x: auto; }
 #wp-word-count table.widefat th { vertical-align: bottom; }
 #wp-word-count table.widefat td { white-space: nowrap; }
 #wp-word-count table.widefat th.wpwc-post-type { font-weight: bold; }
+#wp-word-count table.widefat img.avatar { float: left; margin-top: 1px; margin-right: 10px; }
 #wp-word-count table.wpwc-post-type-stats td:nth-of-type(even) { border-right: 1px solid #dcdcdc !important; }
 #wp-word-count table.widefat td:first-of-type a, #wp-word-count table.widefat td:last-of-type a { text-decoration: underline; }
 

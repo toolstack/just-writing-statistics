@@ -1,19 +1,23 @@
 === WP Word Count ===
 Contributors: linksoftware
-Tags: word count, word statistics, author statistics, words, writing, nanowrimo
+Tags: word count, reading time, authors, words, writing
 Requires at least: 4.0
-Tested up to: 5.2.3
-Stable tag: 3.1.0
+Tested up to: 5.3.2
+Stable tag: 3.2.0
 
 Count the words on your WordPress site instantly.
 
 == Description ==
 
-If you own a WordPress site and like to write then WP Word Count is for you. WP Word Count tells you exactly how many words you've written on your site and comes with extra statistics giving you details by month and author.
+WP Word Count tells you exactly how many words you've written on your site with statistics by month and author.
+
+**New in Version 3.2.0: Reading Time**
+WP Word Count now comes with built in reading time statistics for each post and page of your site. Find out how many hours of content you've written or let readers know how long your articles are. You can include reading time at the top of each of your posts automatically or use a shortcode.
 
 ## FEATURES
 
 - Quickly see how many posts and pages you've created and how many total words they add up to.
+- View and display estimated reading times for each piece of content on your site.
 - Support for custom post types so you can monitor word counts from content created by your themes and plugins.
 - View your writing output for each month broken down by post type.
 - See all of your site author's word counts with breakdowns by post type.
@@ -22,12 +26,12 @@ If you own a WordPress site and like to write then WP Word Count is for you. WP 
 
 Upgrade to [WP Word Count Pro](https://wpwordcount.com) and get additional features to help you understand and analyze the amount of content you are producing for your site:
 
-- You'll get complete control over which post types and statuses you see in your statistics through custom "Settings" options.
-- WP Word Count Pro comes with detailed breakdowns of your monthly writing output by day, author, post type, category, tag and more.
-- Each author that contributes to your site has their own personal stats page with information beyond just word count totals.
-- All of your posts have expanded statistical details with revision history, post rankings and more.
-- The achievement system in WP Word Count Pro gives you extra motivation to write more and increase your site's content.
-- Charts and graphs are on nearly every screen of WP Word Count Pro to offer better data visualization.
+- Control which post types and statuses you see in your statistics through custom "Settings" options.
+- Get detailed breakdowns of your monthly writing output by day, author, post type, category, tag and more.
+- View individual author details with information beyond just word count totals.
+- See expanded post details with revision history, site rankings and more.
+- Motivate yourself with the built-in achievement system to write more and increase your site's content.
+- View charts and graphs for better data visualization and understanding.
 
 You can learn more about WP Word Count Pro at [wpwordcount.com](https://wpwordcount.com)
 
@@ -39,20 +43,29 @@ You can learn more about WP Word Count Pro at [wpwordcount.com](https://wpwordco
 
 == Frequently Asked Questions ==
 
-= How does the WP Word Count Shortcode work? =
+= How do the WP Word Count Shortcodes work? =
 
-You can use the Shortcode [wpwordcount] to show the number of words on any page or post. The [wpwordcount] Shortcode 
-can be extended with "before" and "after" attributes to add text or HTML before and after the count.
+There are two shortcodes available:
 
-Example: [wpwordcount before="This post has" after=" total words."]
+* [wp-word-count] will display the number of words on any page or post.
+* [wp-word-count-reading-time] will display the reading time of words on any page or post.
+
+Every WP Word Count shortcode can be extended with "before" and "after" attributes to add text or HTML before and after the result.
+
+Example: [wp-word-count before="This post has" after=" total words."]
 
 == Screenshots ==
 
 1. WP Word Count
 2. Monthly Statistics
 3. Author Statistics
+4. Reading Time Settings
 
 == Changelog ==
+
+= 3.2.0 =
+* New "Reading Time" statistic throughout the plugin.
+* Added support for Gravatar/User Profile Images.
 
 = 3.1.0 =
 * New calculation options for sites with extremely large amounts of content.
@@ -72,58 +85,10 @@ Example: [wpwordcount before="This post has" after=" total words."]
 * Interface changes.
 * General bug fixes.
 
-= 2.1.0 =
-* Improved word counts.
-* Support for non-Latin languages.
-* Interface changes.
-* General bug fixes.
-
-= 2.0.2 =
-* Fixed critical performance bugs for WordPress Network installations.
-* General bug fixes.
-
-= 2.0.1 =
-* Improvements to Custom Post Type statistics: posts without authors are now excluded to try and cut down on plugins that are using the _posts table to store their data.
-* All plugin data is deleted on deactivation.
-* General bug fixes.
-* Minor interface changes.
-
-= 2.0.0 =
-* Complete code rewrite.
-* Support for Custom Post Types.
-* New Statistics Dashboard (now found on its own menu option).
-* Removed Widget.
-* New, and even more shameless, Plugs.
-
-= 1.6 =
-* Compatibility updates.
-
-= 1.5 =
-* Added ability to see word count statistics for All Posts and Pages.
-
-= 1.4 =
-* Fixed Display Bug in Plugins Page of WordPress Admin.
-
-= 1.3 =
-* Added [wpwordcount] Shortcode.
-* Shameless Plugs.
-
-= 1.2 =
-* Added Widget.
-
-= 1.1 =
-* Added Monthly Statistics.
-
-= 1.0 =
-* Initial version.
-
 == Upgrade Notice ==
+
+= 3.2.0 =
+Reading Time statistics are now available throughout WP Word Count.
 
 = 3.0.0 =
 New interface and adjustments to word count calculation to improve plugin performance.
-
-= 2.0.0 =
-Support for custom post types is finally here and the statistics have been redesigned.
-
-= 1.3 =
-Added a new [wpwordcount] Shortcode to show the number of words on any page or post.
