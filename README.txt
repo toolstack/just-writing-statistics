@@ -1,5 +1,5 @@
 === WP Word Count ===
-Contributors: linksoftware
+Contributors: linksoftware, redlettuce
 Tags: word count, reading time, authors, words, writing
 Requires at least: 4.0
 Tested up to: 5.3.2
