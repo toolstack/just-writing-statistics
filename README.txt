@@ -1,9 +1,9 @@
 === WP Word Count ===
-Contributors: linksoftware, redlettuce
+Contributors: redlettuce
 Tags: word count, reading time, authors, words, writing
 Requires at least: 4.0
-Tested up to: 5.3.2
-Stable tag: 3.2.0
+Tested up to: 5.4.1
+Stable tag: 3.2.1
 
 Count the words on your WordPress site instantly.
 
@@ -62,6 +62,10 @@ Example: [wp-word-count before="This post has" after=" total words."]
 4. Reading Time Settings
 
 == Changelog ==
+
+= 3.2.1 - 02/06/20 = 
+* Tested up to WordPress 5.4.1
+* Updated plugin details
 
 = 3.2.0 =
 * New "Reading Time" statistic throughout the plugin.
