@@ -9,7 +9,7 @@
  * @since      3.0.0
  * @package    Wp_Word_Count_Pro
  * @subpackage Wp_Word_Count_Pro/includes
- * @author     Link Software LLC <support@linksoftwarellc.com>
+ * @author     RedLettuce Plugins <support@redlettuce.com>
  * @link       https://wpwordcount.com
  */
 class Wp_Word_Count_i18n

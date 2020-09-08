@@ -11,5 +11,5 @@
  */
 ?>
 <div id="wpwc-footer">
-	<a href="https://linksoftwarellc.com"><?php _e('A WordPress Plugin by', $this->plugin_name); ?> <img src="<?php echo plugins_url('/images/linksoftware.png', dirname(__FILE__)); ?>" alt="Link Software LLC" /></a> <a href="https://linksoftwarellc.com">Link Software LLC</a>
+	A WordPress Plugin by <a href="https://redlettuce.com/">RedLettuce Plugins</a>
 </div>

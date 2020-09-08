@@ -9,7 +9,7 @@
  * @package    Wp_Word_Count
  * @subpackage Wp_Word_Count/includes
  * @link       https://wpwordcount.com
- * @author     Link Software LLC <support@linksoftwarellc.com>
+ * @author     RedLettuce Plugins <support@redlettuce.com>
  */
 
 /**

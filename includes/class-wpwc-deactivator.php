@@ -8,7 +8,7 @@
  * @since      3.0.0
  * @package    Wp_Word_Count
  * @subpackage Wp_Word_Count/includes
- * @author     Link Software LLC <support@linksoftwarellc.com>
+ * @author     RedLettuce Plugins <support@redlettuce.com>
  * @link       https://wpwordcount.com
  */
 class Wp_Word_Count_Deactivator

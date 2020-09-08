@@ -9,7 +9,7 @@
  * Plugin Name:       WP Word Count
  * Plugin URI:        https://wpwordcount.com
  * Description:       Count the words on your WordPress site instantly.
- * Version:           3.2.1
+ * Version:           3.2.2
  * Author:            RedLettuce Plugins
  * Author URI:        http://redlettuce.com
  * License:           GPL-2.0+
@@ -23,7 +23,7 @@ if (!defined('WPINC')) {
     die;
 }
 
-define('WPWC_VERSION', '3.2.1');
+define('WPWC_VERSION', '3.2.2');
 
 function activate_wp_word_count()
 {
