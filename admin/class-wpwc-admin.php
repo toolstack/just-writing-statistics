@@ -191,7 +191,7 @@ class Wp_Word_Count_Admin
     {
         $reading_time_label_before = (get_option('wpwc_reading_time')['labels']['before'] ?: '');
 
-        echo '<input id="wpwc_reading_time_label_before" name="wpwc_reading_time[labels][before]" type="text" class="text" value="'.$reading_time_label_before.'" />';
+        echo '<input id="wpwc_reading_time_label_before" name="wpwc_reading_time[labels][before]" type="text" class="text" value="'.esc_attr($reading_time_label_before).'" />';
         echo '<p><small>'.__('This text will appear before the reading time is inserted into your posts.', $this->plugin_name).'</small></p>';
     }
 
@@ -204,7 +204,7 @@ class Wp_Word_Count_Admin
     {
         $reading_time_label_after = (get_option('wpwc_reading_time')['labels']['after'] ?: '');
 
-        echo '<input id="wpwc_reading_time_label_after" name="wpwc_reading_time[labels][after]" type="text" class="text" value="'.$reading_time_label_after.'" />';
+        echo '<input id="wpwc_reading_time_label_after" name="wpwc_reading_time[labels][after]" type="text" class="text" value="'.esc_attr($reading_time_label_after).'" />';
         echo '<p><small>'.__('This text will appear after the reading time is inserted into your posts.', $this->plugin_name).'</small></p>';
     }
 
@@ -392,10 +392,10 @@ class Wp_Word_Count_Admin
         $reading_time_wpm = (get_option('wpwc_reading_time')['wpm'] ?: 250);
 
         $sql_wpwc_totals = "
-			SELECT post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count 
-			FROM $table_name_posts 
-			WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') 
-			GROUP BY post_type, post_status 
+			SELECT post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+			FROM $table_name_posts
+			WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+			GROUP BY post_type, post_status
 			ORDER BY word_count DESC";
         $wpwc_totals = $wpdb->get_results($sql_wpwc_totals);
 
@@ -445,30 +445,30 @@ class Wp_Word_Count_Admin
 
         if (!isset($wpwc_tab) || $wpwc_tab == 'top-content') {
             $sql_wpwc_statistics = "
-				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count 
-				FROM $table_name_posts 
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') 
-				ORDER BY post_word_count DESC, post_date DESC 
+				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count
+				FROM $table_name_posts
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+				ORDER BY post_word_count DESC, post_date DESC
 				LIMIT 10";
         } elseif ($wpwc_tab == 'all-content') {
             $sql_wpwc_statistics = "
-				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count 
-				FROM $table_name_posts 
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') 
+				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count
+				FROM $table_name_posts
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
 				ORDER BY post_word_count DESC, post_date DESC";
         } elseif ($wpwc_tab == 'monthly-statistics') {
             $sql_wpwc_statistics = "
-				SELECT MID(post_date, 1, 7) AS post_date, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count 
-				FROM $table_name_posts 
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') 
-				GROUP BY MID(post_date, 1, 7), post_type, post_status 
+				SELECT MID(post_date, 1, 7) AS post_date, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+				FROM $table_name_posts
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+				GROUP BY MID(post_date, 1, 7), post_type, post_status
                 ORDER BY post_date DESC";
         } elseif ($wpwc_tab == 'author-statistics') {
             $sql_wpwc_statistics = "
-				SELECT post_author, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count 
-				FROM $table_name_posts 
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') 
-				GROUP BY post_author, post_type, post_status 
+				SELECT post_author, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+				FROM $table_name_posts
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+				GROUP BY post_author, post_type, post_status
 				ORDER BY post_author ASC";
         }
 
