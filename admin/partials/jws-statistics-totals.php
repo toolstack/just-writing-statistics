@@ -3,14 +3,14 @@
 /**
  * Display main word stats at the top of the plugin's admin area.
  *
- * @link       https://wpwordcount.com
+ * @link       https://toolstack.com/just-writing-statistics
  * @since      2.0.0
  *
- * @package    Wp_Word_Count
- * @subpackage Wp_Word_Count/admin/partials
+ * @package    Just_Writing_Statistics
+ * @subpackage Just_Writing_Statistics/admin/partials
  */
 ?>
-<div class="wpwc-totals">
+<div class="jws-totals">
     <div class="third">
 	    <h3><?php _e('Totals', $this->plugin_name); ?></h3>
 	    
@@ -25,12 +25,12 @@
 			</thead>
 			
 			<tbody>
-				<?php $wpwc_counter_post_types = 0; ?>
-				<?php $wpwc_total = 0; ?>
+				<?php $jws_counter_post_types = 0; ?>
+				<?php $jws_total = 0; ?>
 				
-				<?php foreach ($wpwc_totals as $total) : $wpwc_total += ($total['published']['word_count'] + $total['unpublished']['word_count']); ?>
+				<?php foreach ($jws_totals as $total) : $jws_total += ($total['published']['word_count'] + $total['unpublished']['word_count']); ?>
 				
-				<?php echo '<tr'.($wpwc_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
+				<?php echo '<tr'.($jws_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
 					<td><?php echo $total['name']; ?></td>
 					<td><?php echo @number_format(0 + $total['published']['posts'] + $total['unpublished']['posts']); ?></td>
 					<td><?php echo @number_format(0 + $total['published']['word_count'] + $total['unpublished']['word_count']); ?></td>
@@ -48,18 +48,18 @@
 					</td>
 				</tr>
 				
-				<?php $wpwc_counter_post_types++; ?>
+				<?php $jws_counter_post_types++; ?>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
 		
 		<h2 style="float:left; width:40%;">
-            <?php echo number_format($wpwc_total); ?><br />
+            <?php echo number_format($jws_total); ?><br />
 			<span><?php _e('Total Words', $this->plugin_name); ?></span>
 		</h2>
 		
 		<h2 style="float:left; width:60%;">
-            <?php echo wpwc_reading_time($wpwc_total, $reading_time_wpm); ?><br />
+            <?php echo jws_reading_time($jws_total, $reading_time_wpm); ?><br />
 			<span><?php _e('Reading Time', $this->plugin_name); ?></span>
 		</h2>
     </div>
@@ -78,12 +78,12 @@
 			</thead>
 			
 			<tbody>
-				<?php $wpwc_counter_post_types = 0; ?>
+				<?php $jws_counter_post_types = 0; ?>
 				<?php $published_total = 0; ?>
 				
-				<?php foreach ($wpwc_totals as $total) : $published_total += $total['published']['word_count']; ?>
+				<?php foreach ($jws_totals as $total) : $published_total += $total['published']['word_count']; ?>
 				
-				<?php echo '<tr'.($wpwc_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
+				<?php echo '<tr'.($jws_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
 					<td><?php echo $total['name']; ?></td>
 					<td><?php echo @number_format(0 + $total['published']['posts']); ?></td>
 					<td><?php echo @number_format(0 + $total['published']['word_count']); ?></td>
@@ -101,7 +101,7 @@
 					</td>
 				</tr>
 				
-				<?php $wpwc_counter_post_types++; ?>
+				<?php $jws_counter_post_types++; ?>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
@@ -126,12 +126,12 @@
 			</thead>
 			
 			<tbody>
-				<?php $wpwc_counter_post_types = 0; ?>
+				<?php $jws_counter_post_types = 0; ?>
 				<?php $unpublished_total = 0; ?>
 				
-				<?php foreach ($wpwc_totals as $total) : $unpublished_total += $total['unpublished']['word_count']; ?>
+				<?php foreach ($jws_totals as $total) : $unpublished_total += $total['unpublished']['word_count']; ?>
 				
-				<?php echo '<tr'.($wpwc_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
+				<?php echo '<tr'.($jws_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
 					<td><?php echo $total['name']; ?></td>
 					<td><?php echo @number_format(0 + $total['unpublished']['posts']); ?></td>
 					<td><?php echo @number_format(0 + $total['unpublished']['word_count']); ?></td>
@@ -149,7 +149,7 @@
 					</td>
 				</tr>
 				
-				<?php $wpwc_counter_post_types++; ?>
+				<?php $jws_counter_post_types++; ?>
 				<?php endforeach; ?>
 			</tbody>
 		</table>

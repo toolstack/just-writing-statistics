@@ -7,12 +7,12 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Wp_Word_Count
- * @subpackage Wp_Word_Count/includes
- * @author     RedLettuce Plugins <support@redlettuce.com>
- * @link       https://wpwordcount.com
+ * @package    Just_Writing_Statistics
+ * @subpackage Just_Writing_Statistics/includes
+ * @author     GregRoss, RedLettuce
+ * @link       https://toolstack.com/just-writing-statistics
  */
-class Wp_Word_Count_Loader
+class Just_Writing_Statsitics_Loader
 {
     /**
      * The array of actions registered with WordPress.

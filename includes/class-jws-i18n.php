@@ -7,12 +7,12 @@
  * so that it is ready for translation.
  *
  * @since      3.0.0
- * @package    Wp_Word_Count_Pro
- * @subpackage Wp_Word_Count_Pro/includes
- * @author     RedLettuce Plugins <support@redlettuce.com>
- * @link       https://wpwordcount.com
+ * @package    Just_Writing_Statsitics_Pro
+ * @subpackage Just_Writing_Statsitics_Pro/includes
+ * @author     GregRoss, RedLettuce
+ * @link       https://toolstack.com/just-writing-statistics
  */
-class Wp_Word_Count_i18n
+class Just_Writing_Statsitics_i18n
 {
     /**
      * Load the plugin text domain for translation.

@@ -6,12 +6,12 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wp_Word_Count
- * @subpackage Wp_Word_Count/public
- * @author     RedLettuce Plugins <support@redlettuce.com>
- * @link       https://wpwordcount.com
+ * @package    Just_Writing_Statistics
+ * @subpackage Just_Writing_Statistics/public
+ * @author     GregRoss, RedLettuce
+ * @link       https://toolstack.com/just-writing-statistics
  */
-class Wp_Word_Count_Public
+class Just_Writing_Statsitics_Public
 {
     /**
      * The ID of this plugin.
@@ -52,7 +52,7 @@ class Wp_Word_Count_Public
      */
     public function wpwordcount_register_shortcodes()
     {
-        function wpwc_shortcode($atts)
+        function jws_shortcode($atts)
         {
             global $post;
 
@@ -62,28 +62,28 @@ class Wp_Word_Count_Public
                     'after' => '',
                 ], $atts));
 
-                $words = 0 + wpwc_calculate_word_count_post($post);
+                $words = 0 + jws_calculate_word_count_post($post);
 
                 return trim(esc_attr($before).' '.number_format($words).' '.esc_attr($after));
             }
         }
 
-        add_shortcode('wpwordcount', 'wpwc_shortcode');
-        add_shortcode('wp-word-count', 'wpwc_shortcode');
+        add_shortcode('wpwordcount', 'jws_shortcode');
+        add_shortcode('wp-word-count', 'jws_shortcode');
 
-        function wpwc_shortcode_total($atts)
+        function jws_shortcode_total($atts)
         {
             extract(shortcode_atts([
                 'before' => '',
                 'after' => '',
             ], $atts));
 
-            $words = wpwc_calculate_word_count_total();
+            $words = jws_calculate_word_count_total();
 
             return trim(esc_attr($before).' '.number_format($words).' '.esc_attr($after));
         }
 
-        function wpwc_shortcode_reading_time($atts) {
+        function jws_shortcode_reading_time($atts) {
 
             global $post;
 
@@ -98,16 +98,16 @@ class Wp_Word_Count_Public
 
                 ), $atts));
 
-                $reading_time = wpwc_reading_time(wpwc_calculate_word_count_post($post), $reading_time_settings_wpm, 'shortcode');
+                $reading_time = jws_reading_time(jws_calculate_word_count_post($post), $reading_time_settings_wpm, 'shortcode');
 
-                return '<p class="wpwc-reading-time">'.trim(esc_attr($before).' '.$reading_time.' '.esc_attr($after)).'</p>';
+                return '<p class="jws-reading-time">'.trim(esc_attr($before).' '.$reading_time.' '.esc_attr($after)).'</p>';
 
             }
 
         }
 
-        add_shortcode('wpwordcount-reading-time', 'wpwc_shortcode_reading_time');
-        add_shortcode('wp-word-count-reading-time', 'wpwc_shortcode_reading_time');
+        add_shortcode('wpwordcount-reading-time', 'jws_shortcode_reading_time');
+        add_shortcode('wp-word-count-reading-time', 'jws_shortcode_reading_time');
     }
 
 	/**
@@ -120,17 +120,17 @@ class Wp_Word_Count_Public
 
         global $post;
 
-        $option = get_option('wpwc_reading_time');
+        $option = get_option('jws_reading_time');
 
         if ($post && is_array( $option) && $option['insert'] == 'Y') {
 
-            $reading_time_settings_wpm = (get_option('wpwc_reading_time')['wpm'] ?: 250);
-            $reading_time_settings_before = (get_option('wpwc_reading_time')['labels']['before'] ?: '');
-            $reading_time_settings_after = (get_option('wpwc_reading_time')['labels']['after'] ?: '');
+            $reading_time_settings_wpm = (get_option('jws_reading_time')['wpm'] ?: 250);
+            $reading_time_settings_before = (get_option('jws_reading_time')['labels']['before'] ?: '');
+            $reading_time_settings_after = (get_option('jws_reading_time')['labels']['after'] ?: '');
 
-            $reading_time = wpwc_reading_time(wpwc_calculate_word_count_post($post), $reading_time_settings_wpm, 'shortcode');
+            $reading_time = jws_reading_time(jws_calculate_word_count_post($post), $reading_time_settings_wpm, 'shortcode');
 
-            return '<p class="wpwc-reading-time">'.trim($reading_time_settings_before.' '.$reading_time.' '.$reading_time_settings_after).'</p>'.$content;
+            return '<p class="jws-reading-time">'.trim($reading_time_settings_before.' '.$reading_time.' '.$reading_time_settings_after).'</p>'.$content;
 
         } else {
             return $content;

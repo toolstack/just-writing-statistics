@@ -6,10 +6,10 @@
  * This is used to define functions for database issues on the admin and public side.
  *
  * @since      3.0.0
- * @package    Wp_Word_Count
- * @subpackage Wp_Word_Count/includes
- * @link       https://wpwordcount.com
- * @author     RedLettuce Plugins <support@redlettuce.com>
+ * @package    Just_Writing_Statistics
+ * @subpackage Just_Writing_Statistics/includes
+ * @link       https://toolstack.com/just-writing-statistics
+ * @author     GregRoss, RedLettuce
  */
 
 /**
@@ -18,30 +18,30 @@
  * @since   3.0.0
  * @param	post	$post	The post object.
  */
-function wpwc_save_post_data($post)
+function jws_save_post_data($post)
 {
     global $wpdb;
 
-    $table_name_posts = $wpdb->prefix.'wpwc_posts';
+    $table_name_posts = $wpdb->prefix.'jws_posts';
 
     if ($post && $post->post_author != 0) {
-        $post_word_count = wpwc_word_count($post->post_content);
+        $post_word_count = jws_word_count($post->post_content);
 
         // If Thrive Content Builder data is available, add to total
         if ($tve = get_post_meta($post->ID, 'tve_updated_post', true)) {
-            $post_word_count = $post_word_count + wpwc_word_count($tve);
+            $post_word_count = $post_word_count + jws_word_count($tve);
         }
 
         $sql_post_data = "
-			INSERT INTO $table_name_posts (post_id, post_author, post_date, post_status, post_modified, post_parent, post_type, post_word_count) 
-			VALUES (%d, %d, %s, %s, %s, %s, %s, %d) 
-			ON DUPLICATE KEY UPDATE 
+			INSERT INTO $table_name_posts (post_id, post_author, post_date, post_status, post_modified, post_parent, post_type, post_word_count)
+			VALUES (%d, %d, %s, %s, %s, %s, %s, %d)
+			ON DUPLICATE KEY UPDATE
 			post_author = %s,
-			post_date = %s, 
-			post_status = %s, 
-			post_modified = %s, 
-			post_parent = %d, 
-			post_type = %s, 
+			post_date = %s,
+			post_status = %s,
+			post_modified = %s,
+			post_parent = %d,
+			post_type = %s,
 			post_word_count = %d";
         $post_data = $wpdb->prepare($sql_post_data, $post->ID, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count);
         $wpdb->query($post_data);
@@ -54,7 +54,7 @@ function wpwc_save_post_data($post)
  * @since 	3.0.0
  * @param	string	$content	The post content
  */
-function wpwc_word_count($content)
+function jws_word_count($content)
 {
     $content = preg_replace('/(<\/[^>]+?>)(<[^>\/][^>]*?>)/', '$1 $2', $content);
     $content = strip_tags(nl2br($content));
@@ -75,9 +75,9 @@ function wpwc_word_count($content)
 * @since 	3.0.0
 * @param	string	$wpwcp_version	The latest plugin version.
 */
-function wpwc_set_plugin_version($wpwc_version)
+function jws_set_plugin_version($jws_version)
 {
-    update_option('wpwc_version', $wpwc_version);
+    update_option('jws_version', $jws_version);
 }
 
 /**
@@ -85,13 +85,11 @@ function wpwc_set_plugin_version($wpwc_version)
 *
 * @since    3.0.0
 */
-function wpwc_create_posts_table()
+function jws_create_posts_table()
 {
-    require_once ABSPATH.'wp-admin/includes/upgrade.php';
-
     global $wpdb;
 
-    $table_name = $wpdb->prefix.'wpwc_posts';
+    $table_name = $wpdb->prefix.'jws_posts';
 
     // Create database table
     $charset_collate = $wpdb->get_charset_collate();
@@ -115,18 +113,18 @@ function wpwc_create_posts_table()
 *
 * @since    3.0.0
 */
-function wpwc_calculate_word_count_post($post)
+function jws_calculate_word_count_post($post)
 {
     global $wpdb;
 
     $words = 0;
 
-    $table_name = $wpdb->prefix.'wpwc_posts';
+    $table_name = $wpdb->prefix.'jws_posts';
 
-    $sql_wpwc_words = $wpdb->prepare("SELECT post_word_count FROM $table_name WHERE post_id = %d", $post->ID);
-    $wpwc_words = $wpdb->get_row($sql_wpwc_words);
+    $sql_jws_words = $wpdb->prepare("SELECT post_word_count FROM $table_name WHERE post_id = %d", $post->ID);
+    $jws_words = $wpdb->get_row($sql_jws_words);
 
-    $words = $wpwc_words->post_word_count;
+    $words = $jws_words->post_word_count;
 
     return $words;
 }
@@ -135,20 +133,19 @@ function wpwc_calculate_word_count_post($post)
 * Get reading time of a piece of text.
 *
 * @since    3.2.0
-*/	
-function wpwc_reading_time($word_count, $wpm = 250, $format = 'admin')
+*/
+function jws_reading_time($word_count, $wpm = 250, $format = 'admin')
 {
     $html = '';
 
-    $init = floor(($word_count / $wpm) * 60);
+    // Calculate the number of words per minute and second.
+    $init_m = floor($word_count / $wpm);
+    $init_s = $init_m * 60;
 
-    $hours = floor($init / 3600);
-    $minutes = floor(($init / 60) % 60);
-    $seconds = $init % 60;
-
-    if ($seconds >= 30) {
-        $minutes++;
-    }
+    // Hours is going to be the floor of wpm / 60.
+    $hours = floor($init_m / 60);
+    // Minutes is going to be the round of the modulus of wpm.
+    $minutes = round($init_m % 60);
 
     if ($format == 'admin') {
         if ($minutes == 0) {

@@ -6,17 +6,17 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      3.0.0
- * @package    Wp_Word_Count
- * @subpackage Wp_Word_Count/includes
- * @author     RedLettuce Plugins <support@redlettuce.com>
- * @link       https://wpwordcount.com
+ * @package    Just_Writing_Statistics
+ * @subpackage Just_Writing_Statistics/includes
+ * @author     GregRoss, RedLettuce
+ * @link       https://toolstack.com/just-writing-statistics
  */
-class Wp_Word_Count_Deactivator
+class Just_Writing_Statsitics_Deactivator
 {
     /**
      * Remove tables, options and transients.
      *
-     * Remove all data from the WordPress database that WP Word Count has generated.
+     * Remove all data from the WordPress database that Just Writing Statistics has generated.
      *
      * @since    3.0.0
      */
@@ -25,13 +25,13 @@ class Wp_Word_Count_Deactivator
         global $wpdb;
 
         // Empty database tables the plugin has made
-        $table_name_posts = $wpdb->prefix.'wpwc_posts';
+        $table_name_posts = $wpdb->prefix.'jws_posts';
 
         $wpdb->query("DELETE FROM $table_name_posts");
         $wpdb->query("DROP TABLE $table_name_posts");
 
         // Delete options the plugin has made
-        delete_option('wpwc_version');
-        delete_option('wpwc_reading_time');
+        delete_option('jws_version');
+        delete_option('jws_reading_time');
     }
 }
