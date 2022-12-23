@@ -50,7 +50,7 @@ class Just_Writing_Statsitics_Public
      * @since 	3.0.0
      * @param	array	$atts	Shortcode attributes.
      */
-    public function wpwordcount_register_shortcodes()
+    public function justwritingstatistics_register_shortcodes()
     {
         function jws_shortcode($atts)
         {
@@ -68,8 +68,8 @@ class Just_Writing_Statsitics_Public
             }
         }
 
-        add_shortcode('wpwordcount', 'jws_shortcode');
-        add_shortcode('wp-word-count', 'jws_shortcode');
+        add_shortcode('justwritingstatistics', 'jws_shortcode');
+        add_shortcode('just-writing-statistics', 'jws_shortcode');
 
         function jws_shortcode_total($atts)
         {
@@ -106,8 +106,8 @@ class Just_Writing_Statsitics_Public
 
         }
 
-        add_shortcode('wpwordcount-reading-time', 'jws_shortcode_reading_time');
-        add_shortcode('wp-word-count-reading-time', 'jws_shortcode_reading_time');
+        add_shortcode('justwritingstatistics-reading-time', 'jws_shortcode_reading_time');
+        add_shortcode('just-writing-statistics-reading-time', 'jws_shortcode_reading_time');
     }
 
 	/**
@@ -116,7 +116,7 @@ class Just_Writing_Statsitics_Public
 	 * @since 	3.2.0
 	 */
 
-    public function wpwordcount_reading_time_before_content($content) {
+    public function justwritingstatistics_reading_time_before_content($content) {
 
         global $post;
 

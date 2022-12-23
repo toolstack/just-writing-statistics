@@ -21,6 +21,6 @@ class Just_Writing_Statsitics_i18n
      */
     public function load_plugin_textdomain()
     {
-        load_plugin_textdomain('wp-word-count', false, dirname(dirname(plugin_basename(__FILE__))) . '/languages/');
+    // No longer required after WP 4.6 for plugins in the offical wordpress.org directory.        
     }
 }

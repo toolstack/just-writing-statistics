@@ -56,7 +56,7 @@ class Just_Writing_Statistics
      */
     public function __construct()
     {
-        $this->plugin_name = 'wp-word-count';
+        $this->plugin_name = 'just-writing-statistics';
         $this->version = JWS_VERSION;
 
         $this->load_dependencies();
@@ -162,8 +162,8 @@ class Just_Writing_Statistics
     {
         $plugin_public = new Just_Writing_Statsitics_Public($this->get_plugin_name(), $this->get_version());
 
-        $this->loader->add_action('init', $plugin_public, 'wpwordcount_register_shortcodes');
-		$this->loader->add_filter( 'the_content', $plugin_public, 'wpwordcount_reading_time_before_content' );
+        $this->loader->add_action('init', $plugin_public, 'justwritingstatistics_register_shortcodes');
+		$this->loader->add_filter( 'the_content', $plugin_public, 'justwritingstatistics_reading_time_before_content' );
     }
 
     /**

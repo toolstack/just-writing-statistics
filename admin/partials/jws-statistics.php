@@ -14,7 +14,7 @@
 
 ?>
 
-<div id="wp-word-count" class="wrap">
+<div id="just-writing-statistics" class="wrap">
 	<h1><?php _e('Just Writing Statistics', $this->plugin_name); ?></h1>
 
 	<?php if ((isset($arr_jws_posts) && @count($arr_jws_posts) != 0) || (isset($arr_jws_months) && @count($arr_jws_months)) || (isset($arr_jws_authors) && @count($arr_jws_authors))): ?>

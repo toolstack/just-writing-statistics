@@ -14,7 +14,7 @@
 ?>
 
 <?php $jws_tab = 'reading-time'; ?>
-<div id="wp-word-count" class="wrap">
+<div id="just-writing-statistics" class="wrap">
     <h1><?php _e('Just Writing Statistics', $this->plugin_name); ?> - <?php _e('Reading Time', $this->plugin_name); ?></h1>
     
     <?php include_once 'jws-statistics-menu.php'; ?>
