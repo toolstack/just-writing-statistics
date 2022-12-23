@@ -1,7 +1,7 @@
 === Just Writing Statistics ===
 Contributors: gregross, redlettuce
 Tags: word count, reading time, authors, words, writing
-Requires at least: 4.0
+Requires at least: 4.6
 Tested up to: 5.8.1
 Stable tag: 4.0
 
@@ -9,11 +9,13 @@ Calculate your writing statistics on your WordPress site instantly.
 
 == Description ==
 
+** Just Writing Statistics is a fork of WP Word Count **
+
 Just Writing Statistics tells you exactly how many words you've written on your site with statistics by month and author.
 
 Just Writing Statistics comes with built in reading time statistics for each post and page of your site. Find out how many hours of content you've written or let readers know how long your articles are. You can include reading time at the top of each of your posts automatically or use a shortcode.
 
-== FEATURES ==
+== Features ==
 
 - Quickly see how many posts and pages you've created and how many total words they add up to.
 - View and display estimated reading times for each piece of content on your site.
@@ -28,6 +30,14 @@ Just Writing Statistics comes with built in reading time statistics for each pos
 3. Just Writing Statistics can be accessed via the menu of the WordPress Admin.
 
 == Frequently Asked Questions ==
+
+= Why fork WP Word Count? =
+
+WP Word Count is by far the best plugin of its kind, however it is, as far as I can tell, abandoned at this point.
+
+Even worse, the existing plugin has a known security vulnerability in it and so wordpress.org has closed the repository.
+
+As such, a fork is required to fix the security issue and bring the plugin functionality back.
 
 = How do the Just Writing Statistics Shortcodes work? =
 
