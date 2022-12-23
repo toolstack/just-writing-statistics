@@ -47,10 +47,10 @@ require plugin_dir_path(__FILE__) . 'includes/class-jws-functions.php';
  *
  * @since    3.0.0
  */
-function run_just_writing_statsitics_()
+function run_just_writing_statsitics()
 {
     $plugin = new Just_Writing_Statistics();
     $plugin->run();
 }
 
-run_just_writing_statsitics_();
+run_just_writing_statsitics();
