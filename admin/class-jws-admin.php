@@ -106,7 +106,7 @@ class Just_Writing_Statsitics_Admin
      */
     public function action_links($links)
     {
-        $settings_link = ['<a href="'.admin_url('admin.php?page='.$this->plugin_name.'-settings').'">'.__('Settings', $this->plugin_name).'</a>'];
+        $settings_link = ['<a href="'.admin_url('admin.php?page='.$this->plugin_name.'-calculate').'">'.__('Settings', $this->plugin_name).'</a>'];
 
         return array_merge($settings_link, $links);
     }
