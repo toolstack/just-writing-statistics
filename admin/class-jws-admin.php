@@ -280,12 +280,16 @@ class Just_Writing_Statsitics_Admin
         $post_statuses = get_post_stati('', 'names');
         $posts_count = 0 + $jws_post_total[0]->post_total;
 
+        // Make sure we don't divide by 0 later on.
+        if( $posts_count == 0 ) { $posts_count = 1; }
+
         if ($ret) {
-            $step += 1;
-            $percentage = (($step - 1) * 50 / $posts_count * 100);
+            $percentage = ($step * 50 / $posts_count * 100);
             if ($percentage > 100) {
                 $percentage = 100;
             }
+
+            $step += 1;
 
             echo json_encode(['step' => $step, 'percentage' => $percentage]);
 
