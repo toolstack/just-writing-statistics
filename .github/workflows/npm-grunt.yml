@@ -25,7 +25,7 @@ jobs:
       run: |
         npm install
         grunt
-        git config --global user.name 'Greg Ross'
-        git config --global user.email 'greg@toolstack.com'
+        git config --global user.name '${{secrets.GIT_USERNAME}}'
+        git config --global user.email '${{secrets.GIT_EMAIL}}'
         git commit -am "Regenerate readme.md"
         git push
