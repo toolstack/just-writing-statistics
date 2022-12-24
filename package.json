@@ -9,7 +9,7 @@
     "count",
     "wordpress"
   ],
-  "author": "GregRoss, redlettuce",
+  "author": "GregRoss",
   "license": "GPL-2.0",
   "homepage": "https://toolstack.com/just-writing-statistics",
   "devDependencies": {

@@ -9,11 +9,11 @@ Calculate your writing statistics on your WordPress site instantly.
 
 == Description ==
 
-** Just Writing Statistics is a fork of WP Word Count **
+**Just Writing Statistics is a fork of WP Word Count**
 
 Just Writing Statistics tells you exactly how many words you've written on your site with statistics by month and author.
 
-Just Writing Statistics comes with built in reading time statistics for each post and page of your site. Find out how many hours of content you've written or let readers know how long your articles are. You can include reading time at the top of each of your posts automatically or use a shortcode.
+Just Writing Statistics comes with built in reading time for each post and page of your site. Find out how many hours of content you've written or let readers know how long your articles are. You can include reading time at the top of each of your posts automatically or use a shortcode.
 
 == Features ==
 
@@ -61,36 +61,48 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 = 4.0 =
 * Release date: TBD
+* Tested up to WordPress 6.1.1
 * Fork from Just Writing Statistics
 * Security fixes
 * Removal of Pro references
+* Fix the menu icon
+* Fix the settings link in the plugin list
+* Fix various wp_debug warnings
 
-= 3.2.3 - 6 Oct 2021 =
+= 3.2.3 =
+* Release date: 6 Oct 2021
 * Tested up to WordPress 5.8.1
 * We've been a bit quiet (sorry!), but busy behind the scenes! Get ready for some new features ready in Q4 2021!
 
-= 3.2.2 - 8 Sept 2020 =
+= 3.2.2 =
+* Release date:  8 Sept 2020
 * Tested up to WordPress 5.5.1
 
-= 3.2.1 - 2 June 2020 =
+= 3.2.1 =
+* Release date:  2 June 2020
 * Tested up to WordPress 5.4.1
 * Updated plugin details
 
 = 3.2.0 =
+* Release date: 2 Jan 2020
 * New "Reading Time" statistic throughout the plugin.
 * Added support for Gravatar/User Profile Images.
 
 = 3.1.0 =
+* Release date: 8 Sept 2019
 * New calculation options for sites with extremely large amounts of content.
 * Menu changes.
 
 = 3.0.2 =
+* Release date: 12 Apr 2019
 * Interface changes.
 
 = 3.0.1 =
+* Release date: 13 Sept 2018
 * Interface changes and bug fixes.
 
 = 3.0.0 =
+* Release date: 21 Feb 2017
 * You can calculate your word counts any time you wish via the "Calculate" tab. This should help alleviate problems with plugin activation/updating on servers with limited resources.
 * Automatically excluding common WordPress post types: Custom CSS, Navigation Menu Items.
 * Support for Scheduled Posts.

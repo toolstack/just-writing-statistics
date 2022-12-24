@@ -10,11 +10,13 @@
  * Plugin URI:        https://toolstack.com/just-writing-statistics
  * Description:       Count the words on your WordPress site instantly.
  * Version:           4.0
- * Author:            GregRoss, RedLettuce Plugins
+ * Author:            GregRoss
  * Author URI:        https://toolstack.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       just-writing-statistics
+ *
+ * Forked from WP Word Count by RedLettuce Plugins
  */
 
 // If this file is called directly, abort.
