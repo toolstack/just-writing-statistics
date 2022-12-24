@@ -68,6 +68,12 @@
 					}
 				}).fail(function (response) {
 
+					var jws_calculate_form = $('.jws-calculate-statistics').find('.jws-progress').parent().parent();
+
+					jws_calculate_form.find('.button-disabled').removeClass('button-disabled');
+					jws_calculate_form.find('.spinner').remove();
+					jws_calculate_form.find('.jws-progress-wrapper').html('<b>Ajax call failed!  See console for details.<b>');
+
 					if (window.console && window.console.log) {
 
 						console.log(response);
