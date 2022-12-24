@@ -95,8 +95,7 @@ class Just_Writing_Statsitics_Admin
     {
         add_menu_page('Just Writing Statistics', 'Writing Statistics', 'delete_posts', $this->plugin_name, [$this, 'display_statistics'], 'dashicons-editor-paste-word', 99);
         add_submenu_page($this->plugin_name, 'Just Writing Statistics', __('Statistics', $this->plugin_name), 'delete_posts', $this->plugin_name, [$this, 'display_statistics']);
-        add_submenu_page($this->plugin_name, 'Just Writing Statistics - '.__('Reading Time', $this->plugin_name), __('Reading Time', $this->plugin_name), 'delete_posts', $this->plugin_name . '-reading-time', [$this, 'display_reading_time']);
-        add_submenu_page($this->plugin_name, 'Just Writing Statistics - '.__('Calculate', $this->plugin_name), __('Calculate', $this->plugin_name), 'delete_posts', $this->plugin_name . '-calculate', [$this, 'display_calculate']);
+        add_submenu_page($this->plugin_name, 'Just Writing Statistics - '.__('Settings', $this->plugin_name), __('Settings', $this->plugin_name), 'delete_posts', $this->plugin_name . '-settings', [$this, 'display_settings']);
     }
 
     /**
@@ -106,7 +105,7 @@ class Just_Writing_Statsitics_Admin
      */
     public function action_links($links)
     {
-        $settings_link = ['<a href="'.admin_url('admin.php?page='.$this->plugin_name.'-calculate').'">'.__('Settings', $this->plugin_name).'</a>'];
+        $settings_link = ['<a href="'.admin_url('admin.php?page='.$this->plugin_name.'-settings').'">'.__('Settings', $this->plugin_name).'</a>'];
 
         return array_merge($settings_link, $links);
     }
@@ -121,10 +120,15 @@ class Just_Writing_Statsitics_Admin
         // Reading Time
         add_settings_section('jws-section-reading-time', __('Reading Time', $this->plugin_name), [$this, 'settings_section_reading_time'], 'jws-reading-time');
         add_settings_field('jws_reading_time_wpm', __('Words Per Minute', $this->plugin_name), [$this, 'settings_reading_time_wpm'], 'jws-reading-time', 'jws-section-reading-time');
-        add_settings_field('jws_reading_time_insert', __('Insert before post content?', $this->plugin_name), [$this, 'settings_reading_time_insert'], 'jws-reading-time', 'jws-section-reading-time');
+        add_settings_field('jws_reading_time_insert', __('Add to top of post content?', $this->plugin_name), [$this, 'settings_reading_time_insert'], 'jws-reading-time', 'jws-section-reading-time');
         add_settings_field('jws_reading_time_label_before', __('Before Label', $this->plugin_name), [$this, 'settings_reading_time_label_before'], 'jws-reading-time', 'jws-section-reading-time');
         add_settings_field('jws_reading_time_label_after', __('After Label', $this->plugin_name), [$this, 'settings_reading_time_label_after'], 'jws-reading-time', 'jws-section-reading-time');
         register_setting('jws-section-reading-time', 'jws_reading_time');
+    }
+
+    public function display_settings()
+    {
+        include_once 'partials/jws-settings.php';
     }
 
     /**
@@ -242,7 +246,7 @@ class Just_Writing_Statsitics_Admin
             unset($parameters['jws_date_range_start'], $parameters['jws_date_range_end'], $parameters['jws_date_range_start_formatted'], $parameters['jws_date_range_end_formatted'], $parameters['jws_delete_data']);
         }
 
-        $sql_post_total = "SELECT COUNT(ID) AS post_total FROM $table_name_posts WHERE 1 ";
+        $sql_post_total = "SELECT COUNT(ID) AS post_total FROM $table_name_posts WHERE 1";
 
         $post_types = get_post_types('', 'names');
         unset($post_types['attachment'], $post_types['nav_menu_item'], $post_types['custom_css'], $post_types['revision'], $post_types['customize_changeset']);
@@ -301,7 +305,6 @@ class Just_Writing_Statsitics_Admin
                 'nonce' => wp_create_nonce('jws_calculate_nonce'),
                 ]
             );
-
             $link_message = add_query_arg(['page' => $this->plugin_name], admin_url('admin.php'));
             $message = sprintf(wp_kses(__('Word counts calculated successfully. Visit the <a href="%s">statistics page</a> to view.', $this->plugin_name), ['a' => ['href' => []]]), esc_url($link_message));
 
@@ -377,7 +380,7 @@ class Just_Writing_Statsitics_Admin
                 }
             }
 
-            return true;
+           return true;
         } else {
             return false;
         }
@@ -486,6 +489,13 @@ class Just_Writing_Statsitics_Admin
 				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
 				GROUP BY MID(post_date, 1, 7), post_type, post_status
                 ORDER BY post_date DESC";
+        } elseif ($jws_tab == 'yearly-statistics') {
+            $sql_jws_statistics = "
+                SELECT MID(post_date, 1, 4) AS post_date, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+                FROM $table_name_posts
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+                GROUP BY MID(post_date, 1, 4), post_type, post_status
+                ORDER BY post_date DESC";
         } elseif ($jws_tab == 'author-statistics') {
             $sql_jws_statistics = "
 				SELECT post_author, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
@@ -563,6 +573,41 @@ class Just_Writing_Statsitics_Admin
 
                 $arr_jws_months[$total->post_date]['total'] += $total->word_count;
             }
+        } elseif ($jws_tab == 'yearly-statistics') {
+            $arr_jws_years = [];
+
+            foreach ($jws_statistics as $total) {
+                // Load post type array
+                if (!isset($arr_jws_post_types[$total->post_type])) {
+                    $post_type_object = get_post_type_object($total->post_type);
+
+                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                }
+
+                // Load months array
+                if (!isset($arr_jws_years[$total->post_date])) {
+                    $arr_jws_years[$total->post_date]['total'] = 0;
+                }
+
+                if (!isset($arr_jws_months[$total->post_date][$total->post_type])) {
+                    $arr_jws_years[$total->post_date][$total->post_type]['name'] = $arr_jws_post_types[$total->post_type]['plural_name'];
+                    $arr_jws_years[$total->post_date][$total->post_type]['published']['posts'] = 0;
+                    $arr_jws_years[$total->post_date][$total->post_type]['published']['word_count'] = 0;
+                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['posts'] = 0;
+                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['word_count'] = 0;
+                }
+
+                if ($total->post_status == 'publish') {
+                    $arr_jws_years[$total->post_date][$total->post_type]['published']['posts'] += $total->posts;
+                    $arr_jws_years[$total->post_date][$total->post_type]['published']['word_count'] += $total->word_count;
+                } else {
+                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['posts'] += $total->posts;
+                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                }
+
+                $arr_jws_years[$total->post_date]['total'] += $total->word_count;
+            }
         } elseif ($jws_tab == 'author-statistics') {
             $arr_jws_authors = [];
             $arr_jws_post_types = [];
@@ -603,7 +648,7 @@ class Just_Writing_Statsitics_Admin
             // Sort authors array by total
             uasort(
                 $arr_jws_authors, function ($a, $b) {
-                    return $b['total'] - $a['total']; 
+                    return $b['total'] - $a['total'];
                 }
             );
         }
@@ -628,7 +673,7 @@ class Just_Writing_Statsitics_Admin
 
             uasort(
                 $arr_jws_post_types_custom, function ($a, $b) {
-                    return strcmp($a['plural_name'], $b['plural_name']); 
+                    return strcmp($a['plural_name'], $b['plural_name']);
                 }
             );
             $arr_jws_post_types = array_merge($arr_jws_post_types_standard, $arr_jws_post_types_custom);

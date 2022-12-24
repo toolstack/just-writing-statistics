@@ -17,7 +17,7 @@
 <div id="just-writing-statistics" class="wrap">
     <h1><?php _e('Just Writing Statistics', $this->plugin_name); ?></h1>
 
-    <?php if ((isset($arr_jws_posts) && @count($arr_jws_posts) != 0) || (isset($arr_jws_months) && @count($arr_jws_months)) || (isset($arr_jws_authors) && @count($arr_jws_authors))) : ?>
+    <?php if ((isset($arr_jws_posts) && @count($arr_jws_posts) != 0) || (isset($arr_jws_months) && @count($arr_jws_months)) || (isset($arr_jws_years) && @count($arr_jws_years)) || (isset($arr_jws_authors) && @count($arr_jws_authors))) : ?>
 
         <?php include_once 'jws-statistics-menu.php'; ?>
 
@@ -126,6 +126,62 @@
                     </tr>
 
                         <?php $jws_counter_monthly_statistics++; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <?php elseif ($jws_tab == 'yearly-statistics') : ?>
+
+    <div class="full">
+        <h3><?php _e('Yearly Statistics', $this->plugin_name); ?></h3>
+
+        <div class="jws-table">
+            <table class="widefat jws-post-type-stats">
+                <thead>
+                    <tr>
+                        <th rowspan="2"><?php _e('Year', $this->plugin_name); ?></th>
+                        <th rowspan="2"><?php _e('Words', $this->plugin_name); ?></th>
+                        <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
+                        <th colspan="2" class="jws-post-type"><?php echo $post_type['plural_name']; ?></th>
+                        <?php endforeach; ?>
+                    </tr>
+
+                    <tr>
+                        <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
+                        <th><?php _e('Published', $this->plugin_name); ?></th>
+                        <th><?php _e('Unpublished', $this->plugin_name); ?></th>
+                        <?php endforeach; ?>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php $jws_counter_yearly_statistics = 0; ?>
+                    <?php foreach ($arr_jws_years as $year => $count) : ?>
+
+                        <?php echo '<tr'.($jws_counter_yearly_statistics % 2 == 1 ? '' : " class='alternate'").'>'; ?>
+                        <td><nobr><?php echo $year; ?></td>
+                        <td><?php echo number_format($count['total']); ?></td>
+                        <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
+                        <td>
+                            <?php echo (isset($count[$index]['published']['posts']) ? number_format(0 + $count[$index]['published']['posts']) : '0'); ?> <?php _e('Total', $this->plugin_name); ?><br />
+                            <?php echo (isset($count[$index]['published']['word_count']) ? number_format(0 + $count[$index]['published']['word_count']) : '0'); ?> <?php _e('Words', $this->plugin_name); ?><br />
+                            <?php if (isset($count[$index]['published']['posts']) && $count[$index]['published']['posts'] != 0) : ?>
+                                <?php echo number_format(round(0 + ($count[$index]['published']['word_count'] / $count[$index]['published']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php echo (isset($count[$index]['unpublished']['posts']) ? number_format(0 + $count[$index]['unpublished']['posts']) : '0'); ?> <?php _e('Total', $this->plugin_name); ?><br />
+                            <?php echo (isset($count[$index]['unpublished']['word_count']) ? number_format(0 + $count[$index]['unpublished']['word_count']) : '0'); ?> <?php _e('Words', $this->plugin_name); ?><br />
+                            <?php if (isset($count[$index]['unpublished']['posts']) && $count[$index]['unpublished']['posts'] != 0) : ?>
+                                <?php echo number_format(round(0 + ($count[$index]['unpublished']['word_count'] / $count[$index]['unpublished']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+                            <?php endif; ?>
+                        </td>
+                        <?php endforeach; ?>
+                    </tr>
+
+                        <?php $jws_counter_yearly_statistics++; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
