@@ -70,7 +70,7 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 ### 4.0 ###
 * Release date: TBD
 * Tested up to WordPress 6.1.1
-* Fork from Just Writing Statistics
+* Fork from WP Word Count
 * Security fixes
 * Removal of Pro references
 * Fix the menu icon
