@@ -105,6 +105,9 @@ function jws_create_posts_table()
 		post_word_count bigint(20) NOT NULL,
 		UNIQUE KEY post_id (post_id)
 	) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
     dbDelta($sql);
 }
 
