@@ -18,7 +18,7 @@ Just Writing Statistics tells you exactly how many words you've written on your 
 - Top Content
 - All Content
 - Month
-- Year **NEW**
+- **Year (new)**
 - Author
 
 Just Writing Statistics also has reading times for each post and page of your site. Find out how many hours of content you've written or let readers know how long your articles are. You can include reading time at the top of each of your posts automatically or use a shortcode.
