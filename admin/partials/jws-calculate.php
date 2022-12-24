@@ -5,8 +5,8 @@
  *
  * This file is used to markup the settings view of the plugin.
  *
- * @link       https://toolstack.com/just-writing-statistics
- * @since      3.0.0
+ * @link  https://toolstack.com/just-writing-statistics
+ * @since 3.0.0
  *
  * @package    Just_Writing_Statistics
  * @subpackage Just_Writing_Statistics/admin/partials
@@ -17,7 +17,7 @@
 <div id="just-writing-statistics" class="wrap">
     <h1><?php _e('Just Writing Statistics', $this->plugin_name); ?> - <?php _e('Calculate', $this->plugin_name); ?></h1>
 
-    <?php include_once 'jws-statistics-menu.php'; ?>
+    <?php require_once 'jws-statistics-menu.php'; ?>
 
     <h2><?php _e('Calculate Writing Statistics', $this->plugin_name); ?></h2>
     <p style="width:65%"><?php _e('You can calculate the word counts on your site at any time. Sites with thousands of posts or years of content should do multiple calculations by a date range to avoid server complications.', $this->plugin_name); ?></p>

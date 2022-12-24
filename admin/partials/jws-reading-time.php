@@ -5,8 +5,8 @@
  *
  * This file is used to markup the settings view of the plugin.
  *
- * @link       https://toolstack.com/just-writing-statistics
- * @since      3.2.0
+ * @link  https://toolstack.com/just-writing-statistics
+ * @since 3.2.0
  *
  * @package    Just_Writing_Statistics
  * @subpackage Just_Writing_Statistics/admin/partials
@@ -17,7 +17,7 @@
 <div id="just-writing-statistics" class="wrap">
     <h1><?php _e('Just Writing Statistics', $this->plugin_name); ?> - <?php _e('Reading Time', $this->plugin_name); ?></h1>
     
-    <?php include_once 'jws-statistics-menu.php'; ?>
+    <?php require_once 'jws-statistics-menu.php'; ?>
 
     <form method="post" action="options.php">
         <?php settings_fields("jws-section-reading-time"); ?>

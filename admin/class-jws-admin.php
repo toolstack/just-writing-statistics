@@ -16,27 +16,27 @@ class Just_Writing_Statsitics_Admin
     /**
      * The ID of this plugin.
      *
-     * @since    3.0.0
-     * @access   private
-     * @var      string    $plugin_name    The ID of this plugin.
+     * @since  3.0.0
+     * @access private
+     * @var    string    $plugin_name    The ID of this plugin.
      */
     private $plugin_name;
 
     /**
      * The version of this plugin.
      *
-     * @since    3.0.0
-     * @access   private
-     * @var      string    $version    The current version of this plugin.
+     * @since  3.0.0
+     * @access private
+     * @var    string    $version    The current version of this plugin.
      */
     private $version;
 
     /**
      * Initialize the class and set its properties.
      *
-     * @since    3.0.0
-     * @param      string    $plugin_name       The name of this plugin.
-     * @param      string    $version    The version of this plugin.
+     * @since 3.0.0
+     * @param string $plugin_name The name of this plugin.
+     * @param string $version     The version of this plugin.
      */
     public function __construct($plugin_name, $version)
     {
@@ -47,7 +47,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Check plugin version and run updates if necessary.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function plugin_check()
     {
@@ -61,7 +61,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Register the stylesheets for the admin area.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function enqueue_styles()
     {
@@ -79,7 +79,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Register the JavaScript for the admin area.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function enqueue_scripts()
     {
@@ -89,7 +89,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Register the administration menu.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function menu()
     {
@@ -102,7 +102,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Add settings action link to the plugins page.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function action_links($links)
     {
@@ -112,10 +112,10 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
-    * Register the settings.
-    *
-    * @since    3.2.0
-    */
+     * Register the settings.
+     *
+     * @since 3.2.0
+     */
     public function settings()
     {
         // Reading Time
@@ -128,27 +128,27 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
-    * Display Reading Time Settings Section.
-    *
-    * @since    3.2.0
-    */
+     * Display Reading Time Settings Section.
+     *
+     * @since 3.2.0
+     */
     public function settings_section_reading_time()
     {
         echo '<p>'.__('Define how many words per minute to use in Reading Time statistics and set labels for displaying Reading Time statistics inside of your posts.', $this->plugin_name).'</p>';
     }
 
     /**
-    * Display Reading Time Settings Words Per Minute Text Box.
-    *
-    * @since    3.2.0
-    */
+     * Display Reading Time Settings Words Per Minute Text Box.
+     *
+     * @since 3.2.0
+     */
     public function settings_reading_time_wpm()
     {
         $reading_time_options = get_option('jws_reading_time');
 
         $reading_time_wpm = 250;
 
-        if( is_array( $reading_time_options ) && array_key_exists( 'wpm', $reading_time_options ) ) {
+        if(is_array($reading_time_options) && array_key_exists('wpm', $reading_time_options) ) {
             $reading_time_wpm = (get_option('jws_reading_time')['wpm'] ?: 250);
         }
 
@@ -156,17 +156,17 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
-    * Display Reading Time Settings Before Label.
-    *
-    * @since    3.2.0
-    */
+     * Display Reading Time Settings Before Label.
+     *
+     * @since 3.2.0
+     */
     public function settings_reading_time_insert()
     {
         $reading_time_options = get_option('jws_reading_time');
 
         $reading_time_insert = 'N';
 
-        if( is_array( $reading_time_options ) && array_key_exists( 'insert', $reading_time_options ) ) {
+        if(is_array($reading_time_options) && array_key_exists('insert', $reading_time_options) ) {
             $reading_time_insert = (get_option('jws_reading_time')['insert'] ?: 'N');
         }
 
@@ -174,18 +174,18 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
-    * Display Reading Time Settings Before Label.
-    *
-    * @since    3.2.0
-    */
+     * Display Reading Time Settings Before Label.
+     *
+     * @since 3.2.0
+     */
     public function settings_reading_time_label_before()
     {
         $reading_time_options = get_option('jws_reading_time');
 
         $reading_time_label_before = '';
 
-        if( is_array( $reading_time_options ) && array_key_exists( 'labels', $reading_time_options ) ) {
-            if( is_array( $reading_time_options['labels'] ) && array_key_exists( 'before', $reading_time_options['labels'] ) ) {
+        if(is_array($reading_time_options) && array_key_exists('labels', $reading_time_options) ) {
+            if(is_array($reading_time_options['labels']) && array_key_exists('before', $reading_time_options['labels']) ) {
                 $reading_time_label_before = (get_option('jws_reading_time')['labels']['before'] ?: '');
             }
         }
@@ -195,18 +195,18 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
-    * Display Reading Time Settings After Label.
-    *
-    * @since    3.2.0
-    */
+     * Display Reading Time Settings After Label.
+     *
+     * @since 3.2.0
+     */
     public function settings_reading_time_label_after()
     {
         $reading_time_options = get_option('jws_reading_time');
 
         $reading_time_label_after = '';
 
-        if( is_array( $reading_time_options ) && array_key_exists( 'labels', $reading_time_options ) ) {
-            if( is_array( $reading_time_options['labels'] ) && array_key_exists( 'after', $reading_time_options['labels'] ) ) {
+        if(is_array($reading_time_options) && array_key_exists('labels', $reading_time_options) ) {
+            if(is_array($reading_time_options['labels']) && array_key_exists('after', $reading_time_options['labels']) ) {
                 $reading_time_label_after = (get_option('jws_reading_time')['labels']['after'] ?: '');
             }
         }
@@ -218,7 +218,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Render the calculate display.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function display_calculate()
     {
@@ -228,7 +228,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Calculate statistics
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function calculate_statistics()
     {
@@ -291,10 +291,12 @@ class Just_Writing_Statsitics_Admin
 
             exit;
         } else {
-            $args = array_merge($_REQUEST, [
+            $args = array_merge(
+                $_REQUEST, [
                 'step' => $step,
                 'nonce' => wp_create_nonce('jws_calculate_nonce'),
-            ]);
+                ]
+            );
 
             $link_message = add_query_arg(['page' => $this->plugin_name], admin_url('admin.php'));
             $message = sprintf(wp_kses(__('Word counts calculated successfully. Visit the <a href="%s">statistics page</a> to view.', $this->plugin_name), ['a' => ['href' => []]]), esc_url($link_message));
@@ -310,8 +312,8 @@ class Just_Writing_Statsitics_Admin
     /**
      * Process calculation step
      *
-     * @since    3.0.0
-     * @return 	bool
+     * @since  3.0.0
+     * @return bool
      */
     public function process_step($step, $data)
     {
@@ -378,15 +380,13 @@ class Just_Writing_Statsitics_Admin
     }
 
     /***************************************
-     *
      * STATISTICS
-     *
      ***************************************/
 
     /**
      * Calculate total word counts by post type.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function display_statistics_totals()
     {
@@ -400,7 +400,7 @@ class Just_Writing_Statsitics_Admin
 
         $reading_time_wpm = 250;
 
-        if( is_array( $reading_time_options ) && array_key_exists( 'wpm', $reading_time_options ) ) {
+        if(is_array($reading_time_options) && array_key_exists('wpm', $reading_time_options) ) {
             $reading_time_wpm = (get_option('jws_reading_time')['wpm'] ?: 250);
         }
 
@@ -438,7 +438,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Display Top Content, All Content, Monthly Statistics and Author Statistics
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function display_statistics()
     {
@@ -450,7 +450,7 @@ class Just_Writing_Statsitics_Admin
 
         $reading_time_wpm = 250;
 
-        if( is_array( $reading_time_options ) && array_key_exists( 'wpm', $reading_time_options ) ) {
+        if(is_array($reading_time_options) && array_key_exists('wpm', $reading_time_options) ) {
             $reading_time_wpm = (get_option('jws_reading_time')['wpm'] ?: 250);
         }
 
@@ -597,7 +597,11 @@ class Just_Writing_Statsitics_Admin
             }
 
             // Sort authors array by total
-            uasort($arr_jws_authors, function ($a, $b) { return $b['total'] - $a['total']; });
+            uasort(
+                $arr_jws_authors, function ($a, $b) {
+                    return $b['total'] - $a['total']; 
+                }
+            );
         }
 
         // Sort Post Types in a more readable way
@@ -618,7 +622,11 @@ class Just_Writing_Statsitics_Admin
                 }
             }
 
-            uasort($arr_jws_post_types_custom, function ($a, $b) { return strcmp($a['plural_name'], $b['plural_name']); });
+            uasort(
+                $arr_jws_post_types_custom, function ($a, $b) {
+                    return strcmp($a['plural_name'], $b['plural_name']); 
+                }
+            );
             $arr_jws_post_types = array_merge($arr_jws_post_types_standard, $arr_jws_post_types_custom);
         }
 
@@ -628,7 +636,7 @@ class Just_Writing_Statsitics_Admin
     /**
      * Render the reading time display.
      *
-     * @since    3.2.0
+     * @since 3.2.0
      */
     public function display_reading_time()
     {
@@ -638,9 +646,9 @@ class Just_Writing_Statsitics_Admin
     /**
      * Call public save post data function on post save.
      *
-     * @since    3.0.0
-     * @param    int		$post_id    The ID of the post.
-     * @param    object		$post		The post object.
+     * @since 3.0.0
+     * @param int    $post_id The ID of the post.
+     * @param object $post    The post object.
      */
     public function post_word_count($post_id, $post)
     {

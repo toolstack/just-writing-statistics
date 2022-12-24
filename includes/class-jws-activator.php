@@ -14,7 +14,7 @@
 class Just_Writing_Statsitics_Activator
 {
     /**
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public static function activate()
     {

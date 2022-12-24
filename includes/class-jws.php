@@ -21,27 +21,27 @@ class Just_Writing_Statistics
      * The loader that's responsible for maintaining and registering all hooks that power
      * the plugin.
      *
-     * @since    3.0.0
-     * @access   protected
-     * @var      Just_Writing_Statsitics_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @since  3.0.0
+     * @access protected
+     * @var    Just_Writing_Statsitics_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
     /**
      * The unique identifier of this plugin.
      *
-     * @since    3.0.0
-     * @access   protected
-     * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+     * @since  3.0.0
+     * @access protected
+     * @var    string    $plugin_name    The string used to uniquely identify this plugin.
      */
     protected $plugin_name;
 
     /**
      * The current version of the plugin.
      *
-     * @since    3.0.0
-     * @access   protected
-     * @var      string    $version    The current version of the plugin.
+     * @since  3.0.0
+     * @access protected
+     * @var    string    $version    The current version of the plugin.
      */
     protected $version;
 
@@ -52,7 +52,7 @@ class Just_Writing_Statistics
      * Load the dependencies, define the locale, and set the hooks for the admin area and
      * the public-facing side of the site.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function __construct()
     {
@@ -78,8 +78,8 @@ class Just_Writing_Statistics
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
      *
-     * @since    3.0.0
-     * @access   private
+     * @since  3.0.0
+     * @access private
      */
     private function load_dependencies()
     {
@@ -87,24 +87,24 @@ class Just_Writing_Statistics
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-jws-loader.php';
+        include_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-jws-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-jws-i18n.php';
+        include_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-jws-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-jws-admin.php';
+        include_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-jws-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-jws-public.php';
+        include_once plugin_dir_path(dirname(__FILE__)) . 'public/class-jws-public.php';
 
         $this->loader = new Just_Writing_Statsitics_Loader();
     }
@@ -115,8 +115,8 @@ class Just_Writing_Statistics
      * Uses the Just_Writing_Statsitics_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
-     * @since    3.0.0
-     * @access   private
+     * @since  3.0.0
+     * @access private
      */
     private function set_locale()
     {
@@ -129,14 +129,14 @@ class Just_Writing_Statistics
      * Register all of the hooks related to the admin area functionality
      * of the plugin.
      *
-     * @since    3.0.0
-     * @access   private
+     * @since  3.0.0
+     * @access private
      */
     private function define_admin_hooks()
     {
         $plugin_admin = new Just_Writing_Statsitics_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action('admin_init', $plugin_admin, 'settings');
+        $this->loader->add_action('admin_init', $plugin_admin, 'settings');
         $this->loader->add_action('plugins_loaded', $plugin_admin, 'plugin_check');
 
         $this->loader->add_action('wp_ajax_jws_calculate', $plugin_admin, 'calculate_statistics');
@@ -155,21 +155,21 @@ class Just_Writing_Statistics
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
      *
-     * @since    3.0.0
-     * @access   private
+     * @since  3.0.0
+     * @access private
      */
     private function define_public_hooks()
     {
         $plugin_public = new Just_Writing_Statsitics_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('init', $plugin_public, 'justwritingstatistics_register_shortcodes');
-		$this->loader->add_filter( 'the_content', $plugin_public, 'justwritingstatistics_reading_time_before_content' );
+        $this->loader->add_filter('the_content', $plugin_public, 'justwritingstatistics_reading_time_before_content');
     }
 
     /**
      * Run the loader to execute all of the hooks with WordPress.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function run()
     {
@@ -180,8 +180,8 @@ class Just_Writing_Statistics
      * The name of the plugin used to uniquely identify it within the context of
      * WordPress and to define internationalization functionality.
      *
-     * @since     3.0.0
-     * @return    string    The name of the plugin.
+     * @since  3.0.0
+     * @return string    The name of the plugin.
      */
     public function get_plugin_name()
     {
@@ -191,8 +191,8 @@ class Just_Writing_Statistics
     /**
      * The reference to the class that orchestrates the hooks with the plugin.
      *
-     * @since     3.0.0
-     * @return    Just_Writing_Statsitics_Loader    Orchestrates the hooks of the plugin.
+     * @since  3.0.0
+     * @return Just_Writing_Statsitics_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader()
     {
@@ -202,8 +202,8 @@ class Just_Writing_Statistics
     /**
      * Retrieve the version number of the plugin.
      *
-     * @since     3.0.0
-     * @return    string    The version number of the plugin.
+     * @since  3.0.0
+     * @return string    The version number of the plugin.
      */
     public function get_version()
     {

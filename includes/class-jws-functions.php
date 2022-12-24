@@ -15,8 +15,8 @@
 /**
  * Maintain our post plugin table with post-related information
  *
- * @since   3.0.0
- * @param	post	$post	The post object.
+ * @since 3.0.0
+ * @param post $post The post object.
  */
 function jws_save_post_data($post)
 {
@@ -51,8 +51,8 @@ function jws_save_post_data($post)
 /**
  * Calculate word count in a given set of text.
  *
- * @since 	3.0.0
- * @param	string	$content	The post content
+ * @since 3.0.0
+ * @param string $content The post content
  */
 function jws_word_count($content)
 {
@@ -70,21 +70,21 @@ function jws_word_count($content)
 }
 
 /**
-* Store the plugin version as an option.
-*
-* @since 	3.0.0
-* @param	string	$wpwcp_version	The latest plugin version.
-*/
+ * Store the plugin version as an option.
+ *
+ * @since 3.0.0
+ * @param string $wpwcp_version The latest plugin version.
+ */
 function jws_set_plugin_version($jws_version)
 {
     update_option('jws_version', $jws_version);
 }
 
 /**
-* Create the posts table for our plugin data.
-*
-* @since    3.0.0
-*/
+ * Create the posts table for our plugin data.
+ *
+ * @since 3.0.0
+ */
 function jws_create_posts_table()
 {
     global $wpdb;
@@ -109,10 +109,10 @@ function jws_create_posts_table()
 }
 
 /**
-* Get total word count for a given post.
-*
-* @since    3.0.0
-*/
+ * Get total word count for a given post.
+ *
+ * @since 3.0.0
+ */
 function jws_calculate_word_count_post($post)
 {
     global $wpdb;
@@ -130,10 +130,10 @@ function jws_calculate_word_count_post($post)
 }
 
 /**
-* Get reading time of a piece of text.
-*
-* @since    3.2.0
-*/
+ * Get reading time of a piece of text.
+ *
+ * @since 3.2.0
+ */
 function jws_reading_time($word_count, $wpm = 250, $format = 'admin')
 {
     $html = '';
@@ -154,11 +154,11 @@ function jws_reading_time($word_count, $wpm = 250, $format = 'admin')
             if ($hours == 0) {
                 $html = number_format($minutes).' minute'.($minutes > 1 ? 's' : '');
             } else
-                if ($minutes == 0) {
-                    $html = number_format($hours).' hour'.($hours > 1 ? 's' : '');
-                } else {
-                    $html = number_format($hours).' hour'.($hours > 1 ? 's' : '').', '.number_format($minutes).' minute'.($minutes > 1 ? 's' : '');
-                }
+            if ($minutes == 0) {
+                $html = number_format($hours).' hour'.($hours > 1 ? 's' : '');
+            } else {
+                $html = number_format($hours).' hour'.($hours > 1 ? 's' : '').', '.number_format($minutes).' minute'.($minutes > 1 ? 's' : '');
+            }
         }
     } else {
         if ($minutes == 0) {

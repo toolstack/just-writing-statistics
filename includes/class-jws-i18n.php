@@ -17,10 +17,10 @@ class Just_Writing_Statsitics_i18n
     /**
      * Load the plugin text domain for translation.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public function load_plugin_textdomain()
     {
-    // No longer required after WP 4.6 for plugins in the offical wordpress.org directory.        
+        // No longer required after WP 4.6 for plugins in the offical wordpress.org directory.        
     }
 }

@@ -18,7 +18,7 @@ class Just_Writing_Statsitics_Deactivator
      *
      * Remove all data from the WordPress database that Just Writing Statistics has generated.
      *
-     * @since    3.0.0
+     * @since 3.0.0
      */
     public static function deactivate()
     {

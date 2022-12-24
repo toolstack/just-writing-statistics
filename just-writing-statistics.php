@@ -1,20 +1,20 @@
 <?php
 
 /**
- * @link              https://toolstack.com/just-writing-statistics
- * @since             3.0.0
- * @package           Just_Writing_Statistics
+ * @link    https://toolstack.com/just-writing-statistics
+ * @since   3.0.0
+ * @package Just_Writing_Statistics
  *
  * @wordpress-plugin
- * Plugin Name:       Just Writing Statistics
- * Plugin URI:        https://toolstack.com/just-writing-statistics
- * Description:       Count the words on your WordPress site instantly.
- * Version:           4.0
- * Author:            GregRoss
- * Author URI:        https://toolstack.com
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       just-writing-statistics
+ * Plugin Name: Just Writing Statistics
+ * Plugin URI:  https://toolstack.com/just-writing-statistics
+ * Description: Count the words on your WordPress site instantly.
+ * Version:     4.0
+ * Author:      GregRoss
+ * Author URI:  https://toolstack.com
+ * License:     GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain: just-writing-statistics
  *
  * Forked from WP Word Count by RedLettuce Plugins
  */
@@ -28,13 +28,13 @@ define('JWS_VERSION', '4.0');
 
 function activate_just_writing_statsitics_()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/class-jws-activator.php';
+    include_once plugin_dir_path(__FILE__) . 'includes/class-jws-activator.php';
     Just_Writing_Statsitics_Activator::activate();
 }
 
 function deactivate_just_writing_statsitics_()
 {
-    require_once plugin_dir_path(__FILE__) . 'includes/class-jws-deactivator.php';
+    include_once plugin_dir_path(__FILE__) . 'includes/class-jws-deactivator.php';
     Just_Writing_Statsitics_Deactivator::deactivate();
 }
 
@@ -47,7 +47,7 @@ require plugin_dir_path(__FILE__) . 'includes/class-jws-functions.php';
 /**
  * Begins execution of Just Writing Statistics.
  *
- * @since    3.0.0
+ * @since 3.0.0
  */
 function run_just_writing_statsitics()
 {
