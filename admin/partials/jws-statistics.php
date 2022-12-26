@@ -22,35 +22,42 @@
         $jws_tab = '';
     }
 
-    if ((isset($arr_jws_posts) && @count($arr_jws_posts)) ||
-        (isset($arr_jws_months) && @count($arr_jws_months)) ||
-        (isset($arr_jws_years) && @count($arr_jws_years)) ||
-        (isset($arr_jws_authors) && @count($arr_jws_authors))) {
-
-        include_once 'jws-statistics-menu.php';
-    }
-
     switch( $jws_tab ) {
         case 'top-content':
+            include_once 'jws-statistics-menu.php';
             include_once 'jws-statistics-totals.php';
             include_once 'jws-statistics-top.php';
 
             break;
         case 'all-content':
+            include_once 'jws-statistics-menu.php';
             include_once 'jws-statistics-totals.php';
             include_once 'jws-statistics-all.php';
 
             break;
         case 'monthly-statistics':
+            include_once 'jws-statistics-menu.php';
             include_once 'jws-statistics-monthly.php';
 
             break;
         case 'yearly-statistics':
+            include_once 'jws-statistics-menu.php';
             include_once 'jws-statistics-yearly.php';
 
             break;
         case 'author-statistics':
+            include_once 'jws-statistics-menu.php';
             include_once 'jws-statistics-author.php';
+
+            break;
+        case 'tag-statistics':
+            include_once 'jws-statistics-menu.php';
+            include_once 'jws-statistics-tags.php';
+
+            break;
+        case 'category-statistics':
+            include_once 'jws-statistics-menu.php';
+            include_once 'jws-statistics-category.php';
 
             break;
         default:

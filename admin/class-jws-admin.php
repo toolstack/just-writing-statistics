@@ -491,13 +491,27 @@ class Just_Writing_Statsitics_Admin
                 WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
                 GROUP BY MID(post_date, 1, 4), post_type, post_status
                 ORDER BY post_date DESC";
-        } elseif ($jws_tab == 'author-statistics') {
+        } elseif ($jws_tab == 'tag-statistics') {
             $sql_jws_statistics = "
-				SELECT post_author, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+				SELECT post_author, post_type, post_status, post_id, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
 				FROM $table_name_posts
 				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
 				GROUP BY post_author, post_type, post_status
 				ORDER BY post_author ASC";
+        } elseif ($jws_tab == 'category-statistics') {
+            $sql_jws_statistics = "
+                SELECT post_author, post_type, post_status, post_id, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+                FROM $table_name_posts
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+                GROUP BY post_author, post_type, post_status
+                ORDER BY post_author ASC";
+        } elseif ($jws_tab == 'author-statistics') {
+            $sql_jws_statistics = "
+                SELECT post_author, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+                FROM $table_name_posts
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+                GROUP BY post_author, post_type, post_status
+                ORDER BY post_author ASC";
         }
 
         $jws_statistics = $wpdb->get_results($sql_jws_statistics);
@@ -609,6 +623,81 @@ class Just_Writing_Statsitics_Admin
 
                 $arr_jws_years[$total->post_date]['total'] += $total->word_count;
             }
+        } elseif ($jws_tab == 'tag-statistics') {
+            $arr_jws_tags = [];
+            $arr_jws_post_types = [];
+
+
+            foreach ($jws_statistics as $total) {
+                // Load post type array
+                if (!isset($arr_jws_post_types[$total->post_type])) {
+                    $post_type_object = get_post_type_object($total->post_type);
+
+                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                }
+
+                $tags = wp_get_post_tags( $total->post_id );
+
+                foreach( $tags as $tag ) {
+                    if (!isset($arr_jws_tags[$tag->name][$total->post_type])) {
+                        $arr_jws_tags[$tag->name][$total->post_type]['published']['posts'] = 0;
+                        $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] = 0;
+                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts'] = 0;
+                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] = 0;
+                    }
+
+                    if ($total->post_status == 'publish') {
+                        $arr_jws_tags[$tag->name][$total->post_type]['published']['posts'] += $total->posts;
+                        $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] += $total->word_count;
+                    } else if ($total->post_status == 'future') {
+                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['posts'] += $total->posts;
+                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] += $total->word_count;
+                    } else {
+                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts'] += $total->posts;
+                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                    }
+
+                    $arr_jws_tags[$tag->name]['total'] += $total->word_count;
+                }
+            }
+        } elseif ($jws_tab == 'category-statistics') {
+            $arr_jws_categories = [];
+            $arr_jws_post_types = [];
+
+            foreach ($jws_statistics as $total) {
+                // Load post type array
+                if (!isset($arr_jws_post_types[$total->post_type])) {
+                    $post_type_object = get_post_type_object($total->post_type);
+
+                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                }
+
+                $categories = get_the_category( $total->post_id );
+
+                foreach( $categories as $category ) {
+                    if (!isset($arr_jws_categories[$category->name][$total->post_type])) {
+                        $arr_jws_categories[$category->name][$total->post_type]['published']['posts'] = 0;
+                        $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] = 0;
+                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts'] = 0;
+                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] = 0;
+                    }
+
+                    if ($total->post_status == 'publish') {
+                        $arr_jws_categories[$category->name][$total->post_type]['published']['posts'] += $total->posts;
+                        $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] += $total->word_count;
+                    } else if ($total->post_status == 'future') {
+                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['posts'] += $total->posts;
+                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] += $total->word_count;
+                    } else {
+                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts'] += $total->posts;
+                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                    }
+
+                    $arr_jws_categories[$category->name]['total'] += $total->word_count;
+                }
+            }
         } elseif ($jws_tab == 'author-statistics') {
             $arr_jws_authors = [];
             $arr_jws_post_types = [];
@@ -638,6 +727,9 @@ class Just_Writing_Statsitics_Admin
                 if ($total->post_status == 'publish') {
                     $arr_jws_authors[$total->post_author][$total->post_type]['published']['posts'] += $total->posts;
                     $arr_jws_authors[$total->post_author][$total->post_type]['published']['word_count'] += $total->word_count;
+                } else if ($total->post_status == 'future') {
+                    $arr_jws_authors[$total->post_author][$total->post_type]['scheduled']['posts'] += $total->posts;
+                    $arr_jws_authors[$total->post_author][$total->post_type]['scheduled']['word_count'] += $total->word_count;
                 } else {
                     $arr_jws_authors[$total->post_author][$total->post_type]['unpublished']['posts'] += $total->posts;
                     $arr_jws_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] += $total->word_count;
