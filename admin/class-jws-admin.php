@@ -66,14 +66,6 @@ class Just_Writing_Statsitics_Admin
     public function enqueue_styles()
     {
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/jws-admin.css', [], $this->version, 'all');
-        $wp_scripts = wp_scripts();
-        wp_enqueue_style(
-            'jquery-ui-theme-smoothness',
-            sprintf(
-                '//ajax.googleapis.com/ajax/libs/jqueryui/%s/themes/smoothness/jquery-ui.css', // working for https as well now
-                $wp_scripts->registered['jquery-ui-core']->ver
-            )
-        );
     }
 
     /**
