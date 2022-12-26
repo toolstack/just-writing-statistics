@@ -425,6 +425,9 @@ class Just_Writing_Statsitics_Admin
             if ($total->post_status == 'publish') {
                 $totals[$total->post_type]['published']['posts'] += $total->posts;
                 $totals[$total->post_type]['published']['word_count'] += $total->word_count;
+            } else if ($total->post_status == 'future') {
+                $totals[$total->post_type]['scheduled']['posts'] += $total->posts;
+                $totals[$total->post_type]['scheduled']['word_count'] += $total->word_count;
             } else {
                 $totals[$total->post_type]['unpublished']['posts'] += $total->posts;
                 $totals[$total->post_type]['unpublished']['word_count'] += $total->word_count;
