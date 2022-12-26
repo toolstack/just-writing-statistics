@@ -217,17 +217,20 @@
         <div class="jws-table">
             <table class="widefat jws-post-type-stats">
                 <thead>
-                    <tr>
-                        <th rowspan="2"><?php _e('Author', $this->plugin_name); ?></th>
-                        <th rowspan="2"><?php _e('Words', $this->plugin_name); ?></th>
+                    <tr class="jws-table-stats-header-one">
+                        <th></th>
+                        <th></th>
         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
-                        <th colspan="2" class="jws-post-type"><?php echo $post_type['plural_name']; ?></th>
+                        <th colspan="3" class="jws-post-type"><?php echo $post_type['plural_name']; ?></th>
         <?php endforeach; ?>
                     </tr>
 
-                    <tr>
+                    <tr class="jws-table-stats-header-two">
+                        <th><?php _e('Author', $this->plugin_name); ?></th>
+                        <th><?php _e('Words', $this->plugin_name); ?></th>
         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
                         <th><?php _e('Published', $this->plugin_name); ?></th>
+                        <th><?php _e('Scheduled', $this->plugin_name); ?></th>
                         <th><?php _e('Unpublished', $this->plugin_name); ?></th>
         <?php endforeach; ?>
                     </tr>
@@ -249,6 +252,13 @@
                 <?php echo (isset($author[$index]['published']['word_count']) ? number_format(0 + $author[$index]['published']['word_count']) : '0'); ?> <?php _e('Words', $this->plugin_name); ?><br />
                 <?php if (isset($author[$index]['published']['posts']) && $author[$index]['published']['posts'] != 0) : ?>
                     <?php echo number_format(round(0 + ($author[$index]['published']['word_count'] / $author[$index]['published']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+                <?php endif; ?>
+                        </td>
+                        <td>
+                <?php echo (isset($author[$index]['scheduled']['posts']) ? number_format(0 + $author[$index]['scheduled']['posts']) : '0'); ?> <?php _e('Total', $this->plugin_name); ?><br />
+                <?php echo (isset($author[$index]['scheduled']['word_count']) ? number_format(0 + $author[$index]['scheduled']['word_count']) : '0'); ?> <?php _e('Words', $this->plugin_name); ?><br />
+                <?php if (isset($author[$index]['scheduled']['posts']) && $author[$index]['scheduled']['posts'] != 0) : ?>
+                    <?php echo number_format(round(0 + ($author[$index]['scheduled']['word_count'] / $author[$index]['scheduled']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
                 <?php endif; ?>
                         </td>
                         <td>
