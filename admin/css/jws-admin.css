@@ -18,6 +18,9 @@
 #just-writing-statistics h4 { margin: 0; padding: 8px 10px; background-color: #32373c; color: #ffffff; font-weight: normal; text-align: left; }
 
 #just-writing-statistics div.full { float: left; width: 100%; margin: 25px 0 0 0; padding: 0; }
+#just-writing-statistics div.quarter { float: left; width: 23.5%; margin: 25px 0 0 0; padding: 0; }
+#just-writing-statistics div.quarter:nth-of-type(even) { padding: 0 2%; }
+#just-writing-statistics div.quarter:last-of-type { padding-right: 0; }
 #just-writing-statistics div.third { float: left; width: 32%; margin: 25px 0 0 0; padding: 0; }
 #just-writing-statistics div.third:nth-of-type(2) { padding: 0 2%; }
 #just-writing-statistics div.half { float: left; width: 49%; margin: 25px 0 0 0; padding: 0; }
@@ -26,7 +29,7 @@
 #just-writing-statistics .jws-totals { float: none; overflow: hidden; display: inline-table; clear: both; width: 100%; margin: 0; }
 #just-writing-statistics .jws-totals div table { width: 100% !important; margin: 0 !important; padding: 0 !important; }
 #just-writing-statistics .jws-totals div td { width: 25%; }
-#just-writing-statistics .jws-totals div h2 { margin: 15px 0 0 0; padding: 0; font-size: 1.5em; text-align: center; line-height: 1.2em; }
+#just-writing-statistics .jws-totals div h2 { margin: 15px 0 0 0; padding: 0; font-size: 1.5em; text-align: center; line-height: 1.2em; float: left; width:50%; }
 #just-writing-statistics .jws-totals div h2 span { font-size: 0.65em; font-weight: normal; }
 
 #just-writing-statistics .jws-table { overflow-x: auto; }
@@ -34,7 +37,18 @@
 #just-writing-statistics table.widefat td { white-space: nowrap; }
 #just-writing-statistics table.widefat th.jws-post-type { font-weight: bold; }
 #just-writing-statistics table.widefat img.avatar { float: left; margin-top: 1px; margin-right: 10px; }
-#just-writing-statistics table.jws-post-type-stats td:nth-of-type(even) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th { text-align: center; }
+#just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th:nth-of-type(1) { border-bottom: none; }
+#just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th:nth-of-type(2) { border-bottom: none; }
+#just-writing-statistics table.jws-post-type-stats th:nth-of-type(2) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats th:nth-of-type(5) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats th:nth-of-type(8) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats td:nth-of-type(2) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats td:nth-of-type(5) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats td:nth-of-type(8) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th:nth-of-type(3) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th:nth-of-type(4) { border-right: 1px solid #dcdcdc !important; }
+
 #just-writing-statistics table.widefat td:first-of-type a, #just-writing-statistics table.widefat td:last-of-type a { text-decoration: underline; }
 
 #just-writing-statistics .jws-stats { float: left; display: block; width: 20px; height: 20px; margin-right: 10px; margin-top: -2px; padding: 2px; border-radius: 3px; background: #0056a6; color: #ffffff; text-align: center; }
@@ -49,10 +63,9 @@
 
 	#just-writing-statistics .jws-totals div { padding: 0; }
 	#just-writing-statistics .jws-totals div:nth-of-type(1) { width: 49% !important; padding-right: 1% !important; }
-	#just-writing-statistics .jws-totals div:nth-of-type(2) { width: 49% !important; padding-left: 1% !important; }
-	#just-writing-statistics .jws-totals div:nth-of-type(3) { width: 100% !important; margin: 0; padding: 0; }
-
-	#just-writing-statistics .jws-totals div:nth-of-type(2) { padding: 0; }
+	#just-writing-statistics .jws-totals div:nth-of-type(2) { width: 49% !important; padding: 0; padding-left: 1% !important; }
+	#just-writing-statistics .jws-totals div:nth-of-type(3) { width: 49% !important; padding-right: 1% !important; }
+	#just-writing-statistics .jws-totals div:nth-of-type(4) { width: 49% !important; padding: 0; padding-left: 1% !important; }
 
 }
 
@@ -60,6 +73,7 @@
 
 	#just-writing-statistics .jws-totals div { width: 100% !important; padding: 0; }
 
+	#just-writing-statistics div.quarter { float: left; width: 100%; margin: 25px 0 0 0; padding: 0; }
 	#just-writing-statistics div.third { float: left; width: 100%; margin: 25px 0 0 0; padding: 0; }
 	#just-writing-statistics div.half { float: left; width: 100%; margin: 25px 0 0 0; padding: 0; }
 

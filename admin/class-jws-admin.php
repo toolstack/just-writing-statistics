@@ -561,6 +561,9 @@ class Just_Writing_Statsitics_Admin
                 if ($total->post_status == 'publish') {
                     $arr_jws_months[$total->post_date][$total->post_type]['published']['posts'] += $total->posts;
                     $arr_jws_months[$total->post_date][$total->post_type]['published']['word_count'] += $total->word_count;
+                } else if ($total->post_status == 'future') {
+                    $arr_jws_months[$total->post_date][$total->post_type]['scheduled']['posts'] += $total->posts;
+                    $arr_jws_months[$total->post_date][$total->post_type]['scheduled']['word_count'] += $total->word_count;
                 } else {
                     $arr_jws_months[$total->post_date][$total->post_type]['unpublished']['posts'] += $total->posts;
                     $arr_jws_months[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
@@ -596,6 +599,9 @@ class Just_Writing_Statsitics_Admin
                 if ($total->post_status == 'publish') {
                     $arr_jws_years[$total->post_date][$total->post_type]['published']['posts'] += $total->posts;
                     $arr_jws_years[$total->post_date][$total->post_type]['published']['word_count'] += $total->word_count;
+                } else if ($total->post_status == 'future') {
+                    $arr_jws_years[$total->post_date][$total->post_type]['scheduled']['posts'] += $total->posts;
+                    $arr_jws_years[$total->post_date][$total->post_type]['scheduled']['word_count'] += $total->word_count;
                 } else {
                     $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['posts'] += $total->posts;
                     $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
