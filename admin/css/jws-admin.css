@@ -59,7 +59,7 @@
 #jws-footer img { width: 17px;	padding-top: 10px; -ms-interpolation-mode: bicubic; vertical-align: middle; margin: -14px 2px 0px 2px; }
 #jws-footer a { color: #464b50; text-decoration: none; }
 
-@media only screen and (min-width:768px) and (max-width:991px) {
+@media only screen and (min-width:768px) and (max-width:1400px) {
 
 	#just-writing-statistics .jws-totals div { padding: 0; }
 	#just-writing-statistics .jws-totals div:nth-of-type(1) { width: 49% !important; padding-right: 1% !important; }
