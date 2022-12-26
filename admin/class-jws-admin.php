@@ -86,8 +86,8 @@ class Just_Writing_Statsitics_Admin
     public function menu()
     {
         add_menu_page('Just Writing Statistics', 'Writing Statistics', 'delete_posts', $this->plugin_name, [$this, 'display_statistics'], 'dashicons-editor-paste-word', 99);
-        add_submenu_page($this->plugin_name, 'Just Writing Statistics', __('Statistics', $this->plugin_name), 'delete_posts', $this->plugin_name, [$this, 'display_statistics']);
-        add_submenu_page($this->plugin_name, 'Just Writing Statistics - '.__('Settings', $this->plugin_name), __('Settings', $this->plugin_name), 'delete_posts', $this->plugin_name . '-settings', [$this, 'display_settings']);
+        add_submenu_page($this->plugin_name, 'Just Writing Statistics', __('Statistics', 'just-writing-statistics'), 'delete_posts', $this->plugin_name, [$this, 'display_statistics']);
+        add_submenu_page($this->plugin_name, 'Just Writing Statistics - '.__('Settings', 'just-writing-statistics'), __('Settings', 'just-writing-statistics'), 'delete_posts', $this->plugin_name . '-settings', [$this, 'display_settings']);
     }
 
     /**
@@ -97,7 +97,7 @@ class Just_Writing_Statsitics_Admin
      */
     public function action_links($links)
     {
-        $settings_link = ['<a href="'.admin_url('admin.php?page='.$this->plugin_name.'-settings').'">'.__('Settings', $this->plugin_name).'</a>'];
+        $settings_link = ['<a href="'.admin_url('admin.php?page='.$this->plugin_name.'-settings').'">'.__('Settings', 'just-writing-statistics').'</a>'];
 
         return array_merge($settings_link, $links);
     }
@@ -110,11 +110,11 @@ class Just_Writing_Statsitics_Admin
     public function settings()
     {
         // Reading Time
-        add_settings_section('jws-section-reading-time', __('Reading Time', $this->plugin_name), [$this, 'settings_section_reading_time'], 'jws-reading-time');
-        add_settings_field('jws_reading_time_wpm', __('Words Per Minute', $this->plugin_name), [$this, 'settings_reading_time_wpm'], 'jws-reading-time', 'jws-section-reading-time');
-        add_settings_field('jws_reading_time_insert', __('Add to top of post content?', $this->plugin_name), [$this, 'settings_reading_time_insert'], 'jws-reading-time', 'jws-section-reading-time');
-        add_settings_field('jws_reading_time_label_before', __('Before Label', $this->plugin_name), [$this, 'settings_reading_time_label_before'], 'jws-reading-time', 'jws-section-reading-time');
-        add_settings_field('jws_reading_time_label_after', __('After Label', $this->plugin_name), [$this, 'settings_reading_time_label_after'], 'jws-reading-time', 'jws-section-reading-time');
+        add_settings_section('jws-section-reading-time', __('Reading Time', 'just-writing-statistics'), [$this, 'settings_section_reading_time'], 'jws-reading-time');
+        add_settings_field('jws_reading_time_wpm', __('Words Per Minute', 'just-writing-statistics'), [$this, 'settings_reading_time_wpm'], 'jws-reading-time', 'jws-section-reading-time');
+        add_settings_field('jws_reading_time_insert', __('Add to top of post content?', 'just-writing-statistics'), [$this, 'settings_reading_time_insert'], 'jws-reading-time', 'jws-section-reading-time');
+        add_settings_field('jws_reading_time_label_before', __('Before Label', 'just-writing-statistics'), [$this, 'settings_reading_time_label_before'], 'jws-reading-time', 'jws-section-reading-time');
+        add_settings_field('jws_reading_time_label_after', __('After Label', 'just-writing-statistics'), [$this, 'settings_reading_time_label_after'], 'jws-reading-time', 'jws-section-reading-time');
         register_setting('jws-section-reading-time', 'jws_reading_time');
     }
 
@@ -130,7 +130,7 @@ class Just_Writing_Statsitics_Admin
      */
     public function settings_section_reading_time()
     {
-        echo '<p>'.__('Define how many words per minute to use in Reading Time statistics and set labels for displaying Reading Time statistics inside of your posts.', $this->plugin_name).'</p>';
+        echo '<p>'.__('Define how many words per minute to use in Reading Time statistics and set labels for displaying Reading Time statistics inside of your posts.', 'just-writing-statistics').'</p>';
     }
 
     /**
@@ -187,7 +187,7 @@ class Just_Writing_Statsitics_Admin
         }
 
         echo '<input id="jws_reading_time_label_before" name="jws_reading_time[labels][before]" type="text" class="text" value="'.esc_attr($reading_time_label_before).'" />';
-        echo '<p><small>'.__('This text will appear before the reading time is inserted into your posts.', $this->plugin_name).'</small></p>';
+        echo '<p><small>'.__('This text will appear before the reading time is inserted into your posts.', 'just-writing-statistics').'</small></p>';
     }
 
     /**
@@ -208,7 +208,7 @@ class Just_Writing_Statsitics_Admin
         }
 
         echo '<input id="jws_reading_time_label_after" name="jws_reading_time[labels][after]" type="text" class="text" value="'.esc_attr($reading_time_label_after).'" />';
-        echo '<p><small>'.__('This text will appear after the reading time is inserted into your posts.', $this->plugin_name).'</small></p>';
+        echo '<p><small>'.__('This text will appear after the reading time is inserted into your posts.', 'just-writing-statistics').'</small></p>';
     }
 
     /**
@@ -298,7 +298,7 @@ class Just_Writing_Statsitics_Admin
                 ]
             );
             $link_message = add_query_arg(['page' => $this->plugin_name], admin_url('admin.php'));
-            $message = sprintf(wp_kses(__('Word counts calculated successfully. Visit the <a href="%s">statistics page</a> to view.', $this->plugin_name), ['a' => ['href' => []]]), esc_url($link_message));
+            $message = sprintf(wp_kses(__('Word counts calculated successfully. Visit the <a href="%s">statistics page</a> to view.', 'just-writing-statistics'), ['a' => ['href' => []]]), esc_url($link_message));
 
             echo json_encode(['step' => 'done', 'message' => $message]);
 

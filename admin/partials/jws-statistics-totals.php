@@ -13,15 +13,15 @@
 <div class="jws-totals">
 
     <div class="quarter">
-        <h3><?php _e('Totals', $this->plugin_name); ?></h3>
+        <h3><?php _e('Totals', 'just-writing-statistics'); ?></h3>
 
         <table class="widefat">
             <thead>
                 <tr>
-                    <th><?php _e('Type', $this->plugin_name); ?></th>
-                    <th><?php _e('Total', $this->plugin_name); ?></th>
-                    <th><?php _e('Words', $this->plugin_name); ?></th>
-                    <th><?php _e('Average', $this->plugin_name); ?></th>
+                    <th><?php _e('Type', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Total', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Words', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Average', 'just-writing-statistics'); ?></th>
                 </tr>
             </thead>
 
@@ -56,25 +56,25 @@
 
         <h2>
             <?php echo number_format($jws_total); ?><br />
-            <span><?php _e('Total Words', $this->plugin_name); ?></span>
+            <span><?php _e('Total Words', 'just-writing-statistics'); ?></span>
         </h2>
 
         <h2>
             <?php echo jws_reading_time($jws_total, $reading_time_wpm); ?><br />
-            <span><?php _e('Reading Time', $this->plugin_name); ?></span>
+            <span><?php _e('Reading Time', 'just-writing-statistics'); ?></span>
         </h2>
     </div>
 
     <div class="quarter">
-        <h3><?php _e('Published', $this->plugin_name); ?></h3>
+        <h3><?php _e('Published', 'just-writing-statistics'); ?></h3>
 
         <table class="widefat">
             <thead>
                 <tr>
-                    <th><?php _e('Type', $this->plugin_name); ?></th>
-                    <th><?php _e('Total', $this->plugin_name); ?></th>
-                    <th><?php _e('Words', $this->plugin_name); ?></th>
-                    <th><?php _e('Average', $this->plugin_name); ?></th>
+                    <th><?php _e('Type', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Total', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Words', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Average', 'just-writing-statistics'); ?></th>
                 </tr>
             </thead>
 
@@ -109,26 +109,26 @@
 
         <h2>
             <?php echo number_format($published_total); ?><br />
-            <span><?php _e('Published Words', $this->plugin_name); ?></span>
+            <span><?php _e('Published Words', 'just-writing-statistics'); ?></span>
         </h2>
 
         <h2>
             <?php echo jws_reading_time($published_total, $reading_time_wpm); ?><br />
-            <span><?php _e('Reading Time', $this->plugin_name); ?></span>
+            <span><?php _e('Reading Time', 'just-writing-statistics'); ?></span>
         </h2>
 
     </div>
 
     <div class="quarter">
-        <h3><?php _e('Scheduled', $this->plugin_name); ?></h3>
+        <h3><?php _e('Scheduled', 'just-writing-statistics'); ?></h3>
 
         <table class="widefat">
             <thead>
                 <tr>
-                    <th><?php _e('Type', $this->plugin_name); ?></th>
-                    <th><?php _e('Total', $this->plugin_name); ?></th>
-                    <th><?php _e('Words', $this->plugin_name); ?></th>
-                    <th><?php _e('Average', $this->plugin_name); ?></th>
+                    <th><?php _e('Type', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Total', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Words', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Average', 'just-writing-statistics'); ?></th>
                 </tr>
             </thead>
 
@@ -163,26 +163,26 @@
 
         <h2>
             <?php echo number_format($scheduled_total); ?><br />
-            <span><?php _e('Scheduled Words', $this->plugin_name); ?></span>
+            <span><?php _e('Scheduled Words', 'just-writing-statistics'); ?></span>
         </h2>
 
         <h2>
             <?php echo jws_reading_time($scheduled_total, $reading_time_wpm); ?><br />
-            <span><?php _e('Reading Time', $this->plugin_name); ?></span>
+            <span><?php _e('Reading Time', 'just-writing-statistics'); ?></span>
         </h2>
 
     </div>
 
     <div class="quarter">
-        <h3><?php _e('Unpublished', $this->plugin_name); ?></h3>
+        <h3><?php _e('Unpublished', 'just-writing-statistics'); ?></h3>
 
         <table class="widefat">
             <thead>
                 <tr>
-                    <th><?php _e('Type', $this->plugin_name); ?></th>
-                    <th><?php _e('Total', $this->plugin_name); ?></th>
-                    <th><?php _e('Words', $this->plugin_name); ?></th>
-                    <th><?php _e('Average', $this->plugin_name); ?></th>
+                    <th><?php _e('Type', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Total', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Words', 'just-writing-statistics'); ?></th>
+                    <th><?php _e('Average', 'just-writing-statistics'); ?></th>
                 </tr>
             </thead>
 
@@ -217,12 +217,12 @@
 
         <h2>
             <?php echo number_format($unpublished_total); ?><br />
-            <span><?php _e('Unpublished Words', $this->plugin_name); ?></span>
+            <span><?php _e('Unpublished Words', 'just-writing-statistics'); ?></span>
         </h2>
 
         <h2>
             <?php echo jws_reading_time($unpublished_total, $reading_time_wpm); ?><br />
-            <span><?php _e('Reading Time', $this->plugin_name); ?></span>
+            <span><?php _e('Reading Time', 'just-writing-statistics'); ?></span>
         </h2>
 
     </div>

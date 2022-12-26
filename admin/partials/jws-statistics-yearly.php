@@ -16,7 +16,7 @@
 
 
     <div class="full">
-        <h3><?php _e('Yearly Statistics', $this->plugin_name); ?></h3>
+        <h3><?php _e('Yearly Statistics', 'just-writing-statistics'); ?></h3>
 
         <div class="jws-table">
             <table class="widefat jws-post-type-stats">
@@ -31,12 +31,12 @@
                     </tr>
 
                     <tr class="jws-table-stats-header-two">
-                        <th><?php _e('Month', $this->plugin_name); ?></th>
-                        <th><?php _e('Words', $this->plugin_name); ?></th>
+                        <th><?php _e('Month', 'just-writing-statistics'); ?></th>
+                        <th><?php _e('Words', 'just-writing-statistics'); ?></th>
                         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
-                        <th><?php _e('Published', $this->plugin_name); ?></th>
-                        <th><?php _e('Scheduled', $this->plugin_name); ?></th>
-                        <th><?php _e('Unpublished', $this->plugin_name); ?></th>
+                        <th><?php _e('Published', 'just-writing-statistics'); ?></th>
+                        <th><?php _e('Scheduled', 'just-writing-statistics'); ?></th>
+                        <th><?php _e('Unpublished', 'just-writing-statistics'); ?></th>
                         <?php endforeach; ?>
                     </tr>
                 </thead>
@@ -50,24 +50,24 @@
                         <td><?php echo number_format($count['total']); ?></td>
                         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
                         <td>
-                            <?php echo (isset($count[$index]['published']['posts']) ? number_format(0 + $count[$index]['published']['posts']) : '0'); ?> <?php _e('Total', $this->plugin_name); ?><br />
-                            <?php echo (isset($count[$index]['published']['word_count']) ? number_format(0 + $count[$index]['published']['word_count']) : '0'); ?> <?php _e('Words', $this->plugin_name); ?><br />
+                            <?php echo (isset($count[$index]['published']['posts']) ? number_format(0 + $count[$index]['published']['posts']) : '0'); ?> <?php _e('Total', 'just-writing-statistics'); ?><br />
+                            <?php echo (isset($count[$index]['published']['word_count']) ? number_format(0 + $count[$index]['published']['word_count']) : '0'); ?> <?php _e('Words', 'just-writing-statistics'); ?><br />
                             <?php if (isset($count[$index]['published']['posts']) && $count[$index]['published']['posts'] != 0) : ?>
-                                <?php echo number_format(round(0 + ($count[$index]['published']['word_count'] / $count[$index]['published']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+                                <?php echo number_format(round(0 + ($count[$index]['published']['word_count'] / $count[$index]['published']['posts']))); ?> <?php _e('Average', 'just-writing-statistics'); ?>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php echo (isset($count[$index]['scheduled']['posts']) ? number_format(0 + $count[$index]['scheduled']['posts']) : '0'); ?> <?php _e('Total', $this->plugin_name); ?><br />
-                            <?php echo (isset($count[$index]['scheduled']['word_count']) ? number_format(0 + $count[$index]['scheduled']['word_count']) : '0'); ?> <?php _e('Words', $this->plugin_name); ?><br />
+                            <?php echo (isset($count[$index]['scheduled']['posts']) ? number_format(0 + $count[$index]['scheduled']['posts']) : '0'); ?> <?php _e('Total', 'just-writing-statistics'); ?><br />
+                            <?php echo (isset($count[$index]['scheduled']['word_count']) ? number_format(0 + $count[$index]['scheduled']['word_count']) : '0'); ?> <?php _e('Words', 'just-writing-statistics'); ?><br />
                             <?php if (isset($count[$index]['scheduled']['posts']) && $count[$index]['scheduled']['posts'] != 0) : ?>
-                                <?php echo number_format(round(0 + ($count[$index]['scheduled']['word_count'] / $count[$index]['scheduled']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+                                <?php echo number_format(round(0 + ($count[$index]['scheduled']['word_count'] / $count[$index]['scheduled']['posts']))); ?> <?php _e('Average', 'just-writing-statistics'); ?>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php echo (isset($count[$index]['unpublished']['posts']) ? number_format(0 + $count[$index]['unpublished']['posts']) : '0'); ?> <?php _e('Total', $this->plugin_name); ?><br />
-                            <?php echo (isset($count[$index]['unpublished']['word_count']) ? number_format(0 + $count[$index]['unpublished']['word_count']) : '0'); ?> <?php _e('Words', $this->plugin_name); ?><br />
+                            <?php echo (isset($count[$index]['unpublished']['posts']) ? number_format(0 + $count[$index]['unpublished']['posts']) : '0'); ?> <?php _e('Total', 'just-writing-statistics'); ?><br />
+                            <?php echo (isset($count[$index]['unpublished']['word_count']) ? number_format(0 + $count[$index]['unpublished']['word_count']) : '0'); ?> <?php _e('Words', 'just-writing-statistics'); ?><br />
                             <?php if (isset($count[$index]['unpublished']['posts']) && $count[$index]['unpublished']['posts'] != 0) : ?>
-                                <?php echo number_format(round(0 + ($count[$index]['unpublished']['word_count'] / $count[$index]['unpublished']['posts']))); ?> <?php _e('Average', $this->plugin_name); ?>
+                                <?php echo number_format(round(0 + ($count[$index]['unpublished']['word_count'] / $count[$index]['unpublished']['posts']))); ?> <?php _e('Average', 'just-writing-statistics'); ?>
                             <?php endif; ?>
                         </td>
                         <?php endforeach; ?>

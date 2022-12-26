@@ -14,17 +14,17 @@
 
 ?>
     <div class="full">
-        <h3><?php _e('All Content', $this->plugin_name); ?></h3>
+        <h3><?php _e('All Content', 'just-writing-statistics'); ?></h3>
 
         <table class="widefat">
             <thead>
                 <tr>
-                    <th class="jws-words"><?php _e('Words', $this->plugin_name); ?></th>
-                    <th class="jws-title"><?php _e('Title', $this->plugin_name); ?></th>
-                    <th class="jws-reading-time"><?php _e('Reading Time', $this->plugin_name); ?></th>
-                    <th class="jws-type"><?php _e('Type', $this->plugin_name); ?></th>
-                    <th class="jws-status"><?php _e('Status', $this->plugin_name); ?></th>
-                    <th class="jws-author"><?php _e('Author', $this->plugin_name); ?></th>
+                    <th class="jws-words"><?php _e('Words', 'just-writing-statistics'); ?></th>
+                    <th class="jws-title"><?php _e('Title', 'just-writing-statistics'); ?></th>
+                    <th class="jws-reading-time"><?php _e('Reading Time', 'just-writing-statistics'); ?></th>
+                    <th class="jws-type"><?php _e('Type', 'just-writing-statistics'); ?></th>
+                    <th class="jws-status"><?php _e('Status', 'just-writing-statistics'); ?></th>
+                    <th class="jws-author"><?php _e('Author', 'just-writing-statistics'); ?></th>
                 </tr>
             </thead>
 
@@ -38,9 +38,9 @@
                         <a href="<?php echo $post['permalink']; ?>"><?php echo $post['post_title']; ?></a>
 
                         <div class="row-actions">
-                            <span class="edit"><?php edit_post_link(__('Edit', $this->plugin_name), '', ' | ', $post['post_id']); ?></span>
-                            <span class="trash"><a href="<?php echo get_delete_post_link($post['post_id']); ?>"><?php _e('Trash', $this->plugin_name); ?></a> | </span>
-                            <span class='view'><a href="<?php echo $post['permalink']; ?>"><?php _e('View', $this->plugin_name); ?></a></span>
+                            <span class="edit"><?php edit_post_link(__('Edit', 'just-writing-statistics'), '', ' | ', $post['post_id']); ?></span>
+                            <span class="trash"><a href="<?php echo get_delete_post_link($post['post_id']); ?>"><?php _e('Trash', 'just-writing-statistics'); ?></a> | </span>
+                            <span class='view'><a href="<?php echo $post['permalink']; ?>"><?php _e('View', 'just-writing-statistics'); ?></a></span>
                         </div>
                     </td>
                     <td><?php echo jws_reading_time($post['post_word_count'], $reading_time_wpm); ?></td>

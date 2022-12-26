@@ -15,7 +15,7 @@
 ?>
 
 <div id="just-writing-statistics" class="wrap">
-    <h1><?php _e('Just Writing Statistics', $this->plugin_name); ?></h1>
+    <h1><?php _e('Just Writing Statistics', 'just-writing-statistics'); ?></h1>
 
 <?php
     if( !isset($jws_tab)) {
@@ -57,7 +57,7 @@
             $link_calculate = add_query_arg(['page' => $this->plugin_name . '-calculate'], admin_url('admin.php'));
 
             echo '<p>';
-            printf(__('You need to <a href="%s">calculate</a> your word counts before you can start using the plugin.', $this->plugin_name), esc_url($link_calculate));
+            printf(__('You need to <a href="%s">calculate</a> your word counts before you can start using the plugin.', 'just-writing-statistics'), esc_url($link_calculate));
             echo '</p>';
 
     }
