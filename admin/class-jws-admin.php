@@ -728,6 +728,7 @@ class Just_Writing_Statsitics_Admin
                 if (!isset($arr_jws_authors[$total->post_author])) {
                     $arr_jws_authors[$total->post_author]['display_name'] = get_the_author_meta('display_name', $total->post_author);
                     $arr_jws_authors[$total->post_author]['total'] = 0;
+                    $arr_jws_authors[$total->post_author]['items'] = 0;
                 }
 
                 if (!isset($arr_jws_authors[$total->post_author][$total->post_type])) {
@@ -748,6 +749,7 @@ class Just_Writing_Statsitics_Admin
                     $arr_jws_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
+                $arr_jws_authors[$total->post_author]['items']++;
                 $arr_jws_authors[$total->post_author]['total'] += $total->word_count;
             }
 

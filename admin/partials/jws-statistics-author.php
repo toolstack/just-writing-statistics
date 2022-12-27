@@ -13,6 +13,80 @@
  */
 
 ?>
+    <div>
+        <div class="half jws-chart-container">
+
+            <h3><?php _e('Words by Author', 'just-writing-statistics'); ?></h3>
+            <canvas id="AuthorWordCountChart"></canvas>
+
+        </div>
+
+        <div class="half jws-chart-container">
+
+            <h3><?php _e('Items by Author', 'just-writing-statistics'); ?></h3>
+            <canvas id="AuthorItemCountChart"></canvas>
+
+        </div>
+    </div>
+<?php
+    $labels = '';
+    $word_data = '';
+    $item_data = '';
+
+    foreach( $arr_jws_authors as $index => $author) {
+        $labels = '\'' . $author['display_name'] . '\', ' . $labels;
+        $word_data = '\'' . $author['total'] . '\', ' . $word_data;
+        $item_data = '\'' . $author['items'] . '\', ' . $item_data;
+    }
+
+    $labels = trim( $labels, ', ' );
+    $word_data = trim( $word_data, ', ' );
+    $item_data = trim( $item_data, ', ' );
+
+?>
+
+<script>
+  const WordCountChart = document.getElementById('AuthorWordCountChart');
+
+  new Chart(WordCountChart, {
+    type: 'polarArea',
+    data: {
+      labels: [<?php echo $labels;?>],
+      datasets: [
+        {
+          label: '<?php _e('Words','just-writing-statistics');?>',
+          data: [<?php echo $word_data;?>],
+          backgroundColor: '#0056a6',
+          borderColor : "#0056a6",
+        },
+      ],
+    },
+    options: {
+        aspectRatio: 1.5
+    },
+  });
+
+  const ItemCountChart = document.getElementById('AuthorItemCountChart');
+
+  new Chart(ItemCountChart, {
+    type: 'polarArea',
+    data: {
+      labels: [<?php echo $labels;?>],
+      datasets: [
+        {
+          label: '<?php _e('Words','just-writing-statistics');?>',
+          data: [<?php echo $item_data;?>],
+          backgroundColor: '#0056a6',
+          borderColor : "#0056a6",
+        },
+      ],
+    },
+    options: {
+        aspectRatio: 1.5
+    },
+  });
+</script>
+
     <div class="full">
         <h3><?php _e('Author Statistics', 'just-writing-statistics'); ?></h3>
 
