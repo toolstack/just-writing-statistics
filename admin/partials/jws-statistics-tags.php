@@ -42,9 +42,7 @@
     $labels = trim( $labels, ', ' );
 
     if( $label_count <= 10 ) { $aspectRatio = 5; } else { $aspectRatio = 5 - floor( $label_count / 10 ); }
-
     if( $aspectRatio == 0 ) { $aspectRatio = 0.5 ;}
-
     if( $aspectRatio < 0 ) { $aspectRatio = 1 / abs($aspectRatio); }
 
 ?>
