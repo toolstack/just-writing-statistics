@@ -60,6 +60,11 @@
             include_once 'jws-statistics-category.php';
 
             break;
+        case 'about':
+            include_once 'jws-statistics-menu.php';
+            include_once 'jws-about.php';
+
+            break;
         default:
             $link_calculate = add_query_arg(['page' => $this->plugin_name . '-calculate'], admin_url('admin.php'));
 

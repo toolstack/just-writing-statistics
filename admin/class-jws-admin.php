@@ -31,6 +31,18 @@ class Just_Writing_Statsitics_Admin
      */
     private $version;
 
+    private $allowed_tabs = array(
+                                    'top-content' => '',
+                                    'all-content' => '',
+                                    'monthly-statistics' => '',
+                                    'yearly-statistics' => '',
+                                    'tag-statistics' => '',
+                                    'category-statistics' => '',
+                                    'author-statistics' => '',
+                                    'settings' => '',
+                                    'about' => '',
+                                );
+
     /**
      * Initialize the class and set its properties.
      *
@@ -461,18 +473,7 @@ class Just_Writing_Statsitics_Admin
 
         $jws_tab = 'top-content';
 
-        $allowed_tabs = array(
-                                'top-content' => '',
-                                'all-content' => '',
-                                'monthly-statistics' => '',
-                                'yearly-statistics' => '',
-                                'tag-statistics' => '',
-                                'category-statistics' => '',
-                                'author-statistics' => '',
-                                'settings' => '',
-                            );
-
-        if (isset($_GET['tab']) && array_key_exists($_GET['tab'], $allowed_tabs) ) {
+        if (isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $this->allowed_tabs ) ) {
             $jws_tab = $_GET['tab'];
         }
 
@@ -851,4 +852,5 @@ class Just_Writing_Statsitics_Admin
 
         return $step;
     }
+
 }
