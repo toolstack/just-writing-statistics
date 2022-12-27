@@ -13,6 +13,128 @@
  */
 
 ?>
+    <div>
+        <div class="half jws-chart-container">
+
+            <h3><?php _e('Top Content Item Count', 'just-writing-statistics'); ?></h3>
+            <canvas id="TopContentItemCountChart"></canvas>
+
+        </div>
+
+        <div class="half jws-chart-container">
+
+            <h3><?php _e('Top Content Word Count', 'just-writing-statistics'); ?></h3>
+            <canvas id="TopContentWordCountChart"></canvas>
+
+        </div>
+    </div>
+<?php
+    $labels = '';
+    $count_data = array();
+
+    foreach( $arr_jws_post_types as $names ) {
+        $labels .= '\'' . $names['plural_name'] . '\', ';
+    }
+
+    foreach( $arr_jws_post_status as $post_type => $post_status ) {
+
+        foreach( $post_status as $type => $count ) {
+            $count_data[$type] .= '\'' . $count['count'] . '\', ';
+        }
+    }
+
+    $labels = trim( $labels, ', ' );
+
+?>
+
+<script>
+  const ItemCountChart = document.getElementById('TopContentItemCountChart');
+
+  new Chart(ItemCountChart, {
+    type: 'bar',
+    data: {
+      labels: [<?php echo $labels;?>],
+      datasets: [
+        {
+          label: '<?php _e('Published','just-writing-statistics');?>',
+          data: [<?php echo $count_data['Publish'];?>],
+          backgroundColor: '#00ff00',
+        },
+        {
+          label: '<?php _e('Scheduled','just-writing-statistics');?>',
+          data: [<?php echo $count_data['Scheduled'];?>],
+          backgroundColor: '#0000ff',
+        },
+        {
+          label: '<?php _e('Unpublished','just-writing-statistics');?>',
+          data: [<?php echo $count_data['Draft'];?>],
+          backgroundColor: '#ff0000',
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stacked: true,
+        },
+        x: {
+          stacked: true,
+        }
+      }
+    },
+  });
+
+<?php
+    $words_data = array();
+
+    foreach( $arr_jws_post_status as $post_type => $post_status ) {
+
+        foreach( $post_status as $type => $count ) {
+            $words_data[$type] .= '\'' . $count['words'] . '\', ';
+        }
+    }
+
+?>
+
+  const WordCountChart = document.getElementById('TopContentWordCountChart');
+
+  new Chart(WordCountChart, {
+    type: 'bar',
+    data: {
+      labels: [<?php echo $labels;?>],
+      datasets: [
+        {
+          label: '<?php _e('Published','just-writing-statistics');?>',
+          data: [<?php echo $words_data['Publish'];?>],
+          backgroundColor: '#00ff00',
+        },
+        {
+          label: '<?php _e('Scheduled','just-writing-statistics');?>',
+          data: [<?php echo $words_data['Scheduled'];?>],
+          backgroundColor: '#0000ff',
+        },
+        {
+          label: '<?php _e('Unpublished','just-writing-statistics');?>',
+          data: [<?php echo $words_data['Draft'];?>],
+          backgroundColor: '#ff0000',
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stacked: true,
+        },
+        x: {
+          stacked: true,
+        }
+      }
+    },
+  });
+</script>
+
     <div class="full">
         <h3><?php _e('All Content', 'just-writing-statistics'); ?></h3>
 
