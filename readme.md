@@ -7,7 +7,7 @@
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-Calculate your writing statistics on your WordPress site instantly.
+Calculate your writing statistics on your WordPress site.
 
 ## Description ##
 
@@ -20,6 +20,8 @@ Just Writing Statistics tells you exactly how many words you've written on your 
 - Month
 - **Year (new)**
 - Author
+- **Tags (new)**
+- **Categories (new)**
 
 Just Writing Statistics also has reading times for each post and page of your site. Find out how many hours of content you've written or let readers know how long your articles are. You can include reading time at the top of each of your posts automatically or use a shortcode.
 
@@ -60,8 +62,8 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 ## Screenshots ##
 
-### 1. Just Writing Statistics ###
-![Just Writing Statistics](assets/screenshot-1.png)
+### 1. Top Content Statistics ###
+![Top Content Statistics](assets/screenshot-1.png)
 
 ### 2. Monthly Statistics ###
 ![Monthly Statistics](assets/screenshot-2.png)
@@ -69,8 +71,11 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 ### 3. Author Statistics ###
 ![Author Statistics](assets/screenshot-3.png)
 
-### 4. Reading Time Settings ###
-![Reading Time Settings](assets/screenshot-4.png)
+### 4. Tag Statistics ###
+![Tag Statistics](assets/screenshot-4.png)
+
+### 5. Settings ###
+![Settings](assets/screenshot-5.png)
 
 
 ## Changelog ##
@@ -85,7 +90,12 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 * Fix the settings link in the plugin list
 * Fix various wp_debug warnings
 * Added yearly statistics
+* Added tag statistics
+* Added category statistics
 * Combined Read Time and Calculate into a Settings tab
+* Added about tab
+* Add graphs to the statistic tabs
+* Added scheduled posts as a grouping for statistics separate from unpublished
 
 ### 3.2.3 ###
 * Release date: 6 Oct 2021
