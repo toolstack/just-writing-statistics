@@ -59,6 +59,8 @@
 							jws_calculate_form.find('.jws-progress').remove();
 							jws_calculate_form.find('.jws-progress-wrapper').html(response.message);
 
+							window.location.href = 'admin.php?page=just-writing-statistics';
+
 						} else {
 
 							$('.jws-progress div').animate({ width: response.percentage + '%' }, 50, function() { });
@@ -72,7 +74,7 @@
 
 					jws_calculate_form.find('.button-disabled').removeClass('button-disabled');
 					jws_calculate_form.find('.spinner').remove();
-					jws_calculate_form.find('.jws-progress-wrapper').html('<b>Ajax call failed!  See console for details.<b>');
+					jws_calculate_form.find('.jws-progress-wrapper').html('<b>Ajax call failed!<b><br>' + response.message);
 
 					if (window.console && window.console.log) {
 
