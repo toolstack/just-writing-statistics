@@ -315,6 +315,8 @@ class Just_Writing_Statsitics_Admin
 
             echo json_encode(['step' => 'done', 'message' => $message]);
 
+            update_option( 'jws_stats_calculated', true );
+
             exit;
         }
 
@@ -477,7 +479,10 @@ class Just_Writing_Statsitics_Admin
             $jws_tab = $_GET['tab'];
         }
 
-        $excluded_types = array( 'wp_global_styles' );
+        $excluded_types = get_option('jws_excluded_types');
+
+        if( ! is_array( $excluded_types ) ) { $excluded_types = array(); }
+
         $excluded_types_sql = '';
 
         if( count( $excluded_types ) > 0 ) {

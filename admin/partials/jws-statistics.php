@@ -22,56 +22,59 @@
         $jws_tab = '';
     }
 
-    switch( $jws_tab ) {
-        case 'top-content':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-statistics-totals.php';
-            include_once 'jws-statistics-top.php';
+    if( get_option( 'jws_stats_calculated' ) != true ) {
+        echo '<div class="notice notice-error"><p>';
+        _e('You need to calculate your word counts before you can start using the plugin.', 'just-writing-statistics');
+        echo '</p></div>';
 
-            break;
-        case 'all-content':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-statistics-totals.php';
-            include_once 'jws-statistics-all.php';
+        include_once( 'jws-settings-calculate.php' );
 
-            break;
-        case 'monthly-statistics':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-statistics-monthly.php';
+    } else {
+        switch( $jws_tab ) {
+            case 'all-content':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-totals.php';
+                include_once 'jws-statistics-all.php';
 
-            break;
-        case 'yearly-statistics':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-statistics-yearly.php';
+                break;
+            case 'monthly-statistics':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-monthly.php';
 
-            break;
-        case 'author-statistics':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-statistics-author.php';
+                break;
+            case 'yearly-statistics':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-yearly.php';
 
-            break;
-        case 'tag-statistics':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-statistics-tags.php';
+                break;
+            case 'author-statistics':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-author.php';
 
-            break;
-        case 'category-statistics':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-statistics-category.php';
+                break;
+            case 'tag-statistics':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-tags.php';
 
-            break;
-        case 'about':
-            include_once 'jws-statistics-menu.php';
-            include_once 'jws-about.php';
+                break;
+            case 'category-statistics':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-category.php';
 
-            break;
-        default:
-            $link_calculate = add_query_arg(['page' => $this->plugin_name . '-calculate'], admin_url('admin.php'));
+                break;
+            case 'about':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-about.php';
 
-            echo '<p>';
-            printf(__('You need to <a href="%s">calculate</a> your word counts before you can start using the plugin.', 'just-writing-statistics'), esc_url($link_calculate));
-            echo '</p>';
+                break;
+            default:
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-totals.php';
+                include_once 'jws-statistics-top.php';
 
+                break;
+
+        }
     }
 
     require_once 'jws-footer.php';
