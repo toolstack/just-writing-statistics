@@ -29,11 +29,11 @@
     $max_word = 0;
 
     foreach( $arr_jws_categories as $category_name => $category ) {
-        $labels .= '\'' . $category_name . '\', ';
+        $labels .= json_encode( $category_name ) . ', ';
 
-        $word_data['published'] .= '\'' . $category['published'] . '\', ';
-        $word_data['scheduled'] .= '\'' . $category['scheduled'] . '\', ';
-        $word_data['unpublished'] .= '\'' . $category['unpublished'] . '\', ';
+        $word_data['published'] .= json_encode( $category['published'] ) . ', ';
+        $word_data['scheduled'] .= json_encode( $category['scheduled'] ) . ', ';
+        $word_data['unpublished'] .= json_encode( $category['unpublished'] ) . ', ';
 
         if( $category['total'] > $max_word ) { $max_word = $category['total']; }
     }
@@ -95,7 +95,7 @@
                         <th></th>
                         <th></th>
                         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
-                        <th colspan="3" class="jws-post-type"><?php echo $post_type['plural_name']; ?></th>
+                        <th colspan="3" class="jws-post-type"><?php echo esc_html( $post_type['plural_name'] ); ?></th>
                         <?php endforeach; ?>
                     </tr>
 
@@ -115,7 +115,7 @@
                     <?php foreach ($arr_jws_categories as $category_name => $category) : ?>
 
                         <?php echo '<tr'.($jws_counter_monthly_statistics % 2 == 1 ? '' : " class='alternate'").'>'; ?>
-                        <td><nobr><?php echo $category_name; ?></td>
+                        <td><nobr><?php echo esc_html( $category_name ); ?></td>
                         <td><?php echo number_format($category['total']); ?></td>
                         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
                         <td>

@@ -461,7 +461,18 @@ class Just_Writing_Statsitics_Admin
 
         $jws_tab = 'top-content';
 
-        if (isset($_GET['tab'])) {
+        $allowed_tabs = array(
+                                'top-content' => '',
+                                'all-content' => '',
+                                'monthly-statistics' => '',
+                                'yearly-statistics' => '',
+                                'tag-statistics' => '',
+                                'category-statistics' => '',
+                                'author-statistics' => '',
+                                'settings' => '',
+                            );
+
+        if (isset($_GET['tab']) && array_key_exists($_GET['tab'], $allowed_tabs) ) {
             $jws_tab = $_GET['tab'];
         }
 

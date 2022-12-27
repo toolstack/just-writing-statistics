@@ -36,9 +36,9 @@
     $max_item = 0;
 
     foreach( $arr_jws_months as $month_name => $month) {
-        $labels = '\'' . $month_name . '\', ' . $labels;
-        $word_data = '\'' . $month['total'] . '\', ' . $word_data;
-        $item_data = '\'' . $month['items'] . '\', ' . $item_data;
+        $labels = json_encode( $month_name ). ', ' . $labels;
+        $word_data = json_encode( $month['total'] ) . ', ' . $word_data;
+        $item_data = json_encode( $month['items'] ) . ', ' . $item_data;
 
         if( $month['total'] > $max_word ) { $max_word = $month['total']; }
         if( $month['items'] > $max_item ) { $max_item = $month['items']; }
@@ -134,7 +134,7 @@
                         <th></th>
                         <th></th>
                         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
-                        <th colspan="3" class="jws-post-type"><?php echo $post_type['plural_name']; ?></th>
+                        <th colspan="3" class="jws-post-type"><?php echo esc_html( $post_type['plural_name'] ); ?></th>
                         <?php endforeach; ?>
                     </tr>
 
@@ -154,7 +154,7 @@
                     <?php foreach ($arr_jws_months as $month_name => $month) : ?>
 
                         <?php echo '<tr'.($jws_counter_monthly_statistics % 2 == 1 ? '' : " class='alternate'").'>'; ?>
-                        <td><nobr><?php echo $month_name; ?></td>
+                        <td><nobr><?php echo esc_html( $month_name ); ?></td>
                         <td><?php echo number_format($month['total']); ?></td>
                         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
                         <td>

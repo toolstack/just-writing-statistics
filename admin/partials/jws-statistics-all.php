@@ -34,13 +34,13 @@
     $max_item = 0;
 
     foreach( $arr_jws_post_types as $names ) {
-        $labels .= '\'' . $names['plural_name'] . '\', ';
+        $labels .= json_encode( $names['plural_name'] ) . ', ';
     }
 
     foreach( $arr_jws_post_status as $post_type => $post_status ) {
 
         foreach( $post_status as $type => $count ) {
-            $count_data[$type] .= '\'' . $count['count'] . '\', ';
+            $count_data[$type] .= json_encode( $count['count'] ) . ', ';
 
             if( $count['count'] > $max_item ) { $max_item = $count['count']; }
         }
@@ -169,20 +169,20 @@
                 <?php echo '<tr'.($index % 2 == 1 ? '' : " class='alternate'").'>'; ?>
                     <td><?php echo number_format($post['post_word_count']); ?></td>
                     <td>
-                        <a href="<?php echo $post['permalink']; ?>"><?php echo $post['post_title']; ?></a>
+                        <a href="<?php echo esc_attr( $post['permalink'] ); ?>"><?php echo esc_html( $post['post_title'] ); ?></a>
 
                         <div class="row-actions">
                             <span class="edit"><?php edit_post_link(__('Edit', 'just-writing-statistics'), '', ' | ', $post['post_id']); ?></span>
                             <span class="trash"><a href="<?php echo get_delete_post_link($post['post_id']); ?>"><?php _e('Trash', 'just-writing-statistics'); ?></a> | </span>
-                            <span class='view'><a href="<?php echo $post['permalink']; ?>"><?php _e('View', 'just-writing-statistics'); ?></a></span>
+                            <span class='view'><a href="<?php echo esc_attr( $post['permalink'] ); ?>"><?php _e('View', 'just-writing-statistics'); ?></a></span>
                         </div>
                     </td>
                     <td><?php echo jws_reading_time($post['post_word_count'], $reading_time_wpm); ?></td>
-                    <td><?php echo $post['post_type']; ?></td>
-                    <td><?php echo $post['post_status']; ?></td>
+                    <td><?php echo esc_html( $post['post_type'] ); ?></td>
+                    <td><?php echo esc_html( $post['post_status'] ); ?></td>
                     <td>
                         <?php echo get_avatar($post['post_author_id'], 32, 'mysteryman', $arr_jws_authors[$post['post_author_id']]['display_name'], ['class' => 'avatar avatar-32 photo']); ?>
-                        <?php echo $post['post_author']; ?>
+                        <?php echo esc_html( $post['post_author'] ); ?>
                     </td>
                 </tr>
                 <?php $jws_counter_top_content++; ?>

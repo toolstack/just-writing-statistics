@@ -32,7 +32,7 @@
                 <?php foreach ($jws_totals as $total) : $jws_total += ($total['published']['word_count'] + $total['unpublished']['word_count']); ?>
 
                     <?php echo '<tr'.($jws_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-                    <td><?php echo $total['name']; ?></td>
+                    <td><?php echo esc_html( $total['name'] ); ?></td>
                     <td><?php echo @number_format(0 + $total['published']['posts'] + $total['unpublished']['posts']); ?></td>
                     <td><?php echo @number_format(0 + $total['published']['word_count'] + $total['unpublished']['word_count']); ?></td>
                     <td>
@@ -85,7 +85,7 @@
                 <?php foreach ($jws_totals as $total) : $published_total += $total['published']['word_count']; ?>
 
                     <?php echo '<tr'.($jws_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-                    <td><?php echo $total['name']; ?></td>
+                    <td><?php echo esc_html( $total['name'] ); ?></td>
                     <td><?php echo @number_format(0 + $total['published']['posts']); ?></td>
                     <td><?php echo @number_format(0 + $total['published']['word_count']); ?></td>
                     <td>
@@ -139,7 +139,7 @@
                 <?php foreach ($jws_totals as $total) : $scheduled_total += $total['scheduled']['word_count']; ?>
 
                     <?php echo '<tr'.($jws_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-                    <td><?php echo $total['name']; ?></td>
+                    <td><?php echo esc_html( $total['name'] ); ?></td>
                     <td><?php echo @number_format(0 + $total['scheduled']['posts']); ?></td>
                     <td><?php echo @number_format(0 + $total['scheduled']['word_count']); ?></td>
                     <td>
@@ -193,7 +193,7 @@
                 <?php foreach ($jws_totals as $total) : $unpublished_total += $total['unpublished']['word_count']; ?>
 
                     <?php echo '<tr'.($jws_counter_post_types % 2 == 1 ? "" : " class='alternate'").'>'; ?>
-                    <td><?php echo $total['name']; ?></td>
+                    <td><?php echo esc_html( $total['name'] ); ?></td>
                     <td><?php echo @number_format(0 + $total['unpublished']['posts']); ?></td>
                     <td><?php echo @number_format(0 + $total['unpublished']['word_count']); ?></td>
                     <td>

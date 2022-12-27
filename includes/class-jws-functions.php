@@ -22,7 +22,7 @@ function jws_save_post_data($post)
 {
     global $wpdb;
 
-    $table_name_posts = $wpdb->prefix.'jws_posts';
+    $table_name_posts = $wpdb->prefix . 'jws_posts';
 
     if ($post && $post->post_author != 0) {
         $post_word_count = jws_word_count($post->post_content);
@@ -43,7 +43,9 @@ function jws_save_post_data($post)
 			post_parent = %d,
 			post_type = %s,
 			post_word_count = %d";
+
         $post_data = $wpdb->prepare($sql_post_data, $post->ID, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count);
+
         $wpdb->query($post_data);
     }
 }

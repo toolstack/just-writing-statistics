@@ -34,9 +34,9 @@
     $item_data = '';
 
     foreach( $arr_jws_authors as $index => $author) {
-        $labels = '\'' . $author['display_name'] . '\', ' . $labels;
-        $word_data = '\'' . $author['total'] . '\', ' . $word_data;
-        $item_data = '\'' . $author['items'] . '\', ' . $item_data;
+        $labels = json_encode( $author['display_name'] ) . ', ' . $labels;
+        $word_data = json_encode( $author['total'] ) . ', ' . $word_data;
+        $item_data = json_encode( $author['items'] ) . ', ' . $item_data;
     }
 
     $labels = trim( $labels, ', ' );
@@ -97,7 +97,7 @@
                         <th></th>
                         <th></th>
         <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
-                        <th colspan="3" class="jws-post-type"><?php echo $post_type['plural_name']; ?></th>
+                        <th colspan="3" class="jws-post-type"><?php echo esc_html( $post_type['plural_name'] ); ?></th>
         <?php endforeach; ?>
                     </tr>
 
@@ -119,7 +119,7 @@
                     <?php echo '<tr'.($jws_counter_author_statistics % 2 == 1 ? '' : " class='alternate'").'>'; ?>
                         <td><nobr>
                             <?php echo get_avatar($index, 32, 'mysteryman', $author['display_name'], ['class' => 'avatar avatar-32 photo']); ?>
-                            <?php echo $author['display_name']; ?>
+                            <?php echo esc_html( $author['display_name'] ); ?>
                         </td>
                         <td><?php echo number_format($author['total']); ?></td>
             <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
