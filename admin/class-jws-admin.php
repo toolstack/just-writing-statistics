@@ -43,6 +43,18 @@ class Just_Writing_Statsitics_Admin
                                     'about' => '',
                                 );
 
+    private $mandatory_excluded_types = array(
+                                                'attachment',
+                                                'nav_menu_item',
+                                                'wp_navigation',
+                                                'custom_css',
+                                                'revision',
+                                                'customize_changeset',
+                                                'oembed_cache',
+                                                'user_request',
+                                            );
+
+
     /**
      * Initialize the class and set its properties.
      *
@@ -129,6 +141,33 @@ class Just_Writing_Statsitics_Admin
         add_settings_field('jws_reading_time_label_before', __('Before Label', 'just-writing-statistics'), [$this, 'settings_reading_time_label_before'], 'jws-reading-time', 'jws-section-reading-time');
         add_settings_field('jws_reading_time_label_after', __('After Label', 'just-writing-statistics'), [$this, 'settings_reading_time_label_after'], 'jws-reading-time', 'jws-section-reading-time');
         register_setting('jws-section-reading-time', 'jws_reading_time');
+
+        // Excluded Types
+        add_settings_section('jws-section-excluded-types', __('Excluded Post Types', 'just-writing-statistics'), [$this, 'settings_section_excluded_types'], 'jws-excluded-types');
+
+        $post_types = get_post_types('', 'names');
+        foreach( $this->mandatory_excluded_types as $type )
+        {
+            unset($post_types[$type]);
+        }
+
+        $excluded_types = get_option('jws_excluded_types');
+
+        if( ! is_array( $excluded_types ) ) { $excluded_types = array(); }
+
+        foreach( $post_types as $type )
+        {
+
+            $checked = false;
+            $post_type_obj = get_post_type_object( $type );
+
+            $checked = array_key_exists( $type, $excluded_types );
+
+            add_settings_field('jws_excluded_type_' . $type, $post_type_obj->labels->singular_name, [$this, 'settings_excluded_type_by_name'], 'jws-excluded-types', 'jws-section-excluded-types', array( 'type' => $type, 'checked' => $checked ) );
+        }
+
+        register_setting('jws-section-excluded-types', 'jws_excluded_types');
+
     }
 
     public function display_settings()
@@ -147,6 +186,16 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
+     * Display Excluded Types Settings Section.
+     *
+     * @since 3.2.0
+     */
+    public function settings_section_excluded_types()
+    {
+        echo '<p>'.__('Select which post types to be excluded from the statistics.  Note that not all of the types below may show up in your statistics if they do not have any content associated with them.', 'just-writing-statistics').'</p>';
+    }
+
+    /**
      * Display Reading Time Settings Words Per Minute Text Box.
      *
      * @since 3.2.0
@@ -159,9 +208,19 @@ class Just_Writing_Statsitics_Admin
 
         if(is_array($reading_time_options) && array_key_exists('wpm', $reading_time_options) ) {
             $reading_time_wpm = (get_option('jws_reading_time')['wpm'] ?: 250);
+
         }
 
         echo '<input id="jws_reading_time_wpm" name="jws_reading_time[wpm]" type="number" min="1" class="small-text" value="'.$reading_time_wpm.'" />';
+    }
+
+    public function settings_excluded_type_by_name( $args )
+    {
+        //$args['type'];
+        $checked = '';
+
+        if( $args['checked'] == true ) { $checked = ' checked'; }
+        echo '<input name="jws_excluded_types[' . $args['type'] . ']" type="checkbox"' . $checked . '></input>';
     }
 
     /**
@@ -356,7 +415,10 @@ class Just_Writing_Statsitics_Admin
         }
 
         $post_types = get_post_types('', 'names');
-        unset($post_types['attachment'], $post_types['nav_menu_item'], $post_types['custom_css'], $post_types['revision'], $post_types['customize_changeset']);
+        foreach( $this->mandatory_excluded_types as $type )
+        {
+            unset($post_types[$type]);
+        }
 
         $args = [
             'post_type' => $post_types,
@@ -479,9 +541,18 @@ class Just_Writing_Statsitics_Admin
             $jws_tab = $_GET['tab'];
         }
 
-        $excluded_types = get_option('jws_excluded_types');
+        $excluded_types = array();
+        $excluded_types_option = get_option('jws_excluded_types');
 
-        if( ! is_array( $excluded_types ) ) { $excluded_types = array(); }
+        if( ! is_array( $excluded_types_option ) ) { $excluded_types_option = array(); }
+
+        // Convert the setting array which has the type in the key name to have the key in the value instead.
+        foreach( $excluded_types_option as $type => $setting ) {
+            $excluded_types[] .= $type;
+        }
+
+        // Add in the mandatory excluded types.
+        $excluded_types = array_merge( $excluded_types, $this->mandatory_excluded_types );
 
         $excluded_types_sql = '';
 
@@ -489,7 +560,7 @@ class Just_Writing_Statsitics_Admin
             $excluded_types_sql .= 'AND post_type NOT IN (\'';
 
             foreach( $excluded_types as $type ) {
-                $excluded_types_sql .= '%s\', ';
+                $excluded_types_sql .= '%s\', \'';
             }
 
             $excluded_types_sql = trim( $excluded_types_sql, '\', ' );
