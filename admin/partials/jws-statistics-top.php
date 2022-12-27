@@ -151,7 +151,7 @@
     <div class="full">
         <h3><?php _e('Top Content', 'just-writing-statistics'); ?></h3>
 
-        <table class="widefat">
+        <table class="widefat jws_wrapable">
             <thead>
                 <tr>
                     <th class="jws-words"><?php _e('Words', 'just-writing-statistics'); ?></th>

@@ -18,9 +18,8 @@
 #just-writing-statistics h4 { margin: 0; padding: 8px 10px; background-color: #32373c; color: #ffffff; font-weight: normal; text-align: left; }
 
 #just-writing-statistics div.full { float: left; width: 100%; margin: 25px 0 0 0; padding: 0; }
-#just-writing-statistics div.quarter { float: left; width: 23.5%; margin: 25px 0 0 0; padding: 0; }
-#just-writing-statistics div.quarter:nth-of-type(even) { padding: 0 2%; }
-#just-writing-statistics div.quarter:last-of-type { padding-right: 0; }
+#just-writing-statistics div.quarter { float: left; width: 23.5%; margin: 25px 2% 0 0; padding: 0; }
+#just-writing-statistics div.quarter:last-of-type { margin-right: 0; }
 #just-writing-statistics div.third { float: left; width: 32%; margin: 25px 0 0 0; padding: 0; }
 #just-writing-statistics div.third:nth-of-type(2) { padding: 0 2%; }
 #just-writing-statistics div.half { float: left; width: 49%; margin: 25px 2% 0 0; padding: 0; }
@@ -35,7 +34,7 @@
 
 #just-writing-statistics .jws-table { overflow-x: auto; }
 #just-writing-statistics table.widefat th { vertical-align: bottom; }
-#just-writing-statistics table.widefat td {  }
+#just-writing-statistics table.widefat td { white-space: nowrap; }
 #just-writing-statistics table.widefat th.jws-post-type { font-weight: bold; }
 #just-writing-statistics table.widefat img.avatar { float: left; margin-top: 1px; margin-right: 10px; }
 #just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th { text-align: center; }
@@ -47,6 +46,7 @@
 #just-writing-statistics table.jws-post-type-stats td:nth-of-type(2) { border-right: 1px solid #dcdcdc !important; }
 #just-writing-statistics table.jws-post-type-stats td:nth-of-type(5) { border-right: 1px solid #dcdcdc !important; }
 #just-writing-statistics table.jws-post-type-stats td:nth-of-type(8) { border-right: 1px solid #dcdcdc !important; }
+#just-writing-statistics table.jws_wrapable td { white-space: normal; }
 #just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th:nth-of-type(3) { border-right: 1px solid #dcdcdc !important; }
 #just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th:nth-of-type(4) { border-right: 1px solid #dcdcdc !important; }
 
