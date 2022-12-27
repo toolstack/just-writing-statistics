@@ -16,14 +16,14 @@
     <div>
         <div class="half jws-chart-container">
 
-            <h3><?php _e('Top Content Item Count', 'just-writing-statistics'); ?></h3>
+            <h3><?php _e('All Content Item Count', 'just-writing-statistics'); ?></h3>
             <canvas id="TopContentItemCountChart"></canvas>
 
         </div>
 
         <div class="half jws-chart-container">
 
-            <h3><?php _e('Top Content Word Count', 'just-writing-statistics'); ?></h3>
+            <h3><?php _e('All Content Word Count', 'just-writing-statistics'); ?></h3>
             <canvas id="TopContentWordCountChart"></canvas>
 
         </div>

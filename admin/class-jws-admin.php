@@ -506,18 +506,16 @@ class Just_Writing_Statsitics_Admin
                 ORDER BY post_date DESC";
         } elseif ($jws_tab == 'tag-statistics') {
             $sql_jws_statistics = "
-				SELECT post_author, post_type, post_status, post_id, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+				SELECT post_author, post_type, post_status, post_id, post_word_count
 				FROM $table_name_posts
 				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
-				GROUP BY post_author, post_type, post_status
-				ORDER BY post_author ASC";
+				ORDER BY post_id ASC";
         } elseif ($jws_tab == 'category-statistics') {
             $sql_jws_statistics = "
-                SELECT post_author, post_type, post_status, post_id, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
+                SELECT post_author, post_type, post_status, post_id, post_word_count
                 FROM $table_name_posts
                 WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
-                GROUP BY post_author, post_type, post_status
-                ORDER BY post_author ASC";
+                ORDER BY post_id ASC";
         } elseif ($jws_tab == 'author-statistics') {
             $sql_jws_statistics = "
                 SELECT post_author, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
@@ -652,7 +650,6 @@ class Just_Writing_Statsitics_Admin
             $arr_jws_tags = [];
             $arr_jws_post_types = [];
 
-
             foreach ($jws_statistics as $total) {
                 // Load post type array
                 if (!isset($arr_jws_post_types[$total->post_type])) {
@@ -661,6 +658,7 @@ class Just_Writing_Statsitics_Admin
                     $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
                     $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
                 }
+
 
                 $tags = wp_get_post_tags( $total->post_id );
 
@@ -672,27 +670,28 @@ class Just_Writing_Statsitics_Admin
                         $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] = 0;
                         $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts'] = 0;
                         $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] = 0;
-                        $arr_jws_tags[$tag->name]['published'] = 0;
-                        $arr_jws_tags[$tag->name]['scheduled'] = 0;
-                        $arr_jws_tags[$tag->name]['unpublished'] = 0;
                     }
 
                     if ($total->post_status == 'publish') {
-                        $arr_jws_tags[$tag->name][$total->post_type]['published']['posts'] += $total->posts;
-                        $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] += $total->word_count;
-                        $arr_jws_tags[$tag->name]['published'] += $total->word_count;
+                        $arr_jws_tags[$tag->name][$total->post_type]['published']['posts']++;
+                        $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] += $total->post_word_count;
+                        $arr_jws_tags[$tag->name]['published'] += $total->post_word_count;
                     } else if ($total->post_status == 'future') {
-                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['posts'] += $total->posts;
-                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] += $total->word_count;
-                        $arr_jws_tags[$tag->name]['scheduled'] += $total->word_count;
+                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['posts']++;
+                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] += $total->post_word_count;
+                        $arr_jws_tags[$tag->name]['scheduled'] += $total->post_word_count;
                     } else {
-                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts'] += $total->posts;
-                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] += $total->word_count;
-                        $arr_jws_tags[$tag->name]['unpublished'] += $total->word_count;
+                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts']+= $total->post_word_count;
+                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] += $total->post_word_count;
+                        $arr_jws_tags[$tag->name]['unpublished'] += $total->post_word_count;
                     }
 
-                    $arr_jws_tags[$tag->name]['total'] += $total->word_count;
+                    $arr_jws_tags[$tag->name]['items']++;
+                    $arr_jws_tags[$tag->name]['total'] += $total->post_word_count;
                 }
+
+                ksort( $arr_jws_tags );
+
             }
         } elseif ($jws_tab == 'category-statistics') {
             $arr_jws_categories = [];
@@ -717,27 +716,28 @@ class Just_Writing_Statsitics_Admin
                         $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] = 0;
                         $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts'] = 0;
                         $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] = 0;
-                        $arr_jws_categories[$category->name]['published'] = 0;
-                        $arr_jws_categories[$category->name]['scheduled'] = 0;
-                        $arr_jws_categories[$category->name]['unpublished'] = 0;
                     }
 
                     if ($total->post_status == 'publish') {
-                        $arr_jws_categories[$category->name][$total->post_type]['published']['posts'] += $total->posts;
-                        $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] += $total->word_count;
-                        $arr_jws_categories[$category->name]['published'] += $total->word_count;
+                        $arr_jws_categories[$category->name][$total->post_type]['published']['posts']++;
+                        $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] += $total->post_word_count;
+                        $arr_jws_categories[$category->name]['published'] += $total->post_word_count;
                     } else if ($total->post_status == 'future') {
-                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['posts'] += $total->posts;
-                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] += $total->word_count;
-                        $arr_jws_categories[$category->name]['scheduled'] += $total->word_count;
+                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['posts']++;
+                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] += $total->post_word_count;
+                        $arr_jws_categories[$category->name]['scheduled'] += $total->post_word_count;
                     } else {
-                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts'] += $total->posts;
-                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] += $total->word_count;
-                        $arr_jws_categories[$category->name]['unpublished'] += $total->word_count;
+                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts']++;
+                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] += $total->post_word_count;
+                        $arr_jws_categories[$category->name]['unpublished'] += $total->post_word_count;
                     }
 
-                    $arr_jws_categories[$category->name]['total'] += $total->word_count;
+                    $arr_jws_categories[$category->name]['items']++;
+                    $arr_jws_categories[$category->name]['total'] += $total->post_word_count;
                 }
+
+                ksort( $arr_jws_categories );
+
             }
         } elseif ($jws_tab == 'author-statistics') {
             $arr_jws_authors = [];

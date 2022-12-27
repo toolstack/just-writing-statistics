@@ -102,7 +102,7 @@
       labels: [<?php echo $labels;?>],
       datasets: [
         {
-          label: '<?php _e('Words','just-writing-statistics');?>',
+          label: '<?php _e('Items','just-writing-statistics');?>',
           data: [<?php echo $item_data;?>],
           backgroundColor: '#0056a6',
           borderColor : "#0056a6",
