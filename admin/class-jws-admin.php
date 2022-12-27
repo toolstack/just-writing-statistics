@@ -867,6 +867,10 @@ class Just_Writing_Statsitics_Admin
         if( $step == 0 ) { $step = round( $max / 10, 0 ); }
         if( $step == 0 ) { $step = 1; }
 
+        if( $max < 100 && $max > 0 ) {
+            $step = ceil( $max / 10 );
+        }
+
         return $step;
     }
 
