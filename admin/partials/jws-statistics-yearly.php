@@ -33,15 +33,16 @@
     $labels = '';
     $word_data = '';
     $item_data = '';
-
-    $max_year = 0;
+    $max_word = 0;
+    $max_item = 0;
 
     foreach( $arr_jws_years as $year => $count) {
         $labels = '\'' . $year . '\', ' . $labels;
         $word_data = '\'' . $count['total'] . '\', ' . $word_data;
         $item_data = '\'' . $count['items'] . '\', ' . $item_data;
 
-        if( $count['total'] > $max_year ) { $max_month = $count['total']; }
+        if( $month['total'] > $max_word ) { $max_word = $month['total']; }
+        if( $month['items'] > $max_item ) { $max_item = $month['items']; }
     }
 
     $labels = trim( $labels, ', ' );
@@ -83,7 +84,7 @@
           beginAtZero: true,
           stacked: true,
           ticks: {
-            stepSize: <?php echo $year_step;?>
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_word ); ?>
           },
         },
         x: {
@@ -120,7 +121,7 @@
           beginAtZero: true,
           stacked: true,
           ticks: {
-            stepSize: 500
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_item ); ?>
           },
         },
         x: {

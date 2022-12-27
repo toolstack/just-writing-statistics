@@ -656,19 +656,27 @@ class Just_Writing_Statsitics_Admin
                     if (!isset($arr_jws_tags[$tag->name][$total->post_type])) {
                         $arr_jws_tags[$tag->name][$total->post_type]['published']['posts'] = 0;
                         $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] = 0;
+                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['posts'] = 0;
+                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] = 0;
                         $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts'] = 0;
                         $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] = 0;
+                        $arr_jws_tags[$tag->name]['published'] = 0;
+                        $arr_jws_tags[$tag->name]['scheduled'] = 0;
+                        $arr_jws_tags[$tag->name]['unpublished'] = 0;
                     }
 
                     if ($total->post_status == 'publish') {
                         $arr_jws_tags[$tag->name][$total->post_type]['published']['posts'] += $total->posts;
                         $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] += $total->word_count;
+                        $arr_jws_tags[$tag->name]['published'] += $total->word_count;
                     } else if ($total->post_status == 'future') {
                         $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['posts'] += $total->posts;
                         $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] += $total->word_count;
+                        $arr_jws_tags[$tag->name]['scheduled'] += $total->word_count;
                     } else {
                         $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts'] += $total->posts;
                         $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                        $arr_jws_tags[$tag->name]['unpublished'] += $total->word_count;
                     }
 
                     $arr_jws_tags[$tag->name]['total'] += $total->word_count;
@@ -693,19 +701,27 @@ class Just_Writing_Statsitics_Admin
                     if (!isset($arr_jws_categories[$category->name][$total->post_type])) {
                         $arr_jws_categories[$category->name][$total->post_type]['published']['posts'] = 0;
                         $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] = 0;
+                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['posts'] = 0;
+                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] = 0;
                         $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts'] = 0;
                         $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] = 0;
+                        $arr_jws_categories[$category->name]['published'] = 0;
+                        $arr_jws_categories[$category->name]['scheduled'] = 0;
+                        $arr_jws_categories[$category->name]['unpublished'] = 0;
                     }
 
                     if ($total->post_status == 'publish') {
                         $arr_jws_categories[$category->name][$total->post_type]['published']['posts'] += $total->posts;
                         $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] += $total->word_count;
+                        $arr_jws_categories[$category->name]['published'] += $total->word_count;
                     } else if ($total->post_status == 'future') {
                         $arr_jws_categories[$category->name][$total->post_type]['scheduled']['posts'] += $total->posts;
                         $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] += $total->word_count;
+                        $arr_jws_categories[$category->name]['scheduled'] += $total->word_count;
                     } else {
                         $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts'] += $total->posts;
                         $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                        $arr_jws_categories[$category->name]['unpublished'] += $total->word_count;
                     }
 
                     $arr_jws_categories[$category->name]['total'] += $total->word_count;
@@ -810,5 +826,18 @@ class Just_Writing_Statsitics_Admin
     public function post_word_count($post_id, $post)
     {
         jws_save_post_data($post);
+    }
+
+    public function calculate_chart_step_size( $max )
+    {
+        // Figure out a good stepping for the word count.
+        $step = round( $max / 10, -4 );
+        if( $step == 0 ) { $step = round( $max / 10, -3 ); }
+        if( $step == 0 ) { $step = round( $max / 10, -2 ); }
+        if( $step == 0 ) { $step = round( $max / 10, -1 ); }
+        if( $step == 0 ) { $step = round( $max / 10, 0 ); }
+        if( $step == 0 ) { $step = 1; }
+
+        return $step;
     }
 }

@@ -32,26 +32,20 @@
     $labels = '';
     $word_data = '';
     $item_data = '';
-
-    $max_month = 0;
+    $max_word = 0;
+    $max_item = 0;
 
     foreach( $arr_jws_months as $month_name => $month) {
         $labels = '\'' . $month_name . '\', ' . $labels;
         $word_data = '\'' . $month['total'] . '\', ' . $word_data;
         $item_data = '\'' . $month['items'] . '\', ' . $item_data;
 
-        if( $month['total'] > $max_month ) { $max_month = $month['total']; }
+        if( $month['total'] > $max_word ) { $max_word = $month['total']; }
+        if( $month['items'] > $max_item ) { $max_item = $month['items']; }
     }
 
     $labels = trim( $labels, ', ' );
     $word_data = trim( $word_data, ', ' );
-
-    // Figure out a good stepping for the word count.
-    $month_step = round( $max_month / 10, -4 );
-    if( $month_step == 0 ) { $month_step = round( $max_month / 10, -3 ); }
-    if( $month_step == 0 ) { $month_step = round( $max_month / 10, -2 ); }
-    if( $month_step == 0 ) { $month_step = round( $max_month / 10, -1 ); }
-
 ?>
 
 <script>
@@ -82,7 +76,7 @@
           beginAtZero: true,
           stacked: true,
           ticks: {
-            stepSize: <?php echo $month_step;?>
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_word ); ?>
           },
         },
         x: {
@@ -119,7 +113,7 @@
           beginAtZero: true,
           stacked: true,
           ticks: {
-            stepSize: 500
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_item ); ?>
           },
         },
         x: {

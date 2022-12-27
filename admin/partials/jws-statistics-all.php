@@ -31,6 +31,7 @@
 <?php
     $labels = '';
     $count_data = array();
+    $max_item = 0;
 
     foreach( $arr_jws_post_types as $names ) {
         $labels .= '\'' . $names['plural_name'] . '\', ';
@@ -40,6 +41,8 @@
 
         foreach( $post_status as $type => $count ) {
             $count_data[$type] .= '\'' . $count['count'] . '\', ';
+
+            if( $count['count'] > $max_item ) { $max_item = $count['count']; }
         }
     }
 
@@ -78,7 +81,7 @@
           beginAtZero: true,
           stacked: true,
           ticks: {
-            stepSize: 1
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_item );?>
           },
         },
         x: {
@@ -90,11 +93,14 @@
 
 <?php
     $words_data = array();
+    $max_word = 0;
 
     foreach( $arr_jws_post_status as $post_type => $post_status ) {
 
         foreach( $post_status as $type => $count ) {
             $words_data[$type] .= '\'' . $count['words'] . '\', ';
+
+            if( $count['words'] > $max_word ) { $max_word = $count['words']; }
         }
     }
 
@@ -129,6 +135,9 @@
         y: {
           beginAtZero: true,
           stacked: true,
+          ticks: {
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_word );?>
+          },
         },
         x: {
           stacked: true,

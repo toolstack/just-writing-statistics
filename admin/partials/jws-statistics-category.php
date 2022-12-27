@@ -14,6 +14,77 @@
 
 ?>
 
+    <div>
+        <div class="full jws-chart-container">
+
+            <h3><?php _e('Words by Tag', 'just-writing-statistics'); ?></h3>
+            <canvas id="WordsByTagChart"></canvas>
+
+        </div>
+
+    </div>
+<?php
+    $labels = '';
+    $word_data = array();
+    $max_word = 0;
+
+    foreach( $arr_jws_categories as $category_name => $category ) {
+        $labels .= '\'' . $category_name . '\', ';
+
+        $word_data['published'] .= '\'' . $category['published'] . '\', ';
+        $word_data['scheduled'] .= '\'' . $category['scheduled'] . '\', ';
+        $word_data['unpublished'] .= '\'' . $category['unpublished'] . '\', ';
+
+        if( $category['total'] > $max_word ) { $max_word = $category['total']; }
+    }
+
+    $labels = trim( $labels, ', ' );
+?>
+
+<script>
+  const WordCountChart = document.getElementById('WordsByTagChart');
+
+  new Chart(WordCountChart, {
+    type: 'bar',
+    data: {
+      labels: [<?php echo $labels;?>],
+      datasets: [
+        {
+          label: '<?php _e('Published','just-writing-statistics');?>',
+          data: [<?php echo $word_data['published'];?>],
+          backgroundColor: '#00ff00',
+        },
+        {
+          label: '<?php _e('Scheduled','just-writing-statistics');?>',
+          data: [<?php echo $word_data['scheduled'];?>],
+          backgroundColor: '#0056a6',
+        },
+        {
+          label: '<?php _e('Unpublished','just-writing-statistics');?>',
+          data: [<?php echo $word_data['unpublished'];?>],
+          backgroundColor: '#ff0000',
+        },
+      ],
+    },
+    options: {
+      aspectRatio: 4.0,
+      scales: {
+        y: {
+          beginAtZero: true,
+          stacked: true,
+          ticks: {
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_word );?>
+          },
+        },
+        x: {
+          stacked: true,
+        }
+      }
+    },
+  });
+
+</script>
+
     <div class="full">
         <h3><?php _e('Category Statistics', 'just-writing-statistics'); ?></h3>
 
