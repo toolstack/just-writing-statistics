@@ -317,23 +317,23 @@ class Just_Writing_Statsitics_Admin
 
         // Post Types
         if (isset($post_types) && count($post_types) > 0) {
-            $sql_post_total .= 'AND (';
+            $sql_post_total .= ' AND (';
 
             foreach ($post_types as $post_type) {
                 $sql_post_total .= "$table_name_posts.post_type = '".$post_type."' OR ";
             }
             $sql_post_total = substr($sql_post_total, 0, -4);
 
-            $sql_post_total .= ') ';
+            $sql_post_total .= ')';
         }
 
         // Date Range
         if (isset($parameters['jws_date_range_start_formatted']) && strlen($parameters['jws_date_range_start_formatted']) == 10) {
-            $sql_post_total .= "AND $table_name_posts.post_date >= '".$parameters['jws_date_range_start_formatted']." 00:00:00' ";
+            $sql_post_total .= " AND $table_name_posts.post_date >= '".$parameters['jws_date_range_start_formatted']." 00:00:00'";
         }
 
         if (isset($parameters['jws_date_range_end_formatted']) && strlen($parameters['jws_date_range_end_formatted']) == 10) {
-            $sql_post_total .= "AND $table_name_posts.post_date <= '".$parameters['jws_date_range_end_formatted']." 23:59:59' ";
+            $sql_post_total .= " AND $table_name_posts.post_date <= '".$parameters['jws_date_range_end_formatted']." 23:59:59'";
         }
 
         $jws_post_total = $wpdb->get_results($sql_post_total);
@@ -352,7 +352,7 @@ class Just_Writing_Statsitics_Admin
         if( $posts_count == 0 ) { $posts_count = 1; }
 
         if ($ret) {
-            $percentage = ($step * 50 / $posts_count * 100);
+            $percentage = floor($step * 50 / $posts_count * 100);
             if ($percentage > 100) {
                 $percentage = 100;
             }
