@@ -35,7 +35,7 @@
 
 #just-writing-statistics .jws-table { overflow-x: auto; }
 #just-writing-statistics table.widefat th { vertical-align: bottom; }
-#just-writing-statistics table.widefat td { white-space: nowrap; }
+#just-writing-statistics table.widefat td {  }
 #just-writing-statistics table.widefat th.jws-post-type { font-weight: bold; }
 #just-writing-statistics table.widefat img.avatar { float: left; margin-top: 1px; margin-right: 10px; }
 #just-writing-statistics table.jws-post-type-stats .jws-table-stats-header-one th { text-align: center; }
