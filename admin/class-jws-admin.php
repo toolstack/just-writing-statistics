@@ -477,53 +477,70 @@ class Just_Writing_Statsitics_Admin
             $jws_tab = $_GET['tab'];
         }
 
+        $excluded_types = array( 'wp_global_styles' );
+        $excluded_types_sql = '';
+
+        if( count( $excluded_types ) > 0 ) {
+            $excluded_types_sql .= 'AND post_type NOT IN (\'';
+
+            foreach( $excluded_types as $type ) {
+                $excluded_types_sql .= '%s\', ';
+            }
+
+            $excluded_types_sql = trim( $excluded_types_sql, '\', ' );
+
+            $excluded_types_sql .= '\')';
+        }
+
         if (!isset($jws_tab) || $jws_tab == 'top-content') {
             $sql_jws_statistics = "
 				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count
 				FROM $table_name_posts
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
 				ORDER BY post_word_count DESC, post_date DESC
 				LIMIT 10";
         } elseif ($jws_tab == 'all-content') {
             $sql_jws_statistics = "
 				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count
 				FROM $table_name_posts
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
 				ORDER BY post_word_count DESC, post_date DESC";
         } elseif ($jws_tab == 'monthly-statistics') {
             $sql_jws_statistics = "
 				SELECT MID(post_date, 1, 7) AS post_date, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
 				FROM $table_name_posts
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
 				GROUP BY MID(post_date, 1, 7), post_type, post_status
                 ORDER BY post_date DESC";
         } elseif ($jws_tab == 'yearly-statistics') {
             $sql_jws_statistics = "
                 SELECT MID(post_date, 1, 4) AS post_date, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
                 FROM $table_name_posts
-                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
                 GROUP BY MID(post_date, 1, 4), post_type, post_status
                 ORDER BY post_date DESC";
         } elseif ($jws_tab == 'tag-statistics') {
             $sql_jws_statistics = "
 				SELECT post_author, post_type, post_status, post_id, post_word_count
 				FROM $table_name_posts
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
 				ORDER BY post_id ASC";
         } elseif ($jws_tab == 'category-statistics') {
             $sql_jws_statistics = "
                 SELECT post_author, post_type, post_status, post_id, post_word_count
                 FROM $table_name_posts
-                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
                 ORDER BY post_id ASC";
         } elseif ($jws_tab == 'author-statistics') {
             $sql_jws_statistics = "
                 SELECT post_author, post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
                 FROM $table_name_posts
-                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
                 GROUP BY post_author, post_type, post_status
                 ORDER BY post_author ASC";
         }
+
+        $sql_jws_statistics = $wpdb->prepare( $sql_jws_statistics, $excluded_types );
 
         $jws_statistics = $wpdb->get_results($sql_jws_statistics);
 
