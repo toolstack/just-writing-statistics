@@ -86,6 +86,7 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 * Added about tab
 * Add graphs to the statistic tabs
 * Added scheduled posts as a grouping for statistics separate from unpublished
+* Added setting to exclude post types
 
 = 3.2.3 =
 * Release date: 6 Oct 2021
