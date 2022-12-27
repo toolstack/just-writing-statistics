@@ -707,7 +707,7 @@ class Just_Writing_Statsitics_Admin
                     $arr_jws_tags[$tag->name]['total'] += $total->post_word_count;
                 }
 
-                ksort( $arr_jws_tags );
+                ksort( $arr_jws_tags, SORT_FLAG_CASE | SORT_STRING);
 
             }
         } elseif ($jws_tab == 'category-statistics') {
@@ -753,7 +753,7 @@ class Just_Writing_Statsitics_Admin
                     $arr_jws_categories[$category->name]['total'] += $total->post_word_count;
                 }
 
-                ksort( $arr_jws_categories );
+                ksort( $arr_jws_categories, SORT_FLAG_CASE | SORT_STRING);
 
             }
         } elseif ($jws_tab == 'author-statistics') {
