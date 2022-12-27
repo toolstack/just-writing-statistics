@@ -49,6 +49,24 @@ Even worse, the existing plugin has a known security vulnerability in it and so 
 
 As such, a fork is required to fix the security issue and bring the plugin functionality back.
 
+= I've got a very large site, how's the performance going to be? =
+
+Statistics are inherently resource intensive, the large your site is, the slower the statistic generation will be.
+
+For the general content/monthly/yearly/author based statistics, these should remain quick to display no matter the site size as a custom table is used to gather the data whenever a item is saved.
+
+For Tags and Categories this is not the case and these are calculated at display time.  Even with a largish site, this should not be significant, a few seconds at worst.  If this becomes an issue I'll look into converting this code over to a custom table as well.
+
+= Why do I see post types in the settings tab that I don't see on any of the statistics tabs? =
+
+If a post type has no items associated with it, Just Writing Statistics will no include it in the statistic displays.
+
+= Do I really have to calculate the statistics by date range? =
+
+Probably not, but make sure to wait for the progress bar to disappear before reloading the page.  If it is running for more than five minutes, then it's failed silently and you'll need to break up the calculation into chunks.
+
+However, even on a modest hosting provider, it would take hundreds of thousands (maybe millions) of posts to get to this point.
+
 = How do the Just Writing Statistics Shortcodes work? =
 
 There are two shortcodes available:
