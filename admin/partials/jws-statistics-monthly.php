@@ -36,9 +36,9 @@
     $max_item = 0;
 
     foreach( $arr_jws_months as $month_name => $month) {
-        $labels = json_encode( $month_name ). ', ' . $labels;
-        $word_data = json_encode( $month['total'] ) . ', ' . $word_data;
-        $item_data = json_encode( $month['items'] ) . ', ' . $item_data;
+        $labels = html_entity_decode( json_encode( $month_name ) ) . ', ' . $labels;
+        $word_data = html_entity_decode( json_encode( $month['total'] ) ) . ', ' . $word_data;
+        $item_data = html_entity_decode( json_encode( $month['items'] ) ) . ', ' . $item_data;
 
         if( $month['total'] > $max_word ) { $max_word = $month['total']; }
         if( $month['items'] > $max_item ) { $max_item = $month['items']; }

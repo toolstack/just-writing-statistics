@@ -37,22 +37,16 @@
     $max_item = 0;
 
     foreach( $arr_jws_years as $year => $count) {
-        $labels = json_encode( $year ) . ', ' . $labels;
-        $word_data = json_encode( $count['total'] ) . ', ' . $word_data;
-        $item_data = json_encode( $count['items'] ) . ', ' . $item_data;
+        $labels = html_entity_decode( json_encode( $year ) ) . ', ' . $labels;
+        $word_data = html_entity_decode( json_encode( $count['total'] ) ) . ', ' . $word_data;
+        $item_data = html_entity_decode( json_encode( $count['items'] ) ) . ', ' . $item_data;
 
-        if( $month['total'] > $max_word ) { $max_word = $month['total']; }
-        if( $month['items'] > $max_item ) { $max_item = $month['items']; }
+        if( $count['total'] > $max_word ) { $max_word = $count['total']; }
+        if( $count['items'] > $max_item ) { $max_item = $count['items']; }
     }
 
     $labels = trim( $labels, ', ' );
     $word_data = trim( $word_data, ', ' );
-
-    // Figure out a good stepping for the word count.
-    $year_step = round( $max_year / 10, -4 );
-    if( $year_step == 0 ) { $year_step = round( $max_year / 10, -3 ); }
-    if( $year_step == 0 ) { $year_step = round( $max_year / 10, -2 ); }
-    if( $year_step == 0 ) { $year_step = round( $max_year / 10, -1 ); }
 
 ?>
 

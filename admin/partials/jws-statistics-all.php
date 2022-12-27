@@ -34,13 +34,13 @@
     $max_item = 0;
 
     foreach( $arr_jws_post_types as $names ) {
-        $labels .= json_encode( $names['plural_name'] ) . ', ';
+        $labels .= html_entity_decode( json_encode( $names['plural_name'] ) ) . ', ';
     }
 
     foreach( $arr_jws_post_status as $post_type => $post_status ) {
 
         foreach( $post_status as $type => $count ) {
-            $count_data[$type] .= json_encode( $count['count'] ) . ', ';
+            $count_data[$type] .= html_entity_decode( json_encode( $count['count'] ) ) . ', ';
 
             if( $count['count'] > $max_item ) { $max_item = $count['count']; }
         }

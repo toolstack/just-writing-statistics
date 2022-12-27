@@ -32,11 +32,16 @@
     $labels = '';
     $word_data = '';
     $item_data = '';
+    $max_word = 0;
+    $max_item = 0;
 
     foreach( $arr_jws_authors as $index => $author) {
-        $labels = json_encode( $author['display_name'] ) . ', ' . $labels;
-        $word_data = json_encode( $author['total'] ) . ', ' . $word_data;
-        $item_data = json_encode( $author['items'] ) . ', ' . $item_data;
+        $labels = html_entity_decode( json_encode( $author['display_name'] ) ) . ', ' . $labels;
+        $word_data = html_entity_decode( json_encode( $author['total'] ) ) . ', ' . $word_data;
+        $item_data = html_entity_decode( json_encode( $author['items'] ) ) . ', ' . $item_data;
+
+        if( $max_word < $author['total'] ) { $max_word = $author['total']; }
+        if( $max_item < $author['items'] ) { $max_item = $author['items']; }
     }
 
     $labels = trim( $labels, ', ' );
@@ -56,13 +61,18 @@
         {
           label: '<?php _e('Words','just-writing-statistics');?>',
           data: [<?php echo $word_data;?>],
-          backgroundColor: '#0056a6',
-          borderColor : "#0056a6",
+          backgroundColor: '#0056a688',
+          borderColor : "#0056a688",
         },
       ],
     },
     options: {
-        aspectRatio: 1.5
+      aspectRatio: 1.5,
+      scale: {
+        ticks: {
+          stepSize: <?php echo $this->calculate_chart_step_size( $max_word );?>
+        }
+      }
     },
   });
 
@@ -76,13 +86,18 @@
         {
           label: '<?php _e('Words','just-writing-statistics');?>',
           data: [<?php echo $item_data;?>],
-          backgroundColor: '#0056a6',
-          borderColor : "#0056a6",
+          backgroundColor: '#0056a688',
+          borderColor : "#0056a688",
         },
       ],
     },
     options: {
-        aspectRatio: 1.5
+      aspectRatio: 1.5,
+      scale: {
+        ticks: {
+          stepSize: <?php echo $this->calculate_chart_step_size( $max_item );?>
+        }
+      }
     },
   });
 </script>

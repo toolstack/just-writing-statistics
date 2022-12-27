@@ -28,11 +28,11 @@
     $max_word = 0;
 
     foreach( $arr_jws_tags as $tag_name => $tag ) {
-        $labels .= json_encode( $tag_name ). ', ';
+        $labels .= html_entity_decode( json_encode( $tag_name ) ) . ', ';
 
-        $word_data['published'] .= json_encode( $tag['published'] ) . ', ';
-        $word_data['scheduled'] .= json_encode( $tag['scheduled'] ) . ', ';
-        $word_data['unpublished'] .= json_encode( $tag['unpublished'] ) . ', ';
+        $word_data['published'] .= html_entity_decode( json_encode( $tag['published'] ) ) . ', ';
+        $word_data['scheduled'] .= html_entity_decode( json_encode( $tag['scheduled'] ) ) . ', ';
+        $word_data['unpublished'] .= html_entity_decode( json_encode( $tag['unpublished'] ) ) . ', ';
 
         if( $tag['total'] > $max_word ) { $max_word = $tag['total']; }
     }

@@ -29,11 +29,11 @@
     $max_word = 0;
 
     foreach( $arr_jws_categories as $category_name => $category ) {
-        $labels .= json_encode( $category_name ) . ', ';
+        $labels .= html_entity_decode( json_encode( $category_name ) ) . ', ';
 
-        $word_data['published'] .= json_encode( $category['published'] ) . ', ';
-        $word_data['scheduled'] .= json_encode( $category['scheduled'] ) . ', ';
-        $word_data['unpublished'] .= json_encode( $category['unpublished'] ) . ', ';
+        $word_data['published'] .= html_entity_decode( json_encode( $category['published'] ) ) . ', ';
+        $word_data['scheduled'] .= html_entity_decode( json_encode( $category['scheduled'] ) ) . ', ';
+        $word_data['unpublished'] .= html_entity_decode( json_encode( $category['unpublished'] ) ) . ', ';
 
         if( $category['total'] > $max_word ) { $max_word = $category['total']; }
     }
