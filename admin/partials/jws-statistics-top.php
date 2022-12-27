@@ -34,11 +34,11 @@
     $count_data = array();
     $max_item = 0;
 
-    foreach( $arr_jws_post_types as $names ) {
+    foreach( $jws_dataset_post_types as $names ) {
         $labels .= html_entity_decode( json_encode( $names['plural_name'] ) ) . ', ';
     }
 
-    foreach( $arr_jws_post_status as $post_type => $post_status ) {
+    foreach( $jws_dataset_post_status as $post_type => $post_status ) {
 
         foreach( $post_status as $type => $count ) {
             $count_data[$type] .= html_entity_decode( json_encode( $count['count'] ) ) . ', ';
@@ -96,7 +96,7 @@
     $words_data = array();
     $max_word = 0;
 
-    foreach( $arr_jws_post_status as $post_type => $post_status ) {
+    foreach( $jws_dataset_post_status as $post_type => $post_status ) {
 
         foreach( $post_status as $type => $count ) {
             $words_data[$type] .= html_entity_decode( json_encode( $count['words'] ) ). ', ';
@@ -165,7 +165,7 @@
 
             <tbody>
             <?php $jws_counter_top_content = 0; ?>
-            <?php foreach ($arr_jws_posts as $index => $post) : ?>
+            <?php foreach ($jws_dataset_posts as $index => $post) : ?>
 
                 <?php echo '<tr'.($index % 2 == 1 ? '' : " class='alternate'").'>'; ?>
                     <td><?php echo number_format($post['post_word_count']); ?></td>
@@ -182,7 +182,7 @@
                     <td><?php echo esc_html( $post['post_type'] ); ?></td>
                     <td><?php echo esc_html( $post['post_status'] ); ?></td>
                     <td>
-                        <?php echo get_avatar($post['post_author_id'], 32, 'mysteryman', $arr_jws_authors[$post['post_author_id']]['display_name'], ['class' => 'avatar avatar-32 photo']); ?>
+                        <?php echo get_avatar($post['post_author_id'], 32, 'mysteryman', $jws_dataset_authors[$post['post_author_id']]['display_name'], ['class' => 'avatar avatar-32 photo']); ?>
                         <?php echo esc_html( $post['post_author'] ); ?>
                     </td>
                 </tr>
@@ -191,4 +191,3 @@
             </tbody>
         </table>
     </div>
-

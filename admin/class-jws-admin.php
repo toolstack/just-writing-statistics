@@ -610,291 +610,291 @@ class Just_Writing_Statsitics_Admin
         $jws_statistics = $wpdb->get_results($sql_jws_statistics);
 
         if (!isset($jws_tab) || $jws_tab == 'top-content' || $jws_tab == 'all-content') {
-            $arr_jws_posts = [];
-            $arr_jws_post_types = [];
-            $arr_jws_post_status = [];
+            $jws_dataset_posts = [];
+            $jws_dataset_post_types = [];
+            $jws_dataset_post_status = [];
 
             foreach ($jws_statistics as $jws_post) {
                 // Load post type array
-                if (!isset($arr_jws_post_types[$jws_post->post_type])) {
+                if (!isset($jws_dataset_post_types[$jws_post->post_type])) {
                     $post_type_object = get_post_type_object($jws_post->post_type);
 
-                    $arr_jws_post_types[$jws_post->post_type]['plural_name'] = $post_type_object->labels->name;
-                    $arr_jws_post_types[$jws_post->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    $jws_dataset_post_types[$jws_post->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $jws_dataset_post_types[$jws_post->post_type]['singular_name'] = $post_type_object->labels->singular_name;
                 }
 
                 // Load authors array
-                if (!isset($arr_jws_authors[$jws_post->post_author])) {
-                    $arr_jws_authors[$jws_post->post_author]['display_name'] = get_the_author_meta('display_name', $jws_post->post_author);
+                if (!isset($jws_dataset_authors[$jws_post->post_author])) {
+                    $jws_dataset_authors[$jws_post->post_author]['display_name'] = get_the_author_meta('display_name', $jws_post->post_author);
                 }
 
-                $arr_jws_post = [
+                $jws_dataset_post = [
                     'post_id' => $jws_post->post_id,
                     'post_title' => get_the_title($jws_post->post_id),
                     'post_status' => ucwords($jws_post->post_status),
-                    'post_type' => $arr_jws_post_types[$jws_post->post_type]['singular_name'],
-                    'post_author' => $arr_jws_authors[$jws_post->post_author]['display_name'],
+                    'post_type' => $jws_dataset_post_types[$jws_post->post_type]['singular_name'],
+                    'post_author' => $jws_dataset_authors[$jws_post->post_author]['display_name'],
                     'post_author_id' => $jws_post->post_author,
                     'post_word_count' => $jws_post->post_word_count,
                     'permalink' => get_permalink($jws_post->post_id),
                 ];
 
-                if( ! array_key_exists($arr_jws_post['post_type'], $arr_jws_post_status) ) { $arr_jws_post_status[$arr_jws_post['post_type']] = array(); }
+                if( ! array_key_exists($jws_dataset_post['post_type'], $jws_dataset_post_status) ) { $jws_dataset_post_status[$jws_dataset_post['post_type']] = array(); }
 
-                if( ! array_key_exists($arr_jws_post['post_status'], $arr_jws_post_status[$arr_jws_post['post_type']]) ) { $arr_jws_post_status[$arr_jws_post['post_type']][$arr_jws_post['post_status']] = array( 0, 0 ); }
+                if( ! array_key_exists($jws_dataset_post['post_status'], $jws_dataset_post_status[$jws_dataset_post['post_type']]) ) { $jws_dataset_post_status[$jws_dataset_post['post_type']][$jws_dataset_post['post_status']] = array( 0, 0 ); }
 
-                $arr_jws_post_status[$arr_jws_post['post_type']][$arr_jws_post['post_status']]['count']++;
-                $arr_jws_post_status[$arr_jws_post['post_type']][$arr_jws_post['post_status']]['words'] += intval( $arr_jws_post['post_word_count'] );
+                $jws_dataset_post_status[$jws_dataset_post['post_type']][$jws_dataset_post['post_status']]['count']++;
+                $jws_dataset_post_status[$jws_dataset_post['post_type']][$jws_dataset_post['post_status']]['words'] += intval( $jws_dataset_post['post_word_count'] );
 
-                $arr_jws_posts[] = $arr_jws_post;
+                $jws_dataset_posts[] = $jws_dataset_post;
             }
         } elseif ($jws_tab == 'monthly-statistics') {
-            $arr_jws_months = [];
+            $jws_dataset_months = [];
 
             foreach ($jws_statistics as $total) {
                 // Load post type array
-                if (!isset($arr_jws_post_types[$total->post_type])) {
+                if (!isset($jws_dataset_post_types[$total->post_type])) {
                     $post_type_object = get_post_type_object($total->post_type);
 
-                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
-                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    $jws_dataset_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $jws_dataset_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
                 }
 
                 // Load months array
-                if (!isset($arr_jws_months[$total->post_date])) {
-                    $arr_jws_months[$total->post_date]['total'] = 0;
-                    $arr_jws_months[$total->post_date]['items'] = 0;
+                if (!isset($jws_dataset_months[$total->post_date])) {
+                    $jws_dataset_months[$total->post_date]['total'] = 0;
+                    $jws_dataset_months[$total->post_date]['items'] = 0;
                 }
 
-                if (!isset($arr_jws_months[$total->post_date][$total->post_type])) {
-                    $arr_jws_months[$total->post_date][$total->post_type]['name'] = $arr_jws_post_types[$total->post_type]['plural_name'];
-                    $arr_jws_months[$total->post_date][$total->post_type]['published']['posts'] = 0;
-                    $arr_jws_months[$total->post_date][$total->post_type]['published']['word_count'] = 0;
-                    $arr_jws_months[$total->post_date][$total->post_type]['unpublished']['posts'] = 0;
-                    $arr_jws_months[$total->post_date][$total->post_type]['unpublished']['word_count'] = 0;
+                if (!isset($jws_dataset_months[$total->post_date][$total->post_type])) {
+                    $jws_dataset_months[$total->post_date][$total->post_type]['name'] = $jws_dataset_post_types[$total->post_type]['plural_name'];
+                    $jws_dataset_months[$total->post_date][$total->post_type]['published']['posts'] = 0;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['published']['word_count'] = 0;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['unpublished']['posts'] = 0;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['unpublished']['word_count'] = 0;
                 }
 
                 if ($total->post_status == 'publish') {
-                    $arr_jws_months[$total->post_date][$total->post_type]['published']['posts'] += $total->posts;
-                    $arr_jws_months[$total->post_date][$total->post_type]['published']['word_count'] += $total->word_count;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['published']['posts'] += $total->posts;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['published']['word_count'] += $total->word_count;
                 } else if ($total->post_status == 'future') {
-                    $arr_jws_months[$total->post_date][$total->post_type]['scheduled']['posts'] += $total->posts;
-                    $arr_jws_months[$total->post_date][$total->post_type]['scheduled']['word_count'] += $total->word_count;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['scheduled']['posts'] += $total->posts;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['scheduled']['word_count'] += $total->word_count;
                 } else {
-                    $arr_jws_months[$total->post_date][$total->post_type]['unpublished']['posts'] += $total->posts;
-                    $arr_jws_months[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['unpublished']['posts'] += $total->posts;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
-                $arr_jws_months[$total->post_date]['items']++;
-                $arr_jws_months[$total->post_date]['total'] += $total->word_count;
+                $jws_dataset_months[$total->post_date]['items']++;
+                $jws_dataset_months[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'yearly-statistics') {
-            $arr_jws_years = [];
+            $jws_dataset_years = [];
 
             foreach ($jws_statistics as $total) {
                 // Load post type array
-                if (!isset($arr_jws_post_types[$total->post_type])) {
+                if (!isset($jws_dataset_post_types[$total->post_type])) {
                     $post_type_object = get_post_type_object($total->post_type);
 
-                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
-                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    $jws_dataset_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $jws_dataset_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
                 }
 
                 // Load months array
-                if (!isset($arr_jws_years[$total->post_date])) {
-                    $arr_jws_years[$total->post_date]['total'] = 0;
-                    $arr_jws_years[$total->post_date]['items'] = 0;
+                if (!isset($jws_dataset_years[$total->post_date])) {
+                    $jws_dataset_years[$total->post_date]['total'] = 0;
+                    $jws_dataset_years[$total->post_date]['items'] = 0;
                 }
 
-                if (!isset($arr_jws_months[$total->post_date][$total->post_type])) {
-                    $arr_jws_years[$total->post_date][$total->post_type]['name'] = $arr_jws_post_types[$total->post_type]['plural_name'];
-                    $arr_jws_years[$total->post_date][$total->post_type]['published']['posts'] = 0;
-                    $arr_jws_years[$total->post_date][$total->post_type]['published']['word_count'] = 0;
-                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['posts'] = 0;
-                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['word_count'] = 0;
+                if (!isset($jws_dataset_months[$total->post_date][$total->post_type])) {
+                    $jws_dataset_years[$total->post_date][$total->post_type]['name'] = $jws_dataset_post_types[$total->post_type]['plural_name'];
+                    $jws_dataset_years[$total->post_date][$total->post_type]['published']['posts'] = 0;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['published']['word_count'] = 0;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['unpublished']['posts'] = 0;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['unpublished']['word_count'] = 0;
                 }
 
                 if ($total->post_status == 'publish') {
-                    $arr_jws_years[$total->post_date][$total->post_type]['published']['posts'] += $total->posts;
-                    $arr_jws_years[$total->post_date][$total->post_type]['published']['word_count'] += $total->word_count;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['published']['posts'] += $total->posts;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['published']['word_count'] += $total->word_count;
                 } else if ($total->post_status == 'future') {
-                    $arr_jws_years[$total->post_date][$total->post_type]['scheduled']['posts'] += $total->posts;
-                    $arr_jws_years[$total->post_date][$total->post_type]['scheduled']['word_count'] += $total->word_count;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['scheduled']['posts'] += $total->posts;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['scheduled']['word_count'] += $total->word_count;
                 } else {
-                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['posts'] += $total->posts;
-                    $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['unpublished']['posts'] += $total->posts;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
-                $arr_jws_years[$total->post_date]['items']++;
-                $arr_jws_years[$total->post_date]['total'] += $total->word_count;
+                $jws_dataset_years[$total->post_date]['items']++;
+                $jws_dataset_years[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'tag-statistics') {
-            $arr_jws_tags = [];
-            $arr_jws_post_types = [];
+            $jws_dataset_tags = [];
+            $jws_dataset_post_types = [];
 
             foreach ($jws_statistics as $total) {
                 // Load post type array
-                if (!isset($arr_jws_post_types[$total->post_type])) {
+                if (!isset($jws_dataset_post_types[$total->post_type])) {
                     $post_type_object = get_post_type_object($total->post_type);
 
-                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
-                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    $jws_dataset_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $jws_dataset_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
                 }
 
 
                 $tags = wp_get_post_tags( $total->post_id );
 
                 foreach( $tags as $tag ) {
-                    if (!isset($arr_jws_tags[$tag->name][$total->post_type])) {
-                        $arr_jws_tags[$tag->name][$total->post_type]['published']['posts'] = 0;
-                        $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] = 0;
-                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['posts'] = 0;
-                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] = 0;
-                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts'] = 0;
-                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] = 0;
+                    if (!isset($jws_dataset_tags[$tag->name][$total->post_type])) {
+                        $jws_dataset_tags[$tag->name][$total->post_type]['published']['posts'] = 0;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['published']['word_count'] = 0;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['scheduled']['posts'] = 0;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['scheduled']['word_count'] = 0;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['unpublished']['posts'] = 0;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['unpublished']['word_count'] = 0;
                     }
 
                     if ($total->post_status == 'publish') {
-                        $arr_jws_tags[$tag->name][$total->post_type]['published']['posts']++;
-                        $arr_jws_tags[$tag->name][$total->post_type]['published']['word_count'] += $total->post_word_count;
-                        $arr_jws_tags[$tag->name]['published'] += $total->post_word_count;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['published']['posts']++;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['published']['word_count'] += $total->post_word_count;
+                        $jws_dataset_tags[$tag->name]['published'] += $total->post_word_count;
                     } else if ($total->post_status == 'future') {
-                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['posts']++;
-                        $arr_jws_tags[$tag->name][$total->post_type]['scheduled']['word_count'] += $total->post_word_count;
-                        $arr_jws_tags[$tag->name]['scheduled'] += $total->post_word_count;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['scheduled']['posts']++;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['scheduled']['word_count'] += $total->post_word_count;
+                        $jws_dataset_tags[$tag->name]['scheduled'] += $total->post_word_count;
                     } else {
-                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['posts']+= $total->post_word_count;
-                        $arr_jws_tags[$tag->name][$total->post_type]['unpublished']['word_count'] += $total->post_word_count;
-                        $arr_jws_tags[$tag->name]['unpublished'] += $total->post_word_count;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['unpublished']['posts']+= $total->post_word_count;
+                        $jws_dataset_tags[$tag->name][$total->post_type]['unpublished']['word_count'] += $total->post_word_count;
+                        $jws_dataset_tags[$tag->name]['unpublished'] += $total->post_word_count;
                     }
 
-                    $arr_jws_tags[$tag->name]['items']++;
-                    $arr_jws_tags[$tag->name]['total'] += $total->post_word_count;
+                    $jws_dataset_tags[$tag->name]['items']++;
+                    $jws_dataset_tags[$tag->name]['total'] += $total->post_word_count;
                 }
 
-                ksort( $arr_jws_tags, SORT_FLAG_CASE | SORT_STRING);
+                ksort( $jws_dataset_tags, SORT_FLAG_CASE | SORT_STRING);
 
             }
         } elseif ($jws_tab == 'category-statistics') {
-            $arr_jws_categories = [];
-            $arr_jws_post_types = [];
+            $jws_dataset_categories = [];
+            $jws_dataset_post_types = [];
 
             foreach ($jws_statistics as $total) {
                 // Load post type array
-                if (!isset($arr_jws_post_types[$total->post_type])) {
+                if (!isset($jws_dataset_post_types[$total->post_type])) {
                     $post_type_object = get_post_type_object($total->post_type);
 
-                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
-                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    $jws_dataset_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $jws_dataset_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
                 }
 
                 $categories = get_the_category( $total->post_id );
 
                 foreach( $categories as $category ) {
-                    if (!isset($arr_jws_categories[$category->name][$total->post_type])) {
-                        $arr_jws_categories[$category->name][$total->post_type]['published']['posts'] = 0;
-                        $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] = 0;
-                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['posts'] = 0;
-                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] = 0;
-                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts'] = 0;
-                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] = 0;
+                    if (!isset($jws_dataset_categories[$category->name][$total->post_type])) {
+                        $jws_dataset_categories[$category->name][$total->post_type]['published']['posts'] = 0;
+                        $jws_dataset_categories[$category->name][$total->post_type]['published']['word_count'] = 0;
+                        $jws_dataset_categories[$category->name][$total->post_type]['scheduled']['posts'] = 0;
+                        $jws_dataset_categories[$category->name][$total->post_type]['scheduled']['word_count'] = 0;
+                        $jws_dataset_categories[$category->name][$total->post_type]['unpublished']['posts'] = 0;
+                        $jws_dataset_categories[$category->name][$total->post_type]['unpublished']['word_count'] = 0;
                     }
 
                     if ($total->post_status == 'publish') {
-                        $arr_jws_categories[$category->name][$total->post_type]['published']['posts']++;
-                        $arr_jws_categories[$category->name][$total->post_type]['published']['word_count'] += $total->post_word_count;
-                        $arr_jws_categories[$category->name]['published'] += $total->post_word_count;
+                        $jws_dataset_categories[$category->name][$total->post_type]['published']['posts']++;
+                        $jws_dataset_categories[$category->name][$total->post_type]['published']['word_count'] += $total->post_word_count;
+                        $jws_dataset_categories[$category->name]['published'] += $total->post_word_count;
                     } else if ($total->post_status == 'future') {
-                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['posts']++;
-                        $arr_jws_categories[$category->name][$total->post_type]['scheduled']['word_count'] += $total->post_word_count;
-                        $arr_jws_categories[$category->name]['scheduled'] += $total->post_word_count;
+                        $jws_dataset_categories[$category->name][$total->post_type]['scheduled']['posts']++;
+                        $jws_dataset_categories[$category->name][$total->post_type]['scheduled']['word_count'] += $total->post_word_count;
+                        $jws_dataset_categories[$category->name]['scheduled'] += $total->post_word_count;
                     } else {
-                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['posts']++;
-                        $arr_jws_categories[$category->name][$total->post_type]['unpublished']['word_count'] += $total->post_word_count;
-                        $arr_jws_categories[$category->name]['unpublished'] += $total->post_word_count;
+                        $jws_dataset_categories[$category->name][$total->post_type]['unpublished']['posts']++;
+                        $jws_dataset_categories[$category->name][$total->post_type]['unpublished']['word_count'] += $total->post_word_count;
+                        $jws_dataset_categories[$category->name]['unpublished'] += $total->post_word_count;
                     }
 
-                    $arr_jws_categories[$category->name]['items']++;
-                    $arr_jws_categories[$category->name]['total'] += $total->post_word_count;
+                    $jws_dataset_categories[$category->name]['items']++;
+                    $jws_dataset_categories[$category->name]['total'] += $total->post_word_count;
                 }
 
-                ksort( $arr_jws_categories, SORT_FLAG_CASE | SORT_STRING);
+                ksort( $jws_dataset_categories, SORT_FLAG_CASE | SORT_STRING);
 
             }
         } elseif ($jws_tab == 'author-statistics') {
-            $arr_jws_authors = [];
-            $arr_jws_post_types = [];
+            $jws_dataset_authors = [];
+            $jws_dataset_post_types = [];
 
             foreach ($jws_statistics as $total) {
                 // Load post type array
-                if (!isset($arr_jws_post_types[$total->post_type])) {
+                if (!isset($jws_dataset_post_types[$total->post_type])) {
                     $post_type_object = get_post_type_object($total->post_type);
 
-                    $arr_jws_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
-                    $arr_jws_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    $jws_dataset_post_types[$total->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $jws_dataset_post_types[$total->post_type]['singular_name'] = $post_type_object->labels->singular_name;
                 }
 
                 // Load authors array
-                if (!isset($arr_jws_authors[$total->post_author])) {
-                    $arr_jws_authors[$total->post_author]['display_name'] = get_the_author_meta('display_name', $total->post_author);
-                    $arr_jws_authors[$total->post_author]['total'] = 0;
-                    $arr_jws_authors[$total->post_author]['items'] = 0;
+                if (!isset($jws_dataset_authors[$total->post_author])) {
+                    $jws_dataset_authors[$total->post_author]['display_name'] = get_the_author_meta('display_name', $total->post_author);
+                    $jws_dataset_authors[$total->post_author]['total'] = 0;
+                    $jws_dataset_authors[$total->post_author]['items'] = 0;
                 }
 
-                if (!isset($arr_jws_authors[$total->post_author][$total->post_type])) {
-                    $arr_jws_authors[$total->post_author][$total->post_type]['published']['posts'] = 0;
-                    $arr_jws_authors[$total->post_author][$total->post_type]['published']['word_count'] = 0;
-                    $arr_jws_authors[$total->post_author][$total->post_type]['unpublished']['posts'] = 0;
-                    $arr_jws_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] = 0;
+                if (!isset($jws_dataset_authors[$total->post_author][$total->post_type])) {
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['published']['posts'] = 0;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['published']['word_count'] = 0;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['unpublished']['posts'] = 0;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] = 0;
                 }
 
                 if ($total->post_status == 'publish') {
-                    $arr_jws_authors[$total->post_author][$total->post_type]['published']['posts'] += $total->posts;
-                    $arr_jws_authors[$total->post_author][$total->post_type]['published']['word_count'] += $total->word_count;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['published']['posts'] += $total->posts;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['published']['word_count'] += $total->word_count;
                 } else if ($total->post_status == 'future') {
-                    $arr_jws_authors[$total->post_author][$total->post_type]['scheduled']['posts'] += $total->posts;
-                    $arr_jws_authors[$total->post_author][$total->post_type]['scheduled']['word_count'] += $total->word_count;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['scheduled']['posts'] += $total->posts;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['scheduled']['word_count'] += $total->word_count;
                 } else {
-                    $arr_jws_authors[$total->post_author][$total->post_type]['unpublished']['posts'] += $total->posts;
-                    $arr_jws_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] += $total->word_count;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['unpublished']['posts'] += $total->posts;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
-                $arr_jws_authors[$total->post_author]['items']++;
-                $arr_jws_authors[$total->post_author]['total'] += $total->word_count;
+                $jws_dataset_authors[$total->post_author]['items']++;
+                $jws_dataset_authors[$total->post_author]['total'] += $total->word_count;
             }
 
             // Sort authors array by total
             uasort(
-                $arr_jws_authors, function ($a, $b) {
+                $jws_dataset_authors, function ($a, $b) {
                     return $b['total'] - $a['total'];
                 }
             );
         }
 
         // Sort Post Types in a more readable way
-        if (isset($arr_jws_post_types)) {
-            $arr_jws_post_types_standard = [];
-            $arr_jws_post_types_custom = [];
+        if (isset($jws_dataset_post_types)) {
+            $jws_dataset_post_types_standard = [];
+            $jws_dataset_post_types_custom = [];
 
-            if (isset($arr_jws_post_types['post'])) {
-                $arr_jws_post_types_standard['post'] = $arr_jws_post_types['post'];
+            if (isset($jws_dataset_post_types['post'])) {
+                $jws_dataset_post_types_standard['post'] = $jws_dataset_post_types['post'];
             }
-            if (isset($arr_jws_post_types['page'])) {
-                $arr_jws_post_types_standard['page'] = $arr_jws_post_types['page'];
+            if (isset($jws_dataset_post_types['page'])) {
+                $jws_dataset_post_types_standard['page'] = $jws_dataset_post_types['page'];
             }
 
-            foreach ($arr_jws_post_types as $post_type_slug => $post_type) {
+            foreach ($jws_dataset_post_types as $post_type_slug => $post_type) {
                 if ($post_type_slug != 'post' && $post_type_slug != 'page') {
-                    $arr_jws_post_types_custom[$post_type_slug] = $post_type;
+                    $jws_dataset_post_types_custom[$post_type_slug] = $post_type;
                 }
             }
 
             uasort(
-                $arr_jws_post_types_custom, function ($a, $b) {
+                $jws_dataset_post_types_custom, function ($a, $b) {
                     return strcmp($a['plural_name'], $b['plural_name']);
                 }
             );
-            $arr_jws_post_types = array_merge($arr_jws_post_types_standard, $arr_jws_post_types_custom);
+            $jws_dataset_post_types = array_merge($jws_dataset_post_types_standard, $jws_dataset_post_types_custom);
         }
 
         include_once 'partials/jws-statistics.php';

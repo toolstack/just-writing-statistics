@@ -36,7 +36,7 @@
     $max_word = 0;
     $max_item = 0;
 
-    foreach( $arr_jws_years as $year => $count) {
+    foreach( $jws_dataset_years as $year => $count) {
         $labels = html_entity_decode( json_encode( $year ) ) . ', ' . $labels;
         $word_data = html_entity_decode( json_encode( $count['total'] ) ) . ', ' . $word_data;
         $item_data = html_entity_decode( json_encode( $count['items'] ) ) . ', ' . $item_data;
@@ -136,7 +136,7 @@
                     <tr class="jws-table-stats-header-one">
                         <th></th>
                         <th></th>
-                        <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
+                        <?php foreach ($jws_dataset_post_types as $index => $post_type) : ?>
                         <th colspan="3" class="jws-post-type"><?php echo esc_html( $post_type['plural_name'] ); ?></th>
                         <?php endforeach; ?>
                     </tr>
@@ -144,7 +144,7 @@
                     <tr class="jws-table-stats-header-two">
                         <th><?php _e('Month', 'just-writing-statistics'); ?></th>
                         <th><?php _e('Words', 'just-writing-statistics'); ?></th>
-                        <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
+                        <?php foreach ($jws_dataset_post_types as $index => $post_type) : ?>
                         <th><?php _e('Published', 'just-writing-statistics'); ?></th>
                         <th><?php _e('Scheduled', 'just-writing-statistics'); ?></th>
                         <th><?php _e('Unpublished', 'just-writing-statistics'); ?></th>
@@ -154,12 +154,12 @@
 
                 <tbody>
                     <?php $jws_counter_yearly_statistics = 0; ?>
-                    <?php foreach ($arr_jws_years as $year => $count) : ?>
+                    <?php foreach ($jws_dataset_years as $year => $count) : ?>
 
                         <?php echo '<tr'.($jws_counter_yearly_statistics % 2 == 1 ? '' : " class='alternate'").'>'; ?>
                         <td><nobr><?php echo esc_html( $year ); ?></td>
                         <td><?php echo number_format($count['total']); ?></td>
-                        <?php foreach ($arr_jws_post_types as $index => $post_type) : ?>
+                        <?php foreach ($jws_dataset_post_types as $index => $post_type) : ?>
                         <td>
                             <?php echo (isset($count[$index]['published']['posts']) ? number_format(0 + $count[$index]['published']['posts']) : '0'); ?> <?php _e('Total', 'just-writing-statistics'); ?><br />
                             <?php echo (isset($count[$index]['published']['word_count']) ? number_format(0 + $count[$index]['published']['word_count']) : '0'); ?> <?php _e('Words', 'just-writing-statistics'); ?><br />
