@@ -541,18 +541,7 @@ class Just_Writing_Statsitics_Admin
             $jws_tab = $_GET['tab'];
         }
 
-        $excluded_types = array();
-        $excluded_types_option = get_option('jws_excluded_types');
-
-        if( ! is_array( $excluded_types_option ) ) { $excluded_types_option = array(); }
-
-        // Convert the setting array which has the type in the key name to have the key in the value instead.
-        foreach( $excluded_types_option as $type => $setting ) {
-            $excluded_types[] .= $type;
-        }
-
-        // Add in the mandatory excluded types.
-        $excluded_types = array_merge( $excluded_types, $this->mandatory_excluded_types );
+        $excluded_types = $this->get_excluded_post_types();
 
         $excluded_types_sql = '';
 
@@ -948,6 +937,24 @@ class Just_Writing_Statsitics_Admin
         }
 
         return $step;
+    }
+
+    public function get_excluded_post_types()
+    {
+        $excluded_types = array();
+        $excluded_types_option = get_option('jws_excluded_types');
+
+        if( ! is_array( $excluded_types_option ) ) { $excluded_types_option = array(); }
+
+        // Convert the setting array which has the type in the key name to have the key in the value instead.
+        foreach( $excluded_types_option as $type => $setting ) {
+            $excluded_types[] .= $type;
+        }
+
+        // Add in the mandatory excluded types.
+        $excluded_types = array_merge( $excluded_types, $this->mandatory_excluded_types );
+
+        return $excluded_types;
     }
 
 }
