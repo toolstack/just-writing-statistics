@@ -25,11 +25,13 @@
     </div>
 <?php
     $labels = '';
+    $label_count = 0;
     $word_data = array();
     $max_word = 0;
 
     foreach( $arr_jws_categories as $category_name => $category ) {
         $labels .= html_entity_decode( json_encode( $category_name ) ) . ', ';
+        $label_count++;
 
         $word_data['published'] .= html_entity_decode( json_encode( $category['published'] ) ) . ', ';
         $word_data['scheduled'] .= html_entity_decode( json_encode( $category['scheduled'] ) ) . ', ';
@@ -39,6 +41,10 @@
     }
 
     $labels = trim( $labels, ', ' );
+
+    if( $label_count <= 10 ) { $aspectRatio = 5; } else { $aspectRatio = 5 - floor( $label_count / 10 ); }
+    if( $aspectRatio == 0 ) { $aspectRatio = 0.5 ;}
+    if( $aspectRatio < 0 ) { $aspectRatio = 1 / abs($aspectRatio); }
 ?>
 
 <script>
@@ -67,7 +73,8 @@
       ],
     },
     options: {
-      aspectRatio: 4.0,
+      indexAxis: 'y',
+      aspectRatio: <?php echo $aspectRatio; ?>,
       scales: {
         y: {
           beginAtZero: true,
