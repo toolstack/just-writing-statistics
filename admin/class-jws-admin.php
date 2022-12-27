@@ -76,6 +76,7 @@ class Just_Writing_Statsitics_Admin
     public function enqueue_scripts()
     {
         wp_enqueue_script($this->plugin_name.'-js', plugin_dir_url(__FILE__) . 'js/jws-admin.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-datepicker'], $this->version, false);
+        wp_enqueue_script('jws-chart', plugin_dir_url(__FILE__) . 'js/chart.js', [], '4.1.1', false);
     }
 
     /**
@@ -519,6 +520,7 @@ class Just_Writing_Statsitics_Admin
         if (!isset($jws_tab) || $jws_tab == 'top-content' || $jws_tab == 'all-content') {
             $arr_jws_posts = [];
             $arr_jws_post_types = [];
+            $arr_jws_post_status = [];
 
             foreach ($jws_statistics as $jws_post) {
                 // Load post type array
@@ -544,6 +546,13 @@ class Just_Writing_Statsitics_Admin
                     'post_word_count' => $jws_post->post_word_count,
                     'permalink' => get_permalink($jws_post->post_id),
                 ];
+
+                if( ! array_key_exists($arr_jws_post['post_type'], $arr_jws_post_status) ) { $arr_jws_post_status[$arr_jws_post['post_type']] = array(); }
+
+                if( ! array_key_exists($arr_jws_post['post_status'], $arr_jws_post_status[$arr_jws_post['post_type']]) ) { $arr_jws_post_status[$arr_jws_post['post_type']][$arr_jws_post['post_status']] = array( 0, 0 ); }
+
+                $arr_jws_post_status[$arr_jws_post['post_type']][$arr_jws_post['post_status']]['count']++;
+                $arr_jws_post_status[$arr_jws_post['post_type']][$arr_jws_post['post_status']]['words'] += intval( $arr_jws_post['post_word_count'] );
 
                 $arr_jws_posts[] = $arr_jws_post;
             }

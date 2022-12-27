@@ -23,7 +23,8 @@
 #just-writing-statistics div.quarter:last-of-type { padding-right: 0; }
 #just-writing-statistics div.third { float: left; width: 32%; margin: 25px 0 0 0; padding: 0; }
 #just-writing-statistics div.third:nth-of-type(2) { padding: 0 2%; }
-#just-writing-statistics div.half { float: left; width: 49%; margin: 25px 0 0 0; padding: 0; }
+#just-writing-statistics div.half { float: left; width: 49%; margin: 25px 2% 0 0; padding: 0; }
+#just-writing-statistics div div.half:last-of-type { margin: 25px 0 0 0;}
 #just-writing-statistics div.half h3:not(:first-of-type) { margin-top: 25px; }
 
 #just-writing-statistics .jws-totals { float: none; overflow: hidden; display: inline-table; clear: both; width: 100%; margin: 0; }
@@ -54,6 +55,8 @@
 #just-writing-statistics .jws-stats { float: left; display: block; width: 20px; height: 20px; margin-right: 10px; margin-top: -2px; padding: 2px; border-radius: 3px; background: #0056a6; color: #ffffff; text-align: center; }
 #just-writing-statistics .jws-stats-month { margin-top: 5px; }
 #just-writing-statistics .jws-stats:hover { background: #448ac8; color: #ffffff; }
+
+#just-writing-statistics .jws-chart-container { background: white; }
 
 #jws-footer { float: left; display: block; clear: both; width: 100%; margin: 65px 0px 0px 0px; padding: 0; text-align: center; text-transform: uppercase; font-size: 14px; color: #464b50; }
 #jws-footer img { width: 17px;	padding-top: 10px; -ms-interpolation-mode: bicubic; vertical-align: middle; margin: -14px 2px 0px 2px; }
