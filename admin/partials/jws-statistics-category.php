@@ -52,17 +52,17 @@
         {
           label: '<?php _e('Published','just-writing-statistics');?>',
           data: [<?php echo $word_data['published'];?>],
-          backgroundColor: '#00ff00',
+          backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
           data: [<?php echo $word_data['scheduled'];?>],
-          backgroundColor: '#0056a6',
+          backgroundColor: '#63c5da',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
           data: [<?php echo $word_data['unpublished'];?>],
-          backgroundColor: '#ff0000',
+          backgroundColor: '#151e3d',
         },
       ],
     },

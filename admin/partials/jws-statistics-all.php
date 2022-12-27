@@ -61,17 +61,17 @@
         {
           label: '<?php _e('Published','just-writing-statistics');?>',
           data: [<?php echo $count_data['Publish'];?>],
-          backgroundColor: '#00ff00',
+          backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
           data: [<?php echo $count_data['Scheduled'];?>],
-          backgroundColor: '#0056a6',
+          backgroundColor: '#63c5da',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
           data: [<?php echo $count_data['Draft'];?>],
-          backgroundColor: '#ff0000',
+          backgroundColor: '#151e3d',
         },
       ],
     },
@@ -116,17 +116,17 @@
         {
           label: '<?php _e('Published','just-writing-statistics');?>',
           data: [<?php echo $words_data['Publish'];?>],
-          backgroundColor: '#00ff00',
+          backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
           data: [<?php echo $words_data['Scheduled'];?>],
-          backgroundColor: '#0056a6',
+          backgroundColor: '#63c5da',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
           data: [<?php echo $words_data['Draft'];?>],
-          backgroundColor: '#ff0000',
+          backgroundColor: '#151e3d',
         },
       ],
     },
