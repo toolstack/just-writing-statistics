@@ -149,7 +149,7 @@
 </script>
 
     <div class="full">
-        <h3><?php _e('All Content', 'just-writing-statistics'); ?></h3>
+        <h3><?php _e('Top Content', 'just-writing-statistics'); ?></h3>
 
         <table class="widefat">
             <thead>
@@ -170,7 +170,7 @@
                 <?php echo '<tr'.($index % 2 == 1 ? '' : " class='alternate'").'>'; ?>
                     <td><?php echo number_format($post['post_word_count']); ?></td>
                     <td>
-                        <a href="<?php echo esc_attr( $post['permalink'] ); ?>"><?php echo esc_html( $post['post_title'] ); ?></a>
+                        <a href="<?php echo esc_attr( $post['permalink'] ); ?>"><?php echo esc_html( $post['post_title'] ? $post['post_title'] : __( '[No Title]', 'just-writing-statistics') ); ?></a>
 
                         <div class="row-actions">
                             <span class="edit"><?php edit_post_link(__('Edit', 'just-writing-statistics'), '', ' | ', $post['post_id']); ?></span>
