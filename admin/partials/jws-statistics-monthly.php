@@ -13,6 +13,122 @@
  */
 
 ?>
+    <div>
+        <div class="half jws-chart-container">
+
+            <h3><?php _e('Monthly Word Counts', 'just-writing-statistics'); ?></h3>
+            <canvas id="MontlyWordCountChart"></canvas>
+
+        </div>
+
+        <div class="half jws-chart-container">
+
+            <h3><?php _e('Monthly Item Counts', 'just-writing-statistics'); ?></h3>
+            <canvas id="MontlyItemCountChart"></canvas>
+
+        </div>
+    </div>
+<?php
+    $labels = '';
+    $word_data = '';
+    $item_data = '';
+
+    $max_month = 0;
+
+    foreach( $arr_jws_months as $month_name => $month) {
+        $labels = '\'' . $month_name . '\', ' . $labels;
+        $word_data = '\'' . $month['total'] . '\', ' . $word_data;
+        $item_data = '\'' . $month['items'] . '\', ' . $item_data;
+
+        if( $month['total'] > $max_month ) { $max_month = $month['total']; }
+    }
+
+    $labels = trim( $labels, ', ' );
+    $word_data = trim( $word_data, ', ' );
+
+    // Figure out a good stepping for the word count.
+    $month_step = round( $max_month / 10, -4 );
+    if( $month_step == 0 ) { $month_step = round( $max_month / 10, -3 ); }
+    if( $month_step == 0 ) { $month_step = round( $max_month / 10, -2 ); }
+    if( $month_step == 0 ) { $month_step = round( $max_month / 10, -1 ); }
+
+?>
+
+<script>
+  const WordCountChart = document.getElementById('MontlyWordCountChart');
+
+  new Chart(WordCountChart, {
+    type: 'line',
+    data: {
+      labels: [<?php echo $labels;?>],
+      datasets: [
+        {
+          label: '<?php _e('Words','just-writing-statistics');?>',
+          data: [<?php echo $word_data;?>],
+          backgroundColor: '#0056a6',
+          borderColor : "#0056a6",
+        },
+      ],
+    },
+    options: {
+      elements: {
+        line: {
+            backgroundColor: '#0056a6',
+            tension: 0.4
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          stacked: true,
+          ticks: {
+            stepSize: <?php echo $month_step;?>
+          },
+        },
+        x: {
+          stacked: true,
+        }
+      }
+    },
+  });
+
+  const ItemCountChart = document.getElementById('MontlyItemCountChart');
+
+  new Chart(ItemCountChart, {
+    type: 'line',
+    data: {
+      labels: [<?php echo $labels;?>],
+      datasets: [
+        {
+          label: '<?php _e('Words','just-writing-statistics');?>',
+          data: [<?php echo $item_data;?>],
+          backgroundColor: '#0056a6',
+          borderColor : "#0056a6",
+        },
+      ],
+    },
+    options: {
+      elements: {
+        line: {
+            backgroundColor: '#0056a6',
+            tension: 0.4
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          stacked: true,
+          ticks: {
+            stepSize: 500
+          },
+        },
+        x: {
+          stacked: true,
+        }
+      }
+    },
+  });
+</script>
 
     <div class="full">
         <h3><?php _e('Monthly Statistics', 'just-writing-statistics'); ?></h3>

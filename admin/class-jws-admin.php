@@ -571,6 +571,7 @@ class Just_Writing_Statsitics_Admin
                 // Load months array
                 if (!isset($arr_jws_months[$total->post_date])) {
                     $arr_jws_months[$total->post_date]['total'] = 0;
+                    $arr_jws_months[$total->post_date]['items'] = 0;
                 }
 
                 if (!isset($arr_jws_months[$total->post_date][$total->post_type])) {
@@ -592,6 +593,7 @@ class Just_Writing_Statsitics_Admin
                     $arr_jws_months[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
+                $arr_jws_months[$total->post_date]['items']++;
                 $arr_jws_months[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'yearly-statistics') {
@@ -609,6 +611,7 @@ class Just_Writing_Statsitics_Admin
                 // Load months array
                 if (!isset($arr_jws_years[$total->post_date])) {
                     $arr_jws_years[$total->post_date]['total'] = 0;
+                    $arr_jws_years[$total->post_date]['items'] = 0;
                 }
 
                 if (!isset($arr_jws_months[$total->post_date][$total->post_type])) {
@@ -630,6 +633,7 @@ class Just_Writing_Statsitics_Admin
                     $arr_jws_years[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
+                $arr_jws_years[$total->post_date]['items']++;
                 $arr_jws_years[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'tag-statistics') {

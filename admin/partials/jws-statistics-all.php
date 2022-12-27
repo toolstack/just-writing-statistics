@@ -63,7 +63,7 @@
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
           data: [<?php echo $count_data['Scheduled'];?>],
-          backgroundColor: '#0000ff',
+          backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
@@ -77,6 +77,9 @@
         y: {
           beginAtZero: true,
           stacked: true,
+          ticks: {
+            stepSize: 1
+          },
         },
         x: {
           stacked: true,
@@ -112,7 +115,7 @@
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
           data: [<?php echo $words_data['Scheduled'];?>],
-          backgroundColor: '#0000ff',
+          backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
