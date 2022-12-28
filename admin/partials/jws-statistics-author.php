@@ -29,24 +29,20 @@
         </div>
     </div>
 <?php
-    $labels = '';
-    $word_data = '';
-    $item_data = '';
+    $labels = array();
+    $word_data = array();
+    $item_data = array();
     $max_word = 0;
     $max_item = 0;
 
     foreach( $jws_dataset_authors as $index => $author) {
-        $labels = html_entity_decode( json_encode( $author['display_name'] ) ) . ', ' . $labels;
-        $word_data = html_entity_decode( json_encode( $author['total'] ) ) . ', ' . $word_data;
-        $item_data = html_entity_decode( json_encode( $author['items'] ) ) . ', ' . $item_data;
+        $labels[] = $author['display_name'];
+        $word_data[] = $author['total'];
+        $item_data[] = $author['items'];
 
         if( $max_word < $author['total'] ) { $max_word = $author['total']; }
         if( $max_item < $author['items'] ) { $max_item = $author['items']; }
     }
-
-    $labels = trim( $labels, ', ' );
-    $word_data = trim( $word_data, ', ' );
-    $item_data = trim( $item_data, ', ' );
 
 ?>
 
@@ -56,11 +52,11 @@
   new Chart(WordCountChart, {
     type: 'polarArea',
     data: {
-      labels: [<?php echo $labels;?>],
+      labels: <?php echo html_entity_decode( json_encode( $labels ) ); ?>,
       datasets: [
         {
           label: '<?php _e('Words','just-writing-statistics');?>',
-          data: [<?php echo $word_data;?>],
+          data: <?php echo html_entity_decode( json_encode( $word_data ) ); ?>,
           backgroundColor: '#0056a688',
           borderColor : "#0056a688",
         },
@@ -81,11 +77,11 @@
   new Chart(ItemCountChart, {
     type: 'polarArea',
     data: {
-      labels: [<?php echo $labels;?>],
+      labels: <?php echo html_entity_decode( json_encode( $labels ) ); ?>,
       datasets: [
         {
           label: '<?php _e('Words','just-writing-statistics');?>',
-          data: [<?php echo $item_data;?>],
+          data: <?php echo html_entity_decode( json_encode( $item_data ) ); ?>,
           backgroundColor: '#0056a688',
           borderColor : "#0056a688",
         },

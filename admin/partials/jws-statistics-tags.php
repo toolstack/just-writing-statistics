@@ -23,23 +23,21 @@
 
     </div>
 <?php
-    $labels = '';
+    $labels = array();
     $label_count = 0;
     $word_data = array();
     $max_word = 0;
 
     foreach( $jws_dataset_tags as $tag_name => $tag ) {
-        $labels .= html_entity_decode( json_encode( $tag_name ) ) . ', ';
+        $labels[] = $tag_name;
         $label_count++;
 
-        $word_data['published'] .= html_entity_decode( json_encode( $tag['published'] ) ) . ', ';
-        $word_data['scheduled'] .= html_entity_decode( json_encode( $tag['scheduled'] ) ) . ', ';
-        $word_data['unpublished'] .= html_entity_decode( json_encode( $tag['unpublished'] ) ) . ', ';
+        $word_data['published'][] = $tag['published'];
+        $word_data['scheduled'][] = $tag['scheduled'];
+        $word_data['unpublished'][] = $tag['unpublished'];
 
         if( $tag['total'] > $max_word ) { $max_word = $tag['total']; }
     }
-
-    $labels = trim( $labels, ', ' );
 
     if( $label_count <= 10 ) { $aspectRatio = 5; } else { $aspectRatio = 5 - floor( $label_count / 10 ); }
     if( $aspectRatio == 0 ) { $aspectRatio = 0.5 ;}
@@ -53,21 +51,21 @@
   new Chart(WordCountChart, {
     type: 'bar',
     data: {
-      labels: [<?php echo $labels;?>],
+      labels: <?php echo html_entity_decode( json_encode( $labels ) ); ?>,
       datasets: [
         {
           label: '<?php _e('Published','just-writing-statistics');?>',
-          data: [<?php echo $word_data['published'];?>],
+          data: <?php echo html_entity_decode( json_encode( $word_data['published'] ) ); ?>,
           backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
-          data: [<?php echo $word_data['scheduled'];?>],
+          data: <?php echo html_entity_decode( json_encode( $word_data['scheduled'] ) ); ?>,
           backgroundColor: '#63c5da',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
-          data: [<?php echo $word_data['unpublished'];?>],
+          data: <?php echo html_entity_decode( json_encode( $word_data['unpublished'] ) ); ?>,
           backgroundColor: '#151e3d',
         },
       ],

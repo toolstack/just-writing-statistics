@@ -29,23 +29,21 @@
         </div>
     </div>
 <?php
-    $labels = '';
-    $word_data = '';
-    $item_data = '';
+    $labels = array();
+    $word_data = array();
+    $item_data = array();
     $max_word = 0;
     $max_item = 0;
 
     foreach( $jws_dataset_months as $month_name => $month) {
-        $labels = html_entity_decode( json_encode( $month_name ) ) . ', ' . $labels;
-        $word_data = html_entity_decode( json_encode( $month['total'] ) ) . ', ' . $word_data;
-        $item_data = html_entity_decode( json_encode( $month['items'] ) ) . ', ' . $item_data;
+        $labels[] = $month_name;
+        $word_data[] = $month['total'];
+        $item_data[] = $month['items'];
 
         if( $month['total'] > $max_word ) { $max_word = $month['total']; }
         if( $month['items'] > $max_item ) { $max_item = $month['items']; }
     }
 
-    $labels = trim( $labels, ', ' );
-    $word_data = trim( $word_data, ', ' );
 ?>
 
 <script>
@@ -54,11 +52,11 @@
   new Chart(WordCountChart, {
     type: 'line',
     data: {
-      labels: [<?php echo $labels;?>],
+      labels: <?php echo html_entity_decode( json_encode( array_reverse( $labels ) ) ); ?>,
       datasets: [
         {
           label: '<?php _e('Words','just-writing-statistics');?>',
-          data: [<?php echo $word_data;?>],
+          data: <?php echo html_entity_decode( json_encode( array_reverse( $word_data ) ) ); ?>,
           backgroundColor: '#0056a6',
           borderColor : "#0056a6",
         },
@@ -91,11 +89,11 @@
   new Chart(ItemCountChart, {
     type: 'line',
     data: {
-      labels: [<?php echo $labels;?>],
+      labels: <?php echo html_entity_decode( json_encode( array_reverse( $labels ) ) ); ?>,
       datasets: [
         {
           label: '<?php _e('Items','just-writing-statistics');?>',
-          data: [<?php echo $item_data;?>],
+          data: <?php echo html_entity_decode( json_encode( array_reverse( $item_data ) ) ); ?>,
           backgroundColor: '#0056a6',
           borderColor : "#0056a6",
         },

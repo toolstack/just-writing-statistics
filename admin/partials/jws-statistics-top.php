@@ -30,25 +30,24 @@
 
     </div>
 <?php
-    $labels = '';
+    $labels = array();
     $count_data = array();
     $max_item = 0;
 
     foreach( $jws_dataset_post_types as $names ) {
-        $labels .= html_entity_decode( json_encode( $names['plural_name'] ) ) . ', ';
+        $labels[] = $names['plural_name'];
     }
 
     foreach( $jws_dataset_post_status as $post_type => $post_status ) {
 
         foreach( $post_status as $type => $count ) {
-            $count_data[$type] .= html_entity_decode( json_encode( $count['count'] ) ) . ', ';
+            $count_data[$type][] = $count['count'];
 
             if( $count['count'] > $max_item ) { $max_item = $count['count']; }
         }
     }
 
-    $labels = trim( $labels, ', ' );
-
+var_dump($count_data);
 ?>
 
 <script>
@@ -57,21 +56,21 @@
   new Chart(ItemCountChart, {
     type: 'bar',
     data: {
-      labels: [<?php echo $labels;?>],
+      labels: <?php echo html_entity_decode( json_encode( $labels ) ); ?>,
       datasets: [
         {
           label: '<?php _e('Published','just-writing-statistics');?>',
-          data: [<?php echo $count_data['Publish'];?>],
+          data: <?php echo html_entity_decode( json_encode( $count_data['Publish'] ) );?>,
           backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
-          data: [<?php echo $count_data['Scheduled'];?>],
+          data: <?php echo html_entity_decode( json_encode( $count_data['Scheduled'] ) );?>,
           backgroundColor: '#63c5da',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
-          data: [<?php echo $count_data['Draft'];?>],
+          data: <?php echo html_entity_decode( json_encode( $count_data['Draft'] ) ); ?>,
           backgroundColor: '#151e3d',
         },
       ],
@@ -82,7 +81,7 @@
           beginAtZero: true,
           stacked: true,
           ticks: {
-            stepSize: <?php echo $this->calculate_chart_step_size( $max_item );?>
+            stepSize: <?php echo $this->calculate_chart_step_size( $max_item ); ?>
           },
         },
         x: {
@@ -99,7 +98,7 @@
     foreach( $jws_dataset_post_status as $post_type => $post_status ) {
 
         foreach( $post_status as $type => $count ) {
-            $words_data[$type] .= html_entity_decode( json_encode( $count['words'] ) ). ', ';
+            $words_data[$type][] = $count['words'];
 
             if( $count['words'] > $max_word ) { $max_word = $count['words']; }
        }
@@ -112,21 +111,21 @@
   new Chart(WordCountChart, {
     type: 'bar',
     data: {
-      labels: [<?php echo $labels;?>],
+      labels: <?php echo html_entity_decode( json_encode( $labels ) ); ?>,
       datasets: [
         {
           label: '<?php _e('Published','just-writing-statistics');?>',
-          data: [<?php echo $words_data['Publish'];?>],
+          data: <?php echo html_entity_decode( json_encode( $words_data['Publish'] ) ); ?>,
           backgroundColor: '#0056a6',
         },
         {
           label: '<?php _e('Scheduled','just-writing-statistics');?>',
-          data: [<?php echo $words_data['Scheduled'];?>],
+          data: <?php echo html_entity_decode( json_encode( $words_data['Scheduled'] ) ); ?>,
           backgroundColor: '#63c5da',
         },
         {
           label: '<?php _e('Unpublished','just-writing-statistics');?>',
-          data: [<?php echo $words_data['Draft'];?>],
+          data: <?php echo html_entity_decode( json_encode( $words_data['Draft'] ) ); ?>,
           backgroundColor: '#151e3d',
         },
       ],
