@@ -31,7 +31,7 @@
     </div>
 <?php
     $labels = array();
-    $count_data = array();
+    $count_data = array( 'Publish' => array(), 'Scheduled' => array(), 'Draft' => array() );
     $max_item = 0;
 
     foreach( $jws_dataset_post_types as $names ) {
@@ -46,8 +46,6 @@
             if( $count['count'] > $max_item ) { $max_item = $count['count']; }
         }
     }
-
-var_dump($count_data);
 ?>
 
 <script>
@@ -92,7 +90,7 @@ var_dump($count_data);
   });
 
 <?php
-    $words_data = array();
+    $words_data = array( 'Publish' => array(), 'Scheduled' => array(), 'Draft' => array() );
     $max_word = 0;
 
     foreach( $jws_dataset_post_status as $post_type => $post_status ) {

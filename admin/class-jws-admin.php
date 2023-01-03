@@ -495,6 +495,8 @@ class Just_Writing_Statsitics_Admin
                 $totals[$total->post_type]['name'] = $post_type_object->labels->name;
                 $totals[$total->post_type]['published']['posts'] = 0;
                 $totals[$total->post_type]['published']['word_count'] = 0;
+                $totals[$total->post_type]['scheduled']['posts'] = 0;
+                $totals[$total->post_type]['scheduled']['word_count'] = 0;
                 $totals[$total->post_type]['unpublished']['posts'] = 0;
                 $totals[$total->post_type]['unpublished']['word_count'] = 0;
             }
@@ -557,6 +559,8 @@ class Just_Writing_Statsitics_Admin
             $excluded_types_sql .= '\')';
         }
 
+        $sql_jws_statistics = '';
+
         if (!isset($jws_tab) || $jws_tab == 'top-content') {
             $sql_jws_statistics = "
 				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count
@@ -605,6 +609,13 @@ class Just_Writing_Statsitics_Admin
                 ORDER BY post_author ASC";
         }
 
+        // If we're on a page that doesn't need statistics data, like About, just display the page and bail out now.
+        if( $sql_jws_statistics == '' ) {
+            include_once 'partials/jws-statistics.php';
+
+            return;
+        }
+
         $sql_jws_statistics = $wpdb->prepare( $sql_jws_statistics, $excluded_types );
 
         $jws_statistics = $wpdb->get_results($sql_jws_statistics);
@@ -641,7 +652,7 @@ class Just_Writing_Statsitics_Admin
 
                 if( ! array_key_exists($jws_dataset_post['post_type'], $jws_dataset_post_status) ) { $jws_dataset_post_status[$jws_dataset_post['post_type']] = array(); }
 
-                if( ! array_key_exists($jws_dataset_post['post_status'], $jws_dataset_post_status[$jws_dataset_post['post_type']]) ) { $jws_dataset_post_status[$jws_dataset_post['post_type']][$jws_dataset_post['post_status']] = array( 0, 0 ); }
+                if( ! array_key_exists($jws_dataset_post['post_status'], $jws_dataset_post_status[$jws_dataset_post['post_type']]) ) { $jws_dataset_post_status[$jws_dataset_post['post_type']][$jws_dataset_post['post_status']] = array( 'count' => 0, 'words' => 0 ); }
 
                 $jws_dataset_post_status[$jws_dataset_post['post_type']][$jws_dataset_post['post_status']]['count']++;
                 $jws_dataset_post_status[$jws_dataset_post['post_type']][$jws_dataset_post['post_status']]['words'] += intval( $jws_dataset_post['post_word_count'] );
@@ -670,6 +681,8 @@ class Just_Writing_Statsitics_Admin
                     $jws_dataset_months[$total->post_date][$total->post_type]['name'] = $jws_dataset_post_types[$total->post_type]['plural_name'];
                     $jws_dataset_months[$total->post_date][$total->post_type]['published']['posts'] = 0;
                     $jws_dataset_months[$total->post_date][$total->post_type]['published']['word_count'] = 0;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['scheduled']['posts'] = 0;
+                    $jws_dataset_months[$total->post_date][$total->post_type]['scheduled']['word_count'] = 0;
                     $jws_dataset_months[$total->post_date][$total->post_type]['unpublished']['posts'] = 0;
                     $jws_dataset_months[$total->post_date][$total->post_type]['unpublished']['word_count'] = 0;
                 }
@@ -710,6 +723,8 @@ class Just_Writing_Statsitics_Admin
                     $jws_dataset_years[$total->post_date][$total->post_type]['name'] = $jws_dataset_post_types[$total->post_type]['plural_name'];
                     $jws_dataset_years[$total->post_date][$total->post_type]['published']['posts'] = 0;
                     $jws_dataset_years[$total->post_date][$total->post_type]['published']['word_count'] = 0;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['scheduled']['posts'] = 0;
+                    $jws_dataset_years[$total->post_date][$total->post_type]['scheduled']['word_count'] = 0;
                     $jws_dataset_years[$total->post_date][$total->post_type]['unpublished']['posts'] = 0;
                     $jws_dataset_years[$total->post_date][$total->post_type]['unpublished']['word_count'] = 0;
                 }
@@ -752,6 +767,14 @@ class Just_Writing_Statsitics_Admin
                         $jws_dataset_tags[$tag->name][$total->post_type]['scheduled']['word_count'] = 0;
                         $jws_dataset_tags[$tag->name][$total->post_type]['unpublished']['posts'] = 0;
                         $jws_dataset_tags[$tag->name][$total->post_type]['unpublished']['word_count'] = 0;
+                    }
+
+                    if (!array_key_exists('published', $jws_dataset_tags[$tag->name])) {
+                        $jws_dataset_tags[$tag->name]['published'] = 0;
+                        $jws_dataset_tags[$tag->name]['scheduled'] = 0;
+                        $jws_dataset_tags[$tag->name]['unpublished'] = 0;
+                        $jws_dataset_tags[$tag->name]['items'] = 0;
+                        $jws_dataset_tags[$tag->name]['total'] = 0;
                     }
 
                     if ($total->post_status == 'publish') {
@@ -800,6 +823,14 @@ class Just_Writing_Statsitics_Admin
                         $jws_dataset_categories[$category->name][$total->post_type]['unpublished']['word_count'] = 0;
                     }
 
+                    if (!array_key_exists('published', $jws_dataset_categories[$category->name])) {
+                        $jws_dataset_categories[$category->name]['published'] = 0;
+                        $jws_dataset_categories[$category->name]['scheduled'] = 0;
+                        $jws_dataset_categories[$category->name]['unpublished'] = 0;
+                        $jws_dataset_categories[$category->name]['items'] = 0;
+                        $jws_dataset_categories[$category->name]['total'] = 0;
+                    }
+
                     if ($total->post_status == 'publish') {
                         $jws_dataset_categories[$category->name][$total->post_type]['published']['posts']++;
                         $jws_dataset_categories[$category->name][$total->post_type]['published']['word_count'] += $total->post_word_count;
@@ -844,6 +875,8 @@ class Just_Writing_Statsitics_Admin
                 if (!isset($jws_dataset_authors[$total->post_author][$total->post_type])) {
                     $jws_dataset_authors[$total->post_author][$total->post_type]['published']['posts'] = 0;
                     $jws_dataset_authors[$total->post_author][$total->post_type]['published']['word_count'] = 0;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['scheduled']['posts'] = 0;
+                    $jws_dataset_authors[$total->post_author][$total->post_type]['scheduled']['word_count'] = 0;
                     $jws_dataset_authors[$total->post_author][$total->post_type]['unpublished']['posts'] = 0;
                     $jws_dataset_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] = 0;
                 }
