@@ -99,11 +99,12 @@
 </script>
 
     <div class="full">
-        <h3><?php _e('Author Statistics', 'just-writing-statistics'); ?></h3>
-
         <div class="jws-table">
             <table class="widefat jws-post-type-stats">
                 <thead>
+                    <tr>
+                        <th colspan="<?php echo 2 + ( count( $jws_dataset_post_types ) * 3 );?>" class="jws_totals_title"><?php _e('Author Statistics', 'just-writing-statistics'); ?></th>
+                    </tr>
                     <tr class="jws-table-stats-header-one">
                         <th></th>
                         <th></th>

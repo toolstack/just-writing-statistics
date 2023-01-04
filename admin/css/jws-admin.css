@@ -16,6 +16,7 @@
 #just-writing-statistics h1.jws-detail-title { margin: 15px 0 0 0; }
 #just-writing-statistics h3 { margin: 0; padding: 8px 10px; background-color: #0056a6; color: #ffffff; font-weight: normal; text-align: left; }
 #just-writing-statistics h4 { margin: 0; padding: 8px 10px; background-color: #32373c; color: #ffffff; font-weight: normal; text-align: left; }
+#just-writing-statistics .jws_totals_title { column-span: 4; font-size: 1.3em; margin: 0; padding: 5px 10px; background-color: #0056a6; color: #ffffff; font-weight: normal; text-align: left; }
 
 #just-writing-statistics div.full { float: left; width: 100%; margin: 25px 0 0 0; padding: 0; }
 #just-writing-statistics div.quarter { float: left; width: 23.5%; margin: 25px 2% 0 0; padding: 0; }

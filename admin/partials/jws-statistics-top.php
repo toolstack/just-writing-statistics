@@ -146,10 +146,11 @@
 </script>
 
     <div class="full">
-        <h3><?php _e('Top Content', 'just-writing-statistics'); ?></h3>
-
         <table class="widefat jws_wrapable">
             <thead>
+                <tr>
+                    <th colspan="6" class="jws_totals_title"><?php _e('Top Content', 'just-writing-statistics'); ?></th>
+                </tr>
                 <tr>
                     <th class="jws-words"><?php _e('Words', 'just-writing-statistics'); ?></th>
                     <th class="jws-title"><?php _e('Title', 'just-writing-statistics'); ?></th>

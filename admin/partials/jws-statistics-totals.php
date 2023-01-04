@@ -13,10 +13,11 @@
 <div class="jws-totals">
 
     <div class="quarter">
-        <h3><?php _e('Totals', 'just-writing-statistics'); ?></h3>
-
         <table class="widefat">
             <thead>
+                <tr>
+                    <th colspan="4" class="jws_totals_title"><?php _e('Totals', 'just-writing-statistics'); ?></th>
+                </tr>
                 <tr>
                     <th><?php _e('Type', 'just-writing-statistics'); ?></th>
                     <th><?php _e('Total', 'just-writing-statistics'); ?></th>
@@ -66,10 +67,11 @@
     </div>
 
     <div class="quarter">
-        <h3><?php _e('Published', 'just-writing-statistics'); ?></h3>
-
         <table class="widefat">
             <thead>
+                <tr>
+                    <th colspan="4" class="jws_totals_title"><?php _e('Published', 'just-writing-statistics'); ?></th>
+                </tr>
                 <tr>
                     <th><?php _e('Type', 'just-writing-statistics'); ?></th>
                     <th><?php _e('Total', 'just-writing-statistics'); ?></th>
@@ -120,10 +122,11 @@
     </div>
 
     <div class="quarter">
-        <h3><?php _e('Scheduled', 'just-writing-statistics'); ?></h3>
-
         <table class="widefat">
             <thead>
+                <tr>
+                    <th colspan="4" class="jws_totals_title"><?php _e('Scheduled', 'just-writing-statistics'); ?></th>
+                </tr>
                 <tr>
                     <th><?php _e('Type', 'just-writing-statistics'); ?></th>
                     <th><?php _e('Total', 'just-writing-statistics'); ?></th>
@@ -174,10 +177,11 @@
     </div>
 
     <div class="quarter">
-        <h3><?php _e('Unpublished', 'just-writing-statistics'); ?></h3>
-
         <table class="widefat">
             <thead>
+                <tr>
+                    <th colspan="4" class="jws_totals_title"><?php _e('Unpublished', 'just-writing-statistics'); ?></th>
+                </tr>
                 <tr>
                     <th><?php _e('Type', 'just-writing-statistics'); ?></th>
                     <th><?php _e('Total', 'just-writing-statistics'); ?></th>
