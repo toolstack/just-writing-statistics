@@ -98,6 +98,13 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 ## Changelog ##
 
+### 4.1 ###
+* Release date: TBD
+* Fixed various WP_DEBUG warnings
+* Fixed total boxes on top/all content page from showing post types that were marked as excluded
+* Fixed total boxes arranging correctly on small screens
+* Moved table titles into the table headers to fix corner cases where they were shorter than the table under them
+
 ### 4.0 ###
 * Release date: Dec 28, 2022
 * Tested up to WordPress 6.1.1
