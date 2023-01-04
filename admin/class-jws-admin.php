@@ -480,12 +480,31 @@ class Just_Writing_Statsitics_Admin
             $reading_time_wpm = (get_option('jws_reading_time')['wpm'] ?: 250);
         }
 
+        $excluded_types = $this->get_excluded_post_types();
+
+        $excluded_types_sql = '';
+
+        if( count( $excluded_types ) > 0 ) {
+            $excluded_types_sql .= 'AND post_type NOT IN (\'';
+
+            foreach( $excluded_types as $type ) {
+                $excluded_types_sql .= '%s\', \'';
+            }
+
+            $excluded_types_sql = trim( $excluded_types_sql, '\', ' );
+
+            $excluded_types_sql .= '\')';
+        }
+
         $sql_jws_totals = "
 			SELECT post_type, post_status, COUNT(post_id) AS posts, SUM(post_word_count) AS word_count
 			FROM $table_name_posts
-			WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future')
+			WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
 			GROUP BY post_type, post_status
 			ORDER BY word_count DESC";
+
+        $sql_jws_totals = $wpdb->prepare( $sql_jws_totals, $excluded_types );
+
         $jws_totals = $wpdb->get_results($sql_jws_totals);
 
         foreach ($jws_totals as $total) {
