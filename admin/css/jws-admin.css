@@ -63,6 +63,10 @@
 #jws-footer img { width: 17px;	padding-top: 10px; -ms-interpolation-mode: bicubic; vertical-align: middle; margin: -14px 2px 0px 2px; }
 #jws-footer a { color: #464b50; text-decoration: none; }
 
+.column-jws_words {
+    width: 5.5em;
+}
+
 /* The switch - the box around the slider */
 .jws-switch {
   position: relative;

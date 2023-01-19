@@ -25,6 +25,11 @@
     } else {
         require_once 'jws-statistics-menu.php';
 
+        include_once( 'jws-settings-admin-options.php' );
+
+        echo '    <br>' . PHP_EOL;
+        echo '    <hr>' . PHP_EOL;
+
         include_once( 'jws-settings-exclude.php' );
 
         echo '    <br>' . PHP_EOL;

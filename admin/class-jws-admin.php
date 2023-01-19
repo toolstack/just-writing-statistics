@@ -134,6 +134,11 @@ class Just_Writing_Statsitics_Admin
      */
     public function settings()
     {
+        // Admin Options
+        add_settings_section('jws-section-admin-options', __('Administrative Options', 'just-writing-statistics'), [$this, 'settings_section_admin_options'], 'jws-admin-options');
+        add_settings_field('jws_disable_admin_column', __('Disable admin column for word count', 'just-writing-statistics'), [$this, 'settings_disable_admin_column'], 'jws-admin-options', 'jws-section-admin-options');
+        register_setting('jws-section-admin-options', 'jws_admin_options');
+
         // Reading Time
         add_settings_section('jws-section-reading-time', __('Reading Time', 'just-writing-statistics'), [$this, 'settings_section_reading_time'], 'jws-reading-time');
         add_settings_field('jws_reading_time_wpm', __('Words Per Minute', 'just-writing-statistics'), [$this, 'settings_reading_time_wpm'], 'jws-reading-time', 'jws-section-reading-time');
@@ -176,6 +181,16 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
+     * Display Admin Options Settings Section.
+     *
+     * @since 3.2.0
+     */
+    public function settings_section_admin_options()
+    {
+        return;
+    }
+
+    /**
      * Display Reading Time Settings Section.
      *
      * @since 3.2.0
@@ -193,6 +208,26 @@ class Just_Writing_Statsitics_Admin
     public function settings_section_excluded_types()
     {
         echo '<p>'.__('Select which post types to be excluded from the statistics.  Note that not all of the types below may show up in your statistics if they do not have any content associated with them.', 'just-writing-statistics').'</p>';
+    }
+
+    /**
+     * Display Admin Options Settings Words Disable Admin Column.
+     *
+     * @since 4.1.0
+     */
+    public function settings_disable_admin_column()
+    {
+        $admin_options = get_option('jws_admin_options');
+        $disable_admin_column = false;
+
+        if( is_array( $admin_options ) && array_key_exists('disable_admin_column', $admin_options ) ) {
+            $disable_admin_column = true;
+        }
+
+        echo '<label class="jws-switch">' . PHP_EOL;
+        echo '<input type="checkbox" name="jws_admin_options[disable_admin_column]" id="jws_disable_admin_column"' . checked( $disable_admin_column, true, false ) . '>' . PHP_EOL;
+        echo '<span class="jws-slider jws-round"></span>' . PHP_EOL;
+        echo '</label>' . PHP_EOL;
     }
 
     /**
@@ -1012,6 +1047,24 @@ class Just_Writing_Statsitics_Admin
         $excluded_types = array_merge( $excluded_types, $this->mandatory_excluded_types );
 
         return $excluded_types;
+    }
+
+    public function add_wc_column( $defaults )
+    {
+        $defaults['jws_words'] = __( 'Words', 'just-writing-statistics' );
+
+        return $defaults;
+    }
+
+    public function output_wc_column( $column_name )
+    {
+        global $post;
+
+        if( $column_name == 'jws_words' )
+        {
+            echo jws_calculate_word_count_post( $post );
+        }
+
     }
 
 }

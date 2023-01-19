@@ -149,6 +149,33 @@ class Just_Writing_Statistics
         $this->loader->add_filter('plugin_action_links_' . $plugin_basename, $plugin_admin, 'action_links', 10, 2);
 
         $this->loader->add_action('save_post', $plugin_admin, 'post_word_count', 10, 2);
+
+        $admin_options = get_option('jws_admin_options');
+        $disable_admin_column = false;
+
+        if( is_array( $admin_options ) && array_key_exists('disable_admin_column', $admin_options ) ) {
+            $disable_admin_column = true;
+        }
+
+        if( $disable_admin_column ) {
+            return;
+        }
+
+        $post_types = get_post_types('', 'names');
+        foreach( $plugin_admin->get_excluded_post_types() as $type )
+        {
+            unset($post_types[$type]);
+        }
+
+        foreach( $post_types as $type )
+        {
+            // Add columns for each post type.
+            $this->loader->add_filter( 'manage_' . $type . '_posts_columns', $plugin_admin, 'add_wc_column' );
+
+            // Output word count value for each post type.
+            $this->loader->add_action( 'manage_' . $type . '_posts_custom_column', $plugin_admin, 'output_wc_column', 10, 2 );
+        }
+
     }
 
     /**
