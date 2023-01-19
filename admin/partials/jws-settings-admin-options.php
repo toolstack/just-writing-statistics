@@ -12,11 +12,11 @@
  * @subpackage Just_Writing_Statistics/admin/partials
  */
 ?>
+	<div class="half jws-settings-container">
+	    <form method="post" action="options.php">
+	        <?php settings_fields("jws-section-admin-options"); ?>
+	        <?php do_settings_sections("jws-admin-options"); ?>
 
-    <form method="post" action="options.php">
-        <?php settings_fields("jws-section-admin-options"); ?>
-        <?php do_settings_sections("jws-admin-options"); ?>
-
-        <?php submit_button(__('Save Changes', 'just-writing-statistics'), 'primary'); ?>
-    </form>
-
+	        <?php submit_button(__('Save Changes', 'just-writing-statistics'), 'primary'); ?>
+	    </form>
+	</div>

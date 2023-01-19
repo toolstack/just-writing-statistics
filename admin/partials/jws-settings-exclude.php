@@ -13,10 +13,11 @@
  */
 ?>
 
-    <form method="post" action="options.php">
-        <?php settings_fields("jws-section-excluded-types"); ?>
-        <?php do_settings_sections("jws-excluded-types"); ?>
+	<div class="half jws-settings-container">
+	    <form method="post" action="options.php">
+	        <?php settings_fields("jws-section-excluded-types"); ?>
+	        <?php do_settings_sections("jws-excluded-types"); ?>
 
-        <?php submit_button(__('Save Changes', 'just-writing-statistics'), 'primary'); ?>
-    </form>
-
+	        <?php submit_button(__('Save Changes', 'just-writing-statistics'), 'primary'); ?>
+	    </form>
+	</div>
