@@ -217,10 +217,12 @@ class Just_Writing_Statsitics_Admin
     public function settings_excluded_type_by_name( $args )
     {
         //$args['type'];
-        $checked = '';
 
-        if( $args['checked'] == true ) { $checked = ' checked'; }
-        echo '<input name="jws_excluded_types[' . $args['type'] . ']" type="checkbox"' . $checked . '></input>';
+        echo '<label class="jws-switch">' . PHP_EOL;
+        echo '<input type="checkbox" name="jws_excluded_types[' . esc_attr( $args['type'] ) . ']" id="jws_excluded_types[' . esc_attr( $args['type'] ) . ']"' . checked( $args['checked'], true, false ) . '>' . PHP_EOL;
+        echo '<span class="jws-slider jws-round"></span>' . PHP_EOL;
+        echo '</label>' . PHP_EOL;
+
     }
 
     /**
@@ -238,7 +240,10 @@ class Just_Writing_Statsitics_Admin
             $reading_time_insert = (get_option('jws_reading_time')['insert'] ?: 'N');
         }
 
-        echo '<input onclick="this.value=\'Y\';" type="checkbox" name="jws_reading_time[insert]" value="'.$reading_time_insert.'" '.($reading_time_insert == 'Y' ? ' checked="checked"' : '').' />';
+        echo '<label class="jws-switch">' . PHP_EOL;
+        echo '<input onclick="this.value=\'Y\';" type="checkbox" name="jws_reading_time[insert]" id="jws_reading_time[insert]"' . checked( $reading_time_insert, 'Y', false ) . '>' . PHP_EOL;
+        echo '<span class="jws-slider jws-round"></span>' . PHP_EOL;
+        echo '</label>' . PHP_EOL;
     }
 
     /**

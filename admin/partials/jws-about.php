@@ -47,4 +47,5 @@
             <p><?php _e( 'Still not having any luck?', 'just-writing-statistics' );?> <?php echo sprintf( __( 'Then please open a new thread on the %s.', 'just-writing-statistics' ), '<a href="http://wordpress.org/support/plugin/just-writing-statistics" target="_blank">' . __( 'WordPress.org support forum', 'just-writing-statistics' ) . '</a>');?></p>
         </div>
     </div>
+
 </div>
