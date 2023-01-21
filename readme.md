@@ -3,7 +3,7 @@
 **Tags:** word count, reading time, authors, words, writing  
 **Requires at least:** 4.6  
 **Tested up to:** 6.1.1  
-**Stable tag:** 4.0  
+**Stable tag:** 4.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -99,11 +99,13 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 ## Changelog ##
 
 ### 4.1 ###
-* Release date: TBD
+* Release date: Jan 20, 2023
+* Added word count column to admin post/pages list
 * Fixed various WP_DEBUG warnings
 * Fixed total boxes on top/all content page from showing post types that were marked as excluded
 * Fixed total boxes arranging correctly on small screens
 * Moved table titles into the table headers to fix corner cases where they were shorter than the table under them
+* Misc settings cleanups
 
 ### 4.0 ###
 * Release date: Dec 28, 2022
