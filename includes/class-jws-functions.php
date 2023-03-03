@@ -154,15 +154,15 @@ function jws_reading_time($word_count, $wpm = 250, $format = 'admin')
 
     if ($format == 'admin') {
         if ($minutes == 0) {
-            $html = '<1 minute';
+            $html = __( '<1 minute', 'just-writing-statistics' );
         } else {
             if ($hours == 0) {
-                $html = number_format($minutes).' minute'.($minutes > 1 ? 's' : '');
+                $html = number_format($minutes).__( ' minute(s)', 'just-writing-statistics' );
             } else
             if ($minutes == 0) {
-                $html = number_format($hours).' hour'.($hours > 1 ? 's' : '');
+                $html = number_format($hours).__( ' hour(s)', 'just-writing-statistics' );
             } else {
-                $html = number_format($hours).' hour'.($hours > 1 ? 's' : '').', '.number_format($minutes).' minute'.($minutes > 1 ? 's' : '');
+                $html = number_format($hours).__( ' hour(s)', 'just-writing-statistics' ).', '.number_format($minutes).__( ' minute(s)', 'just-writing-statistics' );
             }
         }
     } else {
