@@ -87,6 +87,9 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 4. Settings
 
 == Changelog ==
+= 4.2 =
+* Release date: TBD
+* Improved I18N, thanks @alexclassroom
 
 = 4.1 =
 * Release date: Jan 20, 2023
