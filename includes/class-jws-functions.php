@@ -139,37 +139,57 @@ function jws_calculate_word_count_post($post)
  *
  * @since 3.2.0
  */
-function jws_reading_time($word_count, $wpm = 250, $format = 'admin')
+function jws_reading_time( $word_count, $wpm = 250, $format = 'admin' )
 {
     $html = '';
 
     // Calculate the number of words per minute and second.
-    $init_m = floor($word_count / $wpm);
-    $init_s = $init_m * 60;
+    $init_m = floor( $word_count / $wpm );
 
     // Hours is going to be the floor of wpm / 60.
-    $hours = floor($init_m / 60);
+    $hours = floor( $init_m / 60 );
     // Minutes is going to be the round of the modulus of wpm.
-    $minutes = round($init_m % 60);
+    $minutes = round( $init_m % 60 );
 
-    if ($format == 'admin') {
-        if ($minutes == 0) {
-            $html = '<1 minute';
+    if( $hours > 1 ) {
+        $hour_format = __( '%1$d hours', 'just-writing-statistics' );
+    } else {
+        $hour_format = __( '%1$d hour', 'just-writing-statistics' );
+    }
+
+    if( $minutes > 1 ) {
+        $minute_format = __( '%1$d minutes', 'just-writing-statistics' );
+    } else {
+        $minute_format = __( '%1$d minute', 'just-writing-statistics' );
+    }
+
+    if( $minutes > 1 && $hours > 1 ) {
+        $combined_format = __( '%1$d hours, %2$d minutes', 'just-writing-statistics' );
+    } else if( $minutes > 1 && $hours == 0 ) {
+        $combined_format = __( '%1$d hour, %2$d minutes', 'just-writing-statistics' );
+    } else if ( $minutes == 0 && $hours > 1 ) {
+        $combined_format = __( '%1$d hours, %2$d minute', 'just-writing-statistics' );
+    } else {
+        $combined_format = __( '%1$d hour, %2$d minute', 'just-writing-statistics' );
+    }
+
+    if( $format == 'admin' ) {
+        if( $minutes == 0 ) {
+            $html = __( '<1 minute', 'just-writing-statistics' );
         } else {
-            if ($hours == 0) {
-                $html = number_format($minutes).' minute'.($minutes > 1 ? 's' : '');
-            } else
-            if ($minutes == 0) {
-                $html = number_format($hours).' hour'.($hours > 1 ? 's' : '');
+            if( $hours == 0 ) {
+                $html = sprintf( $minute_format, number_format( $minutes ) );
+            } else if( $minutes == 0 ) {
+                $html = sprintf( $hour_format, number_format( $hours ) );
             } else {
-                $html = number_format($hours).' hour'.($hours > 1 ? 's' : '').', '.number_format($minutes).' minute'.($minutes > 1 ? 's' : '');
+                $html = sprintf( $combined_format, number_format( $hours ), number_format( $minutes ) );
             }
         }
     } else {
-        if ($minutes == 0) {
+        if( $minutes == 0 ) {
             $html = '<1';
         } else {
-            $html = number_format(($hours * 60) + $minutes);
+            $html = number_format( ( $hours * 60 ) + $minutes );
         }
     }
 
