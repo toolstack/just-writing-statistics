@@ -110,7 +110,7 @@ class Just_Writing_Statsitics_Admin
      */
     public function menu()
     {
-        add_menu_page('Just Writing Statistics', 'Writing Statistics', 'delete_posts', $this->plugin_name, [$this, 'display_statistics'], 'dashicons-editor-paste-word', 99);
+        add_menu_page('Just Writing Statistics', __('Writing Statistics', 'just-writing-statistics'), 'delete_posts', $this->plugin_name, [$this, 'display_statistics'], 'dashicons-editor-paste-word', 99);
         add_submenu_page($this->plugin_name, 'Just Writing Statistics', __('Statistics', 'just-writing-statistics'), 'delete_posts', $this->plugin_name, [$this, 'display_statistics']);
         add_submenu_page($this->plugin_name, 'Just Writing Statistics - '.__('Settings', 'just-writing-statistics'), __('Settings', 'just-writing-statistics'), 'delete_posts', $this->plugin_name . '-settings', [$this, 'display_settings']);
     }
