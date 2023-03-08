@@ -99,6 +99,7 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 ## Changelog ##
 ### 4.2 ###
 * Release date: TBD
+* Fixed incorrect wordcount when a post has no text content
 * Improved I18N, thanks @alexclassroom
 
 ### 4.1 ###
