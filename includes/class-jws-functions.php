@@ -58,15 +58,27 @@ function jws_save_post_data($post)
  */
 function jws_word_count($content)
 {
+    // Create a space between any back to back tags ie. "</b><i>" becomes "</b> <i>".
     $content = preg_replace('/(<\/[^>]+?>)(<[^>\/][^>]*?>)/', '$1 $2', $content);
+    // Add breaks to newlines and then strip all the tags.
     $content = strip_tags(nl2br($content));
+    // Now trim the remaining string so we don't have extra line breaks at the start/end.
+    $content = trim( $content );
 
     if (preg_match("/[\x{4e00}-\x{9fa5}]+/u", $content)) {
+        // If there are non-english characters in the content, split them up and count them as words.
         $content = preg_replace('/[\x80-\xff]{1,3}/', ' ', $content, -1, $n);
+
+        // Count any english words.
         $n += str_word_count($content);
 
         return $n;
+    } else if( $content === '' ) {
+        // If we have an empty string, return 0.  This has to be handled separately from the default
+        // case as preg_split() always returns at lest 1 result, an empty string.
+        return 0;
     } else {
+        // Use preg_split() to break the string on whitespaces and then count the results.
         return count(preg_split('/\s+/', $content));
     }
 }
