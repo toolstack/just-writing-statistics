@@ -2,8 +2,8 @@
 **Contributors:** [gregross](https://profiles.wordpress.org/gregross/), [redlettuce](https://profiles.wordpress.org/redlettuce/)  
 **Tags:** word count, reading time, authors, words, writing  
 **Requires at least:** 4.6  
-**Tested up to:** 6.1.1  
-**Stable tag:** 4.1  
+**Tested up to:** 6.2  
+**Stable tag:** 4.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -98,7 +98,7 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 ## Changelog ##
 ### 4.2 ###
-* Release date: TBD
+* Release date: April 25, 2023
 * Fixed incorrect wordcount when a post has no text content
 * Improved I18N, thanks @alexclassroom
 
