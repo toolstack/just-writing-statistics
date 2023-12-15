@@ -781,7 +781,7 @@ class Just_Writing_Statsitics_Admin
                     $jws_dataset_years[$total->post_date]['items'] = 0;
                 }
 
-                if (!isset($jws_dataset_months[$total->post_date][$total->post_type])) {
+                if (!isset($jws_dataset_years[$total->post_date][$total->post_type])) {
                     $jws_dataset_years[$total->post_date][$total->post_type]['name'] = $jws_dataset_post_types[$total->post_type]['plural_name'];
                     $jws_dataset_years[$total->post_date][$total->post_type]['published']['posts'] = 0;
                     $jws_dataset_years[$total->post_date][$total->post_type]['published']['word_count'] = 0;
