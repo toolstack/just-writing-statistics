@@ -2,8 +2,8 @@
 **Contributors:** [gregross](https://profiles.wordpress.org/gregross/), [redlettuce](https://profiles.wordpress.org/redlettuce/)  
 **Tags:** word count, reading time, authors, words, writing  
 **Requires at least:** 4.6  
-**Tested up to:** 6.2  
-**Stable tag:** 4.2  
+**Tested up to:** 6.4.2  
+**Stable tag:** 4.3  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -97,6 +97,12 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 
 ## Changelog ##
+### 4.3 ###
+* Release date: Dec 14, 2023
+* Fixed possible null error on some stat pages
+* Fixed display of datepicker element when regenerating statistics for a date range
+* Fixed missing yearly statistics for some data due to incorrect variable name
+
 ### 4.2 ###
 * Release date: April 25, 2023
 * Fixed incorrect wordcount when a post has no text content
