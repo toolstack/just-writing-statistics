@@ -43,6 +43,14 @@ Just Writing Statistics also has reading times for each post and page of your si
 
 = Why fork WP Word Count? =
 
+***UPDATE***
+WP Word Count is back on the plugin directory, but still seems to be getting very little attention from the developers.
+
+Since I've already done all the work to fork it and publish it in the plugin directory, I'll continue to support this version going forward.
+
+Also Just Writing Statistics has a lot of features that were only included in the Pro version of WP Word Count, so there's that too.
+******
+
 WP Word Count is by far the best plugin of its kind, however it is, as far as I can tell, abandoned at this point.
 
 Even worse, the existing plugin has a known security vulnerability in it and so wordpress.org has closed the repository.
@@ -59,7 +67,7 @@ For Tags and Categories this is not the case and these are calculated at display
 
 = Why do I see post types in the settings tab that I don't see on any of the statistics tabs? =
 
-If a post type has no items associated with it, Just Writing Statistics will no include it in the statistic displays.
+If a post type has no items associated with it, Just Writing Statistics will not include it in the statistic displays.
 
 = Do I really have to calculate the statistics by date range? =
 
