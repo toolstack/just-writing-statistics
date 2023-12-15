@@ -679,11 +679,17 @@ class Just_Writing_Statsitics_Admin
 
         $jws_statistics = $wpdb->get_results($sql_jws_statistics);
 
-        if (!isset($jws_tab) || $jws_tab == 'top-content' || $jws_tab == 'all-content') {
-            $jws_dataset_posts = [];
-            $jws_dataset_post_types = [];
-            $jws_dataset_post_status = [];
+        // Initialize our arrays now so that none of them are null later.
+        $jws_dataset_posts = [];
+        $jws_dataset_post_types = [];
+        $jws_dataset_post_status = [];
+        $jws_dataset_months = [];
+        $jws_dataset_years = [];
+        $jws_dataset_tags = [];
+        $jws_dataset_categories = [];
+        $jws_dataset_authors = [];
 
+        if (!isset($jws_tab) || $jws_tab == 'top-content' || $jws_tab == 'all-content') {
             foreach ($jws_statistics as $jws_post) {
                 // Load post type array
                 if (!isset($jws_dataset_post_types[$jws_post->post_type])) {
@@ -719,8 +725,6 @@ class Just_Writing_Statsitics_Admin
                 $jws_dataset_posts[] = $jws_dataset_post;
             }
         } elseif ($jws_tab == 'monthly-statistics') {
-            $jws_dataset_months = [];
-
             foreach ($jws_statistics as $total) {
                 // Load post type array
                 if (!isset($jws_dataset_post_types[$total->post_type])) {
@@ -761,8 +765,6 @@ class Just_Writing_Statsitics_Admin
                 $jws_dataset_months[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'yearly-statistics') {
-            $jws_dataset_years = [];
-
             foreach ($jws_statistics as $total) {
                 // Load post type array
                 if (!isset($jws_dataset_post_types[$total->post_type])) {
@@ -803,9 +805,6 @@ class Just_Writing_Statsitics_Admin
                 $jws_dataset_years[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'tag-statistics') {
-            $jws_dataset_tags = [];
-            $jws_dataset_post_types = [];
-
             foreach ($jws_statistics as $total) {
                 // Load post type array
                 if (!isset($jws_dataset_post_types[$total->post_type])) {
@@ -858,9 +857,6 @@ class Just_Writing_Statsitics_Admin
 
             }
         } elseif ($jws_tab == 'category-statistics') {
-            $jws_dataset_categories = [];
-            $jws_dataset_post_types = [];
-
             foreach ($jws_statistics as $total) {
                 // Load post type array
                 if (!isset($jws_dataset_post_types[$total->post_type])) {
@@ -912,9 +908,6 @@ class Just_Writing_Statsitics_Admin
 
             }
         } elseif ($jws_tab == 'author-statistics') {
-            $jws_dataset_authors = [];
-            $jws_dataset_post_types = [];
-
             foreach ($jws_statistics as $total) {
                 // Load post type array
                 if (!isset($jws_dataset_post_types[$total->post_type])) {
@@ -964,7 +957,7 @@ class Just_Writing_Statsitics_Admin
         }
 
         // Sort Post Types in a more readable way
-        if (isset($jws_dataset_post_types)) {
+        if (isset($jws_dataset_post_types) && count($jws_dataset_post_types)> 1) {
             $jws_dataset_post_types_standard = [];
             $jws_dataset_post_types_custom = [];
 
