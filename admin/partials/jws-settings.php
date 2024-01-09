@@ -29,6 +29,8 @@
 
         include_once( 'jws-settings-exclude.php' );
 
+        include_once( 'jws-settings-roles.php');
+
         include_once( 'jws-settings-admin-options.php' );
     }
 

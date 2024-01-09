@@ -111,6 +111,30 @@ class Just_Writing_Statsitics_Admin
      */
     public function menu()
     {
+        $roles = get_option('jws_roles');
+        $user = wp_get_current_user();
+
+        // Don't check for permissions if no option has been set (===) or the user is an administrator
+        if( $roles !== false && !in_array( 'administrator', $user->roles ) ) {
+            $blocked = false;
+            $allowed = false;
+
+            // If the roles setting is empty, make sure it's an empty array.
+            if( $roles == false ) { $roles = array(); }
+
+            foreach( $user->roles as $slug ) {
+                if( ! array_key_exists( $slug, $roles ) ) {
+                    $blocked = true;
+                } else {
+                    $allowed = true;
+                }
+            }
+
+            // Users can have multiple roles, so if some are blocked but other are allowed,
+            // have the allowed override the blocked.
+            if( $blocked && !$allowed ) { return; }
+        }
+
         add_menu_page('Just Writing Statistics', __('Writing Statistics', 'just-writing-statistics'), 'delete_posts', $this->plugin_name, [$this, 'display_statistics'], 'dashicons-editor-paste-word', 99);
         add_submenu_page($this->plugin_name, 'Just Writing Statistics', __('Statistics', 'just-writing-statistics'), 'delete_posts', $this->plugin_name, [$this, 'display_statistics']);
         add_submenu_page($this->plugin_name, 'Just Writing Statistics - '.__('Settings', 'just-writing-statistics'), __('Settings', 'just-writing-statistics'), 'delete_posts', $this->plugin_name . '-settings', [$this, 'display_settings']);
@@ -163,7 +187,6 @@ class Just_Writing_Statsitics_Admin
 
         foreach( $post_types as $type )
         {
-
             $checked = false;
             $post_type_obj = get_post_type_object( $type );
 
@@ -173,6 +196,38 @@ class Just_Writing_Statsitics_Admin
         }
 
         register_setting('jws-section-excluded-types', 'jws_excluded_types');
+
+        // Enabled Roles
+        add_settings_section('jws-section-roles', __('User Roles', 'just-writing-statistics'), [$this, 'settings_section_roles'], 'jws-roles');
+
+        $role_types = wp_roles();
+        $roles = get_option('jws_roles');
+
+        if( $roles === false ) {
+            foreach( $role_types->roles as $role_slug ) {
+                $roles[$role_slug] = 'on';
+            }
+        }
+
+        if( $roles == false ) {
+            $roles = array();
+        }
+
+        unset( $roles['administrator'] );
+
+        foreach( $role_types->roles as $role_slug => $role_type ) {
+            // Don't include any role that doesn't have the delete_posts capability.
+            $min_pemissions = array_key_exists( 'delete_posts', $role_type['capabilities'] ) && $role_type['capabilities']['delete_posts'] == true;
+
+            if( $role_slug != 'administrator' && $min_pemissions) {
+                $checked = true;
+                if( ! array_key_exists( $role_slug, $roles ) ) { $checked = false; }
+
+                add_settings_field('jws_roles_' . $role_slug, $role_type['name'], [$this, 'settings_roles_by_name'], 'jws-roles', 'jws-section-roles', array( 'type' => $role_slug, 'checked' => $checked ) );
+            }
+        }
+
+        register_setting('jws-section-roles', 'jws_roles');
 
     }
 
@@ -209,6 +264,16 @@ class Just_Writing_Statsitics_Admin
     public function settings_section_excluded_types()
     {
         echo '<p>'.__('Select which post types to be excluded from the statistics.  Note that not all of the types below may show up in your statistics if they do not have any content associated with them.', 'just-writing-statistics').'</p>';
+    }
+
+    /**
+     * Display Excluded Types Settings Section.
+     *
+     * @since 3.2.0
+     */
+    public function settings_section_roles()
+    {
+        echo '<p>'.__('Select which user to enable the display of the statistics pages for.</p><p>Administrators are always enabled and users that don\'t have the <code>delete_posts</code> capability are never shown the statistics page.', 'just-writing-statistics').'</p>';
     }
 
     /**
@@ -256,6 +321,17 @@ class Just_Writing_Statsitics_Admin
 
         echo '<label class="jws-switch">' . PHP_EOL;
         echo '<input type="checkbox" name="jws_excluded_types[' . esc_attr( $args['type'] ) . ']" id="jws_excluded_types[' . esc_attr( $args['type'] ) . ']"' . checked( $args['checked'], true, false ) . '>' . PHP_EOL;
+        echo '<span class="jws-slider jws-round"></span>' . PHP_EOL;
+        echo '</label>' . PHP_EOL;
+
+    }
+
+    public function settings_roles_by_name( $args )
+    {
+        //$args['type'];
+
+        echo '<label class="jws-switch">' . PHP_EOL;
+        echo '<input type="checkbox" name="jws_roles[' . esc_attr( $args['type'] ) . ']" id="jws_roles[' . esc_attr( $args['type'] ) . ']"' . checked( $args['checked'], true, false ) . '>' . PHP_EOL;
         echo '<span class="jws-slider jws-round"></span>' . PHP_EOL;
         echo '</label>' . PHP_EOL;
 
