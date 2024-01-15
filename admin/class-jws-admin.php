@@ -204,7 +204,9 @@ class Just_Writing_Statsitics_Admin
         $roles = get_option('jws_roles');
 
         if( $roles === false ) {
-            foreach( $role_types->roles as $role_slug ) {
+            $roles = array();
+
+            foreach( $role_types->roles as $role_slug => $value ) {
                 $roles[$role_slug] = 'on';
             }
         }
@@ -273,7 +275,9 @@ class Just_Writing_Statsitics_Admin
      */
     public function settings_section_roles()
     {
-        echo '<p>'.__('Select which user to enable the display of the statistics pages for.</p><p>Administrators are always enabled and roles that do not have the <code>delete_posts</code> capability are not shown the statistics page and excluded from the below list.', 'just-writing-statistics').'</p>';
+        echo '<p>'.__('Select which user to enable the display of the statistics pages for.', 'just-writing-statistics').'</p>';
+        echo '<p>'.__('Administrators are always enabled and roles that do not have the <code>delete_posts</code> capability are not shown the statistics page and excluded from the below list', 'just-writing-statistics').'</p>';
+        echo '<p>'.__('All enabled users will have access to the settings page.</p>', 'just-writing-statistics').'</p>';
     }
 
     /**
