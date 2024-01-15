@@ -3,7 +3,7 @@ Contributors: gregross, redlettuce
 Tags: word count, reading time, authors, words, writing
 Requires at least: 4.6
 Tested up to: 6.4.2
-Stable tag: 4.3
+Stable tag: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,10 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 4. Settings
 
 == Changelog ==
+= 4.4 =
+* Release date: January 15, 2024
+* Added option to disable plugin based on WordPress roles
+
 = 4.3 =
 * Release date: Dec 14, 2023
 * Fixed possible null error on some stat pages

@@ -9,7 +9,7 @@
  * Plugin Name: Just Writing Statistics
  * Plugin URI:  https://toolstack.com/just-writing-statistics
  * Description: Count the words on your WordPress site instantly.
- * Version:     4.3
+ * Version:     4.4
  * Author:      GregRoss
  * Author URI:  https://toolstack.com
  * License:     GPL-2.0+
@@ -24,7 +24,7 @@ if (!defined('WPINC')) {
     die;
 }
 
-define('JWS_VERSION', '4.3');
+define('JWS_VERSION', '4.4');
 
 function activate_just_writing_statsitics_()
 {
