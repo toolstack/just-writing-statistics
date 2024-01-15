@@ -114,12 +114,12 @@ class Just_Writing_Statsitics_Admin
         $roles = get_option('jws_roles');
         $user = wp_get_current_user();
 
-        // Don't check for permissions if no option has been set (===) or the user is an administrator
+        // Don't check for permissions if no option has been set (=== false) or the user is an administrator
         if( $roles !== false && !in_array( 'administrator', $user->roles ) ) {
             $blocked = false;
             $allowed = false;
 
-            // If the roles setting is empty, make sure it's an empty array.
+            // If the roles setting is empty (lose comparison), make sure it's an empty array.
             if( $roles == false ) { $roles = array(); }
 
             foreach( $user->roles as $slug ) {
@@ -198,7 +198,7 @@ class Just_Writing_Statsitics_Admin
         register_setting('jws-section-excluded-types', 'jws_excluded_types');
 
         // Enabled Roles
-        add_settings_section('jws-section-roles', __('User Roles', 'just-writing-statistics'), [$this, 'settings_section_roles'], 'jws-roles');
+        add_settings_section('jws-section-roles', __('User Roles To Enable', 'just-writing-statistics'), [$this, 'settings_section_roles'], 'jws-roles');
 
         $role_types = wp_roles();
         $roles = get_option('jws_roles');
@@ -273,7 +273,7 @@ class Just_Writing_Statsitics_Admin
      */
     public function settings_section_roles()
     {
-        echo '<p>'.__('Select which user to enable the display of the statistics pages for.</p><p>Administrators are always enabled and users that don\'t have the <code>delete_posts</code> capability are never shown the statistics page.', 'just-writing-statistics').'</p>';
+        echo '<p>'.__('Select which user to enable the display of the statistics pages for.</p><p>Administrators are always enabled and roles that do not have the <code>delete_posts</code> capability are not shown the statistics page and excluded from the below list.', 'just-writing-statistics').'</p>';
     }
 
     /**
