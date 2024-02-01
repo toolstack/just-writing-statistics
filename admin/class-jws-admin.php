@@ -842,7 +842,7 @@ class Just_Writing_Statsitics_Admin
                     $jws_dataset_months[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
-                $jws_dataset_months[$total->post_date]['items']++;
+                $jws_dataset_months[$total->post_date]['items'] += $total->posts;
                 $jws_dataset_months[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'yearly-statistics') {
@@ -882,7 +882,7 @@ class Just_Writing_Statsitics_Admin
                     $jws_dataset_years[$total->post_date][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
-                $jws_dataset_years[$total->post_date]['items']++;
+                $jws_dataset_years[$total->post_date]['items'] += $total->posts;
                 $jws_dataset_years[$total->post_date]['total'] += $total->word_count;
             }
         } elseif ($jws_tab == 'tag-statistics') {
@@ -1025,7 +1025,7 @@ class Just_Writing_Statsitics_Admin
                     $jws_dataset_authors[$total->post_author][$total->post_type]['unpublished']['word_count'] += $total->word_count;
                 }
 
-                $jws_dataset_authors[$total->post_author]['items']++;
+                $jws_dataset_authors[$total->post_author]['items'] += $total->posts;
                 $jws_dataset_authors[$total->post_author]['total'] += $total->word_count;
             }
 
