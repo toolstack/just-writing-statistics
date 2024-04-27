@@ -380,7 +380,7 @@ class Just_Writing_Statsitics_Admin
         }
 
         echo '<input id="jws_reading_time_label_before" name="jws_reading_time[labels][before]" type="text" class="text" value="'.esc_attr($reading_time_label_before).'" />';
-        echo '<p><small>'.__('This text will appear before the reading time is inserted into your posts.', 'just-writing-statistics').'</small></p>';
+        echo '<p><small>'.__('This text will appear before the reading time is inserted into your posts (standard post html allowed).', 'just-writing-statistics').'</small></p>';
     }
 
     /**
@@ -401,7 +401,7 @@ class Just_Writing_Statsitics_Admin
         }
 
         echo '<input id="jws_reading_time_label_after" name="jws_reading_time[labels][after]" type="text" class="text" value="'.esc_attr($reading_time_label_after).'" />';
-        echo '<p><small>'.__('This text will appear after the reading time is inserted into your posts.', 'just-writing-statistics').'</small></p>';
+        echo '<p><small>'.__('This text will appear after the reading time is inserted into your posts (standard post html allowed).', 'just-writing-statistics').'</small></p>';
     }
 
     /**
