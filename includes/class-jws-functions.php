@@ -141,7 +141,9 @@ function jws_calculate_word_count_post($post)
     $sql_jws_words = $wpdb->prepare("SELECT post_word_count FROM $table_name WHERE post_id = %d", $post->ID);
     $jws_words = $wpdb->get_row($sql_jws_words);
 
-    $words = $jws_words->post_word_count;
+    if($jws_words != null) {
+        $words = $jws_words->post_word_count;
+    }
 
     return $words;
 }
