@@ -64,7 +64,7 @@ class Just_Writing_Statsitics_Public
 
                 $words = 0 + jws_calculate_word_count_post($post);
 
-                return trim(esc_attr($before).' '.number_format($words).' '.esc_attr($after));
+                return wp_kses_post(trim(esc_attr($before).' '.number_format($words).' '.esc_attr($after)));
             }
         }
 
@@ -80,7 +80,7 @@ class Just_Writing_Statsitics_Public
 
             $words = jws_calculate_word_count_total();
 
-            return trim(esc_attr($before).' '.number_format($words).' '.esc_attr($after));
+            return wp_kses_post(trim(esc_attr($before).' '.number_format($words).' '.esc_attr($after)));
         }
 
         function jws_shortcode_reading_time($atts) {
@@ -100,7 +100,7 @@ class Just_Writing_Statsitics_Public
 
                 $reading_time = jws_reading_time(jws_calculate_word_count_post($post), $reading_time_settings_wpm, 'shortcode');
 
-                return '<p class="jws-reading-time">'.trim(esc_attr($before).' '.$reading_time.' '.esc_attr($after)).'</p>';
+                return wp_kses_post('<p class="jws-reading-time">'.trim(esc_attr($before).' '.$reading_time.' '.esc_attr($after)).'</p>');
 
             }
 
@@ -130,7 +130,7 @@ class Just_Writing_Statsitics_Public
 
             $reading_time = jws_reading_time(jws_calculate_word_count_post($post), $reading_time_settings_wpm, 'shortcode');
 
-            return '<p class="jws-reading-time">'.trim($reading_time_settings_before.' '.$reading_time.' '.$reading_time_settings_after).'</p>'.$content;
+            return wp_kses_post('<p class="jws-reading-time">'.trim($reading_time_settings_before.' '.$reading_time.' '.$reading_time_settings_after).'</p>'.$content);
 
         } else {
             return $content;
