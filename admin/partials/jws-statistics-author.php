@@ -47,6 +47,19 @@
 ?>
 
 <script>
+  const stringToColour = (string) => {
+    let hash = 0;
+    string.split('').forEach(char => {
+      hash = char.charCodeAt(0) + ((hash << 5) - hash)
+    })
+    let colour = '#'
+    for (let i = 0; i < 3; i++) {
+      const value = (hash >> (i * 8)) & 0xff
+      colour += value.toString(16).padStart(2, '0')
+    }
+    return colour
+  }
+
   const WordCountChart = document.getElementById('AuthorWordCountChart');
 
   new Chart(WordCountChart, {
@@ -57,9 +70,14 @@
         {
           label: '<?php _e('Words','just-writing-statistics');?>',
           data: <?php echo html_entity_decode( json_encode( $word_data ) ); ?>,
-          backgroundColor: '#0056a688',
-          borderColor : "#0056a688",
-        },
+          backgroundColor: [<?php
+            foreach( $labels as $label ) {
+              echo "\n" . '              stringToColour( ' . html_entity_decode( json_encode( $label ) ) . '),';
+            }
+            echo "\n";
+?>
+            ]
+          },
       ],
     },
     options: {
@@ -82,8 +100,13 @@
         {
           label: '<?php _e('Words','just-writing-statistics');?>',
           data: <?php echo html_entity_decode( json_encode( $item_data ) ); ?>,
-          backgroundColor: '#0056a688',
-          borderColor : "#0056a688",
+          backgroundColor: [<?php
+            foreach( $labels as $label ) {
+              echo "\n" . '              stringToColour( ' . html_entity_decode( json_encode( $label ) ) . '),';
+            }
+            echo "\n";
+?>
+            ]
         },
       ],
     },
