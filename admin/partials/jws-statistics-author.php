@@ -47,19 +47,6 @@
 ?>
 
 <script>
-  const stringToColour = (string) => {
-    let hash = 0;
-    string.split('').forEach(char => {
-      hash = char.charCodeAt(0) + ((hash << 5) - hash)
-    })
-    let colour = '#'
-    for (let i = 0; i < 3; i++) {
-      const value = (hash >> (i * 8)) & 0xff
-      colour += value.toString(16).padStart(2, '0')
-    }
-    return colour
-  }
-
   const WordCountChart = document.getElementById('AuthorWordCountChart');
 
   new Chart(WordCountChart, {
@@ -72,7 +59,7 @@
           data: <?php echo html_entity_decode( json_encode( $word_data ) ); ?>,
           backgroundColor: [<?php
             foreach( $labels as $label ) {
-              echo "\n" . '              stringToColour( ' . html_entity_decode( json_encode( $label ) ) . '),';
+              echo "\n              '#" . substr( dechex( crc32( $label ) ), 0, 6) . "',";
             }
             echo "\n";
 ?>
@@ -102,7 +89,7 @@
           data: <?php echo html_entity_decode( json_encode( $item_data ) ); ?>,
           backgroundColor: [<?php
             foreach( $labels as $label ) {
-              echo "\n" . '              stringToColour( ' . html_entity_decode( json_encode( $label ) ) . '),';
+              echo "\n              '#" . substr( dechex( crc32( $label ) ), 0, 6) . "',";
             }
             echo "\n";
 ?>
