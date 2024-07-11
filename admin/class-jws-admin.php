@@ -90,6 +90,7 @@ class Just_Writing_Statsitics_Admin
     public function enqueue_styles()
     {
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/jws-admin.css', [], $this->version, 'all');
+        wp_style_add_data( $this->plugin_name, 'rtl', 'replace' );
         wp_enqueue_style('jquery-ui-theme-smoothness', plugin_dir_url(__FILE__) . 'css/jquery-ui.css', [], $this->version, 'all');
     }
 
