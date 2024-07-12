@@ -2,8 +2,8 @@
 **Contributors:** [gregross](https://profiles.wordpress.org/gregross/), [redlettuce](https://profiles.wordpress.org/redlettuce/)  
 **Tags:** word count, reading time, authors, words, writing  
 **Requires at least:** 4.6  
-**Tested up to:** 6.5.2  
-**Stable tag:** 4.6  
+**Tested up to:** 6.5.5  
+**Stable tag:** 4.7  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -105,6 +105,11 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 
 ## Changelog ##
+### 4.7 ###
+* Release date: July 11, 2024
+* Add support for rlt languages in the admin screens.
+* Add colour to the charts for authors.
+
 ### 4.6 ###
 * Release date: April 27, 2024
 * Fixed debug warning.
