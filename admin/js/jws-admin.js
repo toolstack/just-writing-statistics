@@ -125,7 +125,10 @@
         $(".jws-datepicker").keypress(function(event) {event.preventDefault();});
         $('.jws-datepicker').change(function(){
 
+            var date = $(this).datepicker('getDate');
             var id = $(this).attr('id') + '_formatted';
+
+            $('#' + id).val($.datepicker.formatDate('yy-mm-dd', date));
 
             if ($(this).val() == '') {
 

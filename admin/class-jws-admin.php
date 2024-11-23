@@ -424,7 +424,7 @@ class Just_Writing_Statsitics_Admin
     {
         global $wpdb;
 
-        $table_name_posts = $wpdb->prefix.'posts';
+        $table_name_posts = $wpdb->prefix . 'posts';
         $sql_jws_process = '';
 
         parse_str($_POST['form'], $parameters);
@@ -432,7 +432,10 @@ class Just_Writing_Statsitics_Admin
             unset($parameters['jws_date_range_start'], $parameters['jws_date_range_end'], $parameters['jws_date_range_start_formatted'], $parameters['jws_date_range_end_formatted'], $parameters['jws_delete_data']);
         }
 
-        $sql_post_total = "SELECT COUNT(ID) AS post_total FROM $table_name_posts WHERE 1";
+        $sql_post_total_vars = array();
+
+        $sql_post_total = "SELECT COUNT(ID) AS post_total FROM %i WHERE 1";
+        $sql_post_total_vars .= $table_name_posts;
 
         $post_types = get_post_types('', 'names');
         unset($post_types['attachment'], $post_types['nav_menu_item'], $post_types['custom_css'], $post_types['revision'], $post_types['customize_changeset']);
@@ -442,7 +445,9 @@ class Just_Writing_Statsitics_Admin
             $sql_post_total .= ' AND (';
 
             foreach ($post_types as $post_type) {
-                $sql_post_total .= "$table_name_posts.post_type = '".$post_type."' OR ";
+                $sql_post_total .= "%i = %s OR ";
+                $sql_post_total_vars .= $table_name_posts . '.post_type';
+                $sql_post_total_vars .= $post_type;
             }
             $sql_post_total = substr($sql_post_total, 0, -4);
 
@@ -451,13 +456,18 @@ class Just_Writing_Statsitics_Admin
 
         // Date Range
         if (isset($parameters['jws_date_range_start_formatted']) && strlen($parameters['jws_date_range_start_formatted']) == 10) {
-            $sql_post_total .= " AND $table_name_posts.post_date >= '".$parameters['jws_date_range_start_formatted']." 00:00:00'";
+            $sql_post_total .= " AND %i >= %s";
+            $sql_post_total_vars .= $table_name_posts . '.post_date';
+            $sql_post_total_vars .= $parameters['jws_date_range_start_formatted']." 00:00:00";
         }
 
         if (isset($parameters['jws_date_range_end_formatted']) && strlen($parameters['jws_date_range_end_formatted']) == 10) {
-            $sql_post_total .= " AND $table_name_posts.post_date <= '".$parameters['jws_date_range_end_formatted']." 23:59:59'";
+            $sql_post_total .= " AND %i <= %s";
+            $sql_post_total_vars .= $table_name_posts . '.post_date';
+            $sql_post_total_vars .= $parameters['jws_date_range_end_formatted']." 23:59:59";
         }
 
+        $sql_post_total = $wpdb->prepare($sql_post_total, $sql_post_total_vars);
         $jws_post_total = $wpdb->get_results($sql_post_total);
 
         $step = absint($_POST['step']);
@@ -514,25 +524,20 @@ class Just_Writing_Statsitics_Admin
     {
         global $wpdb;
 
-        $table_name_jws_posts = $wpdb->prefix.'jws_posts';
-        $sql_jws_process = '';
-
         parse_str($data['form'], $parameters);
         if ($parameters['jws_calculation_type'] == 'all') {
             unset($parameters['jws_date_range_start'], $parameters['jws_date_range_end'], $parameters['jws_date_range_start_formatted'], $parameters['jws_date_range_end_formatted'], $parameters['jws_delete_data']);
         }
 
-        // Date Range
-        if (isset($parameters['jws_date_range_start_formatted']) && strlen($parameters['jws_date_range_start_formatted']) == 10) {
-            $sql_jws_process .= "AND $table_name_jws_posts.post_date >= '".$parameters['jws_date_range_start_formatted']." 00:00:00' ";
-        }
+        if ($step == 1 && $parameters['jws_delete_data'] == 'on') {
+            $sql_jws_process_vars = array();
+            $table_name_jws_posts = $wpdb->prefix . 'jws_posts';
 
-        if (isset($parameters['jws_date_range_end_formatted']) && strlen($parameters['jws_date_range_end_formatted']) == 10) {
-            $sql_jws_process .= "AND $table_name_jws_posts.post_date <= '".$parameters['jws_date_range_end_formatted']." 23:59:59' ";
-        }
+            $sql_jws_process = 'DELETE FROM %i WHERE 1';
+            $sql_jws_process_vars = $table_name_jws_posts;
 
-        if ($step == 1) {
-            $wpdb->query("DELETE FROM $table_name_jws_posts WHERE 1 ".(!isset($parameters['jws_delete_data']) ? $sql_jws_process : ''));
+            $sql_jws_process = $wpdb->prepare($sql_jws_process, $sql_jws_process_vars);
+            $wpdb->query($sql_jws_process);
             jws_create_posts_table();
         }
 
@@ -550,12 +555,14 @@ class Just_Writing_Statsitics_Admin
         ];
 
         // Date Range
-        if (isset($parameters['jws_date_range_start_formatted']) && strlen($parameters['jws_date_range_start_formatted']) == 10) {
-            $args['date_query']['after'] = ['year' => substr($parameters['jws_date_range_start_formatted'], 0, 4), 'month' => substr($parameters['jws_date_range_start_formatted'], 5, 2), 'day' => substr($parameters['jws_date_range_start_formatted'], -2)];
+        if (isset($parameters['jws_date_range_start_formatted'])) {
+            $start_date = date_parse($parameters['jws_date_range_start_formatted']);
+            $args['date_query']['after'] = ['year' => $start_date['year'], 'month' => $start_date['month'], 'day' => $start_date['day']];
         }
 
-        if (isset($parameters['jws_date_range_end_formatted']) && strlen($parameters['jws_date_range_end_formatted']) == 10) {
-            $args['date_query']['before'] = ['year' => substr($parameters['jws_date_range_end_formatted'], 0, 4), 'month' => substr($parameters['jws_date_range_end_formatted'], 5, 2), 'day' => substr($parameters['jws_date_range_end_formatted'], -2)];
+        if (isset($parameters['jws_date_range_end_formatted'])) {
+            $end_date = date_parse($parameters['jws_date_range_end_formatted']);
+            $args['date_query']['before'] = ['year' => $end_date['year'], 'month' => $end_date['month'], 'day' => $end_date['day']];
         }
 
         if ($step > 1) {
@@ -592,7 +599,7 @@ class Just_Writing_Statsitics_Admin
 
         $totals = [];
 
-        $table_name_posts = $wpdb->prefix.'jws_posts';
+        $table_name_posts = $wpdb->prefix . 'jws_posts';
 
         $reading_time_options = get_option('jws_reading_time');
 
