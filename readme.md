@@ -2,8 +2,8 @@
 **Contributors:** [gregross](https://profiles.wordpress.org/gregross/), [redlettuce](https://profiles.wordpress.org/redlettuce/)  
 **Tags:** word count, reading time, authors, words, writing  
 **Requires at least:** 4.6  
-**Tested up to:** 6.5.5  
-**Stable tag:** 4.7  
+**Tested up to:** 6.7.1  
+**Stable tag:** 4.8  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -105,6 +105,12 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 
 ## Changelog ##
+### 4.8 ###
+* Release date: November 22, 2024
+* Fix security issue with date ranges in the admin page statistics recalculation option.
+* Fix non-working date range code in the admin page statistics recalculation option.
+* Fix optional deleting of data in the admin page statistics recalculation option.
+
 ### 4.7 ###
 * Release date: July 11, 2024
 * Add support for rlt languages in the admin screens.
