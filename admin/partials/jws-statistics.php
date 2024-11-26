@@ -62,6 +62,11 @@
                 include_once 'jws-statistics-category.php';
 
                 break;
+            case 'frequency':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-frequency.php';
+
+                break;
             case 'about':
                 include_once 'jws-statistics-menu.php';
                 include_once 'jws-about.php';

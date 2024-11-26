@@ -38,6 +38,7 @@ class Just_Writing_Statsitics_Admin
                                     'yearly-statistics' => '',
                                     'tag-statistics' => '',
                                     'category-statistics' => '',
+                                    'frequency' => '',
                                     'author-statistics' => '',
                                     'settings' => '',
                                     'about' => '',
@@ -102,7 +103,8 @@ class Just_Writing_Statsitics_Admin
     public function enqueue_scripts()
     {
         wp_enqueue_script($this->plugin_name.'-js', plugin_dir_url(__FILE__) . 'js/jws-admin.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-datepicker'], $this->version, false);
-        wp_enqueue_script('jws-chart', plugin_dir_url(__FILE__) . 'js/chart.js', [], '4.1.1', false);
+        wp_enqueue_script('jws-chart', plugin_dir_url(__FILE__) . 'js/chart.js', [], '4.4.6', false);
+        wp_enqueue_script('jws-word-cloud', plugin_dir_url(__FILE__) . 'js/wordcloud2.js', [], '1.1.1', false);
     }
 
     /**
@@ -755,6 +757,13 @@ class Just_Writing_Statsitics_Admin
                 WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
                 GROUP BY post_author, post_type, post_status
                 ORDER BY post_author ASC";
+        } elseif ($jws_tab == 'frequency') {
+            $sql_jws_statistics = "
+                SELECT post_word_frequency
+                FROM $table_name_posts
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
+                GROUP BY post_author, post_type, post_status
+                ORDER BY post_author ASC";
         }
 
         // If we're on a page that doesn't need statistics data, like About, just display the page and bail out now.
@@ -777,6 +786,7 @@ class Just_Writing_Statsitics_Admin
         $jws_dataset_tags = [];
         $jws_dataset_categories = [];
         $jws_dataset_authors = [];
+        $jws_dataset_word_frequency = [];
 
         if (!isset($jws_tab) || $jws_tab == 'top-content' || $jws_tab == 'all-content') {
             foreach ($jws_statistics as $jws_post) {
@@ -1043,6 +1053,18 @@ class Just_Writing_Statsitics_Admin
                     return $b['total'] - $a['total'];
                 }
             );
+        } elseif ($jws_tab == 'frequency') {
+            $jws_dataset_word_frequency = [];
+            foreach ($jws_statistics as $word_list) {
+                $working_words = json_decode($word_list->post_word_frequency,true);
+
+                foreach( $working_words as $word => $count) {
+                    if (!array_key_exists( $word, $jws_dataset_word_frequency)) { $jws_dataset_word_frequency[$word] = 0; }
+                    $jws_dataset_word_frequency[$word] += $count;
+                }
+            }
+
+            arsort($jws_dataset_word_frequency);
         }
 
         // Sort Post Types in a more readable way

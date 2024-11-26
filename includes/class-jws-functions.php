@@ -26,6 +26,7 @@ function jws_save_post_data($post)
 
     if ($post && $post->post_author != 0) {
         $post_word_count = jws_word_count($post->post_content);
+        $post_word_frequency = json_encode(jws_word_frequency($post->post_content));
 
         // If Thrive Content Builder data is available, add to total
         if ($tve = get_post_meta($post->ID, 'tve_updated_post', true)) {
@@ -33,8 +34,8 @@ function jws_save_post_data($post)
         }
 
         $sql_post_data = "
-			INSERT INTO $table_name_posts (post_id, post_author, post_date, post_status, post_modified, post_parent, post_type, post_word_count)
-			VALUES (%d, %d, %s, %s, %s, %s, %s, %d)
+			INSERT INTO $table_name_posts (post_id, post_author, post_date, post_status, post_modified, post_parent, post_type, post_word_count, post_word_frequency)
+			VALUES (%d, %d, %s, %s, %s, %s, %s, %d, %s)
 			ON DUPLICATE KEY UPDATE
 			post_author = %s,
 			post_date = %s,
@@ -42,9 +43,10 @@ function jws_save_post_data($post)
 			post_modified = %s,
 			post_parent = %d,
 			post_type = %s,
-			post_word_count = %d";
+			post_word_count = %d,
+			post_word_frequency = %s;";
 
-        $post_data = $wpdb->prepare($sql_post_data, $post->ID, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count);
+        $post_data = $wpdb->prepare($sql_post_data, $post->ID, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count, $post_word_frequency, $post->post_author, $post->post_date, $post->post_status, $post->post_modified, $post->post_parent, $post->post_type, $post_word_count, $post_word_frequency);
 
         $wpdb->query($post_data);
     }
@@ -84,6 +86,34 @@ function jws_word_count($content)
 }
 
 /**
+ * Calculate word frequency in a given set of text.
+ *
+ * @since 5.0.0
+ * @param string $content The post content
+ */
+function jws_word_frequency($content)
+{
+    // Convert the text to lowercase.
+    $content = strtolower($content);
+
+    // Create an associative array to store the word frequencies
+    $counts = [];
+
+    // Split the text into words and count if any were found.
+    if( preg_match_all("/\w+/", $content, $words))
+        {
+        // Count the word frequencies based on array values and store them in counts.
+        $counts = array_count_values($words[0]);
+        }
+
+    // Sort the array naturally ;)
+    ksort($counts, SORT_NATURAL);
+
+    // Return the counts.
+    return $counts;
+}
+
+/**
  * Store the plugin version as an option.
  *
  * @since 3.0.0
@@ -117,6 +147,7 @@ function jws_create_posts_table()
 		post_parent bigint(20) NOT NULL,
 		post_type varchar(20) NOT NULL,
 		post_word_count bigint(20) NOT NULL,
+		post_word_frequency longtext NOT NULL,
 		UNIQUE KEY post_id (post_id)
 	) $charset_collate;";
 

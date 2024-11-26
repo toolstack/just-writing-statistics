@@ -53,6 +53,8 @@
 
 #just-writing-statistics table.widefat td:first-of-type a, #just-writing-statistics table.widefat td:last-of-type a { text-decoration: underline; }
 
+#just-writing-statistics > div.full > div > table > tbody > tr > td:nth-child(1), #just-writing-statistics > div.full > div > table > thead > tr:nth-child(2) > th.jws-rank { text-align: center; }
+
 #just-writing-statistics .jws-stats { float: left; display: block; width: 20px; height: 20px; margin-right: 10px; margin-top: -2px; padding: 2px; border-radius: 3px; background: #0056a6; color: #ffffff; text-align: center; }
 #just-writing-statistics .jws-stats-month { margin-top: 5px; }
 #just-writing-statistics .jws-stats:hover { background: #448ac8; color: #ffffff; }
@@ -67,6 +69,14 @@
 
 .column-jws_words {
     width: 5.5em;
+}
+
+th.jws-word {
+    width: 10em;
+}
+
+th.jws-rank {
+  width: 4em;
 }
 
 /* The switch - the box around the slider */
