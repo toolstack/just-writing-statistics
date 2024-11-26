@@ -16,7 +16,7 @@
     <div>
         <div class="full jws-chart-container" id="JWSWordCloud">
 
-            <h3><?php _e('Words Frequency Cloud (Top 100 Words)', 'just-writing-statistics'); ?></h3>
+            <h3><?php _e('Words Frequency Cloud', 'just-writing-statistics'); ?></h3>
             <canvas id="WordsByFrequencyChart"></canvas>
 
         </div>
