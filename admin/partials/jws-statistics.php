@@ -67,6 +67,11 @@
                 include_once 'jws-statistics-frequency.php';
 
                 break;
+            case 'word-to-posts':
+                include_once 'jws-statistics-menu.php';
+                include_once 'jws-statistics-word-to-posts.php';
+
+                break;
             case 'about':
                 include_once 'jws-statistics-menu.php';
                 include_once 'jws-about.php';

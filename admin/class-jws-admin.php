@@ -39,6 +39,7 @@ class Just_Writing_Statsitics_Admin
                                     'tag-statistics' => '',
                                     'category-statistics' => '',
                                     'frequency' => '',
+                                    'word-to-posts' => '',
                                     'author-statistics' => '',
                                     'settings' => '',
                                     'about' => '',
@@ -764,7 +765,28 @@ class Just_Writing_Statsitics_Admin
                 WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
                 GROUP BY post_author, post_type, post_status
                 ORDER BY post_author ASC";
-        }
+        } elseif ($jws_tab == 'word-to-posts') {
+            // Set a default word query that should pretty much aways be around.
+            $word_query = 'the';
+
+            // Get the word we're actually looking for, assuming it was passed in.
+            if (isset( $_GET['word'] ) ) {
+                $word_query = $_GET['word'];
+            }
+
+            // Format it for the extract, have to do this here otherwise prepare will double quote it.
+            $word_query_sql = '$.' . $word_query;
+
+            // Prepare the SQL fragment for the JSON extract.
+            $JSON_extract = "CAST( JSON_EXTRACT(`post_word_frequency`, '%s') AS INT)";
+            $JSON_extract = $wpdb->prepare( $JSON_extract, $word_query_sql);
+
+            $sql_jws_statistics = "
+				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count, post_word_frequency, $JSON_extract as query_word_frequency
+				FROM $table_name_posts
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') AND $JSON_extract > 0 $excluded_types_sql
+				ORDER BY query_word_frequency DESC";
+            }
 
         // If we're on a page that doesn't need statistics data, like About, just display the page and bail out now.
         if( $sql_jws_statistics == '' ) {
@@ -787,6 +809,7 @@ class Just_Writing_Statsitics_Admin
         $jws_dataset_categories = [];
         $jws_dataset_authors = [];
         $jws_dataset_word_frequency = [];
+        $jws_dataset_word_to_posts = [];
 
         if (!isset($jws_tab) || $jws_tab == 'top-content' || $jws_tab == 'all-content') {
             foreach ($jws_statistics as $jws_post) {
@@ -1065,6 +1088,50 @@ class Just_Writing_Statsitics_Admin
             }
 
             arsort($jws_dataset_word_frequency);
+        } elseif ($jws_tab == 'word-to-posts') {
+            $jws_dataset_word_to_posts = [];
+            foreach ($jws_statistics as $jws_post) {
+                // Load post type array
+                if (!isset($jws_dataset_post_types[$jws_post->post_type])) {
+                    $post_type_object = get_post_type_object($jws_post->post_type);
+
+                    $jws_dataset_post_types[$jws_post->post_type]['plural_name'] = $post_type_object->labels->name;
+                    $jws_dataset_post_types[$jws_post->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                }
+
+                // Load authors array
+                if (!isset($jws_dataset_authors[$jws_post->post_author])) {
+                    $jws_dataset_authors[$jws_post->post_author]['display_name'] = get_the_author_meta('display_name', $jws_post->post_author);
+                }
+
+                $jws_dataset_word_to_post = [
+                    'post_id' => $jws_post->post_id,
+                    'post_title' => get_the_title($jws_post->post_id),
+                    'post_status' => ucwords($jws_post->post_status),
+                    'post_type' => $jws_dataset_post_types[$jws_post->post_type]['singular_name'],
+                    'post_author' => $jws_dataset_authors[$jws_post->post_author]['display_name'],
+                    'post_author_id' => $jws_post->post_author,
+                    'post_word_count' => $jws_post->post_word_count,
+                    'permalink' => get_permalink($jws_post->post_id),
+                    'word_query' => '',
+                    'word_query_frequency' => 0,
+                ];
+
+                $post_word_frequencies = json_decode( $jws_post->post_word_frequency, true);
+                if( array_key_exists( $word_query, $post_word_frequencies) ) {
+                    $jws_dataset_word_to_post['word_query'] = $word_query;
+                    $jws_dataset_word_to_post['word_query_frequency'] = intval( $post_word_frequencies[$word_query] );
+                }
+
+                if( ! array_key_exists($jws_dataset_word_to_post['post_type'], $jws_dataset_post_status) ) { $jws_dataset_post_status[$jws_dataset_word_to_post['post_type']] = array(); }
+
+                if( ! array_key_exists($jws_dataset_word_to_post['post_status'], $jws_dataset_post_status[$jws_dataset_word_to_post['post_type']]) ) { $jws_dataset_post_status[$jws_dataset_word_to_post['post_type']][$jws_dataset_word_to_post['post_status']] = array( 'count' => 0, 'words' => 0 ); }
+
+                $jws_dataset_post_status[$jws_dataset_word_to_post['post_type']][$jws_dataset_word_to_post['post_status']]['count']++;
+                $jws_dataset_post_status[$jws_dataset_word_to_post['post_type']][$jws_dataset_word_to_post['post_status']]['words'] += intval( $jws_dataset_word_to_post['post_word_count'] );
+
+                $jws_dataset_word_to_posts[] = $jws_dataset_word_to_post;
+            }
         }
 
         // Sort Post Types in a more readable way

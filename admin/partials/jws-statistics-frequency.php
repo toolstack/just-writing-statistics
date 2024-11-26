@@ -28,8 +28,14 @@
     $i = 1;
     foreach ($jws_dataset_word_frequency as $word => $frequency) {
       $word_list .= "['" . $word . "', " . $frequency . '], ';
+
       if ($i % 2) { $alternate = ' class="alternate"'; } else { $alternate = ""; }
-      $table_rows .= '      <tr ' . $alternate . '>' . PHP_EOL . '      <td>' . $i . '</td>' . PHP_EOL . '      <td>' . esc_html( $word ) . '</td>' . PHP_EOL . '      <td>' . number_format($frequency) . '      </td>' . PHP_EOL . '  </tr>' . PHP_EOL;
+      $table_rows .= '      <tr ' . $alternate . '>' . PHP_EOL;
+      $table_rows .= '      <td>' . $i . '</td>' . PHP_EOL;
+      $table_rows .= '      <td><a href="' . add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'word-to-posts', 'word' => $word ), admin_url('admin.php')) . '">' . esc_html( $word ) . '</a></td>' . PHP_EOL;
+      $table_rows .= '      <td>' . number_format($frequency) . '      </td>' . PHP_EOL;
+      $table_rows .= '  </tr>' . PHP_EOL;
+
       $i++;
     }
     $word_list = substr( $word_list, 0, -2);
