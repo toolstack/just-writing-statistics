@@ -50,13 +50,36 @@
     $word_list .= ']';
 ?>
 
+<div id="JWSFrequencyCountPopup" class="jws-frequency-popup">
+        Test
+</div>
+
 <script>
   // Grab the container and chart elements.
   const WordFrequencyContainer = document.getElementById('JWSWordCloud');
   const WordFrequencyChart = document.getElementById('WordsByFrequencyChart');
+  const WordFrequencyPopup = document.getElementById('JWSFrequencyCountPopup');
 
   // Output the word list and calculate a weight based on the largest frequency.
-  var wordlist = <?php echo $word_list;?>;
+  const wordlist = <?php echo $word_list;?>;
+  const wordPage = "<?php echo add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'word-to-posts' ), admin_url('admin.php')); ?>";
+  const gotoWordPage = function (item, dimension, event) {
+    window.location.href = wordPage + "&word=" + item[0];
+  }
+  const showFrequencyCount = function (item, dimension, event) {
+    console.log( item );
+    if ( typeof item === 'object') {
+        WordFrequencyPopup.style.left = ( event.layerX + 16 ) + 'px';
+        WordFrequencyPopup.style.top = ( event.layerY + 16 ) + 'px';
+        WordFrequencyPopup.style.display = 'block';
+        WordFrequencyPopup.innerText = item[1];
+    }
+  }
+  const onMouseLeaveWordCloud = function () {
+    WordFrequencyPopup.style.display = 'none';
+  }
+
+  WordFrequencyChart.addEventListener("mouseleave", onMouseLeaveWordCloud);
 
   // Monitor the container for resizing, so we can redraw the word cloud.  Note, this will also draw
   // the word cloud for the first time since we're resizing the chart right after this code.
@@ -67,7 +90,7 @@
     WordFrequencyChart.width = rect.width;
     WordFrequencyChart.height = rect.width * 0.5;
 
-    WordCloud(WordFrequencyChart, { list: wordlist, clearCanvas: true, shape: "square" } );
+    WordCloud(WordFrequencyChart, { list: wordlist, clearCanvas: true, shape: "square", click: gotoWordPage, hover: showFrequencyCount } );
   });
 
   // Start watching for resize events
