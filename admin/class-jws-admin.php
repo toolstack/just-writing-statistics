@@ -779,14 +779,14 @@ class Just_Writing_Statsitics_Admin
             $word_query_sql = '$.' . $word_query;
 
             // Prepare the SQL fragment for the JSON extract.
-            $JSON_extract = "CAST( JSON_EXTRACT(`post_word_frequency`, '%s') AS INT)";
+            $JSON_extract = "JSON_EXTRACT(`post_word_frequency`, '%s')";
             $JSON_extract = $wpdb->prepare( $JSON_extract, $word_query_sql);
 
             $sql_jws_statistics = "
 				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count, post_word_frequency, $JSON_extract as query_word_frequency
 				FROM $table_name_posts
-				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') AND $JSON_extract > 0 $excluded_types_sql
-				ORDER BY query_word_frequency";
+				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') AND `post_word_frequency` != '' AND `post_word_frequency` != '[]' AND $JSON_extract > 0 $excluded_types_sql
+				ORDER BY query_word_frequency DESC";
             }
 
         // If we're on a page that doesn't need statistics data, like About, just display the page and bail out now.
