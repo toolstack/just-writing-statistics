@@ -91,17 +91,29 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 ### 1. Top Content Statistics ###
 ![Top Content Statistics](assets/screenshot-1.png)
 
-### 2. Monthly Statistics ###
-![Monthly Statistics](assets/screenshot-2.png)
+### 2. All Content Statistics ###
+![All Content Statistics](assets/screenshot-2.png)
 
-### 3. Author Statistics ###
-![Author Statistics](assets/screenshot-3.png)
+### 3. Monthly Statistics ###
+![Monthly Statistics](assets/screenshot-3.png)
 
-### 4. Tag Statistics ###
-![Tag Statistics](assets/screenshot-4.png)
+### 4. Yearly Statistics ###
+![Yearly Statistics](assets/screenshot-4.png)
 
-### 5. Settings ###
-![Settings](assets/screenshot-5.png)
+### 5. Author Statistics ###
+![Author Statistics](assets/screenshot-5.png)
+
+### 6. Tag Statistics ###
+![Tag Statistics](assets/screenshot-6.png)
+
+### 7. Category Statistics ###
+![Category Statistics](assets/screenshot-7.png)
+
+### 8. Word Frequency Statistics ###
+![Word Frequency Statistics](assets/screenshot-8.png)
+
+### 9. Settings ###
+![Settings](assets/screenshot-9.png)
 
 
 ## Changelog ##
