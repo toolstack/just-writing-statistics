@@ -763,9 +763,7 @@ class Just_Writing_Statsitics_Admin
             $sql_jws_statistics = "
                 SELECT post_word_frequency
                 FROM $table_name_posts
-                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql
-                GROUP BY post_author, post_type, post_status
-                ORDER BY post_author ASC";
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql";
         } elseif ($jws_tab == 'word-to-posts') {
             // Set a default word query that should pretty much aways be around.
             $word_query = 'the';
