@@ -31,9 +31,9 @@
     foreach ($jws_dataset_word_frequency as $word => $frequency) {
       $size = round( $frequency / $top_weight * 400 );
       if ($size >= 16) {
-        $word_list .= "['" . esc_js($word) . "', " . $size . '], ';
+        $word_list .= "['" . esc_js($word) . "', " . $size . ", " . $frequency . '], ';
       } else {
-        $word_list .= "['" . esc_js($word) . "', 16], ";
+        $word_list .= "['" . esc_js($word) . "', " . $frequency . ", 16], ";
       }
 
       $i++;
@@ -71,7 +71,7 @@
         WordFrequencyPopup.style.left = ( event.layerX + 16 ) + 'px';
         WordFrequencyPopup.style.top = ( event.layerY + 16 ) + 'px';
         WordFrequencyPopup.style.display = 'block';
-        WordFrequencyPopup.innerText = item[1];
+        WordFrequencyPopup.innerText = item[2];
     }
   }
   const onMouseLeaveWordCloud = function () {
