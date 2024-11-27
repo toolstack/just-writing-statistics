@@ -51,7 +51,6 @@
 ?>
 
 <div id="JWSFrequencyCountPopup" class="jws-frequency-popup">
-        Test
 </div>
 
 <script>
