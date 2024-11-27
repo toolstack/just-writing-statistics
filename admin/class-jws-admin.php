@@ -785,7 +785,7 @@ class Just_Writing_Statsitics_Admin
 				SELECT post_id, post_author, MID(post_date, 1, 7) AS post_date, post_status, MID(post_modified, 1, 7) AS post_modified, post_parent, post_type, post_word_count, post_word_frequency, $JSON_extract as query_word_frequency
 				FROM $table_name_posts
 				WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') AND $JSON_extract > 0 $excluded_types_sql
-				ORDER BY query_word_frequency DESC";
+				ORDER BY query_word_frequency";
             }
 
         // If we're on a page that doesn't need statistics data, like About, just display the page and bail out now.
@@ -1078,16 +1078,41 @@ class Just_Writing_Statsitics_Admin
             );
         } elseif ($jws_tab == 'frequency') {
             $jws_dataset_word_frequency = [];
+            $global_word_frequencies = [];
+            $unique_counts = [];
+            $count_groupings = [];
+
+            // First let's get a complete list of all the unique words and their frequency count.
             foreach ($jws_statistics as $word_list) {
                 $working_words = json_decode($word_list->post_word_frequency,true);
 
                 foreach( $working_words as $word => $count) {
-                    if (!array_key_exists( $word, $jws_dataset_word_frequency)) { $jws_dataset_word_frequency[$word] = 0; }
-                    $jws_dataset_word_frequency[$word] += $count;
+                    if (!array_key_exists( $word, $global_word_frequencies)) { $global_word_frequencies[$word] = 0; }
+                    $global_word_frequencies[$word] += $count;
                 }
             }
 
-            arsort($jws_dataset_word_frequency);
+            // Now group them by frequency count and identify unique frequency counts so we can sort
+            // them first by count, then alphabetically.
+            foreach ($global_word_frequencies as $word => $count) {
+                if (!array_key_exists( $count, $count_groupings)) { $count_groupings[$count] = []; }
+                $count_groupings[$count][$word] = $count;
+                $unique_counts[$count] = 1;
+            }
+
+            // Resort the unique counts from highest to lowest.
+            krsort($unique_counts);
+
+            // Now create the dataset sorted.
+            foreach( $unique_counts as $count => $value ) {
+                // Make sure the counting groups are sorted alphabetically.
+                ksort( $count_groupings[$count]);
+
+                // Now store the sorted values into the data set.
+                foreach( $count_groupings[$count] as $word => $count) {
+                    $jws_dataset_word_frequency[$word] = $count;
+                }
+            }
         } elseif ($jws_tab == 'word-to-posts') {
             $jws_dataset_word_to_posts = [];
             foreach ($jws_statistics as $jws_post) {
