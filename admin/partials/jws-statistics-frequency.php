@@ -25,10 +25,18 @@
 <?php
     $word_list = '[';
     $table_rows = '';
-    $i = 1;
+    $i = 0;
+    $top_weight = $jws_dataset_word_frequency[array_key_first($jws_dataset_word_frequency)];
 
     foreach ($jws_dataset_word_frequency as $word => $frequency) {
-      $word_list .= "['" . esc_js($word) . "', " . intval($frequency) . '], ';
+      $size = round( $frequency / $top_weight * 400 );
+      if ($size >= 16) {
+        $word_list .= "['" . esc_js($word) . "', " . $size . '], ';
+      } else {
+        $word_list .= "['" . esc_js($word) . "', 16], ";
+      }
+
+      $i++;
 
       if ($i % 2) { $alternate = ' class="alternate"'; } else { $alternate = ""; }
       $table_rows .= '      <tr ' . $alternate . '>' . PHP_EOL;
@@ -36,8 +44,6 @@
       $table_rows .= '      <td><a href="' . add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'word-to-posts', 'word' => urlencode($word) ), admin_url('admin.php')) . '">' . esc_html( $word ) . '</a></td>' . PHP_EOL;
       $table_rows .= '      <td>' . number_format($frequency) . '      </td>' . PHP_EOL;
       $table_rows .= '  </tr>' . PHP_EOL;
-
-      $i++;
     }
 
     $word_list = substr( $word_list, 0, -2);
@@ -51,7 +57,6 @@
 
   // Output the word list and calculate a weight based on the largest frequency.
   var wordlist = <?php echo $word_list;?>;
-  var weight = <?php echo 128 / $jws_dataset_word_frequency[array_key_first($jws_dataset_word_frequency)]; ?>;
 
   // Monitor the container for resizing, so we can redraw the word cloud.  Note, this will also draw
   // the word cloud for the first time since we're resizing the chart right after this code.
@@ -62,17 +67,11 @@
     WordFrequencyChart.width = rect.width;
     WordFrequencyChart.height = rect.width * 0.5;
 
-    WordCloud(WordFrequencyChart, { list: wordlist, clearCanvas: true, minSize: 8, weightFactor: weight, shape: "square" } );
+    WordCloud(WordFrequencyChart, { list: wordlist, clearCanvas: true, shape: "square" } );
   });
 
   // Start watching for resize events
   OnResize.observe(WordFrequencyContainer);
-
-  // Figure out how big the word cloud should be and set the chart appropriately for the first time.
-  // (will force the drawing of the word cloud based on the resize observer)
-  var cloudWidth = WordFrequencyContainer.offsetWidth;
-  WordFrequencyChart.width = cloudWidth;
-  WordFrequencyChart.height = cloudWidth * 0.5;
 </script>
 
     <div class="full">
