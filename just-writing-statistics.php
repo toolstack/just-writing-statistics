@@ -26,20 +26,20 @@ if (!defined('WPINC')) {
 
 define('JWS_VERSION', '4.8');
 
-function activate_just_writing_statsitics_()
+function activate_just_writing_statistics()
 {
     include_once plugin_dir_path(__FILE__) . 'includes/class-jws-activator.php';
-    Just_Writing_Statsitics_Activator::activate();
+    Just_Writing_Statistics_Activator::activate();
 }
 
-function deactivate_just_writing_statsitics_()
+function deactivate_just_writing_statistics()
 {
     include_once plugin_dir_path(__FILE__) . 'includes/class-jws-deactivator.php';
-    Just_Writing_Statsitics_Deactivator::deactivate();
+    Just_Writing_Statistics_Deactivator::deactivate();
 }
 
-register_activation_hook(__FILE__, 'activate_just_writing_statsitics_');
-register_deactivation_hook(__FILE__, 'deactivate_just_writing_statsitics_');
+register_activation_hook(__FILE__, 'activate_just_writing_statistics');
+register_deactivation_hook(__FILE__, 'deactivate_just_writing_statistics');
 
 require plugin_dir_path(__FILE__) . 'includes/class-jws.php';
 require plugin_dir_path(__FILE__) . 'includes/class-jws-functions.php';
@@ -49,10 +49,10 @@ require plugin_dir_path(__FILE__) . 'includes/class-jws-functions.php';
  *
  * @since 3.0.0
  */
-function run_just_writing_statsitics()
+function run_just_writing_statistics()
 {
     $plugin = new Just_Writing_Statistics();
     $plugin->run();
 }
 
-run_just_writing_statsitics();
+run_just_writing_statistics();
