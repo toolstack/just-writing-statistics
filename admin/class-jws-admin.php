@@ -80,6 +80,7 @@ class Just_Writing_Statsitics_Admin
         $jws_installed_version = get_option('jws_version');
 
         if ($jws_installed_version != JWS_VERSION) {
+            jws_create_posts_table();
             jws_set_plugin_version(JWS_VERSION);
         }
     }
