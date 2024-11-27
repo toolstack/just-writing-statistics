@@ -106,11 +106,50 @@ function jws_word_frequency($content)
         $counts = array_count_values($words[0]);
         }
 
+    $stopwords = jws_get_stop_words();
+
+    foreach( $stopwords as $word) {
+        if( array_key_exists( $word, $counts)) {
+            unset( $counts[$word] );
+        }
+    }
+
     // Sort the array naturally ;)
     ksort($counts, SORT_NATURAL);
 
     // Return the counts.
     return $counts;
+}
+
+/**
+ * Get a list of stop words (aka common words to exclude like "the") for the current language.
+ *
+ * @since 5.0.0
+ * @param string $wpwcp_version The latest plugin version.
+ */
+function jws_get_stop_words() {
+    // Stop words list from https://github.com/stopwords-iso/stopwords-iso
+    $stopwords = json_decode( file_get_contents( dirname(__FILE__) . '/stopwords-iso.json'), true);
+    $current_wp_lang = get_locale();
+
+    // First check to see if the full locale exists, if so, return the stopwords.
+    if( array_key_exists( $current_wp_lang, $stopwords)) {
+        return $stopwords[$current_wp_lang];
+    }
+
+    // WP will often use a locale like "en_US", but we only need the "en", so strip everything past
+    // the underscore.
+    $underscore = strpos($current_wp_lang, '_');
+    if( $underscore > 0 ) {
+        // Check again using just the first part of the locale this time.
+        $current_wp_lang = substr($current_wp_lang, 0, $underscore);
+        if( array_key_exists( $current_wp_lang, $stopwords)) {
+            return $stopwords[$current_wp_lang];
+        }
+    }
+
+
+    return array();
 }
 
 /**
