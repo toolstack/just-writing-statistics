@@ -33,7 +33,7 @@
       if ($size >= 16) {
         $word_list .= "['" . esc_js($word) . "', " . $size . ", " . $frequency . '], ';
       } else {
-        $word_list .= "['" . esc_js($word) . "', " . $frequency . ", 16], ";
+        $word_list .= "['" . esc_js($word) . "', 16, " . $frequency . "], ";
       }
 
       $i++;
