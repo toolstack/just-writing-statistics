@@ -46,6 +46,10 @@
         }
     }
 
+    if( ! array_key_exists( 'Publish', $count_data ) ) { $count_data['Publish'][] = 0; }
+    if( ! array_key_exists( 'Scheduled', $count_data ) ) { $count_data['Scheduled'][] = 0; }
+    if( ! array_key_exists( 'Draft', $count_data ) ) { $count_data['Draft'][] = 0; }
+
 ?>
 
 <script>
@@ -101,6 +105,11 @@
             if( $count['words'] > $max_word ) { $max_word = $count['words']; }
         }
     }
+
+    if( ! array_key_exists( 'Publish', $words_data ) ) { $words_data['Publish'][] = 0; }
+    if( ! array_key_exists( 'Scheduled', $words_data ) ) { $words_data['Scheduled'][] = 0; }
+    if( ! array_key_exists( 'Draft', $words_data ) ) { $words_data['Draft'][] = 0; }
+
 
 ?>
 
