@@ -89,10 +89,14 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 == Screenshots ==
 
 1. Top Content Statistics
-2. Monthly Statistics
-3. Author Statistics
-4. Tag Statistics
-4. Settings
+2. All Content Statistics
+3. Monthly Statistics
+4. Yearly Statistics
+5. Author Statistics
+6. Tag Statistics
+7. Category Statistics
+8. Word Frequency Statistics
+9. Settings
 
 == Changelog ==
 = 4.8 =
