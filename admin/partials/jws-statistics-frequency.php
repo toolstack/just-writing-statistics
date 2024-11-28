@@ -66,7 +66,6 @@
     window.location.href = wordPage + "&word=" + item[0];
   }
   const showFrequencyCount = function (item, dimension, event) {
-    console.log( item );
     if ( typeof item === 'object') {
         WordFrequencyPopup.style.left = ( event.layerX + 16 ) + 'px';
         WordFrequencyPopup.style.top = ( event.layerY + 16 ) + 'px';
@@ -77,8 +76,10 @@
   const onMouseLeaveWordCloud = function () {
     WordFrequencyPopup.style.display = 'none';
   }
+  // Setup a default weight factor, aka, just use the sizes by default.
+  var weight = 1;
 
-  WordFrequencyChart.addEventListener("mouseleave", onMouseLeaveWordCloud);
+  WordFrequencyChart.addEventListener( "mouseleave", onMouseLeaveWordCloud );
 
   // Monitor the container for resizing, so we can redraw the word cloud.  Note, this will also draw
   // the word cloud for the first time since we're resizing the chart right after this code.
@@ -89,11 +90,15 @@
     WordFrequencyChart.width = rect.width;
     WordFrequencyChart.height = rect.width * 0.5;
 
-    WordCloud(WordFrequencyChart, { list: wordlist, clearCanvas: true, shape: "square", click: gotoWordPage, hover: showFrequencyCount } );
+    // Bascially a max size of 400 on a 1200px (1200/3=400) wide canvas looks pretty good, so just scale based
+    // upon the actual canvas sized/1200 to create a scaling factor.
+    weight = rect.width / 1200;
+
+    WordCloud(WordFrequencyChart, { list: wordlist, clearCanvas: true, shape: "square", click: gotoWordPage, hover: showFrequencyCount, weightFactor: weight } );
   });
 
   // Start watching for resize events
-  OnResize.observe(WordFrequencyContainer);
+  OnResize.observe( WordFrequencyContainer );
 </script>
 
     <div class="full">
