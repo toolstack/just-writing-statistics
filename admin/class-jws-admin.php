@@ -573,7 +573,7 @@ class Just_Writing_Statsitics_Admin
             $table_name_jws_posts = $wpdb->prefix . 'jws_posts';
 
             $sql_jws_process = 'DELETE FROM %i WHERE 1';
-            $sql_jws_process_vars = $table_name_jws_posts;
+            $sql_jws_process_vars[] = $table_name_jws_posts;
 
             $sql_jws_process = $wpdb->prepare($sql_jws_process, $sql_jws_process_vars);
             $wpdb->query($sql_jws_process);
