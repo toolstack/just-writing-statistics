@@ -62,8 +62,13 @@ function jws_word_count($content)
 {
     // Create a space between any back to back tags ie. "</b><i>" becomes "</b> <i>".
     $content = preg_replace('/(<\/[^>]+?>)(<[^>\/][^>]*?>)/', '$1 $2', $content);
+
     // Add breaks to newlines and then strip all the tags.
     $content = wp_strip_all_tags(nl2br($content));
+
+    // Convert any html entities to real characters.
+    $content = html_entity_decode($content);
+
     // Now trim the remaining string so we don't have extra line breaks at the start/end.
     $content = trim( $content );
 
@@ -95,6 +100,9 @@ function jws_word_frequency($content)
 {
     // Convert the text to lowercase.
     $content = wp_strip_all_tags(strtolower($content));
+
+    // Convert any html entities to real characters.
+    $content = html_entity_decode($content);
 
     // Create an associative array to store the word frequencies
     $counts = [];
