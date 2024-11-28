@@ -32,6 +32,8 @@
         include_once( 'jws-settings-roles.php');
 
         include_once( 'jws-settings-admin-options.php' );
+
+        include_once( 'jws-settings-stopwords-options.php' );
     }
 
     include_once( 'jws-settings-calculate.php' );

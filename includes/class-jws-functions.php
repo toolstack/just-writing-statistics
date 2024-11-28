@@ -106,14 +106,22 @@ function jws_word_frequency($content)
         $counts = array_count_values($words[0]);
         }
 
-    $stopwords = jws_get_stop_words();
+    $stopwords_options = get_option('jws_stopwords_options');
+    $disable_stopwords = false;
 
-    foreach( $stopwords as $word) {
-        if( array_key_exists( $word, $counts)) {
-            unset( $counts[$word] );
-        }
+    if( is_array( $stopwords_options ) && array_key_exists('disable_stopwords', $stopwords_options ) ) {
+        $disable_stopwords = true;
     }
 
+    if( ! $disable_stopwords ) {
+        $stopwords = jws_get_stop_words();
+
+        foreach( $stopwords as $word) {
+            if( array_key_exists( $word, $counts)) {
+                unset( $counts[$word] );
+            }
+        }
+    }
     // Sort the array naturally ;)
     ksort($counts, SORT_NATURAL);
 

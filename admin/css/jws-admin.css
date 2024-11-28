@@ -67,6 +67,10 @@
 #jws-footer img { width: 17px;	padding-top: 10px; -ms-interpolation-mode: bicubic; vertical-align: middle; margin: -14px 2px 0px 2px; }
 #jws-footer a { color: #464b50; text-decoration: none; }
 
+.jws-settings-container .form-table th {
+    white-space: nowrap;
+}
+
 .column-jws_words {
     width: 5.5em;
 }

@@ -164,6 +164,11 @@ class Just_Writing_Statsitics_Admin
      */
     public function settings()
     {
+        // Stopwords Options
+        add_settings_section('jws-section-stopwords-options', __('Stopwords Options', 'just-writing-statistics'), [$this, 'settings_section_stopwords_options'], 'jws-stopwords-options');
+        add_settings_field('jws_disable_stopwords', __('Disable excluding stopwords from the word frequency calculations', 'just-writing-statistics'), [$this, 'settings_disable_stopwords_options'], 'jws-stopwords-options', 'jws-section-stopwords-options');
+        register_setting('jws-section-stopwords-options', 'jws_stopwords_options');
+
         // Admin Options
         add_settings_section('jws-section-admin-options', __('Administrative Options', 'just-writing-statistics'), [$this, 'settings_section_admin_options'], 'jws-admin-options');
         add_settings_field('jws_disable_admin_column', __('Disable admin column for word count', 'just-writing-statistics'), [$this, 'settings_disable_admin_column'], 'jws-admin-options', 'jws-section-admin-options');
@@ -244,6 +249,16 @@ class Just_Writing_Statsitics_Admin
     }
 
     /**
+     * Display Stopwords Options Settings Section.
+     *
+     * @since 5.0.0
+     */
+    public function settings_section_stopwords_options()
+    {
+        return;
+    }
+
+    /**
      * Display Admin Options Settings Section.
      *
      * @since 3.2.0
@@ -283,6 +298,26 @@ class Just_Writing_Statsitics_Admin
         echo '<p>'.__('Select which user to enable the display of the statistics pages for.', 'just-writing-statistics').'</p>';
         echo '<p>'.__('Administrators are always enabled and roles that do not have the <code>delete_posts</code> capability are not shown the statistics page and excluded from the below list', 'just-writing-statistics').'</p>';
         echo '<p>'.__('All enabled users will have access to the settings page.</p>', 'just-writing-statistics').'</p>';
+    }
+
+    /**
+     * Display Admin Options Settings Words Disable Admin Column.
+     *
+     * @since 5.0.0
+     */
+    public function settings_disable_stopwords_options()
+    {
+        $stopwords_options = get_option('jws_stopwords_options');
+        $disable_stopwords = false;
+
+        if( is_array( $stopwords_options ) && array_key_exists('disable_stopwords', $stopwords_options ) ) {
+            $disable_stopwords = true;
+        }
+
+        echo '<label class="jws-switch">' . PHP_EOL;
+        echo '<input type="checkbox" name="jws_stopwords_options[disable_stopwords]" id="jws_disable_stopwords"' . checked( $disable_stopwords, true, false ) . '>' . PHP_EOL;
+        echo '<span class="jws-slider jws-round"></span>' . PHP_EOL;
+        echo '</label>' . PHP_EOL;
     }
 
     /**
