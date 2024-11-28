@@ -41,7 +41,16 @@ Just Writing Statistics also has reading times for each post and page of your si
 
 == Frequently Asked Questions ==
 
+= What are stopwords and why would I care? =
+Stopwords are common words like "the" or "at" that don't really add much to the word frequency count statistics but might dominate due to how oftne they are used.
+
+The stopwords list that Just Writing Statistics comes from [here](https://github.com/stopwords-iso/stopwords-iso) if you want to see what get's excluded per language.
+
 = Why fork WP Word Count? =
+
+***UPDATE TO THE UPDATE***
+WP Word Count has been off the plugin directory again since June 2024, and their website is no longer available, so I guess it's done for good this time.
+******
 
 ***UPDATE***
 WP Word Count is back on the plugin directory, but still seems to be getting very little attention from the developers.
