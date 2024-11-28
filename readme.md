@@ -3,7 +3,7 @@
 **Tags:** word count, reading time, authors, words, writing  
 **Requires at least:** 4.6  
 **Tested up to:** 6.7.1  
-**Stable tag:** 4.8  
+**Stable tag:** 5.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -45,12 +45,12 @@ Just Writing Statistics also has reading times for each post and page of your si
 ### What are stopwords and why would I care? ###
 Stopwords are common words like "the" or "at" that don't really add much to the word frequency count statistics but might dominate due to how oftne they are used.
 
-The stopwords list that Just Writing Statistics comes from [here](https://github.com/stopwords-iso/stopwords-iso) if you want to see what get's excluded per language.
+The stopwords list that Just Writing Statistics uses comes from [here](https://github.com/stopwords-iso/stopwords-iso) if you want to see what gets excluded per language.
 
 ### Why fork WP Word Count? ###
 
 ***UPDATE TO THE UPDATE***
-WP Word Count has been off the plugin directory again since June 2024, and their website is no longer available, so I guess it's done for good this time.
+WP Word Count has been off the plugin directory again since June 2024, and the redlettuce website is no longer available, so I guess it's done for good this time.
 ******
 
 ***UPDATE***
@@ -81,7 +81,7 @@ If a post type has no items associated with it, Just Writing Statistics will not
 
 ### Do I really have to calculate the statistics by date range? ###
 
-Probably not, but make sure to wait for the progress bar to disappear before reloading the page.  If it is running for more than five minutes, then it's failed silently and you'll need to break up the calculation into chunks.
+Probably not, but make sure to wait for the progress bar to disappear before reloading the page.  If it is running for more than five minutes, then it's probably failed silently and you'll need to break up the calculation into chunks.
 
 However, even on a modest hosting provider, it would take hundreds of thousands (maybe millions) of posts to get to this point.
 
@@ -128,7 +128,7 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 ## Changelog ##
 ### 5.0 ###
-* Release date: TBD
+* Release date: November 28, 2024
 * Add Frequency statistics.
 * Fix date range based statistics recalculation.
 * Update the charting library.
@@ -239,6 +239,6 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 ## Upgrade Notice ##
 
-If you wish to generate the frequency statistics for your existing data after upgrading to version 5.0, go to Settings->Calculate Writing Statistics->Calculate Writing Statistics.
+To generate the frequency statistics for your existing data after upgrading to version 5.0, go to Settings->Calculate Writing Statistics->Calculate Writing Statistics.
 
 Note this may take a significant amount of time depending upon the number of posts you have on your site.
