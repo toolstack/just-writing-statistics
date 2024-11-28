@@ -18,10 +18,11 @@ Just Writing Statistics tells you exactly how many words you've written on your 
 - Top Content
 - All Content
 - Month
-- **Year (new)**
+- Year
 - Author
-- **Tags (new)**
-- **Categories (new)**
+- Tags
+- Categories
+- **Frequency (new!)**
 
 Just Writing Statistics also has reading times for each post and page of your site. Find out how many hours of content you've written or let readers know how long your articles are. You can include reading time at the top of each of your posts automatically or use a shortcode.
 
@@ -126,6 +127,13 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 
 ## Changelog ##
+### 5.0 ###
+* Release date: TBD
+* Add Frequency statistics.
+* Fix date range based statistics recalculation.
+* Update the charting library.
+* Other minor fixes and updates.
+
 ### 4.8 ###
 * Release date: November 22, 2024
 * Fix security issue with date ranges in the admin page statistics recalculation option.
@@ -231,4 +239,6 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 ## Upgrade Notice ##
 
-None at this time.
+If you wish to generate the frequency statistics for your existing data after upgrading to version 5.0, go to Settings->Calculate Writing Statistics->Calculate Writing Statistics.
+
+Note this may take a significant amount of time depending upon the number of posts you have on your site.
