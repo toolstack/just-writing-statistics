@@ -474,7 +474,7 @@ class Just_Writing_Statsitics_Admin
         $sql_post_total_vars = array();
 
         $sql_post_total = "SELECT COUNT(ID) AS post_total FROM %i WHERE 1";
-        $sql_post_total_vars .= $table_name_posts;
+        $sql_post_total_vars[] = $table_name_posts;
 
         $post_types = get_post_types('', 'names');
         unset($post_types['attachment'], $post_types['nav_menu_item'], $post_types['custom_css'], $post_types['revision'], $post_types['customize_changeset']);
@@ -484,9 +484,9 @@ class Just_Writing_Statsitics_Admin
             $sql_post_total .= ' AND (';
 
             foreach ($post_types as $post_type) {
-                $sql_post_total .= "%i = %s OR ";
-                $sql_post_total_vars .= $table_name_posts . '.post_type';
-                $sql_post_total_vars .= $post_type;
+                $sql_post_total .= "%i.post_type = %s OR ";
+                $sql_post_total_vars[] = $table_name_posts;
+                $sql_post_total_vars[] = $post_type;
             }
             $sql_post_total = substr($sql_post_total, 0, -4);
 
@@ -495,15 +495,15 @@ class Just_Writing_Statsitics_Admin
 
         // Date Range
         if (isset($parameters['jws_date_range_start_formatted']) && strlen($parameters['jws_date_range_start_formatted']) == 10) {
-            $sql_post_total .= " AND %i >= %s";
-            $sql_post_total_vars .= $table_name_posts . '.post_date';
-            $sql_post_total_vars .= $parameters['jws_date_range_start_formatted']." 00:00:00";
+            $sql_post_total .= " AND %i.post_date >= %s";
+            $sql_post_total_vars[] = $table_name_posts;
+            $sql_post_total_vars[] = $parameters['jws_date_range_start_formatted']." 00:00:00";
         }
 
         if (isset($parameters['jws_date_range_end_formatted']) && strlen($parameters['jws_date_range_end_formatted']) == 10) {
-            $sql_post_total .= " AND %i <= %s";
-            $sql_post_total_vars .= $table_name_posts . '.post_date';
-            $sql_post_total_vars .= $parameters['jws_date_range_end_formatted']." 23:59:59";
+            $sql_post_total .= " AND %i.post_date <= %s";
+            $sql_post_total_vars[] = $table_name_posts;
+            $sql_post_total_vars[] = $parameters['jws_date_range_end_formatted']." 23:59:59";
         }
 
         $sql_post_total = $wpdb->prepare($sql_post_total, $sql_post_total_vars);
