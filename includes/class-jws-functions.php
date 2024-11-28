@@ -133,7 +133,7 @@ function jws_word_frequency($content)
  * Get a list of stop words (aka common words to exclude like "the") for the current language.
  *
  * @since 5.0.0
- * @param string $wpwcp_version The latest plugin version.
+ * @return array() List of stopwords for the current WP locale.
  */
 function jws_get_stop_words() {
     // Stop words list from https://github.com/stopwords-iso/stopwords-iso
@@ -155,7 +155,6 @@ function jws_get_stop_words() {
             return $stopwords[$current_wp_lang];
         }
     }
-
 
     return array();
 }
