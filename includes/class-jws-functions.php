@@ -144,8 +144,12 @@ function jws_word_frequency($content)
  * @return array() List of stopwords for the current WP locale.
  */
 function jws_get_stop_words() {
-    // Stop words list from https://github.com/stopwords-iso/stopwords-iso
-    $stopwords = json_decode( file_get_contents( dirname(__FILE__) . '/stopwords-iso.json'), true);
+    // Stop words list from https://github.com/stopwords-iso/stopwords-iso, use conversion script in
+    // the release directory to create the include file.  This is done to avoid having to decode the
+    // json on each load as well as let php cache the bytecode.
+    require_once( 'stopwords-iso.php' );
+    $stopwords = jws_get_stop_words_list();
+
     $current_wp_lang = get_locale();
 
     // First check to see if the full locale exists, if so, return the stopwords.
