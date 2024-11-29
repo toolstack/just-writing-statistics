@@ -11,7 +11,7 @@
  * @link       https://toolstack.com/just-writing-statistics
  * @author     GregRoss, RedLettuce
  */
-class Just_Writing_Statsitics_Activator
+class Just_Writing_Statistics_Activator
 {
     /**
      * @since 3.0.0
