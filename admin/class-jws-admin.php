@@ -1387,6 +1387,14 @@ class Just_Writing_Statsitics_Admin
         }
     }
 
+    /**
+     * Add frequency stats to the post action list.
+     *
+     * @since 5.1.0
+     * @param array  $actions The current list of actions in the list.
+     * @param object $post    The post object.
+     * @return array The new list of actions.
+     */
     public function add_frequency_stats_action_link( $actions, $post ) {
 		if ( $post instanceof WP_Post && is_array( $actions ) ) {
             $actions[] = '<a href="' . add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'frequency', 'post' => $post->ID ), admin_url('admin.php')) . '">' . __('Frequency Stats', 'just-writing-statistics') . '</a>';
