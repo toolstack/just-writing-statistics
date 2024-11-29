@@ -176,6 +176,8 @@ class Just_Writing_Statistics
             $this->loader->add_action( 'manage_' . $type . '_posts_custom_column', $plugin_admin, 'output_wc_column', 10, 2 );
         }
 
+        $this->loader->add_filter( 'post_row_actions', $plugin_admin, 'add_frequency_stats_action_link', 10, 2 );
+        $this->loader->add_filter( 'page_row_actions', $plugin_admin, 'add_frequency_stats_action_link', 10, 2 );
     }
 
     /**

@@ -1385,7 +1385,14 @@ class Just_Writing_Statsitics_Admin
         {
             echo jws_calculate_word_count_post( $post );
         }
+    }
 
+    public function add_frequency_stats_action_link( $actions, $post ) {
+		if ( $post instanceof WP_Post && is_array( $actions ) ) {
+            $actions[] = '<a href="' . add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'frequency', 'post' => $post->ID ), admin_url('admin.php')) . '">' . __('Frequency Stats', 'just-writing-statistics') . '</a>';
+		}
+
+        return $actions;
     }
 
 }
