@@ -121,7 +121,13 @@
                     <?php foreach ($jws_dataset_categories as $category_name => $category) : ?>
 
                         <?php echo '<tr'.($jws_counter_monthly_statistics % 2 == 1 ? '' : " class='alternate'").'>'; ?>
-                        <td><nobr><?php echo esc_html( $category_name ); ?></td>
+                        <td>
+                          <nobr><?php echo esc_html( $category_name ); ?>
+                          <div class="row-actions">
+                              <span class='view'><a href="<?php echo add_query_arg(array( 'taxonomy' => 'category', 'tag_ID' => $category['id'], 'post_type' => 'post' ), admin_url('term.php')); ?>"><?php _e('Edit', 'just-writing-statistics'); ?></a> | </span>
+                              <span class="frequency"><a href="<?php echo add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'frequency', 'cat' => $category['id'] ), admin_url('admin.php')); ?>"><?php _e('Frequency Stats', 'just-writing-statistics'); ?></a></span>
+                          </div>
+                        </td>
                         <td><?php echo number_format($category['total']); ?></td>
                         <?php foreach ($jws_dataset_post_types as $index => $post_type) : ?>
                         <td>

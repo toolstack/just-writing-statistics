@@ -142,6 +142,10 @@
                         <td><nobr>
                             <?php echo get_avatar($index, 32, 'mysteryman', $author['display_name'], ['class' => 'avatar avatar-32 photo']); ?>
                             <?php echo esc_html( $author['display_name'] ); ?>
+                            <div class="row-actions">
+                              <span class='view'><a href="<?php echo add_query_arg(array( 'user_id' => $author['id'] ), admin_url('user-edit.php')); ?>"><?php _e('Edit', 'just-writing-statistics'); ?></a> | </span>
+                              <span class="frequency"><a href="<?php echo add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'frequency', 'author' => $author['login'] ), admin_url('admin.php')); ?>"><?php _e('Frequency Stats', 'just-writing-statistics'); ?></a></span>
+                            </div>
                         </td>
                         <td><?php echo number_format($author['total']); ?></td>
             <?php foreach ($jws_dataset_post_types as $index => $post_type) : ?>

@@ -173,7 +173,8 @@
                         <div class="row-actions">
                             <span class="edit"><?php edit_post_link(__('Edit', 'just-writing-statistics'), '', ' | ', $post['post_id']); ?></span>
                             <span class="trash"><a href="<?php echo get_delete_post_link($post['post_id']); ?>"><?php _e('Trash', 'just-writing-statistics'); ?></a> | </span>
-                            <span class='view'><a href="<?php echo esc_attr( $post['permalink'] ); ?>"><?php _e('View', 'just-writing-statistics'); ?></a></span>
+                            <span class='view'><a href="<?php echo esc_attr( $post['permalink'] ); ?>"><?php _e('View', 'just-writing-statistics'); ?></a> | </span>
+                            <span class="frequency"><a href="<?php echo add_query_arg(array( 'page' => $this->plugin_name, 'tab' => 'frequency', 'post' => $post['post_id'] ), admin_url('admin.php')); ?>"><?php _e('Frequency Stats', 'just-writing-statistics'); ?></a></span>
                         </div>
                     </td>
                     <td><?php echo jws_reading_time($post['post_word_count'], $reading_time_wpm); ?></td>

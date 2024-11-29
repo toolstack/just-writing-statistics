@@ -747,6 +747,7 @@ class Just_Writing_Statsitics_Admin
         }
 
         $sql_jws_statistics = '';
+        $frequency_title = '';
 
         if (!isset($jws_tab) || $jws_tab == 'top-content') {
             $sql_jws_statistics = "
@@ -800,10 +801,11 @@ class Just_Writing_Statsitics_Admin
             $cat_join = '';
             $cat_where = '';
             $author_where = '';
+            $post_where = '';
 
             // Check to see if we have a specific tag to query against.
             if (isset( $_GET['tag'] ) ) {
-                $tag_obj = get_term_by('name', $_GET['tag'], 'post_tag');
+                $tag_obj = get_term_by('id', $_GET['tag'], 'post_tag');
 
                 if( $tag_obj !== false ) {
                     $tag_id = $tag_obj->term_id;
@@ -819,11 +821,12 @@ class Just_Writing_Statsitics_Admin
                         $tag_id
                     );
                 }
+                $frequency_title = sprintf(__('Word frequency statistics for tag: %s', 'just-writing-statistics'), $tag_obj->name);
             }
 
             // Check to see if we have a specific category to query against.
             if (isset( $_GET['cat'] ) ) {
-                $cat_obj = get_term_by('name', $_GET['cat'], 'category');
+                $cat_obj = get_term_by('id', $_GET['cat'], 'category');
 
                 if( $cat_obj !== false ) {
                     $cat_id = $cat_obj->term_id;
@@ -838,10 +841,11 @@ class Just_Writing_Statsitics_Admin
                         $wpdb->prefix . 'term_relationships',
                         $cat_id
                     );
+                    $frequency_title = sprintf(__('Word frequency statistics for category: %s', 'just-writing-statistics'), $cat_obj->name);
                 }
             }
 
-            // Check to see if we have a specific category to query against.
+            // Check to see if we have a specific author to query against.
             if (isset( $_GET['author'] ) ) {
                 $author_obj = get_user_by('login', $_GET['author']);
 
@@ -853,6 +857,22 @@ class Just_Writing_Statsitics_Admin
                         $author_id
                     );
                 }
+                $frequency_title = sprintf(__('Word frequency statistics for author: %s', 'just-writing-statistics'), $author_obj->display_name);
+            }
+
+            // Check to see if we have a specific post to query against.
+            if (isset( $_GET['post'] ) ) {
+                $post_obj = get_post($_GET['post']);
+
+                if( $post_obj !== false ) {
+                    $post_id = $post_obj->ID;
+
+                    $post_where = $wpdb->prepare(
+                        "AND post_id = %d",
+                        $post_id
+                    );
+                }
+                $frequency_title = sprintf(__('Word frequency statistics for post:  %s', 'just-writing-statistics'), $post_obj->post_title);
             }
 
             $sql_jws_statistics = "
@@ -860,7 +880,7 @@ class Just_Writing_Statsitics_Admin
                 FROM $table_name_posts
                 $tag_join
                 $cat_join
-                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $tag_where $cat_where $author_where $excluded_types_sql";
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $tag_where $cat_where $author_where $post_where $excluded_types_sql";
         } elseif ($jws_tab == 'word-to-posts') {
             // Set a default word query that should pretty much aways be around.
             $word_query = 'the';
@@ -1036,6 +1056,8 @@ class Just_Writing_Statsitics_Admin
                 $tags = wp_get_post_tags( $total->post_id );
 
                 foreach( $tags as $tag ) {
+                    $jws_dataset_tags[$tag->name]['id'] = $tag->term_id;
+
                     if (!isset($jws_dataset_tags[$tag->name][$total->post_type])) {
                         $jws_dataset_tags[$tag->name][$total->post_type]['published']['posts'] = 0;
                         $jws_dataset_tags[$tag->name][$total->post_type]['published']['word_count'] = 0;
@@ -1087,6 +1109,8 @@ class Just_Writing_Statsitics_Admin
                 $categories = get_the_category( $total->post_id );
 
                 foreach( $categories as $category ) {
+                    $jws_dataset_categories[$category->name]['id'] = $category->term_id;
+
                     if (!isset($jws_dataset_categories[$category->name][$total->post_type])) {
                         $jws_dataset_categories[$category->name][$total->post_type]['published']['posts'] = 0;
                         $jws_dataset_categories[$category->name][$total->post_type]['published']['word_count'] = 0;
@@ -1138,6 +1162,8 @@ class Just_Writing_Statsitics_Admin
                 // Load authors array
                 if (!isset($jws_dataset_authors[$total->post_author])) {
                     $jws_dataset_authors[$total->post_author]['display_name'] = get_the_author_meta('display_name', $total->post_author);
+                    $jws_dataset_authors[$total->post_author]['id'] = $total->post_author;
+                    $jws_dataset_authors[$total->post_author]['login'] = get_the_author_meta('user_login', $total->post_author);;
                     $jws_dataset_authors[$total->post_author]['total'] = 0;
                     $jws_dataset_authors[$total->post_author]['items'] = 0;
                 }
@@ -1173,7 +1199,8 @@ class Just_Writing_Statsitics_Admin
                 }
             );
         } elseif ($jws_tab == 'frequency') {
-            $jws_dataset_word_frequency = [];
+            $jws_dataset_word_frequency = array();
+            $jws_dataset_word_frequency['words'] = array();
             $global_word_frequencies = [];
             $unique_counts = [];
             $count_groupings = [];
@@ -1206,9 +1233,11 @@ class Just_Writing_Statsitics_Admin
 
                 // Now store the sorted values into the data set.
                 foreach( $count_groupings[$count] as $word => $count) {
-                    $jws_dataset_word_frequency[$word] = $count;
+                    $jws_dataset_word_frequency['words'][$word] = $count;
                 }
             }
+
+            $jws_dataset_word_frequency['title'] = $frequency_title;
         } elseif ($jws_tab == 'word-to-posts') {
             $jws_dataset_word_to_posts = [];
             foreach ($jws_statistics as $jws_post) {

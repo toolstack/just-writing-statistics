@@ -13,6 +13,13 @@
  */
 
 ?>
+<?php if( $jws_dataset_word_frequency['title'] !== '' ) { ?>
+    <div>
+      <h2>
+        <?php echo $jws_dataset_word_frequency['title'];?>
+      </h2>
+    </div>
+<?php } ?>
     <div>
         <div class="full jws-chart-container" id="JWSWordCloud">
 
@@ -26,9 +33,15 @@
     $word_list = '[';
     $table_rows = '';
     $i = 0;
-    $top_weight = $jws_dataset_word_frequency[array_key_first($jws_dataset_word_frequency)];
+    $top_weight = 400;
+    if( array_key_exists( 'words', $jws_dataset_word_frequency) ) {
+      $first_key = array_key_first($jws_dataset_word_frequency['words']);
+      if( $first_key != '' ) {
+        $top_weight = $jws_dataset_word_frequency['words'][$first_key];
+      }
+    }
 
-    foreach ($jws_dataset_word_frequency as $word => $frequency) {
+    foreach ($jws_dataset_word_frequency['words'] as $word => $frequency) {
       $size = round( $frequency / $top_weight * 400 );
       if ($size >= 16) {
         $word_list .= "['" . esc_js($word) . "', " . $size . ", " . $frequency . '], ';
@@ -106,7 +119,7 @@
             <table class="widefat jws_wrapable">
                 <thead>
                 <tr>
-                    <th colspan="3" class="jws_totals_title"><?php printf(__('Word Frequency (%d Unique Words)', 'just-writing-statistics'), count( $jws_dataset_word_frequency)); ?></th>
+                    <th colspan="3" class="jws_totals_title"><?php printf(__('Word Frequency (%d Unique Words)', 'just-writing-statistics'), count( $jws_dataset_word_frequency['words'])); ?></th>
                 </tr>
                 <tr>
                     <th class="jws-rank"><?php _e('Rank', 'just-writing-statistics'); ?></th>
