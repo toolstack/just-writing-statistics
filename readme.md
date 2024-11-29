@@ -127,6 +127,11 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 
 ## Changelog ##
+### 5.1 ###
+* Release date: November 29, 2024
+* Add category, tag, author, and post frequency stats UI.
+* Fix activation error.
+
 ### 5.0 ###
 * Release date: November 28, 2024
 * Add Frequency statistics.
