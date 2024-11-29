@@ -122,7 +122,7 @@ class Just_Writing_Statsitics_Public
 
         $option = get_option('jws_reading_time');
 
-        if ($post && is_array( $option) && array_key_exists('insert', $option) && $option['insert'] == 'Y') {
+        if ($post && is_array($option) && array_key_exists('insert', $option) && $option['insert'] == 'Y') {
 
             $reading_time_settings_wpm = (get_option('jws_reading_time')['wpm'] ?: 250);
             $reading_time_settings_before = (get_option('jws_reading_time')['labels']['before'] ?: '');

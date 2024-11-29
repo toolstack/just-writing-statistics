@@ -795,10 +795,72 @@ class Just_Writing_Statsitics_Admin
                 GROUP BY post_author, post_type, post_status
                 ORDER BY post_author ASC";
         } elseif ($jws_tab == 'frequency') {
+            $tag_join = '';
+            $tag_where = '';
+            $cat_join = '';
+            $cat_where = '';
+            $author_where = '';
+
+            // Check to see if we have a specific tag to query against.
+            if (isset( $_GET['tag'] ) ) {
+                $tag_obj = get_term_by('name', $_GET['tag'], 'post_tag');
+
+                if( $tag_obj !== false ) {
+                    $tag_id = $tag_obj->term_id;
+
+                    $tag_join = $wpdb->prepare(
+                        "JOIN %i ON (`$table_name_posts`.post_id = %i.object_id)",
+                        $wpdb->prefix . 'term_relationships',
+                        $wpdb->prefix . 'term_relationships'
+                    );
+                    $tag_where = $wpdb->prepare(
+                        "AND %i.term_taxonomy_id = %d",
+                        $wpdb->prefix . 'term_relationships',
+                        $tag_id
+                    );
+                }
+            }
+
+            // Check to see if we have a specific category to query against.
+            if (isset( $_GET['cat'] ) ) {
+                $cat_obj = get_term_by('name', $_GET['cat'], 'category');
+
+                if( $cat_obj !== false ) {
+                    $cat_id = $cat_obj->term_id;
+
+                    $cat_join = $wpdb->prepare(
+                        "JOIN %i ON (`$table_name_posts`.post_id = %i.object_id)",
+                        $wpdb->prefix . 'term_relationships',
+                        $wpdb->prefix . 'term_relationships'
+                    );
+                    $cat_where = $wpdb->prepare(
+                        "AND %i.term_taxonomy_id = %d",
+                        $wpdb->prefix . 'term_relationships',
+                        $cat_id
+                    );
+                }
+            }
+
+            // Check to see if we have a specific category to query against.
+            if (isset( $_GET['author'] ) ) {
+                $author_obj = get_user_by('login', $_GET['author']);
+
+                if( $author_obj !== false ) {
+                    $author_id = $author_obj->ID;
+
+                    $author_where = $wpdb->prepare(
+                        "AND post_author = %d",
+                        $author_id
+                    );
+                }
+            }
+
             $sql_jws_statistics = "
                 SELECT post_word_frequency
                 FROM $table_name_posts
-                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $excluded_types_sql";
+                $tag_join
+                $cat_join
+                WHERE (post_status = 'publish' OR post_status = 'draft' OR post_status = 'future') $tag_where $cat_where $author_where $excluded_types_sql";
         } elseif ($jws_tab == 'word-to-posts') {
             // Set a default word query that should pretty much aways be around.
             $word_query = 'the';
