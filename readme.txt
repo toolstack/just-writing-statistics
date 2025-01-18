@@ -3,7 +3,7 @@ Contributors: gregross, redlettuce
 Tags: word count, reading time, authors, words, writing
 Requires at least: 4.6
 Tested up to: 6.7.1
-Stable tag: 5.1
+Stable tag: 5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,10 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 9. Settings
 
 == Changelog ==
+= 5.2 =
+* Release date: January 18, 2025
+* Fix de-activation error.
+
 = 5.1 =
 * Release date: November 29, 2024
 * Add category, tag, author, and post frequency stats UI.
