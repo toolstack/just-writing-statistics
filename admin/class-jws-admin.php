@@ -11,7 +11,7 @@
  * @author     GregRoss, RedLettuce
  * @link       https://toolstack.com/just-writing-statistics
  */
-class Just_Writing_Statsitics_Admin
+class Just_Writing_Statistics_Admin
 {
     /**
      * The ID of this plugin.

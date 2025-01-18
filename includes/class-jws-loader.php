@@ -12,7 +12,7 @@
  * @author     GregRoss, RedLettuce
  * @link       https://toolstack.com/just-writing-statistics
  */
-class Just_Writing_Statsitics_Loader
+class Just_Writing_Statistics_Loader
 {
     /**
      * The array of actions registered with WordPress.

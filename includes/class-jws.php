@@ -23,7 +23,7 @@ class Just_Writing_Statistics
      *
      * @since  3.0.0
      * @access protected
-     * @var    Just_Writing_Statsitics_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var    Just_Writing_Statistics_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -70,10 +70,10 @@ class Just_Writing_Statistics
      *
      * Include the following files that make up the plugin:
      *
-     * - Just_Writing_Statsitics_Loader. Orchestrates the hooks of the plugin.
-     * - Just_Writing_Statsitics_i18n. Defines internationalization functionality.
-     * - Just_Writing_Statsitics_Admin. Defines all hooks for the admin area.
-     * - Just_Writing_Statsitics_Public. Defines all hooks for the public side of the site.
+     * - Just_Writing_Statistics_Loader. Orchestrates the hooks of the plugin.
+     * - Just_Writing_Statistics_i18n. Defines internationalization functionality.
+     * - Just_Writing_Statistics_Admin. Defines all hooks for the admin area.
+     * - Just_Writing_Statistics_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -106,13 +106,13 @@ class Just_Writing_Statistics
          */
         include_once plugin_dir_path(dirname(__FILE__)) . 'public/class-jws-public.php';
 
-        $this->loader = new Just_Writing_Statsitics_Loader();
+        $this->loader = new Just_Writing_Statistics_Loader();
     }
 
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the Just_Writing_Statsitics_i18n class in order to set the domain and to register the hook
+     * Uses the Just_Writing_Statistics_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since  3.0.0
@@ -120,7 +120,7 @@ class Just_Writing_Statistics
      */
     private function set_locale()
     {
-        $plugin_i18n = new Just_Writing_Statsitics_i18n();
+        $plugin_i18n = new Just_Writing_Statistics_i18n();
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
     }
@@ -134,7 +134,7 @@ class Just_Writing_Statistics
      */
     private function define_admin_hooks()
     {
-        $plugin_admin = new Just_Writing_Statsitics_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new Just_Writing_Statistics_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_init', $plugin_admin, 'settings');
         $this->loader->add_action('plugins_loaded', $plugin_admin, 'plugin_check');
@@ -189,7 +189,7 @@ class Just_Writing_Statistics
      */
     private function define_public_hooks()
     {
-        $plugin_public = new Just_Writing_Statsitics_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new Just_Writing_Statistics_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('init', $plugin_public, 'justwritingstatistics_register_shortcodes');
         $this->loader->add_filter('the_content', $plugin_public, 'justwritingstatistics_reading_time_before_content');
@@ -221,7 +221,7 @@ class Just_Writing_Statistics
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since  3.0.0
-     * @return Just_Writing_Statsitics_Loader    Orchestrates the hooks of the plugin.
+     * @return Just_Writing_Statistics_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader()
     {

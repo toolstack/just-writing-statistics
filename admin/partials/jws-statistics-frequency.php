@@ -8,8 +8,8 @@
  * @link  https://toolstack.com/just-writing-statistics
  * @since 5.0.0
  *
- * @package    Just_Writing_Statsitics_Pro
- * @subpackage Just_Writing_Statsitics_Pro/admin/partials
+ * @package    Just_Writing_Statistics_Pro
+ * @subpackage Just_Writing_Statistics_Pro/admin/partials
  */
 
 ?>
