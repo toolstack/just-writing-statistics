@@ -92,9 +92,14 @@ class Just_Writing_Statistics_Admin
      */
     public function enqueue_styles()
     {
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/jws-admin.css', [], $this->version, 'all');
-        wp_style_add_data( $this->plugin_name, 'rtl', 'replace' );
-        wp_enqueue_style('jquery-ui-theme-smoothness', plugin_dir_url(__FILE__) . 'css/jquery-ui.css', [], $this->version, 'all');
+        $screen = get_current_screen();
+
+        if( $screen->base == "toplevel_page_" . $this->plugin_name || $screen->base == "writing-statistics_page_" . $this->plugin_name . "-settings")
+        {
+            wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/jws-admin.css', [], $this->version, 'all');
+            wp_style_add_data( $this->plugin_name, 'rtl', 'replace' );
+            wp_enqueue_style('jquery-ui-theme-smoothness', plugin_dir_url(__FILE__) . 'css/jquery-ui.css', [], $this->version, 'all');
+        }
     }
 
     /**
@@ -104,9 +109,14 @@ class Just_Writing_Statistics_Admin
      */
     public function enqueue_scripts()
     {
-        wp_enqueue_script($this->plugin_name.'-js', plugin_dir_url(__FILE__) . 'js/jws-admin.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-datepicker'], $this->version, false);
-        wp_enqueue_script('jws-chart', plugin_dir_url(__FILE__) . 'js/chart.js', [], '4.4.6', false);
-        wp_enqueue_script('jws-word-cloud', plugin_dir_url(__FILE__) . 'js/wordcloud2.js', [], '1.1.1', false);
+        $screen = get_current_screen();
+
+        if( $screen->base == "toplevel_page_" . $this->plugin_name || $screen->base == "writing-statistics_page_" . $this->plugin_name . "-settings")
+        {
+            wp_enqueue_script($this->plugin_name.'-js', plugin_dir_url(__FILE__) . 'js/jws-admin.js', ['jquery', 'jquery-ui-tabs', 'jquery-ui-datepicker'], $this->version, false);
+            wp_enqueue_script('jws-chart', plugin_dir_url(__FILE__) . 'js/chart.js', [], '4.4.6', false);
+            wp_enqueue_script('jws-word-cloud', plugin_dir_url(__FILE__) . 'js/wordcloud2.js', [], '1.1.1', false);
+        }
     }
 
     /**
