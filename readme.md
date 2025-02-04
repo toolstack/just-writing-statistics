@@ -3,7 +3,7 @@
 **Tags:** word count, reading time, authors, words, writing  
 **Requires at least:** 4.6  
 **Tested up to:** 6.7.1  
-**Stable tag:** 5.2  
+**Stable tag:** 5.3  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -127,6 +127,11 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 
 
 ## Changelog ##
+### 5.3 ###
+* Release date: February 03, 2025
+* Limit loading of css/js in the admin to only the JWS pages.
+* Update the jQuery UI DatePicker css file.
+
 ### 5.2 ###
 * Release date: January 18, 2025
 * Fix de-activation error.
