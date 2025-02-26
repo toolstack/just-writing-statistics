@@ -3,7 +3,7 @@ Contributors: gregross, redlettuce
 Tags: word count, reading time, authors, words, writing
 Requires at least: 4.6
 Tested up to: 6.7.1
-Stable tag: 5.3
+Stable tag: 5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,12 @@ Example: [just-writing-statistics before="This post has" after=" total words."]
 9. Settings
 
 == Changelog ==
+= 5.4 =
+* Release date: February 25, 2025
+* Limit recalculation of statistics to admins only.
+* Fix date range recalculation to default to all posts when dates are left empty.
+* Fix some possible null reference errors.
+
 = 5.3 =
 * Release date: February 03, 2025
 * Limit loading of css/js in the admin to only the JWS pages.
