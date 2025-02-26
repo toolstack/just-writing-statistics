@@ -616,12 +616,12 @@ class Just_Writing_Statistics_Admin
         ];
 
         // Date Range
-        if (isset($parameters['jws_date_range_start_formatted'])) {
+        if (isset($parameters['jws_date_range_start_formatted']) && strlen($parameters['jws_date_range_start_formatted']) == 10) {
             $start_date = date_parse($parameters['jws_date_range_start_formatted']);
             $args['date_query']['after'] = ['year' => $start_date['year'], 'month' => $start_date['month'], 'day' => $start_date['day']];
         }
 
-        if (isset($parameters['jws_date_range_end_formatted'])) {
+        if (isset($parameters['jws_date_range_end_formatted']) && strlen($parameters['jws_date_range_end_formatted']) == 10) {
             $end_date = date_parse($parameters['jws_date_range_end_formatted']);
             $args['date_query']['before'] = ['year' => $end_date['year'], 'month' => $end_date['month'], 'day' => $end_date['day']];
         }
