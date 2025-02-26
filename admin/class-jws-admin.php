@@ -701,7 +701,12 @@ class Just_Writing_Statistics_Admin
             if (!isset($totals[$total->post_type])) {
                 $post_type_object = get_post_type_object($total->post_type);
 
-                $totals[$total->post_type]['name'] = $post_type_object->labels->name;
+                if ($post_type_object != null) {
+                    $totals[$total->post_type]['name'] = $post_type_object->labels->name;
+                } else {
+                    $totals[$total->post_type]['name'] = '';
+                }
+
                 $totals[$total->post_type]['published']['posts'] = 0;
                 $totals[$total->post_type]['published']['word_count'] = 0;
                 $totals[$total->post_type]['scheduled']['posts'] = 0;
@@ -955,8 +960,13 @@ class Just_Writing_Statistics_Admin
                 if (!isset($jws_dataset_post_types[$jws_post->post_type])) {
                     $post_type_object = get_post_type_object($jws_post->post_type);
 
-                    $jws_dataset_post_types[$jws_post->post_type]['plural_name'] = $post_type_object->labels->name;
-                    $jws_dataset_post_types[$jws_post->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    if ($post_type_object != null) {
+                        $jws_dataset_post_types[$jws_post->post_type]['plural_name'] = $post_type_object->labels->name;
+                        $jws_dataset_post_types[$jws_post->post_type]['singular_name'] = $post_type_object->labels->singular_name;
+                    } else {
+                        $jws_dataset_post_types[$jws_post->post_type]['plural_name'] = '';
+                        $jws_dataset_post_types[$jws_post->post_type]['singular_name'] = '';
+                    }
                 }
 
                 // Load authors array
