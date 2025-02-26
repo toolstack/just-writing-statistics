@@ -481,6 +481,18 @@ class Just_Writing_Statistics_Admin
             unset($parameters['jws_date_range_start'], $parameters['jws_date_range_end'], $parameters['jws_date_range_start_formatted'], $parameters['jws_date_range_end_formatted'], $parameters['jws_delete_data']);
         }
 
+        if ( ! array_key_exists( 'jws_calculate_nonce', $parameters ) ) {
+            wp_die( "Nonce not found!" );
+        }
+
+        if( ! wp_verify_nonce( $parameters['jws_calculate_nonce'], 'jws_calculate_nonce' ) && current_user_can( 'administrator' ) ) {
+            wp_die( "Invalid nonce." );
+        }
+
+        if( ! current_user_can( 'administrator' ) ) {
+            wp_die( "You don't have rights to do that." );
+        }
+
         $sql_post_total_vars = array();
 
         $sql_post_total = "SELECT COUNT(ID) AS post_total FROM %i WHERE 1";
